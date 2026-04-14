@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Labb1_OOP/1.0.0": {
+        "runtime": {
+          "Labb1_OOP.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Labb1_OOP/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
