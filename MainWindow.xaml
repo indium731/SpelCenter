@@ -24,9 +24,11 @@
                 <StackPanel Grid.Row="1" Grid.Column="1">
 
                     <TextBlock Text="Inlogg" />
-                    <TextBox x:Name="LoginTextBox" />
+                    <TextBox x:Name="InloggTextLada" />
                     
-                    <Button Content="Logga in" />
+                    <Button Content="Logga in" 
+                            Click="TestaInloggKlick"/>
+
 
                 </StackPanel>
     </Grid>

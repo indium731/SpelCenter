@@ -6,7 +6,8 @@ public sealed class MedlemsLista
 {
     private MedlemsLista()
     {
-        medlemmar = new List<string> {"Alexander"};
+        medlemmar = new List<Medlem>();
+        medlemmar.Add(new Medlem{});
     }
 
     private static MedlemsLista _instans;
@@ -19,5 +20,5 @@ public sealed class MedlemsLista
         }
         return _instans;
     }
-    public List<string> medlemmar;
+    public List<Medlem> medlemmar;
 }

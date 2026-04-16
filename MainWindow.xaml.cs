@@ -19,10 +19,30 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        InitializeMedlemsLista();
+        InitieraMedlemsLista();
     }
-    void InitializeMedlemsLista()
+    void InitieraMedlemsLista()
     {
         MedlemsLista.HamtaMedlemsLista();
+    }
+
+    private void TestaInloggKlick(object sender, RoutedEventArgs e)
+    {
+        string inlogg = InloggTextLada.Text.Trim();
+
+        if (string.IsNullOrWhiteSpace(inlogg))
+            {
+            MessageBox.Show("Fyll i inloggningsuppgifter.");
+            return;
+        }
+
+        foreach (Medlem medlem in MedlemsLista.HamtaMedlemsLista().medlemmar)
+        {
+            if (inlogg == medlem.medlemsNummer)
+            {
+
+            }
+        }
+
     }
 }

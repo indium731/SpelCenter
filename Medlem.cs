@@ -2,6 +2,13 @@
 
 public class Medlem
 {
+    public Medlem()
+    {
+        namn = "Alfred";
+        telefonNummer = "0707715633";
+        medlemsNummer = "S2507580";
+        medlemSkap = new MedlemSkap{};
+    }
     public string namn;
     public string telefonNummer;
     public string medlemsNummer;
