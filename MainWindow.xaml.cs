@@ -19,5 +19,10 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        InitializeMedlemsLista();
+    }
+    void InitializeMedlemsLista()
+    {
+        MedlemsLista.HamtaMedlemsLista();
     }
 }
