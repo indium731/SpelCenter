@@ -6,31 +6,9 @@
         xmlns:local="clr-namespace:Labb1_OOP"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <TextBlock Grid.ColumnSpan="2"
-                Text="SpelCenter" />
-
-                <StackPanel Grid.Row="1" Grid.Column="1">
-
-                    <TextBlock Text="Inlogg" />
-                    <TextBox x:Name="InloggTextLada" />
-                    
-                    <Button Content="Logga in" 
-                            Click="TestaInloggKlick"/>
-
-
-                </StackPanel>
-    </Grid>
+        <Grid>
+            <ContentControl x:Name="Vy"/>
+        </Grid>
 
 </Window>

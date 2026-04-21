@@ -20,29 +20,11 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         InitieraMedlemsLista();
+        Vy.Content = new InloggVy();
     }
     void InitieraMedlemsLista()
     {
         MedlemsLista.HamtaMedlemsLista();
     }
 
-    private void TestaInloggKlick(object sender, RoutedEventArgs e)
-    {
-        string inlogg = InloggTextLada.Text.Trim();
-
-        if (string.IsNullOrWhiteSpace(inlogg))
-            {
-            MessageBox.Show("Fyll i inloggningsuppgifter.");
-            return;
-        }
-
-        foreach (Medlem medlem in MedlemsLista.HamtaMedlemsLista().medlemmar)
-        {
-            if (inlogg == medlem.medlemsNummer)
-            {
-
-            }
-        }
-
-    }
 }
