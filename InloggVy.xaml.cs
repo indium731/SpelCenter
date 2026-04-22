@@ -26,7 +26,7 @@ namespace Labb1_OOP
                 if (inlogg == medlem.medlemsNummer)
                     {
                         var mainWin = (MainWindow)Window.GetWindow(this);
-                        mainWin.Vy.Content = new HuvudVy();
+                        mainWin.Vy.Content = new MedlemMenyVy();
                     }
             }
         }

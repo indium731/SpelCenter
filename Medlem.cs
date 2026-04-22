@@ -9,6 +9,14 @@ public class Medlem
         medlemsNummer = "S2507580";
         medlemSkap = new MedlemSkap{};
     }
+
+    public Medlem(string n, string t, string m, bool? a)
+    {
+        namn = n;
+        telefonNummer = t;
+        medlemsNummer = m;
+        medlemSkap = new MedlemSkap{};
+    }
     public string namn;
     public string telefonNummer;
     public string medlemsNummer;
