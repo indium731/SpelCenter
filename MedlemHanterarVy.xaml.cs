@@ -41,8 +41,31 @@ namespace Labb1_OOP
 
         private void TaBortValdMedlemKlick(Object sender, RoutedEventArgs e)
         {
+            if (MedlemListaLada.SelectedItem is not Medlem valdMedlem)
+            {
+                DetaljTextLada.Text = "Välj en medlem att ta bort";
+                return;
+            }
             
+            MedlemsLista.HamtaMedlemsLista().medlemmar.Remove(valdMedlem);
+            UppdateraUI();
+            DetaljTextLada.Text = "Ingen kaka vald";
 
+        }
+
+        private void AndraValdMedlem(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (MedlemListaLada.SelectedItem is not Medlem valdMedlem)
+            {
+                DetaljTextLada.Text = "Ingen medlem vald";
+                return;
+            }
+
+
+            DetaljTextLada.Text = 
+                $"Namn: {valdMedlem.namn}\n" +
+                $"TelefonNummer: {valdMedlem.telefonNummer}\n" +
+                $"MedlemsNummer: {valdMedlem.medlemsNummer}";
         }
 
     }
