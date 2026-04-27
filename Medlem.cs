@@ -10,6 +10,7 @@ public class Medlem
         medlemSkap = new MedlemSkap{};
         atkomster.Add(new MedlemHanterarAtkomst());
         atkomster.Add(new SpelAtkomst());
+        atkomster.Add(new BokningAtkomst());
     }
 
     public Medlem(string n, string t, string m, bool? a)
