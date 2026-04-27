@@ -9,6 +9,7 @@ public class Medlem
         medlemsNummer = "S2507580";
         medlemSkap = new MedlemSkap{};
         atkomster.Add(new MedlemHanterarAtkomst());
+        atkomster.Add(new SpelAtkomst());
     }
 
     public Medlem(string n, string t, string m, bool? a)

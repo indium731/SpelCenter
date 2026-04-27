@@ -2,17 +2,17 @@
 
 namespace Labb1_OOP;
 
-public class MedlemHanterarAtkomst : IAtkomst
+public class SpelAtkomst : IAtkomst
 {
     public ContentControl Atkom()
     {
-        return new MedlemHanterarVy();
+        return new SpelVy();
     }
 
     public Button Knapp()
     {
         Button knapp = new Button();
-        knapp.Content = "MedlemHanterare";
+        knapp.Content = "SpelHanterare";
         return knapp;
     }
 }
