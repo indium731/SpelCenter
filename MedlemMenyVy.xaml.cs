@@ -8,6 +8,7 @@ namespace Labb1_OOP
         public MedlemMenyVy()
         {
             InitializeComponent();
+            KontrolleraAtkomster();
         }
 
         private void TestaUtloggKlick(Object sender, RoutedEventArgs e)
@@ -16,10 +17,23 @@ namespace Labb1_OOP
             mainWin.Vy.Content = new InloggVy();
         }
 
-        private void GaTillMedlemHanterarVy(Object sender, RoutedEventArgs e)
+        private void GaTillValdVy(Object sender, RoutedEventArgs e)
         {
+            Button knapp = (Button)sender;
             var mainWin = (MainWindow)Window.GetWindow(this);
-            mainWin.Vy.Content = new MedlemHanterarVy();
+            mainWin.Vy.Content = knapp.Tag;
+        }
+        
+        private void KontrolleraAtkomster()
+        {
+            foreach (IAtkomst atkomst in Session.HamtaSession().inloggadMedlem.atkomster)
+            {
+                Button knapp = atkomst.Knapp();
+                knapp.Click += GaTillValdVy;
+                knapp.Tag = atkomst.Atkom();
+                MenyListaLada.Items.Add(knapp);
+
+            }
         }
     }
 }

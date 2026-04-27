@@ -10,5 +10,9 @@ public class MedlemSkap
     public DateOnly startDatum;
     public DateOnly slutDatum;
     public bool medlemStatus;
+    public override string ToString()
+    {
+        return "Medlem";
+    }
 
 }

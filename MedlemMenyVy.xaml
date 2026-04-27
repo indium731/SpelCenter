@@ -23,9 +23,7 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <Button Content="Medlemhantering"
-                Click="GaTillMedlemHanterarVy"/>
-            
+            <ListBox x:Name="MenyListaLada"/>
             
         </StackPanel>
 

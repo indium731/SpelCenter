@@ -25,6 +25,7 @@ namespace Labb1_OOP
             {
                 if (inlogg == medlem.medlemsNummer)
                     {
+                        Session.HamtaSession(medlem);
                         var mainWin = (MainWindow)Window.GetWindow(this);
                         mainWin.Vy.Content = new MedlemMenyVy();
                     }
