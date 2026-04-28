@@ -11,6 +11,7 @@ public class Medlem
         atkomster.Add(new MedlemHanterarAtkomst());
         atkomster.Add(new SpelAtkomst());
         atkomster.Add(new BokningAtkomst());
+        atkomster.Add(new AnmalAtkomst());
     }
 
     public Medlem(string n, string t, string m, bool? a)

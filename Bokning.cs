@@ -9,6 +9,7 @@ public class Bokning
         maxAntal = "1";
         ansvarig = new Medlem();
         beskrivning = "spela schack ensam";
+        anmalda = new List<Medlem>();
     }
 
     public Bokning(DateTime d, string p, string m, Medlem a, string b)
@@ -18,12 +19,14 @@ public class Bokning
         maxAntal = m;
         ansvarig = a;
         beskrivning = b;
+        anmalda = new List<Medlem>();
     }
     public DateTime datum;
     public string plats;
     public string maxAntal;
     public Medlem ansvarig;
     public string beskrivning;
+    public List<Medlem> anmalda;
 
     public override string ToString()
     {
