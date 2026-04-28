@@ -31,3 +31,5 @@ C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\BokningVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\BokningVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\AnmalVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\AnmalVy.g.cs
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarVy.baml
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarVy.g.cs
