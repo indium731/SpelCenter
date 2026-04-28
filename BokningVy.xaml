@@ -23,6 +23,17 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
+            <ListBox x:Name="SchemaTiderLada"/>
+
+            <TextBlock Text="Datum"
+                x:Name="DatumTextLada"/>
+            
+            <Button Content="Nästa dag"
+                Click="NastaDagKlick"/>
+            
+            <Button Content="Nästa Vecka"
+                Click="NastaVeckaKlick"/>
+
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
@@ -31,12 +42,6 @@
                 Click="GaTillMeny"/>
             
             <TextBlock Text="Lägg till bokning" />
-
-            <TextBlock Text="datum" />
-            <TextBox x:Name="DatumTextLada" />
-
-            <TextBlock Text="tid" />
-            <TextBox x:Name="TidTextLada" />
 
             <TextBlock Text="plats" />
             <TextBox x:Name="PlatsTextLada" />
@@ -52,10 +57,7 @@
 
             <Button Content="Lägg till bokning" 
                 Click="TestaLaggTillBokningKlick"/>
-
-            <TextBlock Text="Detaljer" />
-            <TextBlock x:Name="DetaljTextLada" Text="Ingen bokning vald." />
-
+            
         </StackPanel>
     </Grid>
 </UserControl>

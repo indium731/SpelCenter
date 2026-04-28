@@ -49,7 +49,7 @@ namespace Labb1_OOP
             
             MedlemsLista.HamtaMedlemsLista().medlemmar.Remove(valdMedlem);
             UppdateraUI();
-            DetaljTextLada.Text = "Ingen kaka vald";
+            DetaljTextLada.Text = "Ingen medlem vald";
 
         }
 

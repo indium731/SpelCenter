@@ -4,28 +4,25 @@ public class Bokning
 {
     public Bokning()
     {
-        datum = "Söndag";
-        tid = "14:00";
+        datum = new DateTime(2030, 4, 20);
         plats  = "Sandgärdet";
         maxAntal = "1";
-        ansvarig = "Jag";
+        ansvarig = new Medlem();
         beskrivning = "spela schack ensam";
     }
 
-    public Bokning(string d, string t, string p, string m, string a, string b)
+    public Bokning(DateTime d, string p, string m, Medlem a, string b)
     {
         datum = d;
-        tid = t;
         plats  = p;
         maxAntal = m;
         ansvarig = a;
         beskrivning = b;
     }
-    public string datum;
-    public string tid;
+    public DateTime datum;
     public string plats;
     public string maxAntal;
-    public string ansvarig;
+    public Medlem ansvarig;
     public string beskrivning;
 
     public override string ToString()
