@@ -31,18 +31,21 @@
             <Button Content="Nästa dag"
                 Click="NastaDagKlick"/>
             
+            <Button Content="Föregående dag"
+                Click="ForegaendeDagKlick"/>
+            
             <Button Content="Nästa Vecka"
                 Click="NastaVeckaKlick"/>
 
+            <Button Content="Föregående Vecka"
+                Click="ForegaendeVeckaKlick"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="1">
+        <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Återvänd till meny" 
                 Click="GaTillMeny"/>
             
-            <TextBlock Text="Lägg till bokning" />
-
             <TextBlock Text="plats" />
             <TextBox x:Name="PlatsTextLada" />
 

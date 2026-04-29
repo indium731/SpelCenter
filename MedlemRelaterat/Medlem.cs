@@ -21,6 +21,9 @@ public class Medlem
         telefonNummer = t;
         medlemsNummer = m;
         medlemSkap = new MedlemSkap{};
+        atkomster.Add(new BokningAtkomst());
+        atkomster.Add(new AnmalAtkomst());
+        atkomster.Add(new MinaBokningarAtkomst());
     }
     public string namn;
     public string telefonNummer;

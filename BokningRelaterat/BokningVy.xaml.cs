@@ -19,11 +19,14 @@ namespace Labb1_OOP
 
         private void TestaLaggTillBokningKlick(Object sender, RoutedEventArgs e)
         {
+            int antal = 0;
+            if (!int.TryParse(MaxAntalTextLada.Text.Trim(), out antal)) return;
+
             Button knapp = (Button) sender;
             DateTime datum = (DateTime)knapp.Tag;
             Bokningar.HamtaBokningar().bokningar.Add(new Bokning(datum,
                                                                       PlatsTextLada.Text.Trim(),
-                                                                      MaxAntalTextLada.Text.Trim(),
+                                                                      antal,
                                                                       Session.HamtaSession().inloggadMedlem,
                                                                       BeskrivningTextLada.Text.Trim()));
         }
@@ -74,6 +77,15 @@ namespace Labb1_OOP
 
             InitieraSchemaTider(datum);
         }
+        private void ForegaendeDagKlick(Object sender, RoutedEventArgs e)
+        {
+            DateTime datum = new DateTime();
+            datum = DateTime.Parse(DatumTextLada.Text);
+            datum = datum.AddDays(-1);
+            datum = datum.AddHours(8);
+
+            InitieraSchemaTider(datum);
+        }
         private void NastaVeckaKlick(Object sender, RoutedEventArgs e)
         {
             DateTime datum = new DateTime();
@@ -84,6 +96,15 @@ namespace Labb1_OOP
             InitieraSchemaTider(datum);
         }
 
+        private void ForegaendeVeckaKlick(Object sender, RoutedEventArgs e)
+        {
+            DateTime datum = new DateTime();
+            datum = DateTime.Parse(DatumTextLada.Text);
+            datum = datum.AddDays(-7);
+            datum = datum.AddHours(8);
+
+            InitieraSchemaTider(datum);
+        }
         private void UppdateraUI()
         {
             var text = DatumTextLada.Text;
@@ -94,5 +115,6 @@ namespace Labb1_OOP
             SchemaTiderLada.ItemsSource = lista;
 
         }
+
     }
 }

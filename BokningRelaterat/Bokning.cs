@@ -6,13 +6,13 @@ public class Bokning
     {
         datum = new DateTime(2030, 4, 20);
         plats  = "Sandgärdet";
-        maxAntal = "1";
+        maxAntal = 1;
         ansvarig = new Medlem();
         beskrivning = "spela schack ensam";
         anmalda = new List<Medlem>();
     }
 
-    public Bokning(DateTime d, string p, string m, Medlem a, string b)
+    public Bokning(DateTime d, string p, int m, Medlem a, string b)
     {
         datum = d;
         plats  = p;
@@ -23,10 +23,17 @@ public class Bokning
     }
     public DateTime datum;
     public string plats;
-    public string maxAntal;
+    public int maxAntal;
     public Medlem ansvarig;
     public string beskrivning;
     public List<Medlem> anmalda;
+
+    public void Anmal(Medlem medlem)
+    {
+            if (anmalda.Count <= maxAntal) return;
+            if (anmalda.Contains(medlem)) return;
+            anmalda.Add(medlem);
+    }
 
     public override string ToString()
     {
