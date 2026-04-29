@@ -34,6 +34,13 @@ namespace Labb1_OOP
                 MenyListaLada.Items.Add(knapp);
 
             }
+            if (Bokningar.HamtaBokningar().bokningar.Where(bokning => bokning.ansvarig == Session.HamtaSession().inloggadMedlem).Count() != 0)
+            {
+                Button knapp = new Button();
+                knapp.Click += GaTillValdVy;
+                knapp.Tag = new OversiktVy();
+                MenyListaLada.Items.Add(knapp);
+            }
         }
     }
 }

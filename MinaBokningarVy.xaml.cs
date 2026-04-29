@@ -62,7 +62,9 @@ namespace Labb1_OOP
 
         private void GaTillOversiktKlick(Object sender, RoutedEventArgs e)
         {
-            return;
+            if (MinaBokningarListaLada.SelectedItem is not Bokning valdBokning) return;
+            var mainWin = (MainWindow)Window.GetWindow(this);
+            mainWin.Vy.Content = new OversiktVy(valdBokning);
         }
 
     }
