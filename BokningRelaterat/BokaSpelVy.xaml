@@ -1,4 +1,7 @@
-<UserControl x:Class="Labb1_OOP.BokningVy"
+
+
+
+<UserControl x:Class="Labb1_OOP.BokaSpelVy"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -23,37 +26,25 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox x:Name="SchemaTiderLada"/>
-
-            <TextBlock Text="Datum"
-                x:Name="DatumTextLada"/>
+            <ListBox x:Name="SpelListaLada"
+                SelectionChanged="AndraValdSpel"/>
             
-            <Button Content="Nästa dag"
-                Click="NastaDagKlick"/>
-            
-            <Button Content="Föregående dag"
-                Click="ForegaendeDagKlick"/>
-            
-            <Button Content="Nästa Vecka"
-                Click="NastaVeckaKlick"/>
-
-            <Button Content="Föregående Vecka"
-                Click="ForegaendeVeckaKlick"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="0" Grid.Column="1">
+        <StackPanel Grid.Row="1" Grid.Column="1">
 
             <Button Content="Återvänd till meny" 
                 Click="GaTillMeny"/>
             
-            <TextBlock Text="plats" />
-            <TextBox x:Name="PlatsTextLada" />
+            <Button Content="Boka spel" 
+                x:Name="BokaSpelKnapp"
+                Click="TestaBokaSpelKlick"/>
 
-            <TextBlock Text="maxantal" />
-            <TextBox x:Name="MaxAntalTextLada" />
+            <Button Content="Ta bort vald spel" 
+                Click="TaBortValdSpelKlick"/>
 
-            <TextBlock Text="beskrivning" />
-            <TextBox x:Name="BeskrivningTextLada" />
+            <TextBlock Text="Detaljer" />
+            <TextBlock x:Name="DetaljTextLada" Text="Ingen medlem vald." />
 
         </StackPanel>
     </Grid>

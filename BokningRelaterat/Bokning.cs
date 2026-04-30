@@ -20,6 +20,7 @@ public class Bokning
         ansvarig = a;
         beskrivning = b;
         anmalda = new List<Medlem>();
+        bokadeSpel = new List<Spel>();
     }
     public DateTime datum;
     public string plats;
@@ -27,12 +28,19 @@ public class Bokning
     public Medlem ansvarig;
     public string beskrivning;
     public List<Medlem> anmalda;
+    public List<Spel> bokadeSpel;
 
     public void Anmal(Medlem medlem)
     {
-            if (anmalda.Count <= maxAntal) return;
-            if (anmalda.Contains(medlem)) return;
-            anmalda.Add(medlem);
+        if (anmalda.Count <= maxAntal) return;
+        if (anmalda.Contains(medlem)) return;
+        anmalda.Add(medlem);
+    }
+    public void BokaSpel(Spel spel)
+    {
+        if (bokadeSpel.Contains(spel)) return;
+        bokadeSpel.Add(spel);
+
     }
 
     public override string ToString()

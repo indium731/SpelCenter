@@ -24,11 +24,19 @@ namespace Labb1_OOP
 
             Button knapp = (Button) sender;
             DateTime datum = (DateTime)knapp.Tag;
-            Bokningar.HamtaBokningar().bokningar.Add(new Bokning(datum,
-                                                                      PlatsTextLada.Text.Trim(),
-                                                                      antal,
-                                                                      Session.HamtaSession().inloggadMedlem,
-                                                                      BeskrivningTextLada.Text.Trim()));
+
+
+            Bokning bokning = new Bokning(datum,
+                                          PlatsTextLada.Text.Trim(),
+                                          antal,
+                                          Session.HamtaSession().inloggadMedlem,
+                                          BeskrivningTextLada.Text.Trim());
+
+
+            Bokningar.HamtaBokningar().bokningar.Add(bokning);
+
+            var mainWin = (MainWindow)MainWindow.GetWindow(this);
+            mainWin.Vy.Content = new BokaSpelVy(bokning);
         }
 
         private void InitieraSchemaTider()
