@@ -4,7 +4,8 @@ public class Bokning
 {
     public Bokning()
     {
-        datum = new DateTime(2030, 4, 20);
+        startDatum = new DateTime(2030, 4, 20);
+        slutDatum = new DateTime(2030, 4, 21);
         plats  = "Sandgärdet";
         maxAntal = 1;
         ansvarig = new Medlem();
@@ -12,9 +13,10 @@ public class Bokning
         anmalda = new List<Medlem>();
     }
 
-    public Bokning(DateTime d, string p, int m, Medlem a, string b)
+    public Bokning(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
-        datum = d;
+        startDatum = d;
+        slutDatum = s;
         plats  = p;
         maxAntal = m;
         ansvarig = a;
@@ -22,7 +24,8 @@ public class Bokning
         anmalda = new List<Medlem>();
         bokadeSpel = new List<Spel>();
     }
-    public DateTime datum;
+    public DateTime startDatum;
+    public DateTime slutDatum;
     public string plats;
     public int maxAntal;
     public Medlem ansvarig;

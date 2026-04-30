@@ -52,7 +52,8 @@ namespace Labb1_OOP
             }
             
             DetaljTextLada.Text = 
-                $"datum: {valdBokning.datum.ToString()}\n" +
+                $"startdatum: {valdBokning.startDatum.ToString()}\n" +
+                $"slutdatum: {valdBokning.slutDatum.ToString()}\n" +
                 $"plats: {valdBokning.plats}\n" +
                 $"ansvarig: {valdBokning.ansvarig.ToString()}\n" +
                 $"max antal: {valdBokning.maxAntal}\n" +

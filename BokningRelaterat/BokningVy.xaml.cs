@@ -19,14 +19,24 @@ namespace Labb1_OOP
 
         private void TestaLaggTillBokningKlick(Object sender, RoutedEventArgs e)
         {
+
+
             int antal = 0;
             if (!int.TryParse(MaxAntalTextLada.Text.Trim(), out antal)) return;
 
             Button knapp = (Button) sender;
             DateTime datum = (DateTime)knapp.Tag;
 
+            if (StartDatumTextLada.Tag == null)
+            {
+                StartDatumTextLada.Text = datum.ToString(); 
+                StartDatumTextLada.Tag = datum;
+                UppdateraUI();
+                return;
+            }
 
-            Bokning bokning = new Bokning(datum,
+            Bokning bokning = new Bokning((DateTime)StartDatumTextLada.Tag,
+                                          datum,
                                           PlatsTextLada.Text.Trim(),
                                           antal,
                                           Session.HamtaSession().inloggadMedlem,
@@ -121,6 +131,9 @@ namespace Labb1_OOP
             var lista = SchemaTiderLada.ItemsSource;
             SchemaTiderLada.ItemsSource = null;
             SchemaTiderLada.ItemsSource = lista;
+            var startDatum = StartDatumTextLada.Text;
+            StartDatumTextLada.Text = null;
+            StartDatumTextLada.Text = startDatum;
 
         }
 

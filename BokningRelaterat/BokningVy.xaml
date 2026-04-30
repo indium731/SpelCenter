@@ -55,6 +55,9 @@
             <TextBlock Text="beskrivning" />
             <TextBox x:Name="BeskrivningTextLada" />
 
+            <TextBlock Text="StartDatum" 
+            x:Name="StartDatumTextLada" />
+
         </StackPanel>
     </Grid>
 </UserControl>
