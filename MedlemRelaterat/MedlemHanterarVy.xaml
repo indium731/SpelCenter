@@ -54,6 +54,9 @@
             <Button Content="Ta bort vald medlem" 
                 Click="TaBortValdMedlemKlick"/>
 
+            <Button Content="Uppdatera vald medlem" 
+                Click="UppdateraValdMedlemKlick"/>
+
             <TextBlock Text="Detaljer" />
             <TextBlock x:Name="DetaljTextLada" Text="Ingen medlem vald." />
 
