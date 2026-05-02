@@ -8,7 +8,7 @@ public class Spel
         namn = "Schack";
         kategori= "Strategi";
         antalSpelare = "2";
-        svårighetsgrad = "Beror på motståndet";
+        svarighetsgrad = "Beror på motståndet";
         beskrivning = "The ROOK!";
     }
 
@@ -17,14 +17,14 @@ public class Spel
         namn = n;
         kategori = k;
         antalSpelare = a;
-        svårighetsgrad = s;
+        svarighetsgrad = s;
         beskrivning = b;
 
     }
     public string namn;
     public string kategori;
     public string antalSpelare;
-    public string svårighetsgrad;
+    public string svarighetsgrad;
     public string beskrivning;
 
     public override string ToString()

@@ -64,6 +64,17 @@ namespace Labb1_OOP
                 $"Beskrivning: {valdSpel.beskrivning}";
         }
 
+        private void UppdateraValdSpelKlick(Object sender, RoutedEventArgs e)
+        {
+            if (SpelListaLada.SelectedItem is not Spel valdSpel) return;
+            if (NamnTextLada.Text.Trim().Count() != 0) valdSpel.namn = NamnTextLada.Text.Trim();
+            if (KategoriTextLada.Text.Trim().Count() != 0) valdSpel.kategori= KategoriTextLada.Text.Trim();
+            if (SpelareTextLada.Text.Trim().Count() != 0) valdSpel.antalSpelare = SpelareTextLada.Text.Trim();
+            if (SvarighetsgradTextLada.Text.Trim().Count() != 0) valdSpel.svarighetsgrad= SvarighetsgradTextLada.Text.Trim();
+            if (BeskrivningTextLada.Text.Trim().Count() != 0) valdSpel.beskrivning = BeskrivningTextLada.Text.Trim();
+            UppdateraUI();
+
+        }
+
     }
 }
-

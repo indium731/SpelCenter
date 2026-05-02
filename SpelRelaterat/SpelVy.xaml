@@ -58,6 +58,9 @@
             <Button Content="Ta bort vald spel" 
                 Click="TaBortValdSpelKlick"/>
 
+            <Button Content="Uppdatera vald spel" 
+                Click="UppdateraValdSpelKlick"/>
+
             <TextBlock Text="Detaljer" />
             <TextBlock x:Name="DetaljTextLada" Text="Ingen medlem vald." />
 
