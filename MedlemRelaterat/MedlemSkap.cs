@@ -4,8 +4,8 @@ public class MedlemSkap
 {
     public MedlemSkap()
     {
-        startDatum = DateOnly.MinValue;
-        slutDatum = DateOnly.MaxValue;
+        startDatum = DateOnly.FromDateTime(DateTime.Today);
+        slutDatum = DateOnly.FromDateTime(DateTime.Today);
     }
     public DateOnly startDatum;
     public DateOnly slutDatum;

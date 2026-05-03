@@ -13,14 +13,21 @@ public class Bokning
         anmalda = new List<Medlem>();
     }
 
-    public Bokning(DateTime d, DateTime s, string p, int m, Medlem a, string b)
+    public Bokning(DateTime? d, DateTime? s, string? p, int? m, Medlem? a, string? b)
     {
-        startDatum = d;
-        slutDatum = s;
-        plats  = p;
-        maxAntal = m;
-        ansvarig = a;
-        beskrivning = b;
+        if (d == null) return;
+        if (s == null) return;
+        if (p == null) return;
+        if (m == null) return;
+        if (a == null) return;
+        if (b == null) return;
+
+        startDatum = (DateTime)d;
+        slutDatum = (DateTime)s;
+        plats  = (string)p;
+        maxAntal = (int)m;
+        ansvarig = (Medlem)a;
+        beskrivning = (string)b;
         anmalda = new List<Medlem>();
         bokadeSpel = new List<Spel>();
     }

@@ -25,20 +25,17 @@
 
             <ListBox x:Name="SchemaTiderLada"/>
 
-            <TextBlock Text="Datum"
-                x:Name="DatumTextLada"/>
+            <TextBlock Text="StartDatum"
+                x:Name="StartDatumTextLada"/>
             
-            <Button Content="Nästa dag"
-                Click="NastaDagKlick"/>
-            
-            <Button Content="Föregående dag"
-                Click="ForegaendeDagKlick"/>
-            
-            <Button Content="Nästa Vecka"
-                Click="NastaVeckaKlick"/>
+            <DatePicker Text="StartDatum"
+                x:Name="StartDatumValjare"/> 
 
-            <Button Content="Föregående Vecka"
-                Click="ForegaendeVeckaKlick"/>
+            <TextBlock Text="SlutDatum"
+                x:Name="SlutDatumTextLada"/>
+            
+            <DatePicker Text="SlutDatum"
+                x:Name="SlutDatumValjare"/> 
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
@@ -54,9 +51,6 @@
 
             <TextBlock Text="beskrivning" />
             <TextBox x:Name="BeskrivningTextLada" />
-
-            <TextBlock Text="StartDatum" 
-                x:Name="StartDatumTextLada" />
 
         </StackPanel>
     </Grid>

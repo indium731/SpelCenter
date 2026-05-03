@@ -65,6 +65,7 @@ namespace Labb1_OOP
             DetaljTextLada.Text = 
                 $"Namn: {valdMedlem.namn}\n" +
                 $"TelefonNummer: {valdMedlem.telefonNummer}\n" +
+                $"Slutdatum av medlemskap: {valdMedlem.medlemSkap.slutDatum}\n" +
                 $"MedlemsNummer: {valdMedlem.medlemsNummer}";
         }
 
@@ -74,6 +75,13 @@ namespace Labb1_OOP
             if (NamnTextLada.Text.Trim().Count() != 0) valdMedlem.namn = NamnTextLada.Text.Trim();
             if (TelefonNummerTextLada.Text.Trim().Count() != 0) valdMedlem.telefonNummer= TelefonNummerTextLada.Text.Trim();
             if (MedlemsNummerTextLada.Text.Trim().Count() != 0) valdMedlem.medlemsNummer = MedlemsNummerTextLada.Text.Trim();
+            UppdateraUI();
+        }
+
+        private void OkaMedlemSkapManad(Object sender, RoutedEventArgs e)
+        {
+            if (MedlemListaLada.SelectedItem is not Medlem valdMedlem) return;
+            valdMedlem.medlemSkap.slutDatum = valdMedlem.medlemSkap.slutDatum.AddMonths(1);
             UppdateraUI();
         }
 
