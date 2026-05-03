@@ -49,8 +49,8 @@
             <TextBlock Text="Maximum antal spelare" />
             <TextBox x:Name="MaxSpelareTextLada" />
 
-            <TextBlock Text="Svårighetsgrad"/>
-            <TextBox x:Name="SvarighetsgradTextLada" />
+            <TextBlock Text="SvårighetsGrad"/>
+            <ComboBox x:Name="SvarighetsgradLada"/>
 
             <TextBlock Text="Beskrivning"/>
             <TextBox x:Name="BeskrivningTextLada" />

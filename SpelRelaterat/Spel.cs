@@ -1,4 +1,6 @@
 ﻿
+using System.Windows;
+
 namespace Labb1_OOP;
 
 public class Spel 
@@ -9,12 +11,17 @@ public class Spel
         kategori= "Strategi";
         minAntalSpelare = 2;
         maxAntalSpelare = 2;
-        svarighetsgrad = "Beror på motståndet";
+        svarighetsgrad = Svarighetsgrad.mittemellan;
         beskrivning = "The ROOK!";
     }
 
-    public Spel(string n, string k, int a, int m, string s, string b)
+    public Spel(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
+        if (minAntalSpelare > maxAntalSpelare)
+        {
+            MessageBox.Show("minimum antal spelare måste vara lägre än max antal spelare");
+            throw new ArgumentException();
+        }
         namn = n;
         kategori = k;
         minAntalSpelare = a;
@@ -27,7 +34,7 @@ public class Spel
     public string kategori;
     public int minAntalSpelare;
     public int maxAntalSpelare;
-    public string svarighetsgrad;
+    public Svarighetsgrad svarighetsgrad;
     public string beskrivning;
 
     public override string ToString()

@@ -10,6 +10,7 @@ namespace Labb1_OOP
         public SpelVy()
         {
             InitializeComponent();
+            InitieraSvarighetsgradLada();
             UppdateraUI();
         }
 
@@ -33,12 +34,15 @@ namespace Labb1_OOP
 
             if (!int.TryParse(MinSpelareTextLada.Text.Trim(), out minAntal)) return;
             if (!int.TryParse(MaxSpelareTextLada.Text.Trim(), out maxAntal)) return;
+            if (SvarighetsgradLada.SelectedItem == null) return;
+
+            Svarighetsgrad svarighetsgrad = (Svarighetsgrad)Enum.Parse(typeof(Svarighetsgrad), SvarighetsgradLada.SelectedItem.ToString());
 
             SpelLista.HamtaSpelLista().spel.Add(new Spel(NamnTextLada.Text.Trim(),
                                                                       KategoriTextLada.Text.Trim(),
                                                                       minAntal,
                                                                       maxAntal,
-                                                                      SvarighetsgradTextLada.Text.Trim(),
+                                                                      svarighetsgrad,
                                                                       BeskrivningTextLada.Text.Trim()));
             UppdateraUI();
         }
@@ -79,10 +83,14 @@ namespace Labb1_OOP
             if (KategoriTextLada.Text.Trim().Count() != 0) valdSpel.kategori= KategoriTextLada.Text.Trim();
             if (!int.TryParse(MinSpelareTextLada.Text.Trim(), out valdSpel.minAntalSpelare)) ;
             if (!int.TryParse(MaxSpelareTextLada.Text.Trim(), out valdSpel.maxAntalSpelare)) ;
-            if (SvarighetsgradTextLada.Text.Trim().Count() != 0) valdSpel.svarighetsgrad= SvarighetsgradTextLada.Text.Trim();
-            if (BeskrivningTextLada.Text.Trim().Count() != 0) valdSpel.beskrivning = BeskrivningTextLada.Text.Trim();
+            if (SvarighetsgradLada.SelectedItem != null) valdSpel.svarighetsgrad = (Svarighetsgrad)SvarighetsgradLada.SelectedItem;
             UppdateraUI();
 
+        }
+
+        private void InitieraSvarighetsgradLada()
+        {
+            SvarighetsgradLada.ItemsSource = Enum.GetNames(typeof(Svarighetsgrad));
         }
 
     }

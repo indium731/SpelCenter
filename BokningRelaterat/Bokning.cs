@@ -1,4 +1,6 @@
-﻿namespace Labb1_OOP;
+﻿using System.Windows;
+
+namespace Labb1_OOP;
 
 public class Bokning 
 {
@@ -15,12 +17,19 @@ public class Bokning
 
     public Bokning(DateTime? d, DateTime? s, string? p, int? m, Medlem? a, string? b)
     {
-        if (d == null) return;
-        if (s == null) return;
-        if (p == null) return;
-        if (m == null) return;
-        if (a == null) return;
-        if (b == null) return;
+
+        if (d == null) throw new ArgumentException();
+        if (s == null) throw new ArgumentException();
+        if (p == null) throw new ArgumentException();
+        if (m == null) throw new ArgumentException();
+        if (a == null) throw new ArgumentException();
+        if (b == null) throw new ArgumentException();
+
+        if (d < s)
+        {
+           MessageBox.Show("Startdatum måste vara före slutdatum"); 
+           throw new ArgumentException();
+        }
 
         startDatum = (DateTime)d;
         slutDatum = (DateTime)s;

@@ -11,7 +11,6 @@ C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.Gene
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.AssemblyInfoInputs.cache
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.AssemblyInfo.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.csproj.CoreCompileInputs.cache
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.sourcelink.json
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.dll
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\refint\Labb1_OOP.dll
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.pdb
@@ -39,3 +38,4 @@ C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarR
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarRelaterat\AndraBokningVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\InloggOMenyRelaterat\MedlemMenyVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\InloggOMenyRelaterat\MedlemMenyVy.g.cs
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.sourcelink.json
