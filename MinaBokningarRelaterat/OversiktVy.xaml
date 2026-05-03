@@ -37,6 +37,7 @@
                 Click="GaTillMinaBokningarKlick"/>
             
             <Button Content="Ändra visad lista" 
+                x:Name="AndraVisadListaKnapp"
                 Click="AndraVisadListaKlick"/>
 
             <TextBlock Text="Detaljer" />

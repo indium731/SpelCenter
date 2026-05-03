@@ -1,4 +1,5 @@
 
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,6 +20,7 @@ namespace Labb1_OOP
         {
             InitializeComponent();
             InitieraOversiktLista(bokning);
+            OversiktListaLada.Tag = bokning;
             UppdateraUI();
         }
         private void UppdateraUI()
@@ -31,6 +33,7 @@ namespace Labb1_OOP
         private void InitieraOversiktLista(Bokning bokning)
         {
             OversiktListaLada.ItemsSource = bokning.anmalda;
+            AndraVisadListaKnapp.Tag = "personer";
         }
 
         private void GaTillMinaBokningarKlick(Object sender, RoutedEventArgs e)
@@ -49,13 +52,33 @@ namespace Labb1_OOP
             }
             if (OversiktListaLada.SelectedItem is Spel valdSpel)
             {
-                return;
+                DetaljTextLada.Text = 
+                    $"Namn: {valdSpel.namn}\n" +
+                    $"kategori: {valdSpel.kategori}\n" +
+                    $"minimum antal spelare: {valdSpel.minAntalSpelare}\n" +
+                    $"maximum antal spelare: {valdSpel.maxAntalSpelare}\n" +
+                    $"svarighetsgrad: {valdSpel.svarighetsgrad}\n" +
+                    $"beskrivning: {valdSpel.beskrivning}\n";
             }
         }
 
         private void AndraVisadListaKlick(Object sender, RoutedEventArgs e)
         {
-            return;
+            if (AndraVisadListaKnapp.Tag == "personer")
+            {
+                AndraVisadListaKnapp.Tag = "spel";
+            
+                Bokning bokning = (Bokning)OversiktListaLada.Tag;
+                OversiktListaLada.ItemsSource = SpelLista.HamtaSpelLista().spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count() && spel.maxAntalSpelare >= bokning.anmalda.Count());
+                return;
+            }
+            if (AndraVisadListaKnapp.Tag == "spel")
+            {
+                AndraVisadListaKnapp.Tag = "personer";
+
+                OversiktListaLada.ItemsSource = ((Bokning)OversiktListaLada.Tag).anmalda;
+            }
+            UppdateraUI();
         }
     }
 }

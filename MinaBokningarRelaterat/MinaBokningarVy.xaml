@@ -40,6 +40,9 @@
             <Button Content="Få översikt" 
                 Click="GaTillOversiktKlick"/>
 
+            <Button Content="Ändra bokning" 
+                Click="GaTillAndraBokningKlick"/>
+
             <Button Content="Ta bort vald bokning" 
                 Click="TaBortValdBokningKlick"/>
 

@@ -8,7 +8,7 @@ public class Bokning
         slutDatum = new DateTime(2030, 4, 21);
         plats  = "Sandgärdet";
         maxAntal = 1;
-        ansvarig = new Medlem();
+        ansvarig = Session.HamtaSession().inloggadMedlem;
         beskrivning = "spela schack ensam";
         anmalda = new List<Medlem>();
     }
@@ -55,7 +55,7 @@ public class Bokning
 
     public override string ToString()
     {
-        return ansvarig.ToString();
+        return beskrivning.ToString();
     }
 }
 

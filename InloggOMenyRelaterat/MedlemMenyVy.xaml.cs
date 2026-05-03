@@ -30,15 +30,15 @@ namespace Labb1_OOP
             {
                 Button knapp = atkomst.Knapp();
                 knapp.Click += GaTillValdVy;
-                knapp.Tag = atkomst.Atkom();
                 MenyListaLada.Items.Add(knapp);
 
             }
             if (Bokningar.HamtaBokningar().bokningar.Where(bokning => bokning.ansvarig == Session.HamtaSession().inloggadMedlem).Count() != 0)
             {
                 Button knapp = new Button();
+                knapp.Content = "Mina bokningar";
                 knapp.Click += GaTillValdVy;
-                knapp.Tag = new OversiktVy();
+                knapp.Tag = new MinaBokningarVy();
                 MenyListaLada.Items.Add(knapp);
             }
         }

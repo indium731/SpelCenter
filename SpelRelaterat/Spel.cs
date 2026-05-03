@@ -7,23 +7,26 @@ public class Spel
     {
         namn = "Schack";
         kategori= "Strategi";
-        antalSpelare = "2";
+        minAntalSpelare = 2;
+        maxAntalSpelare = 2;
         svarighetsgrad = "Beror på motståndet";
         beskrivning = "The ROOK!";
     }
 
-    public Spel(string n, string k, string a, string s, string b)
+    public Spel(string n, string k, int a, int m, string s, string b)
     {
         namn = n;
         kategori = k;
-        antalSpelare = a;
+        minAntalSpelare = a;
+        maxAntalSpelare = m;
         svarighetsgrad = s;
         beskrivning = b;
 
     }
     public string namn;
     public string kategori;
-    public string antalSpelare;
+    public int minAntalSpelare;
+    public int maxAntalSpelare;
     public string svarighetsgrad;
     public string beskrivning;
 

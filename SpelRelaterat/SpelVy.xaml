@@ -43,8 +43,11 @@
             <TextBlock Text="Kategori" />
             <TextBox x:Name="KategoriTextLada" />
 
-            <TextBlock Text="Antal spelare" />
-            <TextBox x:Name="SpelareTextLada" />
+            <TextBlock Text="Minimum antal spelare" />
+            <TextBox x:Name="MinSpelareTextLada" />
+
+            <TextBlock Text="Maximum antal spelare" />
+            <TextBox x:Name="MaxSpelareTextLada" />
 
             <TextBlock Text="Svårighetsgrad"/>
             <TextBox x:Name="SvarighetsgradTextLada" />

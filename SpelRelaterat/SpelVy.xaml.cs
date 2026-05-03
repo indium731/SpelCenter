@@ -27,9 +27,17 @@ namespace Labb1_OOP
 
         private void TestaLaggTillSpelKlick(Object sender, RoutedEventArgs e)
         {
+
+            int minAntal; 
+            int maxAntal;
+
+            if (!int.TryParse(MinSpelareTextLada.Text.Trim(), out minAntal)) return;
+            if (!int.TryParse(MaxSpelareTextLada.Text.Trim(), out maxAntal)) return;
+
             SpelLista.HamtaSpelLista().spel.Add(new Spel(NamnTextLada.Text.Trim(),
                                                                       KategoriTextLada.Text.Trim(),
-                                                                      SpelareTextLada.Text.Trim(),
+                                                                      minAntal,
+                                                                      maxAntal,
                                                                       SvarighetsgradTextLada.Text.Trim(),
                                                                       BeskrivningTextLada.Text.Trim()));
             UppdateraUI();
@@ -69,7 +77,8 @@ namespace Labb1_OOP
             if (SpelListaLada.SelectedItem is not Spel valdSpel) return;
             if (NamnTextLada.Text.Trim().Count() != 0) valdSpel.namn = NamnTextLada.Text.Trim();
             if (KategoriTextLada.Text.Trim().Count() != 0) valdSpel.kategori= KategoriTextLada.Text.Trim();
-            if (SpelareTextLada.Text.Trim().Count() != 0) valdSpel.antalSpelare = SpelareTextLada.Text.Trim();
+            if (!int.TryParse(MinSpelareTextLada.Text.Trim(), out valdSpel.minAntalSpelare)) ;
+            if (!int.TryParse(MaxSpelareTextLada.Text.Trim(), out valdSpel.maxAntalSpelare)) ;
             if (SvarighetsgradTextLada.Text.Trim().Count() != 0) valdSpel.svarighetsgrad= SvarighetsgradTextLada.Text.Trim();
             if (BeskrivningTextLada.Text.Trim().Count() != 0) valdSpel.beskrivning = BeskrivningTextLada.Text.Trim();
             UppdateraUI();

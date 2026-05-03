@@ -12,7 +12,6 @@ public class Medlem
         atkomster.Add(new SpelAtkomst());
         atkomster.Add(new BokningAtkomst());
         atkomster.Add(new AnmalAtkomst());
-        atkomster.Add(new MinaBokningarAtkomst());
     }
 
     public Medlem(string n, string t, string m, bool? a)
@@ -23,7 +22,6 @@ public class Medlem
         medlemSkap = new MedlemSkap{};
         atkomster.Add(new BokningAtkomst());
         atkomster.Add(new AnmalAtkomst());
-        atkomster.Add(new MinaBokningarAtkomst());
     }
     public string namn;
     public string telefonNummer;
