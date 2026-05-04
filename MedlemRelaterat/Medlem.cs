@@ -16,7 +16,7 @@ public class Medlem
         atkomster.Add(new AnmalAtkomst());
     }
 
-    public Medlem(string n, string t, string m, bool? a)
+    public Medlem(string n, string t, string m, bool a)
     {
         if (t.All(char.IsDigit)){
             MessageBox.Show("Telefonnummer får enbart innehålla siffror");
@@ -28,6 +28,11 @@ public class Medlem
         medlemSkap = new MedlemSkap{};
         atkomster.Add(new BokningAtkomst());
         atkomster.Add(new AnmalAtkomst());
+        if (a)
+        {
+            atkomster.Add(new MedlemHanterarAtkomst());
+            atkomster.Add(new SpelAtkomst());
+        }
     }
     public string namn;
     public string telefonNummer;

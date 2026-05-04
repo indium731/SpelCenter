@@ -36,7 +36,7 @@ namespace Labb1_OOP
             MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem(NamnTextLada.Text.Trim(),
                                                                       TelefonNummerTextLada.Text.Trim(),
                                                                       MedlemsNummerTextLada.Text.Trim(),
-                                                                      Administratör.IsChecked));
+                                                                      (bool)Administratör.IsChecked));
             } catch (ArgumentException ex)
             {
                 return;
