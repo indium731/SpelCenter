@@ -9,7 +9,8 @@ namespace Labb1_OOP
         public AndraBokningVy(Bokning bokning)
         {
             InitializeComponent();
-            InitieraSchemaTider();
+            InitieraSchemaTider(StartSchemaTiderLada);
+            InitieraSchemaTider(SlutSchemaTiderLada);
             NuvarandeBokningTextLada.Text = bokning.ToString();
             NuvarandeBokningTextLada.Tag = bokning;
         }
@@ -27,8 +28,32 @@ namespace Labb1_OOP
 
             Bokning bokning = (Bokning)NuvarandeBokningTextLada.Tag;
 
-            if (StartDatumValjare != null) bokning.startDatum = (DateTime)StartDatumValjare.SelectedDate;
-            if (SlutDatumValjare != null) bokning.slutDatum = (DateTime)SlutDatumValjare.SelectedDate;
+
+            DateTime? startDatumTid = null;
+            DateTime? slutDatumTid = null;
+
+            if (sender is Button knapp)
+            {
+                if (knapp.Tag is not TimeOnly tid)
+                {
+                    MessageBox.Show("Välj ett datum+tid inte bara tid, tack");
+                    return;
+                }
+                if (StartDatumValjare.SelectedDate is DateTime startDatum)
+                {
+                startDatumTid = startDatum.Date + tid.ToTimeSpan();
+                }
+                if (SlutDatumValjare.SelectedDate is DateTime slutDatum)
+                {
+                slutDatumTid = slutDatum.Date + tid.ToTimeSpan();
+                }
+
+            }
+
+
+
+            if (startDatumTid != null) bokning.startDatum = (DateTime)startDatumTid;
+            if (slutDatumTid != null) bokning.slutDatum = (DateTime)slutDatumTid;
             if (PlatsTextLada.Text.Trim() != "") bokning.plats = PlatsTextLada.Text.Trim();
             if (antal != 0) bokning.maxAntal = antal;
             if (BeskrivningTextLada.Text.Trim() != "") bokning.beskrivning = BeskrivningTextLada.Text.Trim();
@@ -37,43 +62,35 @@ namespace Labb1_OOP
             mainWin.Vy.Content = new BokaSpelVy(bokning);
         }
 
-        private void InitieraSchemaTider()
+        
+        private void InitieraSchemaTider(ListBox ListaLada)
         {
-            DateTime datum = new DateTime();
-            datum = DateTime.Today;
-            datum = datum.AddHours(8);
-            List<TextBlock> tider = new List<TextBlock>();
+            List<Button> tider = new List<Button>();
+            TimeOnly tid = TimeOnly.MinValue;
+            //8 == tidigaste bokningsbara tid
+            tid = tid.AddHours(8);
 
+            //4 == hur många olika tider man kan boka per dag
             for (int i = 0; i<4; i++)
             {
-                TextBlock tid = new TextBlock();
-                tid.Text = datum.TimeOfDay.ToString();
-                tid.Tag = datum;
-                tider.Add(tid);
-                SchemaTiderLada.ItemsSource = tider;
-                datum = datum.AddHours(4);
-            }
-            UppdateraUI();
-        }
-        private void InitieraSchemaTider(DateTime datum)
-        {
-            List<TextBlock> tider = new List<TextBlock>();
-
-            for (int i = 0; i<4; i++)
-            {
-                TextBlock tid = new TextBlock();
-                tid.Text = datum.TimeOfDay.ToString();
-                tid.Tag = datum;
-                SchemaTiderLada.ItemsSource = tider;
-                datum = datum.AddHours(4);
+                Button tidKnapp = new Button();
+                tidKnapp.Content = tid.ToString();
+                tidKnapp.Tag = tid;
+                tidKnapp.Click += TestaAndraBokningKlick;
+                tider.Add(tidKnapp);
+                ListaLada.ItemsSource = tider;
+                tid = tid.AddHours(4);
             }
             UppdateraUI();
         }
         private void UppdateraUI()
         {
-            var lista = SchemaTiderLada.ItemsSource;
-            SchemaTiderLada.ItemsSource = null;
-            SchemaTiderLada.ItemsSource = lista;
+            var startLista = StartSchemaTiderLada.ItemsSource;
+            StartSchemaTiderLada.ItemsSource = null;
+            StartSchemaTiderLada.ItemsSource = startLista;
+            var slutLista = SlutSchemaTiderLada.ItemsSource;
+            SlutSchemaTiderLada.ItemsSource = null;
+            SlutSchemaTiderLada.ItemsSource = slutLista;
             var startDatum = StartDatumTextLada.Text;
             StartDatumTextLada.Text = null;
             StartDatumTextLada.Text = startDatum;

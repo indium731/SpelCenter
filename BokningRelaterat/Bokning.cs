@@ -15,19 +15,12 @@ public class Bokning
         anmalda = new List<Medlem>();
     }
 
-    public Bokning(DateTime? d, DateTime? s, string? p, int? m, Medlem? a, string? b)
+    public Bokning(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
 
-        if (d == null) throw new ArgumentException();
-        if (s == null) throw new ArgumentException();
-        if (p == null) throw new ArgumentException();
-        if (m == null) throw new ArgumentException();
-        if (a == null) throw new ArgumentException();
-        if (b == null) throw new ArgumentException();
-
-        if (d < s)
+        if (d > s)
         {
-           MessageBox.Show("Startdatum måste vara före slutdatum"); 
+           MessageBox.Show($"Startdatum måste vara före slutdatum \n  startdatum: {d}\n slutdatum: {s}"); 
            throw new ArgumentException();
         }
 

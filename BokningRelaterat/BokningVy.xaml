@@ -18,12 +18,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.ColumnSpan="2"
-                Text="SpelCenter" />
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox x:Name="SchemaTiderLada"/>
+        <TextBlock Grid.ColumnSpan="2"
+                Text="SpelCenter" />
 
             <TextBlock Text="StartDatum"
                 x:Name="StartDatumTextLada"/>
@@ -31,11 +30,16 @@
             <DatePicker Text="StartDatum"
                 x:Name="StartDatumValjare"/> 
 
+            <ListBox x:Name="StartSchemaTiderLada"/>
+
             <TextBlock Text="SlutDatum"
                 x:Name="SlutDatumTextLada"/>
             
             <DatePicker Text="SlutDatum"
                 x:Name="SlutDatumValjare"/> 
+
+            <ListBox x:Name="SlutSchemaTiderLada"/>
+
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
@@ -51,6 +55,8 @@
 
             <TextBlock Text="beskrivning" />
             <TextBox x:Name="BeskrivningTextLada" />
+
+            <TextBlock x:Name="StartDatumLada"/>
 
         </StackPanel>
     </Grid>

@@ -8,7 +8,8 @@ namespace Labb1_OOP
         public BokningVy()
         {
             InitializeComponent();
-            InitieraSchemaTider();
+            InitieraStartSchemaTider();
+            InitieraSlutSchemaTider();
         }
 
         private void GaTillMeny(Object sender, RoutedEventArgs e)
@@ -19,12 +20,28 @@ namespace Labb1_OOP
 
         private void TestaLaggTillBokningKlick(Object sender, RoutedEventArgs e)
         {
+
+            if (StartDatumValjare.SelectedDate == null) return;
+            if (SlutDatumValjare.SelectedDate == null) return;
+            
+            if (StartDatumLada.Tag is not TimeOnly startTid)
+            {
+                MessageBox.Show("Välj ett startdatum först");
+                return;
+            }
+
+            Button knapp = (Button)sender;
+            TimeOnly slutTid = (TimeOnly)((Button)sender).Tag;
+            DateTime startDatum = ((DateTime)StartDatumValjare.SelectedDate).Date + startTid.ToTimeSpan();
+            DateTime slutDatum = ((DateTime)SlutDatumValjare.SelectedDate).Date + slutTid.ToTimeSpan();
+
+
             try {
             int antal = 0;
             if (!int.TryParse(MaxAntalTextLada.Text.Trim(), out antal)) return;
 
-            Bokning bokning = new Bokning(StartDatumValjare.SelectedDate,
-                                          SlutDatumValjare.SelectedDate,
+            Bokning bokning = new Bokning(startDatum,
+                                          slutDatum,
                                           PlatsTextLada.Text.Trim(),
                                           antal,
                                           Session.HamtaSession().inloggadMedlem,
@@ -43,46 +60,61 @@ namespace Labb1_OOP
                 
         }
 
-        private void InitieraSchemaTider()
+        private void ValjStartTid(Object sender, RoutedEventArgs e)
         {
-            DateTime datum = new DateTime();
-            datum = DateTime.Today;
-            datum = datum.AddHours(8);
+            StartDatumLada.Tag = (TimeOnly)((Button)sender).Tag;
+            StartDatumLada.Text = "StartDatum vald";
+        }
+        private void InitieraStartSchemaTider()
+        {
+            TimeOnly tid = new TimeOnly();
+            tid = TimeOnly.MinValue;
+            //8 == tidigaste bokbara tid
+            tid = tid.AddHours(8);
             List<Button> knappar = new List<Button>();
 
+            //4 == mängd olika bokbara tider per dag
             for (int i = 0; i<4; i++)
             {
                 Button knapp = new Button();
-                knapp.Content = datum.TimeOfDay.ToString();
-                knapp.Click += TestaLaggTillBokningKlick;
-                knapp.Tag = datum;
+                knapp.Content = tid.ToString();
+                knapp.Click += ValjStartTid;
+                knapp.Tag = tid;
                 knappar.Add(knapp);
-                SchemaTiderLada.ItemsSource = knappar;
-                datum = datum.AddHours(4);
+                StartSchemaTiderLada.ItemsSource = knappar;
+                //4 == tid mellan de bokbara tiderna utöver en dag
+                tid = tid.AddHours(4);
             }
             UppdateraUI();
-        }
-        private void InitieraSchemaTider(DateTime datum)
+        } 
+        private void InitieraSlutSchemaTider()
         {
+            TimeOnly tid = new TimeOnly();
+            tid = TimeOnly.MinValue;
+            //8 == tidigaste bokbara tid
+            tid = tid.AddHours(8);
             List<Button> knappar = new List<Button>();
 
+            //4 == mängd olika bokbara tider per dag
             for (int i = 0; i<4; i++)
             {
                 Button knapp = new Button();
-                knapp.Content = datum.TimeOfDay.ToString();
+                knapp.Content = tid.ToString();
                 knapp.Click += TestaLaggTillBokningKlick;
-                knapp.Tag = datum;
+                knapp.Tag = tid;
                 knappar.Add(knapp);
-                SchemaTiderLada.ItemsSource = knappar;
-                datum = datum.AddHours(4);
+                SlutSchemaTiderLada.ItemsSource = knappar;
+                //4 == tid mellan de bokbara tiderna utöver en dag
+                tid = tid.AddHours(4);
             }
             UppdateraUI();
         }
+
         private void UppdateraUI()
         {
-            var lista = SchemaTiderLada.ItemsSource;
-            SchemaTiderLada.ItemsSource = null;
-            SchemaTiderLada.ItemsSource = lista;
+            var lista = StartSchemaTiderLada.ItemsSource;
+            StartSchemaTiderLada.ItemsSource = null;
+            StartSchemaTiderLada.ItemsSource = lista;
             var startDatum = StartDatumTextLada.Text;
             StartDatumTextLada.Text = null;
             StartDatumTextLada.Text = startDatum;

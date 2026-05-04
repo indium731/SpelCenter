@@ -19,12 +19,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        InitieraMedlemsLista();
         Vy.Content = new InloggVy();
-    }
-    void InitieraMedlemsLista()
-    {
-        MedlemsLista.HamtaMedlemsLista();
     }
 
 }
