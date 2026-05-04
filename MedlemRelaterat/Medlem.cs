@@ -1,4 +1,6 @@
-﻿namespace Labb1_OOP;
+﻿using System.Windows;
+
+namespace Labb1_OOP;
 
 public class Medlem
 {
@@ -16,6 +18,10 @@ public class Medlem
 
     public Medlem(string n, string t, string m, bool? a)
     {
+        if (t.All(char.IsDigit)){
+            MessageBox.Show("Telefonnummer får enbart innehålla siffror");
+            throw new ArgumentException();
+        }
         namn = n;
         telefonNummer = t;
         medlemsNummer = m;

@@ -38,12 +38,18 @@ namespace Labb1_OOP
 
             Svarighetsgrad svarighetsgrad = (Svarighetsgrad)Enum.Parse(typeof(Svarighetsgrad), SvarighetsgradLada.SelectedItem.ToString());
 
+            try {
+
             SpelLista.HamtaSpelLista().spel.Add(new Spel(NamnTextLada.Text.Trim(),
                                                                       KategoriTextLada.Text.Trim(),
                                                                       minAntal,
                                                                       maxAntal,
                                                                       svarighetsgrad,
                                                                       BeskrivningTextLada.Text.Trim()));
+            } catch (ArgumentException ex)
+            {
+                return;
+            }
             UppdateraUI();
         }
 

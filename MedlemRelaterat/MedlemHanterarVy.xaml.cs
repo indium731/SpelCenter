@@ -32,10 +32,15 @@ namespace Labb1_OOP
 
         private void TestaLaggTillMedlemKlick(Object sender, RoutedEventArgs e)
         {
+            try{
             MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem(NamnTextLada.Text.Trim(),
                                                                       TelefonNummerTextLada.Text.Trim(),
                                                                       MedlemsNummerTextLada.Text.Trim(),
                                                                       Administratör.IsChecked));
+            } catch (ArgumentException ex)
+            {
+                return;
+            }
             UppdateraUI();
         }
 

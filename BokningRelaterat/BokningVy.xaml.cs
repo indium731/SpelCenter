@@ -19,6 +19,7 @@ namespace Labb1_OOP
 
         private void TestaLaggTillBokningKlick(Object sender, RoutedEventArgs e)
         {
+            try {
             int antal = 0;
             if (!int.TryParse(MaxAntalTextLada.Text.Trim(), out antal)) return;
 
@@ -30,9 +31,16 @@ namespace Labb1_OOP
                                           BeskrivningTextLada.Text.Trim());
 
             Bokningar.HamtaBokningar().bokningar.Add(bokning);
+            
 
             var mainWin = (MainWindow)MainWindow.GetWindow(this);
             mainWin.Vy.Content = new BokaSpelVy(bokning);
+            
+            } catch (ArgumentException ex)
+                {
+                    return;
+                }
+                
         }
 
         private void InitieraSchemaTider()
