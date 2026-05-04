@@ -5,11 +5,16 @@ public class MedlemSkap
     public MedlemSkap()
     {
         startDatum = DateOnly.FromDateTime(DateTime.Today);
-        slutDatum = DateOnly.FromDateTime(DateTime.Today);
+        slutDatum = DateOnly.FromDateTime(DateTime.Today).AddMonths(1);
     }
     public DateOnly startDatum;
     public DateOnly slutDatum;
-    public bool medlemStatus;
+    public bool medlemStatus {
+        get
+        {
+            if (DateOnly.FromDateTime(DateTime.Today) < slutDatum) return true;
+            return false;
+        } private set;}
     public override string ToString()
     {
         return "Medlem";

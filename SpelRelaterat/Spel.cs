@@ -17,7 +17,7 @@ public class Spel
 
     public Spel(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
-        if (minAntalSpelare > maxAntalSpelare)
+        if (a > m)
         {
             MessageBox.Show("minimum antal spelare måste vara lägre än max antal spelare");
             throw new ArgumentException();

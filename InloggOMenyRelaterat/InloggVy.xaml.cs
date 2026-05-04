@@ -25,7 +25,11 @@ namespace Labb1_OOP
             {
                 if (inlogg == medlem.medlemsNummer)
                     {
-                        Session.HamtaSession(medlem);
+                        if (!medlem.medlemSkap.medlemStatus)
+                    {
+                        MessageBox.Show("medlemSkap ej aktivt");
+                        return;
+                    }
                         Session.HamtaSession().inloggadMedlem = medlem;
                         var mainWin = (MainWindow)Window.GetWindow(this);
                         mainWin.Vy.Content = new MedlemMenyVy();
