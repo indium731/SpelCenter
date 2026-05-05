@@ -30,7 +30,7 @@ namespace Labb1_OOP
             {
                 return;
             }
-            valdBokning.anmalda.Add(Session.HamtaSession().inloggadMedlem);
+            valdBokning.Anmal(Session.HamtaSession().inloggadMedlem);
         }
 
         private void AndraValdBokning(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
