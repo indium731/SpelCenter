@@ -13,6 +13,7 @@ public class Bokning
         ansvarig = Session.HamtaSession().inloggadMedlem;
         beskrivning = "spela schack ensam";
         anmalda = new List<Medlem>();
+        bokadeSpel = new List<Spel>();
     }
 
     public Bokning(DateTime d, DateTime s, string p, int m, Medlem a, string b)
@@ -20,7 +21,7 @@ public class Bokning
 
         if (d > s)
         {
-           MessageBox.Show($"Startdatum måste vara före slutdatum \n  startdatum: {d}\n slutdatum: {s}"); 
+           MessageBox.Show($"Startdatum måste vara före slutdatum \n startdatum: {d}\n slutdatum: {s}"); 
            throw new ArgumentException();
         }
 
@@ -54,6 +55,12 @@ public class Bokning
         bokadeSpel.Add(spel);
 
     }
+    public void AvBokaSpel(Spel spel)
+    {
+        if (!bokadeSpel.Contains(spel)) return;
+        bokadeSpel.Remove(spel);
+
+    }
 
     public override string ToString()
     {
@@ -61,11 +68,18 @@ public class Bokning
     }
     public string Detaljer()
     {
+        string bokadeSpelString = "\n";
+        foreach (Spel spel in this.bokadeSpel)
+        {
+            bokadeSpelString += spel.ToString() + '\n';
+        }
+
         return $"Tid: {this.startDatum.ToString()} - {this.slutDatum.ToString()}\n" +
                $"Plats: {this.plats}\n" +
                $"Maxantal: {this.maxAntal}\n" +
                $"Ansvarig: {this.ansvarig.ToString()}\n" +
-               $"Beskriving: {this.beskrivning}\n";
+               $"Beskriving: {this.beskrivning}\n" +
+               $"Bokade spel: {bokadeSpelString}";
     }
 }
 

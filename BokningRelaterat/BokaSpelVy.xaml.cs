@@ -54,24 +54,20 @@ namespace Labb1_OOP
 
         private void TestaBokaSpelKlick(Object sender, RoutedEventArgs e)
         {
-            Bokning bokning = (Bokning)BokaSpelKnapp.Tag;
-            bokning.BokaSpel((Spel)SpelListaLada.SelectedItem);
+            if (BokaSpelKnapp.Tag is not Bokning bokning) return;
+            if (SpelListaLada.SelectedItem is not Spel spel) return;
+            bokning.BokaSpel(spel);
 
             UppdateraUI();
         }
 
         private void TaBortValdSpelKlick(Object sender, RoutedEventArgs e)
         {
-            if (SpelListaLada.SelectedItem is not Spel valdSpel)
-            {
-                DetaljTextLada.Text = "Välj ett spel att ta bort";
-                return;
-            }
-            
-            SpelLista.HamtaSpelLista().spel.Remove(valdSpel);
-            UppdateraUI();
-            DetaljTextLada.Text = "Inget Spel vald";
+            if (BokaSpelKnapp.Tag is not Bokning bokning) return;
+            if (SpelListaLada.SelectedItem is not Spel spel) return;
+            bokning.AvBokaSpel(spel);
 
+            UppdateraUI();
         }
 
         private void AndraValdSpel(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

@@ -24,7 +24,7 @@ namespace Labb1_OOP
         private void TestaAndraBokningKlick(Object sender, RoutedEventArgs e)
         {
             int antal = 0;
-            if (!int.TryParse(MaxAntalTextLada.Text.Trim(), out antal)) return;
+            if (!int.TryParse(MaxAntalTextLada.Text.Trim(), out antal));
 
             Bokning bokning = (Bokning)NuvarandeBokningTextLada.Tag;
 
@@ -32,13 +32,8 @@ namespace Labb1_OOP
             DateTime? startDatumTid = null;
             DateTime? slutDatumTid = null;
 
-            if (sender is Button knapp)
+            if (((Button)sender).Tag is TimeOnly tid)
             {
-                if (knapp.Tag is not TimeOnly tid)
-                {
-                    MessageBox.Show("Välj ett datum+tid inte bara tid, tack");
-                    return;
-                }
                 if (StartDatumValjare.SelectedDate is DateTime startDatum)
                 {
                 startDatumTid = startDatum.Date + tid.ToTimeSpan();
@@ -47,10 +42,7 @@ namespace Labb1_OOP
                 {
                 slutDatumTid = slutDatum.Date + tid.ToTimeSpan();
                 }
-
             }
-
-
 
             if (startDatumTid != null) bokning.startDatum = (DateTime)startDatumTid;
             if (slutDatumTid != null) bokning.slutDatum = (DateTime)slutDatumTid;
