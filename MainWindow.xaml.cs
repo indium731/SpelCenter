@@ -20,6 +20,12 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Vy.Content = new InloggVy();
+        Seed();
+    }
+
+    private void Seed()
+    {
+
     }
 
 }
