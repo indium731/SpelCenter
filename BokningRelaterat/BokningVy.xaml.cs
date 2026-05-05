@@ -67,14 +67,17 @@ namespace Labb1_OOP
         }
         private void InitieraStartSchemaTider()
         {
+            int startTid = Installningar.HamtaInstallningar().forstaBokbaraTid;
+            int bokningTider = Installningar.HamtaInstallningar().antalBokningTider;
+            int inkrement = (Installningar.HamtaInstallningar().sistaBokbaraTid - startTid) / bokningTider;
             TimeOnly tid = new TimeOnly();
             tid = TimeOnly.MinValue;
             //8 == tidigaste bokbara tid
-            tid = tid.AddHours(8);
+            tid = tid.AddHours(startTid);
             List<Button> knappar = new List<Button>();
 
             //4 == mängd olika bokbara tider per dag
-            for (int i = 0; i<4; i++)
+            for (int i = 0; i<bokningTider; i++)
             {
                 Button knapp = new Button();
                 knapp.Content = tid.ToString();
@@ -83,20 +86,24 @@ namespace Labb1_OOP
                 knappar.Add(knapp);
                 StartSchemaTiderLada.ItemsSource = knappar;
                 //4 == tid mellan de bokbara tiderna utöver en dag
-                tid = tid.AddHours(4);
+                tid = tid.AddHours(inkrement);
             }
             UppdateraUI();
         } 
         private void InitieraSlutSchemaTider()
         {
+            int startTid = Installningar.HamtaInstallningar().forstaBokbaraTid;
+            int bokningTider = Installningar.HamtaInstallningar().antalBokningTider;
+            int inkrement = (Installningar.HamtaInstallningar().sistaBokbaraTid - startTid) / bokningTider;
+
             TimeOnly tid = new TimeOnly();
             tid = TimeOnly.MinValue;
             //8 == tidigaste bokbara tid
-            tid = tid.AddHours(8);
+            tid = tid.AddHours(startTid);
             List<Button> knappar = new List<Button>();
 
             //4 == mängd olika bokbara tider per dag
-            for (int i = 0; i<4; i++)
+            for (int i = 0; i<bokningTider; i++)
             {
                 Button knapp = new Button();
                 knapp.Content = tid.ToString();
@@ -105,7 +112,7 @@ namespace Labb1_OOP
                 knappar.Add(knapp);
                 SlutSchemaTiderLada.ItemsSource = knappar;
                 //4 == tid mellan de bokbara tiderna utöver en dag
-                tid = tid.AddHours(4);
+                tid = tid.AddHours(inkrement);
             }
             UppdateraUI();
         }

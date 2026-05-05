@@ -65,13 +65,17 @@ namespace Labb1_OOP
         
         private void InitieraSchemaTider(ListBox ListaLada)
         {
+            int startTid = Installningar.HamtaInstallningar().forstaBokbaraTid;
+            int bokningTider = Installningar.HamtaInstallningar().antalBokningTider;
+            int inkrement = (Installningar.HamtaInstallningar().sistaBokbaraTid - startTid) / bokningTider;
+
             List<Button> tider = new List<Button>();
             TimeOnly tid = TimeOnly.MinValue;
             //8 == tidigaste bokningsbara tid
-            tid = tid.AddHours(8);
+            tid = tid.AddHours(startTid);
 
             //4 == hur många olika tider man kan boka per dag
-            for (int i = 0; i<4; i++)
+            for (int i = 0; i<bokningTider; i++)
             {
                 Button tidKnapp = new Button();
                 tidKnapp.Content = tid.ToString();
@@ -79,7 +83,7 @@ namespace Labb1_OOP
                 tidKnapp.Click += TestaAndraBokningKlick;
                 tider.Add(tidKnapp);
                 ListaLada.ItemsSource = tider;
-                tid = tid.AddHours(4);
+                tid = tid.AddHours(inkrement);
             }
             UppdateraUI();
         }
