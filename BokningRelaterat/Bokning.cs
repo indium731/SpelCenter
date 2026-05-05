@@ -45,26 +45,34 @@ public class Bokning
 
     public void Anmal(Medlem medlem)
     {
-        if (anmalda.Count <= maxAntal) return;
-        if (anmalda.Contains(medlem)) return;
-        anmalda.Add(medlem);
+        if (this.anmalda.Count >= maxAntal)
+        {
+            MessageBox.Show("Bokningen är fullbokad");
+            return;
+        } 
+        if (this.anmalda.Contains(medlem))
+        {
+            MessageBox.Show("Du har redan anmält dig till denna bokning");
+            return;
+        }
+        this.anmalda.Add(medlem);
     }
     public void BokaSpel(Spel spel)
     {
-        if (bokadeSpel.Contains(spel)) return;
-        bokadeSpel.Add(spel);
+        if (this.bokadeSpel.Contains(spel)) return;
+        this.bokadeSpel.Add(spel);
 
     }
     public void AvBokaSpel(Spel spel)
     {
-        if (!bokadeSpel.Contains(spel)) return;
-        bokadeSpel.Remove(spel);
+        if (!this.bokadeSpel.Contains(spel)) return;
+        this.bokadeSpel.Remove(spel);
 
     }
 
     public override string ToString()
     {
-        return beskrivning.ToString();
+        return this.beskrivning.ToString();
     }
     public string Detaljer()
     {
