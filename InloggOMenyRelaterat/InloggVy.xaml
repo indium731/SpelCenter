@@ -21,7 +21,7 @@
         <TextBlock Grid.ColumnSpan="2"
                 Text="SpelCenter" />
 
-        <StackPanel Grid.Row="1" Grid.Column="1">
+        <StackPanel Grid.Row="0" Grid.Column="1">
 
             <TextBlock Text="Logga in" 
                 x:Name="InloggTextBlock"/>

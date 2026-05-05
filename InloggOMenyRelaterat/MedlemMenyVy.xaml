@@ -27,7 +27,7 @@
             
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="1">
+        <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Logga ut" 
                 Click="TestaUtloggKlick"/>
