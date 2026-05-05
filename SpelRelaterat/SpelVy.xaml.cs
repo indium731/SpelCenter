@@ -76,10 +76,7 @@ namespace Labb1_OOP
             }
 
 
-            DetaljTextLada.Text = 
-                $"Namn: {valdSpel.namn}\n" +
-                $"Kategori: {valdSpel.kategori}\n" +
-                $"Beskrivning: {valdSpel.beskrivning}";
+            DetaljTextLada.Text = valdSpel.Detaljer(); 
         }
 
         private void UppdateraValdSpelKlick(Object sender, RoutedEventArgs e)

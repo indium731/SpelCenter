@@ -59,5 +59,13 @@ public class Bokning
     {
         return beskrivning.ToString();
     }
+    public string Detaljer()
+    {
+        return $"Tid: {this.startDatum.ToString()} - {this.slutDatum.ToString()}\n" +
+               $"Plats: {this.plats}\n" +
+               $"Maxantal: {this.maxAntal}\n" +
+               $"Ansvarig: {this.ansvarig.ToString()}\n" +
+               $"Beskriving: {this.beskrivning}\n";
+    }
 }
 

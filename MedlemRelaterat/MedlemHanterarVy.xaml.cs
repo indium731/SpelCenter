@@ -67,11 +67,7 @@ namespace Labb1_OOP
             }
 
 
-            DetaljTextLada.Text = 
-                $"Namn: {valdMedlem.namn}\n" +
-                $"TelefonNummer: {valdMedlem.telefonNummer}\n" +
-                $"Slutdatum av medlemskap: {valdMedlem.medlemSkap.slutDatum}\n" +
-                $"MedlemsNummer: {valdMedlem.medlemsNummer}";
+            DetaljTextLada.Text = valdMedlem.UtokadeDetaljer();
         }
 
         private void UppdateraValdMedlemKlick(Object sender, RoutedEventArgs e)

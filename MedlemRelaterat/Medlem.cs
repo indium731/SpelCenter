@@ -44,4 +44,21 @@ public class Medlem
     {
         return namn;
     }
+    public string UtokadeDetaljer()
+    {
+        string admin;
+        admin = atkomster.Count() == 5 ? "admin" : "ej admin";
+
+        return $"Namn: {this.namn}\n" + 
+               $"TelefonNummer: {this.telefonNummer}\n" +
+               $"medlemsNummer: {this.medlemsNummer}\n" +
+               $"Blev medlem: {this.medlemSkap.startDatum}" +
+               $"Medlemskap upphör: {this.medlemSkap.slutDatum}" +
+               admin;
+    }
+    public string Detaljer()
+    {
+        return $"Namn: {this.namn}\n" + 
+               $"TelefonNummer: {this.telefonNummer}\n";
+    }
 }

@@ -41,4 +41,12 @@ public class Spel
     {
         return namn;
     }
+    public string Detaljer()
+    {
+        return $"Namn: {this.namn}\n" +
+               $"Kategori: {this.kategori}\n" +
+               $"Antal Spelare: {this.minAntalSpelare} - {this.maxAntalSpelare}\n" +
+               $"Svårighetsgrad: {this.svarighetsgrad}\n" +
+               $"Beskrivning: {this.beskrivning}";
+    }
 }

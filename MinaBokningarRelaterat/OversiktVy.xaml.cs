@@ -7,15 +7,6 @@ namespace Labb1_OOP
 {
     public partial class OversiktVy : UserControl
     {
-        public OversiktVy()
-        {
-            return;
-            /*
-            InitializeComponent();
-            InitieraOversiktLista();
-            UppdateraUI();
-            */
-        }
         public OversiktVy(Bokning bokning)
         {
             InitializeComponent();
@@ -46,19 +37,11 @@ namespace Labb1_OOP
         {
             if (OversiktListaLada.SelectedItem is Medlem valdMedlem)
             {
-                DetaljTextLada.Text = 
-                    $"Namn: {valdMedlem.namn}\n" +
-                    $"TelefonNummer: {valdMedlem.telefonNummer}\n";
+                DetaljTextLada.Text = valdMedlem.Detaljer();
             }
             if (OversiktListaLada.SelectedItem is Spel valdSpel)
             {
-                DetaljTextLada.Text = 
-                    $"Namn: {valdSpel.namn}\n" +
-                    $"kategori: {valdSpel.kategori}\n" +
-                    $"minimum antal spelare: {valdSpel.minAntalSpelare}\n" +
-                    $"maximum antal spelare: {valdSpel.maxAntalSpelare}\n" +
-                    $"svarighetsgrad: {valdSpel.svarighetsgrad}\n" +
-                    $"beskrivning: {valdSpel.beskrivning}\n";
+                DetaljTextLada.Text = valdSpel.Detaljer();
             }
         }
 

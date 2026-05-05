@@ -38,8 +38,8 @@ namespace Labb1_OOP
             }
             
             Bokningar.HamtaBokningar().bokningar.Remove(valdBokning);
-            UppdateraUI();
             DetaljTextLada.Text = "Ingen bokning vald";
+            UppdateraUI();
 
         }
 
@@ -51,14 +51,7 @@ namespace Labb1_OOP
                 return;
             }
             
-            DetaljTextLada.Text = 
-                $"startdatum: {valdBokning.startDatum.ToString()}\n" +
-                $"slutdatum: {valdBokning.slutDatum.ToString()}\n" +
-                $"plats: {valdBokning.plats}\n" +
-                $"ansvarig: {valdBokning.ansvarig.ToString()}\n" +
-                $"max antal: {valdBokning.maxAntal}\n" +
-                $"antal anmälda: {valdBokning.anmalda.Count}\n" +
-                $"beskrivning: {valdBokning.beskrivning}";
+            DetaljTextLada.Text = valdBokning.Detaljer();
         }
 
         private void GaTillOversiktKlick(Object sender, RoutedEventArgs e)
