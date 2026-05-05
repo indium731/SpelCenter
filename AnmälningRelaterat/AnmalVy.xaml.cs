@@ -26,7 +26,7 @@ namespace Labb1_OOP
 
         private void TestaAnmalKlick(Object sender, RoutedEventArgs e)
         {
-            if (BokningarListaLada.SelectedItem is not Bokning valdBokning)
+        if (BokningarListaLada.SelectedItem is not Bokning valdBokning)
             {
                 return;
             }
