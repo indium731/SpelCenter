@@ -26,11 +26,19 @@ public partial class MainWindow : Window
 	private void Seed()
 	{
 
+		Medlem Alexander = new Medlem("Alexander", "0701234567", "S1", true);
+		Medlem Rednaxela = new Medlem("Rednaxela", "070123333", "S5", true);
+		Medlem Lisa = new Medlem("Lisa", "0739876543", "S2", false);
+		Medlem Pelle = new Medlem("Pelle", "0725551234", "S3", false);
+		Medlem Emma = new Medlem("Emma", "0761112233", "S4", true);
 
-		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem("Alexander", "0701234567", "S1", true));   // admin
-		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem("Lisa", "0739876543", "S2", false));      // vanlig
-		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem("Pelle", "0725551234", "S3", false));
-		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem("Emma", "0761112233", "S4", true));       // admin
+		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(Alexander);   
+		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(Rednaxela);
+		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(Lisa);
+		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(Pelle);
+		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(Emma);
+
+
 
 		SpelLista.HamtaSpelLista().spel.Add(new Spel("Uno", "Sällskap", 2, 8, Svarighetsgrad.barnvänligt , "kortspel"));
 		SpelLista.HamtaSpelLista().spel.Add(new Spel("Fyra i rad", "Sällskap", 2, 2, Svarighetsgrad.barnvänligt, "Få fyra i rad"));
@@ -38,7 +46,13 @@ public partial class MainWindow : Window
 		SpelLista.HamtaSpelLista().spel.Add(new Spel("Guitarherokortspelet", "Sällskap", 1, 2, Svarighetsgrad.barnvänligt, "kortspel"));
 
 
-		Bokningar().HamtaBokningar().bokningar.Add(new Bokning(new DateTime (2024, 03, 12),new  DateTime (2024, 03, 12), "Majorna", 5, Medlem a, string b));
+
+		Bokning unoraff = new Bokning(new DateTime(2024, 03, 12), new DateTime(2024, 03, 12), "Majorna", 5, Alexander, "Unospelträff");
+
+		
+		Bokningar.HamtaBokningar().bokningar.Add(unoraff);
+		
+		unoraff.Anmal(Rednaxela);
 	}
 
 }

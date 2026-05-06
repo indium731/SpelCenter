@@ -5,15 +5,7 @@ namespace Labb1_OOP;
 
 public class Spel 
 {
-    public Spel()
-    {
-        namn = "Schack";
-        kategori= "Strategi";
-        minAntalSpelare = 2;
-        maxAntalSpelare = 2;
-        svarighetsgrad = Svarighetsgrad.mittemellan;
-        beskrivning = "The ROOK!";
-    }
+
 
     public Spel(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {

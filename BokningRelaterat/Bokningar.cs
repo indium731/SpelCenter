@@ -8,7 +8,6 @@ public sealed class Bokningar
     private Bokningar()
     {
         bokningar = new List<Bokning>();
-        bokningar.Add(new Bokning());
     }
 
     private static Bokningar _instans;

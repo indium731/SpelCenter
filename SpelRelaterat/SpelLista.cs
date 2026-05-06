@@ -5,7 +5,6 @@ public sealed class SpelLista
     private SpelLista()
     {
         spel = new List<Spel>();
-        spel.Add(new Spel());
     }
 
     private static SpelLista _instans;
