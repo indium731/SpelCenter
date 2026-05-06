@@ -1,36 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alle9\\Desktop\\Skola\\Programering\\Lab 1 senaste\\Labb1_OOP.csproj": {}
+    "C:\\Users\\alfre\\VSCodeProjects\\Labb1_OOP\\Labb1_OOP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alle9\\Desktop\\Skola\\Programering\\Lab 1 senaste\\Labb1_OOP.csproj": {
+    "C:\\Users\\alfre\\VSCodeProjects\\Labb1_OOP\\Labb1_OOP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alle9\\Desktop\\Skola\\Programering\\Lab 1 senaste\\Labb1_OOP.csproj",
+        "projectUniqueName": "C:\\Users\\alfre\\VSCodeProjects\\Labb1_OOP\\Labb1_OOP.csproj",
         "projectName": "Labb1_OOP",
-        "projectPath": "C:\\Users\\Alle9\\Desktop\\Skola\\Programering\\Lab 1 senaste\\Labb1_OOP.csproj",
-        "packagesPath": "C:\\Users\\Alle9\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alle9\\Desktop\\Skola\\Programering\\Lab 1 senaste\\obj\\",
+        "projectPath": "C:\\Users\\alfre\\VSCodeProjects\\Labb1_OOP\\Labb1_OOP.csproj",
+        "packagesPath": "C:\\Users\\alfre\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alfre\\VSCodeProjects\\Labb1_OOP\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Alle9\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\alfre\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net10.0-windows": {
-            "framework": "net10.0-windows7.0",
+          "net10.0-windows7.0": {
             "targetAlias": "net10.0-windows",
             "projectReferences": {}
           }
@@ -48,8 +41,7 @@
         "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
-        "net10.0-windows": {
-          "framework": "net10.0-windows7.0",
+        "net10.0-windows7.0": {
           "targetAlias": "net10.0-windows",
           "imports": [
             "net461",
@@ -70,7 +62,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.203/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

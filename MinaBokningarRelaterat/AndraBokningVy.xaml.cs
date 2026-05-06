@@ -59,8 +59,8 @@ namespace Labb1_OOP
         {
             int startTid = Installningar.forstaBokbaraTid;
             int bokningTider = Installningar.antalBokningTider;
-            int inkrement = (Installningar.sistaBokbaraTid - startTid) / bokningTider;
-
+            double inkrement = (Installningar.sistaBokbaraTid - startTid);
+            inkrement /= (bokningTider-1);
             List<Button> tider = new List<Button>();
             TimeOnly tid = TimeOnly.MinValue;
             //8 == tidigaste bokningsbara tid

@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -69,7 +70,8 @@ namespace Labb1_OOP
         {
             int startTid = Installningar.forstaBokbaraTid;
             int bokningTider = Installningar.antalBokningTider;
-            int inkrement = (Installningar.sistaBokbaraTid - startTid) / bokningTider;
+            double inkrement = (Installningar.sistaBokbaraTid - startTid);
+            inkrement /= (bokningTider-1);
             TimeOnly tid = new TimeOnly();
             tid = TimeOnly.MinValue;
             //8 == tidigaste bokbara tid
@@ -94,7 +96,9 @@ namespace Labb1_OOP
         {
             int startTid = Installningar.forstaBokbaraTid;
             int bokningTider = Installningar.antalBokningTider;
-            int inkrement = (Installningar.sistaBokbaraTid - startTid) / bokningTider;
+
+            double inkrement = (Installningar.sistaBokbaraTid - startTid);
+            inkrement /= (bokningTider-1);
 
             TimeOnly tid = new TimeOnly();
             tid = TimeOnly.MinValue;
