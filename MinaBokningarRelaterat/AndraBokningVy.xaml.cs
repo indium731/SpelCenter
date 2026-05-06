@@ -57,9 +57,9 @@ namespace Labb1_OOP
         
         private void InitieraSchemaTider(ListBox ListaLada)
         {
-            int startTid = Installningar.HamtaInstallningar().forstaBokbaraTid;
-            int bokningTider = Installningar.HamtaInstallningar().antalBokningTider;
-            int inkrement = (Installningar.HamtaInstallningar().sistaBokbaraTid - startTid) / bokningTider;
+            int startTid = Installningar.forstaBokbaraTid;
+            int bokningTider = Installningar.antalBokningTider;
+            int inkrement = (Installningar.sistaBokbaraTid - startTid) / bokningTider;
 
             List<Button> tider = new List<Button>();
             TimeOnly tid = TimeOnly.MinValue;

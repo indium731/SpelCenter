@@ -67,9 +67,9 @@ namespace Labb1_OOP
         }
         private void InitieraStartSchemaTider()
         {
-            int startTid = Installningar.HamtaInstallningar().forstaBokbaraTid;
-            int bokningTider = Installningar.HamtaInstallningar().antalBokningTider;
-            int inkrement = (Installningar.HamtaInstallningar().sistaBokbaraTid - startTid) / bokningTider;
+            int startTid = Installningar.forstaBokbaraTid;
+            int bokningTider = Installningar.antalBokningTider;
+            int inkrement = (Installningar.sistaBokbaraTid - startTid) / bokningTider;
             TimeOnly tid = new TimeOnly();
             tid = TimeOnly.MinValue;
             //8 == tidigaste bokbara tid
@@ -92,9 +92,9 @@ namespace Labb1_OOP
         } 
         private void InitieraSlutSchemaTider()
         {
-            int startTid = Installningar.HamtaInstallningar().forstaBokbaraTid;
-            int bokningTider = Installningar.HamtaInstallningar().antalBokningTider;
-            int inkrement = (Installningar.HamtaInstallningar().sistaBokbaraTid - startTid) / bokningTider;
+            int startTid = Installningar.forstaBokbaraTid;
+            int bokningTider = Installningar.antalBokningTider;
+            int inkrement = (Installningar.sistaBokbaraTid - startTid) / bokningTider;
 
             TimeOnly tid = new TimeOnly();
             tid = TimeOnly.MinValue;
