@@ -32,6 +32,7 @@ public partial class MainWindow : Window
 		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem("Johan", "0725551234", "S3", false));
 		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem("Emma", "0761112233", "S4", true));       // admin
 
+		SpelLista.HamtaSpelLista().spel.Add(new Spel("Fyra i rad, ng k, int a, int m, Svarighetsgrad s, strög b");
 	}
 
 }
