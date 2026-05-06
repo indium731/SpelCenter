@@ -5,11 +5,12 @@ namespace Labb1_OOP;
 public class MedlemHanterarAtkomst : IAtkomst
 {
 
-    public Button Knapp()
+    public UserControl Atkom()
     {
-        Button knapp = new Button();
-        knapp.Content = "MedlemHanterare";
-        knapp.Tag = new MedlemHanterarVy();
-        return knapp;
+        return new MedlemHanterarVy();
+    }
+    public string Namn()
+    {
+        return "MedlemHanterare";
     }
 }

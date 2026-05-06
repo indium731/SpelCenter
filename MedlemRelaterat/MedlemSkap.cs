@@ -5,7 +5,7 @@ public class MedlemSkap
     public MedlemSkap()
     {
         startDatum = DateOnly.FromDateTime(DateTime.Today);
-        slutDatum = DateOnly.FromDateTime(DateTime.Today).AddMonths(1);
+        slutDatum = DateOnly.FromDateTime(DateTime.Today).AddYears(1);
     }
     public DateOnly startDatum;
     public DateOnly slutDatum;

@@ -40,8 +40,8 @@
                 x:Name="BokaSpelKnapp"
                 Click="TestaBokaSpelKlick"/>
 
-            <Button Content="Ta bort vald spel" 
-                Click="TaBortValdSpelKlick"/>
+            <Button Content="Avboka vald spel" 
+                Click="AvbokaValdSpelKlick"/>
 
             <TextBlock Text="Detaljer" />
             <TextBlock x:Name="DetaljTextLada" Text="Ingen medlem vald." />

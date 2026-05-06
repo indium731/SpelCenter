@@ -4,7 +4,8 @@ namespace Labb1_OOP;
 
 public interface IAtkomst
 {
-    Button Knapp();
+    UserControl Atkom();
+    string Namn();
 
 
 }

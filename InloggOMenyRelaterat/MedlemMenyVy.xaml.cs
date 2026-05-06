@@ -28,8 +28,10 @@ namespace Labb1_OOP
         {
             foreach (IAtkomst atkomst in Session.HamtaSession().inloggadMedlem.atkomster)
             {
-                Button knapp = atkomst.Knapp();
+                Button knapp = new Button();
                 knapp.Click += GaTillValdVy;
+                knapp.Tag = atkomst.Atkom();
+                knapp.Content = atkomst.Namn();
                 MenyListaLada.Items.Add(knapp);
 
             }

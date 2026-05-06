@@ -5,11 +5,12 @@ namespace Labb1_OOP;
 public class AnmalAtkomst : IAtkomst
 {
 
-    public Button Knapp()
+    public UserControl Atkom()
     {
-        Button knapp = new Button();
-        knapp.Content = "Anmäl dig";
-        knapp.Tag = new AnmalVy();
-        return knapp;
+        return new AnmalVy();
+    }
+    public string Namn()
+    {
+        return "Anmäl dig";
     }
 }

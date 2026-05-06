@@ -61,7 +61,7 @@ namespace Labb1_OOP
             UppdateraUI();
         }
 
-        private void TaBortValdSpelKlick(Object sender, RoutedEventArgs e)
+        private void AvbokaValdSpelKlick(Object sender, RoutedEventArgs e)
         {
             if (BokaSpelKnapp.Tag is not Bokning bokning) return;
             if (SpelListaLada.SelectedItem is not Spel spel) return;

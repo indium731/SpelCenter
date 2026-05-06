@@ -7,7 +7,6 @@ public sealed class MedlemsLista
     private MedlemsLista()
     {
         medlemmar = new List<Medlem>();
-        medlemmar.Add(new Medlem{});
     }
 
     private static MedlemsLista _instans;
@@ -21,4 +20,13 @@ public sealed class MedlemsLista
         return _instans;
     }
     public List<Medlem> medlemmar;
+
+    public void LaggTill(Medlem medlem)
+    {
+        medlemmar.Add(medlem);
+    }
+    public void TaBort(Medlem medlem)
+    {
+        medlemmar.Remove(medlem);
+    }
 }

@@ -57,8 +57,8 @@
             <Button Content="Uppdatera vald medlem" 
                 Click="UppdateraValdMedlemKlick"/>
             
-            <Button Content="Öka medlemskapet med en månad"
-                Click="OkaMedlemSkapManad"/>
+            <Button Content="Öka medlemskapet med ett år"
+                Click="OkaMedlemSkapAr"/>
 
             <TextBlock Text="Detaljer" />
             <TextBlock x:Name="DetaljTextLada" Text="Ingen medlem vald." />

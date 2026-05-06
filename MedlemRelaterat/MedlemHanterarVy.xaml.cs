@@ -33,10 +33,12 @@ namespace Labb1_OOP
         private void TestaLaggTillMedlemKlick(Object sender, RoutedEventArgs e)
         {
             try{
-            MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem(NamnTextLada.Text.Trim(),
+            MedlemsLista.HamtaMedlemsLista().LaggTill(new Medlem(NamnTextLada.Text.Trim(),
                                                                       TelefonNummerTextLada.Text.Trim(),
                                                                       MedlemsNummerTextLada.Text.Trim(),
                                                                       (bool)Administratör.IsChecked));
+            
+
             } catch (ArgumentException ex)
             {
                 return;
@@ -52,7 +54,7 @@ namespace Labb1_OOP
                 return;
             }
             
-            MedlemsLista.HamtaMedlemsLista().medlemmar.Remove(valdMedlem);
+            MedlemsLista.HamtaMedlemsLista().TaBort(valdMedlem);
             UppdateraUI();
             DetaljTextLada.Text = "Ingen medlem vald";
 
@@ -74,15 +76,15 @@ namespace Labb1_OOP
         {
             if (MedlemListaLada.SelectedItem is not Medlem valdMedlem) return;
             if (NamnTextLada.Text.Trim().Count() != 0) valdMedlem.namn = NamnTextLada.Text.Trim();
-            if (TelefonNummerTextLada.Text.Trim().Count() != 0) valdMedlem.telefonNummer= TelefonNummerTextLada.Text.Trim();
+            if (TelefonNummerTextLada.Text.Trim().Count() != 0) valdMedlem.telefonNummer = TelefonNummerTextLada.Text.Trim();
             if (MedlemsNummerTextLada.Text.Trim().Count() != 0) valdMedlem.medlemsNummer = MedlemsNummerTextLada.Text.Trim();
             UppdateraUI();
         }
 
-        private void OkaMedlemSkapManad(Object sender, RoutedEventArgs e)
+        private void OkaMedlemSkapAr(Object sender, RoutedEventArgs e)
         {
             if (MedlemListaLada.SelectedItem is not Medlem valdMedlem) return;
-            valdMedlem.medlemSkap.slutDatum = valdMedlem.medlemSkap.slutDatum.AddMonths(1);
+            valdMedlem.medlemSkap.slutDatum = valdMedlem.medlemSkap.slutDatum.AddYears(1);
             UppdateraUI();
         }
 

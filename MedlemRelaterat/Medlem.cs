@@ -25,7 +25,7 @@ public class Medlem
         namn = n;
         telefonNummer = t;
         medlemsNummer = m;
-        medlemSkap = new MedlemSkap{};
+        medlemSkap = new MedlemSkap();
         atkomster.Add(new BokningAtkomst());
         atkomster.Add(new AnmalAtkomst());
         if (a)
@@ -52,8 +52,8 @@ public class Medlem
         return $"Namn: {this.namn}\n" + 
                $"TelefonNummer: {this.telefonNummer}\n" +
                $"medlemsNummer: {this.medlemsNummer}\n" +
-               $"Blev medlem: {this.medlemSkap.startDatum}" +
-               $"Medlemskap upphör: {this.medlemSkap.slutDatum}" +
+               $"Blev medlem: {this.medlemSkap.startDatum}\n" +
+               $"Medlemskap upphör: {this.medlemSkap.slutDatum}\n" +
                admin;
     }
     public string Detaljer()

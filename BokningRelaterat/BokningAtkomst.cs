@@ -6,11 +6,12 @@ namespace Labb1_OOP;
 public class BokningAtkomst : IAtkomst
 {
 
-    public Button Knapp()
+    public UserControl Atkom()
     {
-        Button knapp = new Button();
-        knapp.Content = "BokningHanterare";
-        knapp.Tag = new BokningVy();
-        return knapp;
+        return new BokningVy();
+    }
+    public string Namn()
+    {
+        return "BokningHanterare";
     }
 }
