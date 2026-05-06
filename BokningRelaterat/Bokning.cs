@@ -4,17 +4,7 @@ namespace Labb1_OOP;
 
 public class Bokning 
 {
-    public Bokning()
-    {
-        startDatum = new DateTime(2030, 4, 20);
-        slutDatum = new DateTime(2030, 4, 21);
-        plats  = "Sandgärdet";
-        maxAntal = 1;
-        ansvarig = Session.HamtaSession().inloggadMedlem;
-        beskrivning = "spela schack ensam";
-        anmalda = new List<Medlem>();
-        bokadeSpel = new List<Spel>();
-    }
+
 
     public Bokning(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
