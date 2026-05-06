@@ -47,12 +47,16 @@ public partial class MainWindow : Window
 
 
 
-		Bokning unoraff = new Bokning(new DateTime(2024, 03, 12), new DateTime(2024, 03, 12), "Majorna", 5, Alexander, "Unospelträff");
+		Bokning unotraff = new Bokning(new DateTime(2026, 03, 12), new DateTime(2026, 03, 12), "Majorna", 5, Alexander, "Unospelträff");
 
-		
-		Bokningar.HamtaBokningar().bokningar.Add(unoraff);
-		
-		unoraff.Anmal(Rednaxela);
+		Bokning Codtraff = new Bokning(new DateTime(2026, 03, 15), new DateTime(2026, 03, 15), "Majorna", 5, Emma, "Unospelträff");
+
+
+		Bokningar.HamtaBokningar().bokningar.Add(unotraff);
+		Bokningar.HamtaBokningar().bokningar.Add(Codtraff);
+
+		unotraff.Anmal(Rednaxela);
+		Codtraff.Anmal(Pelle);
 	}
 
 }
