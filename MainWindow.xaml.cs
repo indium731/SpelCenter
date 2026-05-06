@@ -25,12 +25,13 @@ public partial class MainWindow : Window
 
 	private void Seed()
 	{
-		var lista = MedlemsLista.HamtaMedlemsLista().medlemmar;
 
-		lista.Add(new Medlem("Alexander", "0701234567", "S1", true));   // admin
-		lista.Add(new Medlem("Lisa", "0739876543", "S2", false));      // vanlig
-		lista.Add(new Medlem("Johan", "0725551234", "S3", false));
-		lista.Add(new Medlem("Emma", "0761112233", "S4", true));       // admin
+
+		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem("Alexander", "0701234567", "S1", true));   // admin
+		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem("Lisa", "0739876543", "S2", false));      // vanlig
+		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem("Johan", "0725551234", "S3", false));
+		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(new Medlem("Emma", "0761112233", "S4", true));       // admin
+
 	}
 
 }
