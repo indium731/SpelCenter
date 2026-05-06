@@ -18,4 +18,13 @@ public sealed class SpelLista
         return _instans;
     }
     public List<Spel> spel;
+
+    public void LaggTill(Spel nyttSpel)
+    {
+        spel.Add(nyttSpel);
+    }
+    public void TaBort(Spel nyttSpel)
+    {
+        spel.Remove(nyttSpel);
+    }
 }

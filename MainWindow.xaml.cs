@@ -32,11 +32,11 @@ public partial class MainWindow : Window
 		Medlem Pelle = new Medlem("Pelle", "0725551234", "S3", false);
 		Medlem Emma = new Medlem("Emma", "0761112233", "S4", true);
 
-		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(Alexander);   
-		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(Rednaxela);
-		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(Lisa);
-		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(Pelle);
-		MedlemsLista.HamtaMedlemsLista().medlemmar.Add(Emma);
+		MedlemsLista.HamtaMedlemsLista().LaggTill(Alexander);   
+		MedlemsLista.HamtaMedlemsLista().LaggTill(Rednaxela);
+		MedlemsLista.HamtaMedlemsLista().LaggTill(Lisa);
+		MedlemsLista.HamtaMedlemsLista().LaggTill(Pelle);
+		MedlemsLista.HamtaMedlemsLista().LaggTill(Emma);
 
 
 

@@ -40,7 +40,7 @@ namespace Labb1_OOP
 
             try {
 
-            SpelLista.HamtaSpelLista().spel.Add(new Spel(NamnTextLada.Text.Trim(),
+            SpelLista.HamtaSpelLista().LaggTill(new Spel(NamnTextLada.Text.Trim(),
                                                                       KategoriTextLada.Text.Trim(),
                                                                       minAntal,
                                                                       maxAntal,
@@ -61,7 +61,7 @@ namespace Labb1_OOP
                 return;
             }
             
-            SpelLista.HamtaSpelLista().spel.Remove(valdSpel);
+            SpelLista.HamtaSpelLista().TaBort(valdSpel);
             UppdateraUI();
             DetaljTextLada.Text = "Inget Spel vald";
 

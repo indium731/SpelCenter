@@ -39,16 +39,16 @@ public class Medlem
         string admin;
         admin = atkomster.Count() == 5 ? "admin" : "ej admin";
 
-        return $"Namn: {this.namn}\n" + 
-               $"TelefonNummer: {this.telefonNummer}\n" +
-               $"medlemsNummer: {this.medlemsNummer}\n" +
-               $"Blev medlem: {this.medlemSkap.startDatum}\n" +
-               $"Medlemskap upphör: {this.medlemSkap.slutDatum}\n" +
+        return $"Namn: {namn}\n" + 
+               $"TelefonNummer: {telefonNummer}\n" +
+               $"medlemsNummer: {medlemsNummer}\n" +
+               $"Blev medlem: {medlemSkap.startDatum}\n" +
+               $"Medlemskap upphör: {medlemSkap.slutDatum}\n" +
                admin;
     }
     public string Detaljer()
     {
-        return $"Namn: {this.namn}\n" + 
-               $"TelefonNummer: {this.telefonNummer}\n";
+        return $"Namn: {namn}\n" + 
+               $"TelefonNummer: {telefonNummer}\n";
     }
 }

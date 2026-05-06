@@ -21,4 +21,13 @@ public sealed class Bokningar
         return _instans;
     }
     public List<Bokning> bokningar;
+
+    public void Laggtill(Bokning bokning)
+    {
+        bokningar.Add(bokning);
+    }
+    public void TaBort(Bokning bokning)
+    {
+        bokningar.Remove(bokning);
+    }
 }
