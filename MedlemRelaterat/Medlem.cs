@@ -16,19 +16,13 @@ public class Medlem
         telefonNummer = t;
         medlemsNummer = m;
         medlemSkap = new MedlemSkap();
-        atkomster.Add(new BokningAtkomst());
-        atkomster.Add(new AnmalAtkomst());
-        if (a)
-        {
-            atkomster.Add(new MedlemHanterarAtkomst());
-            atkomster.Add(new SpelAtkomst());
-        }
+        admin = a;
     }
     public string namn;
     public string telefonNummer;
     public string medlemsNummer;
     public MedlemSkap medlemSkap;
-    public List<IAtkomst> atkomster = new List<IAtkomst>();
+    public bool admin;
 
     public override string ToString()
     {
@@ -36,15 +30,14 @@ public class Medlem
     }
     public string UtokadeDetaljer()
     {
-        string admin;
-        admin = atkomster.Count() == 5 ? "admin" : "ej admin";
 
+        string adminString = admin? "Admin" : "Ej admin";
         return $"Namn: {namn}\n" + 
                $"TelefonNummer: {telefonNummer}\n" +
                $"medlemsNummer: {medlemsNummer}\n" +
                $"Blev medlem: {medlemSkap.startDatum}\n" +
                $"Medlemskap upphör: {medlemSkap.slutDatum}\n" +
-               admin;
+                 adminString;
     }
     public string Detaljer()
     {

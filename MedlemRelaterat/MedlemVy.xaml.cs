@@ -4,9 +4,9 @@ using System.Windows.Controls;
 
 namespace Labb1_OOP
 {
-    public partial class MedlemHanterarVy : UserControl
+    public partial class MedlemVy : UserControl
     {
-        public MedlemHanterarVy()
+        public MedlemVy()
         {
             InitializeComponent();
             InitializeMedlemLista();

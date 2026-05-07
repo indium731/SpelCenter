@@ -19,12 +19,10 @@ C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\ref\Labb1_OOP.
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\AnmälningRelaterat\AnmalVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\BokningRelaterat\BokningVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\InloggOMenyRelaterat\InloggVy.baml
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MedlemRelaterat\MedlemHanterarVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\SpelRelaterat\SpelVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\AnmälningRelaterat\AnmalVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\BokningRelaterat\BokningVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\InloggOMenyRelaterat\InloggVy.g.cs
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MedlemRelaterat\MedlemHanterarVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\SpelRelaterat\SpelVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MainWindow.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MainWindow.baml
@@ -80,3 +78,6 @@ C:\Users\Alle9\Desktop\Skola\Programering\Lab 1 senaste\obj\Debug\net10.0-window
 C:\Users\Alle9\Desktop\Skola\Programering\Lab 1 senaste\obj\Debug\net10.0-windows\Labb1_OOP.pdb
 C:\Users\Alle9\Desktop\Skola\Programering\Lab 1 senaste\obj\Debug\net10.0-windows\Labb1_OOP.genruntimeconfig.cache
 C:\Users\Alle9\Desktop\Skola\Programering\Lab 1 senaste\obj\Debug\net10.0-windows\ref\Labb1_OOP.dll
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MedlemRelaterat\MedlemVy.baml
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MedlemRelaterat\MedlemVy.g.cs
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\GeneratedInternalTypeHelper.g.cs

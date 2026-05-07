@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Labb1_OOP"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -23,8 +24,48 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox x:Name="MenyListaLada"/>
+            <Button Content="BokningHanterare"
+                x:Name="BokningHanterare"
+                Click="GaTillValdVy">
+                <Button.Tag>
+                    <local:BokningVy/>
+                </Button.Tag>
+            </Button>
+
+            <Button Content="Anmäl dig"
+                x:Name="AnmalHanterare"
+                Click="GaTillValdVy">
+                <Button.Tag>
+                    <local:AnmalVy/>
+                </Button.Tag>
+            </Button>
             
+            <Button Content="Mina bokningar"
+                x:Name="MinaBokningar"
+                Visibility="Collapsed"
+                Click="GaTillValdVy">
+                <Button.Tag>
+                    <local:MinaBokningarVy/>
+                </Button.Tag>
+            </Button>
+            
+            <Button Content="SpelHanterare"
+                x:Name="SpelHanterare"
+                Click="GaTillValdVy">
+                <Button.Tag>
+                    <local:SpelVy/>
+                </Button.Tag>
+            </Button>
+
+            <Button Content="MedlemHanterare"
+                x:Name="MedlemHanterare"
+                Click="GaTillValdVy">
+                <Button.Tag>
+                    <local:MedlemVy/>
+                </Button.Tag>
+            </Button>
+
+
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">

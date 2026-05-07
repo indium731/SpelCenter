@@ -13,7 +13,7 @@ namespace Labb1_OOP
             InitieraSlutSchemaTider();
         }
 
-        private void GaTillMeny(Object sender, RoutedEventArgs e)
+        public void GaTillMeny(Object sender, RoutedEventArgs e)
         {
             var mainWin = (MainWindow)Window.GetWindow(this);
             mainWin.Vy.Content = new MedlemMenyVy();

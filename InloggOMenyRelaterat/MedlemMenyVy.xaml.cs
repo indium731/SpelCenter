@@ -26,22 +26,14 @@ namespace Labb1_OOP
         
         private void KontrolleraAtkomster()
         {
-            foreach (IAtkomst atkomst in Session.HamtaSession().inloggadMedlem.atkomster)
+            if (!Session.HamtaSession().inloggadMedlem.admin)
             {
-                Button knapp = new Button();
-                knapp.Click += GaTillValdVy;
-                knapp.Tag = atkomst.Atkom();
-                knapp.Content = atkomst.Namn();
-                MenyListaLada.Items.Add(knapp);
-
+                MedlemHanterare.Visibility = Visibility.Collapsed;
+                SpelHanterare.Visibility = Visibility.Collapsed;
             }
             if (Bokningar.HamtaBokningar().bokningar.Where(bokning => bokning.ansvarig == Session.HamtaSession().inloggadMedlem).Count() != 0)
             {
-                Button knapp = new Button();
-                knapp.Content = "Mina bokningar";
-                knapp.Click += GaTillValdVy;
-                knapp.Tag = new MinaBokningarVy();
-                MenyListaLada.Items.Add(knapp);
+                MinaBokningar.Visibility = Visibility.Visible;
             }
         }
     }
