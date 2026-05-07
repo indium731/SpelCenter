@@ -35,48 +35,48 @@ public class Bokning
 
     public void Anmal(Medlem medlem)
     {
-        if (this.anmalda.Count >= maxAntal)
+        if (anmalda.Count >= maxAntal)
         {
             MessageBox.Show("Bokningen är fullbokad");
             return;
         } 
-        if (this.anmalda.Contains(medlem))
+        if (anmalda.Contains(medlem))
         {
             MessageBox.Show("Du har redan anmält dig till denna bokning");
             return;
         }
-        this.anmalda.Add(medlem);
+        anmalda.Add(medlem);
     }
     public void BokaSpel(Spel spel)
     {
-        if (this.bokadeSpel.Contains(spel)) return;
-        this.bokadeSpel.Add(spel);
+        if (bokadeSpel.Contains(spel)) return;
+        bokadeSpel.Add(spel);
 
     }
     public void AvBokaSpel(Spel spel)
     {
-        if (!this.bokadeSpel.Contains(spel)) return;
-        this.bokadeSpel.Remove(spel);
+        if (!bokadeSpel.Contains(spel)) return;
+        bokadeSpel.Remove(spel);
 
     }
 
     public override string ToString()
     {
-        return this.beskrivning.ToString();
+        return beskrivning.ToString();
     }
     public string Detaljer()
     {
         string bokadeSpelString = "\n";
-        foreach (Spel spel in this.bokadeSpel)
+        foreach (Spel spel in bokadeSpel)
         {
             bokadeSpelString += spel.ToString() + '\n';
         }
 
-        return $"Tid: {this.startDatum.ToString()} - {this.slutDatum.ToString()}\n" +
-               $"Plats: {this.plats}\n" +
-               $"Maxantal: {this.maxAntal}\n" +
-               $"Ansvarig: {this.ansvarig.ToString()}\n" +
-               $"Beskriving: {this.beskrivning}\n" +
+        return $"Tid: {startDatum.ToString()} - {slutDatum.ToString()}\n" +
+               $"Plats: {plats}\n" +
+               $"Maxantal: {maxAntal}\n" +
+               $"Ansvarig: {ansvarig.ToString()}\n" +
+               $"Beskriving: {beskrivning}\n" +
                $"Bokade spel: {bokadeSpelString}";
     }
 }

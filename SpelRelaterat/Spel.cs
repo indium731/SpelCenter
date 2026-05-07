@@ -35,10 +35,10 @@ public class Spel
     }
     public string Detaljer()
     {
-        return $"Namn: {this.namn}\n" +
-               $"Kategori: {this.kategori}\n" +
-               $"Antal Spelare: {this.minAntalSpelare} - {this.maxAntalSpelare}\n" +
-               $"Svårighetsgrad: {this.svarighetsgrad}\n" +
-               $"Beskrivning: {this.beskrivning}";
+        return $"Namn: {namn}\n" +
+               $"Kategori: {kategori}\n" +
+               $"Antal Spelare: {minAntalSpelare} - {maxAntalSpelare}\n" +
+               $"Svårighetsgrad: {svarighetsgrad}\n" +
+               $"Beskrivning: {beskrivning}";
     }
 }
