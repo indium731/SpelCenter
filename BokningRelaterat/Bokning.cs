@@ -2,7 +2,7 @@
 
 namespace Labb1_OOP;
 
-public class Bokning 
+public class Bokning : IListBar
 {
 
 
@@ -79,6 +79,21 @@ public class Bokning
         return beskrivning.ToString();
     }
     public string Detaljer()
+    {
+        string bokadeSpelString = "\n";
+        foreach (Spel spel in bokadeSpel)
+        {
+            bokadeSpelString += spel.ToString() + '\n';
+        }
+
+        return $"Tid: {startDatum.ToString()} - {slutDatum.ToString()}\n" +
+               $"Plats: {plats}\n" +
+               $"Maxantal: {maxAntal}\n" +
+               $"Ansvarig: {ansvarig.ToString()}\n" +
+               $"Beskriving: {beskrivning}\n" +
+               $"Bokade spel: {bokadeSpelString}";
+    }
+    public string UtokadeDetaljer()
     {
         string bokadeSpelString = "\n";
         foreach (Spel spel in bokadeSpel)

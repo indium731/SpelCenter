@@ -26,7 +26,6 @@ namespace Labb1_OOP
         private void InitieraOversiktLista(Bokning bokning)
         {
             OversiktListaLada.ItemsSource = bokning.anmalda;
-            AndraVisadListaKnapp.Tag = "personer";
         }
 
 
@@ -39,22 +38,14 @@ namespace Labb1_OOP
 
         private void AndraValdObjekt(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (OversiktListaLada.SelectedItem is Medlem valdMedlem)
-            {
-                DetaljTextLada.Text = valdMedlem.Detaljer();
-            }
-            if (OversiktListaLada.SelectedItem is Spel valdSpel)
-            {
-                DetaljTextLada.Text = valdSpel.Detaljer();
-            }
+            ((IListBar)OversiktListaLada.SelectedItem).Detaljer();
         }
 
 
         private void AndraVisadListaKlick(Object sender, RoutedEventArgs e)
         {
-            if ((string)AndraVisadListaKnapp.Tag == "personer")
+            if (OversiktListaLada.ItemsSource is IEnumerable<Medlem> medlem)
             {
-                AndraVisadListaKnapp.Tag = "spel";
 
 
                 //"oh vengance of god how you should be feared by all who read what i now see before my eyes" - Dante Alighieri
@@ -81,11 +72,8 @@ namespace Labb1_OOP
                 return;
             }
 
-            if ((string)AndraVisadListaKnapp.Tag == "spel")
+            if (OversiktListaLada.ItemsSource is IEnumerable<Spel> spel)
             {
-                AndraVisadListaKnapp.Tag = "personer";
-
-
                 OversiktListaLada.ItemsSource = bokning.anmalda;
                 UppdateraUI();
                 return;

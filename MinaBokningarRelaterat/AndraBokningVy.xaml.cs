@@ -43,9 +43,6 @@ namespace Labb1_OOP
             }
             try
             {
-                
-
-
                 if (startDatumTid != null) bokning.startDatum = (DateTime)startDatumTid;
                 if (slutDatumTid != null) bokning.slutDatum = (DateTime)slutDatumTid;
                 if (PlatsTextLada.Text.Trim() != "") bokning.plats = PlatsTextLada.Text.Trim();
@@ -66,8 +63,8 @@ namespace Labb1_OOP
         {
             int startTid = Installningar.forstaBokbaraTid;
             int bokningTider = Installningar.antalBokningTider;
-            double inkrement = (Installningar.sistaBokbaraTid - startTid);
-            inkrement /= (bokningTider-1);
+            double inkrement = Installningar.sistaBokbaraTid - startTid;
+            inkrement /= bokningTider-1;
             List<Button> tider = new List<Button>();
             TimeOnly tid = TimeOnly.MinValue;
             tid = tid.AddHours(startTid);

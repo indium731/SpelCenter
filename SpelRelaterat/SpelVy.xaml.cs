@@ -74,8 +74,6 @@ namespace Labb1_OOP
                 DetaljTextLada.Text = "Inget spel vald";
                 return;
             }
-
-
             DetaljTextLada.Text = valdSpel.Detaljer(); 
         }
 
@@ -83,8 +81,6 @@ namespace Labb1_OOP
         {
             try
             {
-                
-            
                 int tempInt;
                 if (SpelListaLada.SelectedItem is not Spel valdSpel) return;
                 if (NamnTextLada.Text.Trim().Count() != 0) valdSpel.namn = NamnTextLada.Text.Trim();

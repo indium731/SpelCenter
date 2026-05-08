@@ -2,7 +2,7 @@
 
 namespace Labb1_OOP;
 
-public class Medlem
+public class Medlem : IListBar
 {
 
 

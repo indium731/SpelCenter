@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace Labb1_OOP;
 
-public class Spel 
+public class Spel : IListBar
 {
 
 
@@ -49,6 +49,14 @@ public class Spel
         return namn;
     }
     public string Detaljer()
+    {
+        return $"Namn: {namn}\n" +
+               $"Kategori: {kategori}\n" +
+               $"Antal Spelare: {minAntalSpelare} - {maxAntalSpelare}\n" +
+               $"Svårighetsgrad: {svarighetsgrad}\n" +
+               $"Beskrivning: {beskrivning}";
+    }
+    public string UtokadeDetaljer()
     {
         return $"Namn: {namn}\n" +
                $"Kategori: {kategori}\n" +

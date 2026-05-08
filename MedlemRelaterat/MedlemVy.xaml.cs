@@ -76,8 +76,6 @@ namespace Labb1_OOP
         {
             try
             {
-                
-            
                 if (MedlemListaLada.SelectedItem is not Medlem valdMedlem) return;
                 if (NamnTextLada.Text.Trim().Count() != 0) valdMedlem.namn = NamnTextLada.Text.Trim();
                 if (TelefonNummerTextLada.Text.Trim().Count() != 0) valdMedlem.telefonNummer = TelefonNummerTextLada.Text.Trim();
