@@ -6,10 +6,11 @@ namespace Labb1_OOP
 {
     public partial class MedlemVy : UserControl
     {
+
         public MedlemVy()
         {
             InitializeComponent();
-            InitializeMedlemLista();
+            InitieraMedlemLista();
             UppdateraUI();
         }
 
@@ -19,8 +20,9 @@ namespace Labb1_OOP
             MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().medlemmar;
         }
 
-        private void InitializeMedlemLista()
+        private void InitieraMedlemLista()
         {
+            SorteringTextLada.Text = MedlemsLista.HamtaMedlemsLista().NuvarandeSortering();
             MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().medlemmar;
         }
 
@@ -93,6 +95,23 @@ namespace Labb1_OOP
             if (MedlemListaLada.SelectedItem is not Medlem valdMedlem) return;
             valdMedlem.medlemSkap.slutDatum = valdMedlem.medlemSkap.slutDatum.AddYears(1);
             UppdateraUI();
+        }
+        private void AndraSorteringKlick(Object sender, RoutedEventArgs e)
+        {
+            MedlemsLista.HamtaMedlemsLista().GaTillNastaMetod();
+            SorteringTextLada.Text = MedlemsLista.HamtaMedlemsLista().NuvarandeSortering();
+            UppdateraUI();
+            
+        }
+        private void SokKlick(Object sender, RoutedEventArgs e)
+        {
+            if (SokTextLada.Text.Trim() is not string sokOrd)
+            {
+                MessageBox.Show("Välj något att söka på");
+                return;
+            }
+            MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(sokOrd);
+            
         }
 
     }

@@ -47,9 +47,9 @@ public partial class MainWindow : Window
 
 
 
-		Bokning unotraff = new Bokning(new DateTime(2026, 03, 12), new DateTime(2026, 03, 12), "Majorna", 5, Alexander, "Unospelträff");
+		Bokning unotraff = new Bokning(new DateTime(2027, 03, 12), new DateTime(2027, 03, 12), "Majorna", 5, Alexander, "Unospelträff");
 
-		Bokning Codtraff = new Bokning(new DateTime(2026, 03, 15), new DateTime(2026, 03, 15), "Majorna", 5, Emma, "Unospelträff");
+		Bokning Codtraff = new Bokning(new DateTime(2027, 03, 15), new DateTime(2027, 03, 15), "Majorna", 5, Emma, "Unospelträff");
 
 
 		Bokningar.HamtaBokningar().bokningar.Add(unotraff);
