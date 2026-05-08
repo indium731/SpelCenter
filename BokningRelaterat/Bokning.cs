@@ -9,14 +9,8 @@ public class Bokning
     public Bokning(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
 
-        if (d > s)
-        {
-           MessageBox.Show($"Startdatum måste vara före slutdatum \n startdatum: {d}\n slutdatum: {s}"); 
-           throw new ArgumentException();
-        }
-
-        startDatum = (DateTime)d;
         slutDatum = (DateTime)s;
+        startDatum = (DateTime)d;
         plats  = (string)p;
         maxAntal = (int)m;
         ansvarig = (Medlem)a;
@@ -24,8 +18,28 @@ public class Bokning
         anmalda = new List<Medlem>();
         bokadeSpel = new List<Spel>();
     }
-    public DateTime startDatum;
-    public DateTime slutDatum;
+    private DateTime _startDatum;
+    public DateTime startDatum {get => _startDatum; set
+        {
+            if (value > _slutDatum)
+            {
+                MessageBox.Show("StartDatum måste vara före slutdatum");
+                throw new ArgumentException();
+            }
+            _startDatum = value;
+        }
+    }
+    private DateTime _slutDatum;
+    public DateTime slutDatum {get => _slutDatum; set
+        {
+            if (_startDatum > value)
+            {
+                MessageBox.Show("StartDatum måste vara före slutdatum");
+                throw new ArgumentException();
+            }
+            _slutDatum = value;
+        }
+    }
     public string plats;
     public int maxAntal;
     public Medlem ansvarig;

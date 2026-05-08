@@ -8,10 +8,6 @@ public class Medlem
 
     public Medlem(string n, string t, string m, bool a)
     {
-        if (!t.All(char.IsDigit)){
-            MessageBox.Show("Telefonnummer får enbart innehålla siffror");
-            throw new ArgumentException();
-        }
         namn = n;
         telefonNummer = t;
         medlemsNummer = m;
@@ -19,7 +15,17 @@ public class Medlem
         admin = a;
     }
     public string namn;
-    public string telefonNummer;
+    private string _telefonNummer;
+    public string telefonNummer {get => _telefonNummer; set
+        {
+            if (!value.All(char.IsDigit))
+            {
+                MessageBox.Show("Telefonnummer få enbart innehålla siffror");
+                throw new ArgumentException();
+            }
+            _telefonNummer = value;
+        }
+    }
     public string medlemsNummer;
     public MedlemSkap medlemSkap;
     public bool admin;

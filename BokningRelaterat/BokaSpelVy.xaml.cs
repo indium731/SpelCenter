@@ -8,10 +8,11 @@ namespace Labb1_OOP
 {
     public partial class BokaSpelVy : UserControl
     {
-        public BokaSpelVy(Bokning bokning)
+        Bokning bokning;
+        public BokaSpelVy(Bokning b)
         {
             InitializeComponent();
-            BokaSpelKnapp.Tag = bokning;
+            bokning = b;
             InitieraLista();
             UppdateraUI();
         }
@@ -25,16 +26,17 @@ namespace Labb1_OOP
             //  överlappande bokningarna har bokat upp ett givet spel.
             //  Om spelet inte är bokat under denna tid så läggs den till i listan av spel som kan bokas.
 
-            SpelListaLada.ItemsSource = null;
-            List<Bokning> overlappandeBokningar = (Bokningar.HamtaBokningar().bokningar.Where(bokning => bokning.startDatum < ((Bokning)BokaSpelKnapp.Tag).slutDatum && ((Bokning)BokaSpelKnapp.Tag).startDatum < bokning.slutDatum)).ToList();
-            List<Spel> tillgangligaSpel = new List<Spel>();
-            foreach (Spel spel in SpelLista.HamtaSpelLista().spel)
-            {
-                if (overlappandeBokningar.Where(bokning => bokning.bokadeSpel.Contains(spel)).Count() == 0)
-                {
-                    tillgangligaSpel.Add(spel);
-                }
-            }
+            // 2. Find all bookings that clash with the selected dates
+            var overlappandeBokningar = Bokningar.HamtaBokningar().bokningar
+                .Where(b => b.startDatum < bokning.slutDatum && bokning.startDatum < b.slutDatum)
+                .ToList();
+
+            // 3. Filter the games: Select games NOT found in the list of overlapping games
+            var tillgangligaSpel = SpelLista.HamtaSpelLista().spel
+                .Where(spel => !overlappandeBokningar.Any(b => b.bokadeSpel.Contains(spel)))
+                .ToList();
+
+            // 4. Update the UI
             SpelListaLada.ItemsSource = tillgangligaSpel;
         }
 
@@ -79,10 +81,7 @@ namespace Labb1_OOP
             }
 
 
-            DetaljTextLada.Text = 
-                $"Namn: {valdSpel.namn}\n" +
-                $"Kategori: {valdSpel.kategori}\n" +
-                $"Beskrivning: {valdSpel.beskrivning}";
+            DetaljTextLada.Text = valdSpel.Detaljer(); 
         }
 
     }

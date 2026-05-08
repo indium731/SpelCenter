@@ -81,14 +81,24 @@ namespace Labb1_OOP
 
         private void UppdateraValdSpelKlick(Object sender, RoutedEventArgs e)
         {
-            if (SpelListaLada.SelectedItem is not Spel valdSpel) return;
-            if (NamnTextLada.Text.Trim().Count() != 0) valdSpel.namn = NamnTextLada.Text.Trim();
-            if (KategoriTextLada.Text.Trim().Count() != 0) valdSpel.kategori= KategoriTextLada.Text.Trim();
-            if (!int.TryParse(MinSpelareTextLada.Text.Trim(), out valdSpel.minAntalSpelare)) ;
-            if (!int.TryParse(MaxSpelareTextLada.Text.Trim(), out valdSpel.maxAntalSpelare)) ;
-            if (SvarighetsgradLada.SelectedItem != null) valdSpel.svarighetsgrad = (Svarighetsgrad)SvarighetsgradLada.SelectedItem;
+            try
+            {
+                
+            
+                int tempInt;
+                if (SpelListaLada.SelectedItem is not Spel valdSpel) return;
+                if (NamnTextLada.Text.Trim().Count() != 0) valdSpel.namn = NamnTextLada.Text.Trim();
+                if (KategoriTextLada.Text.Trim().Count() != 0) valdSpel.kategori= KategoriTextLada.Text.Trim();
+                if (!int.TryParse(MinSpelareTextLada.Text.Trim(), out tempInt)) ;
+                else valdSpel.minAntalSpelare = tempInt;
+                if (!int.TryParse(MaxSpelareTextLada.Text.Trim(), out tempInt)) ;
+                else valdSpel.maxAntalSpelare = tempInt;
+                if (SvarighetsgradLada.SelectedItem != null) valdSpel.svarighetsgrad = (Svarighetsgrad)SvarighetsgradLada.SelectedItem;
+            }
+            catch
+            {
+            }
             UppdateraUI();
-
         }
 
         private void InitieraSvarighetsgradLada()

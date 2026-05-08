@@ -9,23 +9,38 @@ public class Spel
 
     public Spel(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
-        if (a > m)
-        {
-            MessageBox.Show("minimum antal spelare måste vara lägre än max antal spelare");
-            throw new ArgumentException();
-        }
         namn = n;
         kategori = k;
-        minAntalSpelare = a;
         maxAntalSpelare = m;
+        minAntalSpelare = a;
         svarighetsgrad = s;
         beskrivning = b;
 
     }
     public string namn;
     public string kategori;
-    public int minAntalSpelare;
-    public int maxAntalSpelare;
+    private int _minAntalSpelare = 0;
+    public int minAntalSpelare {get => _minAntalSpelare; set
+        {
+            if (value > _maxAntalSpelare)
+            {
+                MessageBox.Show("Minimum antal spelare måste vara färre än maximum");
+                throw new ArgumentException();
+            }
+            _minAntalSpelare = value;
+        }
+    }
+    private int _maxAntalSpelare = 0;
+    public int maxAntalSpelare {get => _minAntalSpelare; set
+        {
+            if (value < _maxAntalSpelare)
+            {
+                MessageBox.Show("Max antal spelare måste vara fler än minimum antal");
+                throw new ArgumentException();
+            }
+            _maxAntalSpelare = value;
+        }
+    }
     public Svarighetsgrad svarighetsgrad;
     public string beskrivning;
 

@@ -6,13 +6,14 @@ namespace Labb1_OOP
 {
     public partial class AndraBokningVy : UserControl
     {
-        public AndraBokningVy(Bokning bokning)
+        Bokning bokning;
+        public AndraBokningVy(Bokning b)
         {
             InitializeComponent();
             InitieraSchemaTider(StartSchemaTiderLada);
             InitieraSchemaTider(SlutSchemaTiderLada);
-            NuvarandeBokningTextLada.Text = bokning.ToString();
-            NuvarandeBokningTextLada.Tag = bokning;
+            NuvarandeBokningTextLada.Text = b.ToString();
+            bokning = b;
         }
 
         private void GaTillMeny(Object sender, RoutedEventArgs e)
@@ -25,9 +26,6 @@ namespace Labb1_OOP
         {
             int antal = 0;
             if (!int.TryParse(MaxAntalTextLada.Text.Trim(), out antal));
-
-            Bokning bokning = (Bokning)NuvarandeBokningTextLada.Tag;
-
 
             DateTime? startDatumTid = null;
             DateTime? slutDatumTid = null;
@@ -43,15 +41,24 @@ namespace Labb1_OOP
                 slutDatumTid = slutDatum.Date + tid.ToTimeSpan();
                 }
             }
+            try
+            {
+                
 
-            if (startDatumTid != null) bokning.startDatum = (DateTime)startDatumTid;
-            if (slutDatumTid != null) bokning.slutDatum = (DateTime)slutDatumTid;
-            if (PlatsTextLada.Text.Trim() != "") bokning.plats = PlatsTextLada.Text.Trim();
-            if (antal != 0) bokning.maxAntal = antal;
-            if (BeskrivningTextLada.Text.Trim() != "") bokning.beskrivning = BeskrivningTextLada.Text.Trim();
 
-            var mainWin = (MainWindow)MainWindow.GetWindow(this);
-            mainWin.Vy.Content = new BokaSpelVy(bokning);
+                if (startDatumTid != null) bokning.startDatum = (DateTime)startDatumTid;
+                if (slutDatumTid != null) bokning.slutDatum = (DateTime)slutDatumTid;
+                if (PlatsTextLada.Text.Trim() != "") bokning.plats = PlatsTextLada.Text.Trim();
+                if (antal != 0) bokning.maxAntal = antal;
+                if (BeskrivningTextLada.Text.Trim() != "") bokning.beskrivning = BeskrivningTextLada.Text.Trim();
+
+                var mainWin = (MainWindow)MainWindow.GetWindow(this);
+                mainWin.Vy.Content = new BokaSpelVy(bokning);
+            }
+            catch
+            {
+                
+            }
         }
 
         
@@ -63,10 +70,8 @@ namespace Labb1_OOP
             inkrement /= (bokningTider-1);
             List<Button> tider = new List<Button>();
             TimeOnly tid = TimeOnly.MinValue;
-            //8 == tidigaste bokningsbara tid
             tid = tid.AddHours(startTid);
 
-            //4 == hur många olika tider man kan boka per dag
             for (int i = 0; i<bokningTider; i++)
             {
                 Button tidKnapp = new Button();

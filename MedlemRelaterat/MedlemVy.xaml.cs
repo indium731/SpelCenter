@@ -74,11 +74,20 @@ namespace Labb1_OOP
 
         private void UppdateraValdMedlemKlick(Object sender, RoutedEventArgs e)
         {
-            if (MedlemListaLada.SelectedItem is not Medlem valdMedlem) return;
-            if (NamnTextLada.Text.Trim().Count() != 0) valdMedlem.namn = NamnTextLada.Text.Trim();
-            if (TelefonNummerTextLada.Text.Trim().Count() != 0) valdMedlem.telefonNummer = TelefonNummerTextLada.Text.Trim();
-            if (MedlemsNummerTextLada.Text.Trim().Count() != 0) valdMedlem.medlemsNummer = MedlemsNummerTextLada.Text.Trim();
+            try
+            {
+                
+            
+                if (MedlemListaLada.SelectedItem is not Medlem valdMedlem) return;
+                if (NamnTextLada.Text.Trim().Count() != 0) valdMedlem.namn = NamnTextLada.Text.Trim();
+                if (TelefonNummerTextLada.Text.Trim().Count() != 0) valdMedlem.telefonNummer = TelefonNummerTextLada.Text.Trim();
+                if (MedlemsNummerTextLada.Text.Trim().Count() != 0) valdMedlem.medlemsNummer = MedlemsNummerTextLada.Text.Trim();
+            }
+            catch
+            {
+            }
             UppdateraUI();
+            
         }
 
         private void OkaMedlemSkapAr(Object sender, RoutedEventArgs e)
