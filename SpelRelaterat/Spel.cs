@@ -27,6 +27,11 @@ public class Spel : IListBar
                 MessageBox.Show("Minimum antal spelare måste vara färre än maximum");
                 throw new ArgumentException();
             }
+            if (value < 0)
+            {
+                MessageBox.Show("Minimum antal spelare måste vara mer än 0");
+                throw new ArgumentException();
+            }
             _minAntalSpelare = value;
         }
     }
@@ -36,6 +41,11 @@ public class Spel : IListBar
             if (value < _maxAntalSpelare)
             {
                 MessageBox.Show("Max antal spelare måste vara fler än minimum antal");
+                throw new ArgumentException();
+            }
+            if (value < 0)
+            {
+                MessageBox.Show("Maximum antal spelare måste vara mer än 0");
                 throw new ArgumentException();
             }
             _maxAntalSpelare = value;
