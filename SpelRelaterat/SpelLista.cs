@@ -1,10 +1,21 @@
-﻿namespace Labb1_OOP;
+﻿using System.Windows;
+
+namespace Labb1_OOP;
 
 public sealed class SpelLista
 {
     private SpelLista()
     {
-        spel = new List<Spel>();
+        _spel = new List<Spel>();
+        metoder = new List<Sorterare<Spel>>
+        {
+            new Sorterare<Spel>(s=>s.namn, "Namn"),
+            new Sorterare<Spel>(s=>s.kategori, "Kategori"),
+            new Sorterare<Spel>(s=>s.minAntalSpelare, "Minantal spelare"),
+            new Sorterare<Spel>(s=>s.maxAntalSpelare, "Maxantal spelare"),
+            new Sorterare<Spel>(s=>s.svarighetsgrad, "svarighetsgrad")
+        };
+        metodIndex = 0;
     }
 
     private static SpelLista _instans;
@@ -17,7 +28,15 @@ public sealed class SpelLista
         }
         return _instans;
     }
-    public List<Spel> spel;
+    private List<Spel> _spel;
+    public List<Spel> spel 
+    {
+        get
+        {
+            return metoder[metodIndex].Sortera(_spel);
+        } set;}
+    private List<Sorterare<Spel>> metoder;
+    private int metodIndex;
 
     public void LaggTill(Spel nyttSpel)
     {
@@ -26,5 +45,17 @@ public sealed class SpelLista
     public void TaBort(Spel nyttSpel)
     {
         spel.Remove(nyttSpel);
+    }
+    public void GaTillNastaMetod()
+    {
+        metodIndex = (metodIndex + 1) % metoder.Count();
+    }
+    public List<Spel> Sok(string sokOrd)
+    {
+        return spel.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())).ToList();
+    }
+    public string NuvarandeSortering()
+    {
+        return metoder[metodIndex].sortering;
     }
 }

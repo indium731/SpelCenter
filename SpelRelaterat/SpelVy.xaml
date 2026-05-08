@@ -64,6 +64,16 @@
             <Button Content="Uppdatera vald spel" 
                 Click="UppdateraValdSpelKlick"/>
 
+            <TextBlock Text="Sortering"
+                x:Name="SorteringTextLada"/>
+
+            <Button Content="Ändra sortering"
+                Click="AndraSorteringKlick"/>
+
+            <TextBox x:Name="SokTextLada"/>
+            <Button Content="Sök"
+                Click="SokKlick"/>
+
             <TextBlock Text="Detaljer" />
             <TextBlock x:Name="DetaljTextLada" Text="Ingen medlem vald." />
 

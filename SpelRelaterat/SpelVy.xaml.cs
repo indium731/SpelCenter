@@ -10,6 +10,7 @@ namespace Labb1_OOP
         public SpelVy()
         {
             InitializeComponent();
+            SorteringTextLada.Text = SpelLista.HamtaSpelLista().NuvarandeSortering();
             InitieraSvarighetsgradLada();
             UppdateraUI();
         }
@@ -100,6 +101,23 @@ namespace Labb1_OOP
         private void InitieraSvarighetsgradLada()
         {
             SvarighetsgradLada.ItemsSource = Enum.GetNames(typeof(Svarighetsgrad));
+        }
+        private void AndraSorteringKlick(Object sender, RoutedEventArgs e)
+        {
+            SpelLista.HamtaSpelLista().GaTillNastaMetod();
+            SorteringTextLada.Text = SpelLista.HamtaSpelLista().NuvarandeSortering();
+            UppdateraUI();
+            
+        }
+        private void SokKlick(Object sender, RoutedEventArgs e)
+        {
+            if (SokTextLada.Text.Trim() is not string sokOrd)
+            {
+                MessageBox.Show("Välj något att söka på");
+                return;
+            }
+            SpelListaLada.ItemsSource = SpelLista.HamtaSpelLista().Sok(sokOrd);
+            
         }
 
     }

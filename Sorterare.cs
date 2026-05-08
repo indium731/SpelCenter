@@ -1,4 +1,6 @@
-﻿namespace Labb1_OOP;
+﻿using System.Windows;
+
+namespace Labb1_OOP;
 
 public class Sorterare<T>
 {

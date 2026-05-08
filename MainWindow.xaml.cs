@@ -52,8 +52,8 @@ public partial class MainWindow : Window
 		Bokning Codtraff = new Bokning(new DateTime(2027, 03, 15), new DateTime(2027, 03, 15), "Majorna", 5, Emma, "Unospelträff");
 
 
-		Bokningar.HamtaBokningar().bokningar.Add(unotraff);
-		Bokningar.HamtaBokningar().bokningar.Add(Codtraff);
+		Bokningar.HamtaBokningar().LaggTill(unotraff);
+		Bokningar.HamtaBokningar().LaggTill(Codtraff);
 
 		unotraff.Anmal(Rednaxela);
 		Codtraff.Anmal(Pelle);
