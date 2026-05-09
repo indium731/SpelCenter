@@ -2,9 +2,9 @@
 
 namespace Labb1_OOP;
 
-public sealed class MedlemsLista
+public sealed class MedlemLista
 {
-    private MedlemsLista()
+    private MedlemLista()
     {
         _medlemmar = new List<Medlem>();
         metoder = new List<Sorterare<Medlem>>
@@ -18,13 +18,13 @@ public sealed class MedlemsLista
         metodIndex = 0;
     }
 
-    private static MedlemsLista _instans;
+    private static MedlemLista _instans;
  
-    public static MedlemsLista HamtaMedlemsLista()
+    public static MedlemLista HamtaMedlemLista()
     {
         if (_instans == null)
         {
-            _instans = new MedlemsLista();
+            _instans = new MedlemLista();
         }
         return _instans;
     }

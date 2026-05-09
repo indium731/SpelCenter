@@ -32,11 +32,11 @@ public partial class MainWindow : Window
 		Medlem Pelle = new Medlem("Pelle", "0725551234", "S3", false);
 		Medlem Emma = new Medlem("Emma", "0761112233", "S4", true);
 
-		MedlemsLista.HamtaMedlemsLista().LaggTill(Alexander);   
-		MedlemsLista.HamtaMedlemsLista().LaggTill(Rednaxela);
-		MedlemsLista.HamtaMedlemsLista().LaggTill(Lisa);
-		MedlemsLista.HamtaMedlemsLista().LaggTill(Pelle);
-		MedlemsLista.HamtaMedlemsLista().LaggTill(Emma);
+		MedlemLista.HamtaMedlemLista().LaggTill(Alexander);   
+		MedlemLista.HamtaMedlemLista().LaggTill(Rednaxela);
+		MedlemLista.HamtaMedlemLista().LaggTill(Lisa);
+		MedlemLista.HamtaMedlemLista().LaggTill(Pelle);
+		MedlemLista.HamtaMedlemLista().LaggTill(Emma);
 
 
 
@@ -52,8 +52,8 @@ public partial class MainWindow : Window
 		Bokning Codtraff = new Bokning(new DateTime(2027, 03, 15), new DateTime(2027, 03, 15), "Majorna", 5, Emma, "Unospelträff");
 
 
-		Bokningar.HamtaBokningar().LaggTill(unotraff);
-		Bokningar.HamtaBokningar().LaggTill(Codtraff);
+		BokningLista.HamtaBokningLista().LaggTill(unotraff);
+		BokningLista.HamtaBokningLista().LaggTill(Codtraff);
 
 		unotraff.Anmal(Rednaxela);
 		Codtraff.Anmal(Pelle);

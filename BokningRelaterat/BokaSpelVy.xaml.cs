@@ -27,7 +27,7 @@ namespace Labb1_OOP
             //  Om spelet inte är bokat under denna tid så läggs den till i listan av spel som kan bokas.
 
             // 2. Find all bookings that clash with the selected dates
-            var overlappandeBokningar = Bokningar.HamtaBokningar().bokningar
+            var overlappandeBokningar = BokningLista.HamtaBokningLista().bokningar
                 .Where(b => b.startDatum < bokning.slutDatum && bokning.startDatum < b.slutDatum)
                 .ToList();
 

@@ -58,7 +58,7 @@ namespace Labb1_OOP
                                 spel.maxAntalSpelare >= bokning.anmalda.Count)
                     .ToList();
 
-                List<Bokning> overlappandeBokningar = Bokningar.HamtaBokningar().bokningar
+                List<Bokning> overlappandeBokningar = BokningLista.HamtaBokningLista().bokningar
                     .Where(b => b != bokning && 
                                 b.startDatum < bokning.slutDatum && 
                                 b.slutDatum > bokning.startDatum)

@@ -21,7 +21,7 @@ namespace Labb1_OOP
              return;
             }
 
-            foreach (Medlem medlem in MedlemsLista.HamtaMedlemsLista().medlemmar)
+            foreach (Medlem medlem in MedlemLista.HamtaMedlemLista().medlemmar)
             {
                 if (inlogg == medlem.medlemsNummer)
                     {

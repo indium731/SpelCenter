@@ -31,7 +31,7 @@ namespace Labb1_OOP
                 MedlemHanterare.Visibility = Visibility.Collapsed;
                 SpelHanterare.Visibility = Visibility.Collapsed;
             }
-            if (Bokningar.HamtaBokningar().bokningar.Where(bokning => bokning.ansvarig == Session.HamtaSession().inloggadMedlem).Count() != 0)
+            if (BokningLista.HamtaBokningLista().bokningar.Any(bokning => bokning.ansvarig == Session.HamtaSession().inloggadMedlem))
             {
                 MinaBokningar.Visibility = Visibility.Visible;
             }

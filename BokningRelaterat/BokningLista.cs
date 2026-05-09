@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Labb1_OOP;
 
-public sealed class Bokningar
+public sealed class BokningLista
 {
-    private Bokningar()
+    private BokningLista()
     {
         _bokningar = new List<Bokning>();
         metoder = new List<Sorterare<Bokning>>
@@ -20,13 +20,13 @@ public sealed class Bokningar
         metodIndex = 0;
     }
 
-    private static Bokningar _instans;
+    private static BokningLista _instans;
  
-    public static Bokningar HamtaBokningar()
+    public static BokningLista HamtaBokningLista()
     {
         if (_instans == null)
         {
-            _instans = new Bokningar();
+            _instans = new BokningLista();
         }
         return _instans;
     }

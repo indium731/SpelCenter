@@ -48,7 +48,7 @@ namespace Labb1_OOP
                                           Session.HamtaSession().inloggadMedlem,
                                           BeskrivningTextLada.Text.Trim());
 
-            Bokningar.HamtaBokningar().bokningar.Add(bokning);
+            BokningLista.HamtaBokningLista().bokningar.Add(bokning);
             
 
             var mainWin = (MainWindow)MainWindow.GetWindow(this);

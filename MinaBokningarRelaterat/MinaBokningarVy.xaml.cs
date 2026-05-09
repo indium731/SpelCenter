@@ -15,12 +15,12 @@ namespace Labb1_OOP
         private void UppdateraUI()
         {
             MinaBokningarListaLada.ItemsSource = null;
-            MinaBokningarListaLada.ItemsSource = Bokningar.HamtaBokningar().bokningar.Where(bokning => bokning.ansvarig.medlemsNummer == Session.HamtaSession().inloggadMedlem.medlemsNummer);
+            MinaBokningarListaLada.ItemsSource = BokningLista.HamtaBokningLista().bokningar.Where(bokning => bokning.ansvarig.medlemsNummer == Session.HamtaSession().inloggadMedlem.medlemsNummer);
         }
 
         private void InitieraMedlemLista()
         {
-            MinaBokningarListaLada.ItemsSource = Bokningar.HamtaBokningar().bokningar.Where(bokning => bokning.ansvarig.medlemsNummer == Session.HamtaSession().inloggadMedlem.medlemsNummer);
+            MinaBokningarListaLada.ItemsSource = BokningLista.HamtaBokningLista().bokningar.Where(bokning => bokning.ansvarig.medlemsNummer == Session.HamtaSession().inloggadMedlem.medlemsNummer);
         }
 
         private void GaTillMeny(Object sender, RoutedEventArgs e)
@@ -37,7 +37,7 @@ namespace Labb1_OOP
                 return;
             }
             
-            Bokningar.HamtaBokningar().bokningar.Remove(valdBokning);
+            BokningLista.HamtaBokningLista().bokningar.Remove(valdBokning);
             DetaljTextLada.Text = "Ingen bokning vald";
             UppdateraUI();
 

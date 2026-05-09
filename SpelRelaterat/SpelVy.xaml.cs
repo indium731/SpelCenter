@@ -121,7 +121,7 @@ namespace Labb1_OOP
         {
             if (SokTextLada.Visibility != Visibility.Collapsed)
             {
-                SpelListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(SokTextLada.Text.Trim());
+                SpelListaLada.ItemsSource = SpelLista.HamtaSpelLista().Sok(SokTextLada.Text.Trim());
             }
             if (SokComboLada.Visibility != Visibility.Collapsed)
             {
@@ -131,7 +131,7 @@ namespace Labb1_OOP
                 }
                 
                 Svarighetsgrad svarighetsgrad = (Svarighetsgrad)SvarighetsgradLada.SelectedItem;
-                SpelListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(svarighetsgrad.ToString());
+                SpelListaLada.ItemsSource = SpelLista.HamtaSpelLista().Sok(svarighetsgrad.ToString());
             }
             
         }

@@ -16,22 +16,22 @@ namespace Labb1_OOP
         private void UppdateraUI()
         {
             MedlemListaLada.ItemsSource = null;
-            MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().medlemmar;
+            MedlemListaLada.ItemsSource = MedlemLista.HamtaMedlemLista().medlemmar;
             SokTextLada.Visibility = Visibility.Collapsed;
             SokCheckLada.Visibility = Visibility.Collapsed;
             SokDatumLada.Visibility = Visibility.Collapsed;
-            if (MedlemsLista.HamtaMedlemsLista().NuvarandeSortering() == "Startdatum") SokDatumLada.Visibility = Visibility.Visible;
-            if (MedlemsLista.HamtaMedlemsLista().NuvarandeSortering() == "Slutdatum") SokDatumLada.Visibility = Visibility.Visible;
-            if (MedlemsLista.HamtaMedlemsLista().NuvarandeSortering() == "MedlemStatus") SokCheckLada.Visibility = Visibility.Visible;
-            if (MedlemsLista.HamtaMedlemsLista().NuvarandeSortering() == "Admin") SokCheckLada.Visibility = Visibility.Visible;
-            if (MedlemsLista.HamtaMedlemsLista().NuvarandeSortering() == "Namn") SokTextLada.Visibility = Visibility.Visible;
+            if (MedlemLista.HamtaMedlemLista().NuvarandeSortering() == "Startdatum") SokDatumLada.Visibility = Visibility.Visible;
+            if (MedlemLista.HamtaMedlemLista().NuvarandeSortering() == "Slutdatum") SokDatumLada.Visibility = Visibility.Visible;
+            if (MedlemLista.HamtaMedlemLista().NuvarandeSortering() == "MedlemStatus") SokCheckLada.Visibility = Visibility.Visible;
+            if (MedlemLista.HamtaMedlemLista().NuvarandeSortering() == "Admin") SokCheckLada.Visibility = Visibility.Visible;
+            if (MedlemLista.HamtaMedlemLista().NuvarandeSortering() == "Namn") SokTextLada.Visibility = Visibility.Visible;
 
         }
 
         private void InitieraMedlemLista()
         {
-            SorteringTextLada.Text = MedlemsLista.HamtaMedlemsLista().NuvarandeSortering();
-            MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().medlemmar;
+            SorteringTextLada.Text = MedlemLista.HamtaMedlemLista().NuvarandeSortering();
+            MedlemListaLada.ItemsSource = MedlemLista.HamtaMedlemLista().medlemmar;
         }
 
         private void GaTillMeny(Object sender, RoutedEventArgs e)
@@ -43,7 +43,7 @@ namespace Labb1_OOP
         private void TestaLaggTillMedlemKlick(Object sender, RoutedEventArgs e)
         {
             try{
-            MedlemsLista.HamtaMedlemsLista().LaggTill(new Medlem(NamnTextLada.Text.Trim(),
+            MedlemLista.HamtaMedlemLista().LaggTill(new Medlem(NamnTextLada.Text.Trim(),
                                                                       TelefonNummerTextLada.Text.Trim(),
                                                                       MedlemsNummerTextLada.Text.Trim(),
                                                                       (bool)Administratör.IsChecked));
@@ -64,7 +64,7 @@ namespace Labb1_OOP
                 return;
             }
             
-            MedlemsLista.HamtaMedlemsLista().TaBort(valdMedlem);
+            MedlemLista.HamtaMedlemLista().TaBort(valdMedlem);
             UppdateraUI();
             DetaljTextLada.Text = "Ingen medlem vald";
 
@@ -106,8 +106,8 @@ namespace Labb1_OOP
         }
         private void AndraSorteringKlick(Object sender, RoutedEventArgs e)
         {
-            MedlemsLista.HamtaMedlemsLista().GaTillNastaMetod();
-            SorteringTextLada.Text = MedlemsLista.HamtaMedlemsLista().NuvarandeSortering();
+            MedlemLista.HamtaMedlemLista().GaTillNastaMetod();
+            SorteringTextLada.Text = MedlemLista.HamtaMedlemLista().NuvarandeSortering();
             UppdateraUI();
             
         }
@@ -115,17 +115,17 @@ namespace Labb1_OOP
         {
             if (SokTextLada.Visibility != Visibility.Collapsed)
             {
-                MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(SokTextLada.Text.Trim());
+                MedlemListaLada.ItemsSource = MedlemLista.HamtaMedlemLista().Sok(SokTextLada.Text.Trim());
             }
             if (SokCheckLada.Visibility != Visibility.Collapsed)
             {
                 var checkad = SokCheckLada.IsChecked ?? true;
-                MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(checkad.ToString());
+                MedlemListaLada.ItemsSource = MedlemLista.HamtaMedlemLista().Sok(checkad.ToString());
             }
             if (SokDatumLada.Visibility != Visibility.Collapsed)
             {
                 var datum = SokDatumLada.SelectedDate ?? DateTime.Now;
-                MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(datum.ToShortDateString());
+                MedlemListaLada.ItemsSource = MedlemLista.HamtaMedlemLista().Sok(datum.ToShortDateString());
             }
             
         }
