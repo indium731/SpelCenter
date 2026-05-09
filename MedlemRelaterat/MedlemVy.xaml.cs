@@ -6,7 +6,6 @@ namespace Labb1_OOP
 {
     public partial class MedlemVy : UserControl
     {
-
         public MedlemVy()
         {
             InitializeComponent();
@@ -18,6 +17,15 @@ namespace Labb1_OOP
         {
             MedlemListaLada.ItemsSource = null;
             MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().medlemmar;
+            SokTextLada.Visibility = Visibility.Collapsed;
+            SokCheckLada.Visibility = Visibility.Collapsed;
+            SokDatumLada.Visibility = Visibility.Collapsed;
+            if (MedlemsLista.HamtaMedlemsLista().NuvarandeSortering() == "Startdatum") SokDatumLada.Visibility = Visibility.Visible;
+            if (MedlemsLista.HamtaMedlemsLista().NuvarandeSortering() == "Slutdatum") SokDatumLada.Visibility = Visibility.Visible;
+            if (MedlemsLista.HamtaMedlemsLista().NuvarandeSortering() == "MedlemStatus") SokCheckLada.Visibility = Visibility.Visible;
+            if (MedlemsLista.HamtaMedlemsLista().NuvarandeSortering() == "Admin") SokCheckLada.Visibility = Visibility.Visible;
+            if (MedlemsLista.HamtaMedlemsLista().NuvarandeSortering() == "Namn") SokTextLada.Visibility = Visibility.Visible;
+
         }
 
         private void InitieraMedlemLista()
@@ -105,12 +113,20 @@ namespace Labb1_OOP
         }
         private void SokKlick(Object sender, RoutedEventArgs e)
         {
-            if (SokTextLada.Text.Trim() is not string sokOrd)
+            if (SokTextLada.Visibility != Visibility.Collapsed)
             {
-                MessageBox.Show("Välj något att söka på");
-                return;
+                MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(SokTextLada.Text.Trim());
             }
-            MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(sokOrd);
+            if (SokCheckLada.Visibility != Visibility.Collapsed)
+            {
+                var checkad = SokCheckLada.IsChecked ?? true;
+                MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(checkad.ToString());
+            }
+            if (SokDatumLada.Visibility != Visibility.Collapsed)
+            {
+                var datum = SokDatumLada.SelectedDate ?? DateTime.Now;
+                MedlemListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(datum.ToShortDateString());
+            }
             
         }
 

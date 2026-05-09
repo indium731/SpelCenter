@@ -10,7 +10,15 @@ namespace Labb1_OOP
         public AnmalVy()
         {
             InitializeComponent();
+            SorteringTextLada.Text = MedlemsLista.HamtaMedlemsLista().NuvarandeSortering();
             InitieraBokningar();
+            UppdateraUI();
+        }
+        private void UppdateraUI()
+        {
+            var b = BokningarListaLada.ItemsSource;
+            BokningarListaLada.ItemsSource = null;
+            BokningarListaLada.ItemsSource = b;
         }
 
         private void InitieraBokningar()
@@ -43,6 +51,23 @@ namespace Labb1_OOP
 
 
             DetaljTextLada.Text = valdBokning.Detaljer();
+        }
+        private void AndraSorteringKlick(Object sender, RoutedEventArgs e)
+        {
+            Bokningar.HamtaBokningar().GaTillNastaMetod();
+            SorteringTextLada.Text = Bokningar.HamtaBokningar().NuvarandeSortering();
+            UppdateraUI();
+            
+        }
+        private void SokKlick(Object sender, RoutedEventArgs e)
+        {
+            if (SokTextLada.Text.Trim() is not string sokOrd)
+            {
+                MessageBox.Show("Välj något att söka på");
+                return;
+            }
+            BokningarListaLada.ItemsSource = Bokningar.HamtaBokningar().Sok(sokOrd);
+            
         }
 
     }

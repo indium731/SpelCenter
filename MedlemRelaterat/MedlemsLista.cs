@@ -10,10 +10,10 @@ public sealed class MedlemsLista
         metoder = new List<Sorterare<Medlem>>
         {
             new Sorterare<Medlem>(m=>m.namn, "Namn"),
-            new Sorterare<Medlem>(m=>!m.medlemSkap.medlemStatus, "MedlemStatus"),
+            new Sorterare<Medlem>(m=>m.medlemSkap.medlemStatus, "MedlemStatus"),
             new Sorterare<Medlem>(m=>m.medlemSkap.startDatum, "Startdatum"),
             new Sorterare<Medlem>(m=>m.medlemSkap.slutDatum, "Slutdatum"),
-            new Sorterare<Medlem>(m=>!m.admin, "Admin"),
+            new Sorterare<Medlem>(m=>m.admin, "Admin"),
         };
         metodIndex = 0;
     }

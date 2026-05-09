@@ -38,6 +38,17 @@
             <Button Content="Anmäl dig" 
                 Click="TestaAnmalKlick"/>
 
+            <TextBlock Text="Sortering"
+                x:Name="SorteringTextLada"/>
+
+            <Button Content="Ändra sortering"
+                Click="AndraSorteringKlick"/>
+
+            <TextBox x:Name="SokTextLada"/>
+            <Button Content="Sök"
+                Click="SokKlick"/>
+
+
             <TextBlock Text="Detaljer" />
             <TextBlock x:Name="DetaljTextLada" Text="Ingen bokning vald." />
 
