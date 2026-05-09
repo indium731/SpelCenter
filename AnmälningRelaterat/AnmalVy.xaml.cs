@@ -19,6 +19,14 @@ namespace Labb1_OOP
             var b = BokningarListaLada.ItemsSource;
             BokningarListaLada.ItemsSource = null;
             BokningarListaLada.ItemsSource = b;
+            SokTextLada.Visibility = Visibility.Collapsed;
+            SokDatumLada.Visibility = Visibility.Collapsed;
+            if (Bokningar.HamtaBokningar().NuvarandeSortering() == "Startdatum") SokDatumLada.Visibility = Visibility.Visible;
+            if (Bokningar.HamtaBokningar().NuvarandeSortering() == "Slutdatum") SokDatumLada.Visibility = Visibility.Visible;
+            if (Bokningar.HamtaBokningar().NuvarandeSortering() == "Beskrivning") SokTextLada.Visibility = Visibility.Visible;
+            if (Bokningar.HamtaBokningar().NuvarandeSortering() == "Ansvarig") SokTextLada.Visibility = Visibility.Visible;
+            if (Bokningar.HamtaBokningar().NuvarandeSortering() == "Maxantal") SokTextLada.Visibility = Visibility.Visible;
+            if (Bokningar.HamtaBokningar().NuvarandeSortering() == "Plats") SokTextLada.Visibility = Visibility.Visible;
         }
 
         private void InitieraBokningar()
@@ -61,12 +69,16 @@ namespace Labb1_OOP
         }
         private void SokKlick(Object sender, RoutedEventArgs e)
         {
-            if (SokTextLada.Text.Trim() is not string sokOrd)
+
+            if (SokTextLada.Visibility != Visibility.Collapsed)
             {
-                MessageBox.Show("Välj något att söka på");
-                return;
+                BokningarListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(SokTextLada.Text.Trim());
             }
-            BokningarListaLada.ItemsSource = Bokningar.HamtaBokningar().Sok(sokOrd);
+            if (SokDatumLada.Visibility != Visibility.Collapsed)
+            {
+                var datum = SokDatumLada.SelectedDate ?? DateTime.Now;
+                BokningarListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(datum.ToShortDateString());
+            }
             
         }
 

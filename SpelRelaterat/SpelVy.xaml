@@ -71,6 +71,7 @@
                 Click="AndraSorteringKlick"/>
 
             <TextBox x:Name="SokTextLada"/>
+            <ComboBox x:Name="SokComboLada"/>
             <Button Content="Sök"
                 Click="SokKlick"/>
 

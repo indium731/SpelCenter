@@ -19,6 +19,13 @@ namespace Labb1_OOP
         {
             SpelListaLada.ItemsSource = null;
             SpelListaLada.ItemsSource = SpelLista.HamtaSpelLista().spel;
+            SokTextLada.Visibility = Visibility.Collapsed;
+            SokComboLada.Visibility = Visibility.Collapsed;
+            if (SpelLista.HamtaSpelLista().NuvarandeSortering() == "Namn") SokTextLada.Visibility = Visibility.Visible;
+            if (SpelLista.HamtaSpelLista().NuvarandeSortering() == "Kategori") SokTextLada.Visibility = Visibility.Visible;
+            if (SpelLista.HamtaSpelLista().NuvarandeSortering() == "Minantal spelare") SokTextLada.Visibility = Visibility.Visible;
+            if (SpelLista.HamtaSpelLista().NuvarandeSortering() == "Maxantal spelare") SokTextLada.Visibility = Visibility.Visible;
+            if (SpelLista.HamtaSpelLista().NuvarandeSortering() == "Svarighetsgrad") SokComboLada.Visibility = Visibility.Visible;
         }
 
         private void GaTillMeny(Object sender, RoutedEventArgs e)
@@ -101,6 +108,7 @@ namespace Labb1_OOP
         private void InitieraSvarighetsgradLada()
         {
             SvarighetsgradLada.ItemsSource = Enum.GetNames(typeof(Svarighetsgrad));
+            SokComboLada.ItemsSource = Enum.GetNames(typeof(Svarighetsgrad));
         }
         private void AndraSorteringKlick(Object sender, RoutedEventArgs e)
         {
@@ -111,12 +119,20 @@ namespace Labb1_OOP
         }
         private void SokKlick(Object sender, RoutedEventArgs e)
         {
-            if (SokTextLada.Text.Trim() is not string sokOrd)
+            if (SokTextLada.Visibility != Visibility.Collapsed)
             {
-                MessageBox.Show("Välj något att söka på");
-                return;
+                SpelListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(SokTextLada.Text.Trim());
             }
-            SpelListaLada.ItemsSource = SpelLista.HamtaSpelLista().Sok(sokOrd);
+            if (SokComboLada.Visibility != Visibility.Collapsed)
+            {
+                if (SvarighetsgradLada.SelectedItem == null)
+                {
+                    return;
+                }
+                
+                Svarighetsgrad svarighetsgrad = (Svarighetsgrad)SvarighetsgradLada.SelectedItem;
+                SpelListaLada.ItemsSource = MedlemsLista.HamtaMedlemsLista().Sok(svarighetsgrad.ToString());
+            }
             
         }
 

@@ -12,10 +12,10 @@ public sealed class Bokningar
         {
             new Sorterare<Bokning>(b=>b.beskrivning, "Beskrivning"),
             new Sorterare<Bokning>(b=>b.ansvarig.namn, "Ansvarig"),
-            new Sorterare<Bokning>(b=>b.startDatum, "Börjar"),
-            new Sorterare<Bokning>(b=>b.slutDatum, "Avslutas"),
+            new Sorterare<Bokning>(b=>b.startDatum.Date, "Startdatum"),
+            new Sorterare<Bokning>(b=>b.slutDatum.Date, "Slutdatum"),
             new Sorterare<Bokning>(b=>b.plats, "Plats"),
-            new Sorterare<Bokning>(b=>b.maxAntal, "maxantal"),
+            new Sorterare<Bokning>(b=>b.maxAntal, "Maxantal"),
         };
         metodIndex = 0;
     }

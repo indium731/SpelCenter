@@ -40,10 +40,10 @@ public partial class MainWindow : Window
 
 
 
-		SpelLista.HamtaSpelLista().spel.Add(new Spel("Uno", "Sällskap", 2, 8, Svarighetsgrad.barnvänligt , "kortspel"));
-		SpelLista.HamtaSpelLista().spel.Add(new Spel("Fyra i rad", "Sällskap", 2, 2, Svarighetsgrad.barnvänligt, "Få fyra i rad"));
-		SpelLista.HamtaSpelLista().spel.Add(new Spel("Call of duty", "Strategi", 2, 8, Svarighetsgrad.barnvänligt, "Actionfyllt strategispel"));
-		SpelLista.HamtaSpelLista().spel.Add(new Spel("Guitarherokortspelet", "Sällskap", 1, 2, Svarighetsgrad.barnvänligt, "kortspel"));
+		SpelLista.HamtaSpelLista().LaggTill(new Spel("Uno", "Sällskap", 2, 8, Svarighetsgrad.barnvänligt , "kortspel"));
+		SpelLista.HamtaSpelLista().LaggTill(new Spel("Fyra i rad", "Sällskap", 2, 2, Svarighetsgrad.barnvänligt, "Få fyra i rad"));
+		SpelLista.HamtaSpelLista().LaggTill(new Spel("Call of duty", "Strategi", 2, 8, Svarighetsgrad.barnvänligt, "Actionfyllt strategispel"));
+		SpelLista.HamtaSpelLista().LaggTill(new Spel("Guitarherokortspelet", "Sällskap", 1, 2, Svarighetsgrad.barnvänligt, "kortspel"));
 
 
 

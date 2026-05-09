@@ -13,7 +13,7 @@ public sealed class SpelLista
             new Sorterare<Spel>(s=>s.kategori, "Kategori"),
             new Sorterare<Spel>(s=>s.minAntalSpelare, "Minantal spelare"),
             new Sorterare<Spel>(s=>s.maxAntalSpelare, "Maxantal spelare"),
-            new Sorterare<Spel>(s=>s.svarighetsgrad, "svarighetsgrad")
+            new Sorterare<Spel>(s=>s.svarighetsgrad, "Svarighetsgrad")
         };
         metodIndex = 0;
     }
@@ -40,11 +40,11 @@ public sealed class SpelLista
 
     public void LaggTill(Spel nyttSpel)
     {
-        spel.Add(nyttSpel);
+        _spel.Add(nyttSpel);
     }
     public void TaBort(Spel nyttSpel)
     {
-        spel.Remove(nyttSpel);
+        _spel.Remove(nyttSpel);
     }
     public void GaTillNastaMetod()
     {

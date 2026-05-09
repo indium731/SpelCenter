@@ -45,6 +45,7 @@
                 Click="AndraSorteringKlick"/>
 
             <TextBox x:Name="SokTextLada"/>
+            <DatePicker x:Name="SokDatumLada"/>
             <Button Content="Sök"
                 Click="SokKlick"/>
 
