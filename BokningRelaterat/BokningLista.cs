@@ -60,4 +60,9 @@ public sealed class BokningLista
     {
         return metoder[metodIndex].sortering;
     }
+    public List<Bokning> OverlappandeBokningar(Bokning bokning)
+    {
+        return _bokningar.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum).ToList();
+        
+    }
 }

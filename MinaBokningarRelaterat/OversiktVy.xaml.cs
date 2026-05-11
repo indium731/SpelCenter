@@ -47,27 +47,13 @@ namespace Labb1_OOP
             if (OversiktListaLada.ItemsSource is IEnumerable<Medlem> medlem)
             {
 
+                List<Spel> rekommenderadeSpel = SpelLista.HamtaSpelLista().RekommenderadeSpel(bokning);
+                List<Bokning> overlappandeBokningar = BokningLista.HamtaBokningLista().OverlappandeBokningar(bokning);
 
-                //"oh vengance of god how you should be feared by all who read what i now see before my eyes" - Dante Alighieri
-                //kommande kod tar först fram en lista på vilka spel som har en matchande mängd rekommenderade spelare i förhållande till mängden anmälda till den träffen man har översikt över
-                //efter detta tar den fram en lista på bokningar som är bokade till samma tid som den bokningen man har översikt över
-                //sedan räknas det ut, av de bokningar som överlappar, vilka har bokat ett spel som är med i listan av rekommenderade spel
-
-                List<Spel> tillgangligaSpel = SpelLista.HamtaSpelLista().spel
-                    .Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && 
-                                spel.maxAntalSpelare >= bokning.anmalda.Count)
-                    .ToList();
-
-                List<Bokning> overlappandeBokningar = BokningLista.HamtaBokningLista().bokningar
-                    .Where(b => b != bokning && 
-                                b.startDatum < bokning.slutDatum && 
-                                b.slutDatum > bokning.startDatum)
-                    .ToList();
-
-                tillgangligaSpel.RemoveAll(spel => 
+                rekommenderadeSpel.RemoveAll(spel => 
                     overlappandeBokningar.Any(b => b.bokadeSpel.Contains(spel)));
 
-                OversiktListaLada.ItemsSource = tillgangligaSpel;
+                OversiktListaLada.ItemsSource = rekommenderadeSpel;
                 UppdateraUI();
                 return;
             }

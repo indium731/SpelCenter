@@ -58,4 +58,8 @@ public sealed class SpelLista
     {
         return metoder[metodIndex].sortering;
     }
+    public List<Spel> RekommenderadeSpel(Bokning bokning)
+    {
+        return _spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && spel.maxAntalSpelare >= bokning.anmalda.Count).ToList();
+    }
 }
