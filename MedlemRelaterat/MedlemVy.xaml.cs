@@ -42,11 +42,12 @@ namespace Labb1_OOP
 
         private void TestaLaggTillMedlemKlick(Object sender, RoutedEventArgs e)
         {
-            try{
-            MedlemLista.HamtaMedlemLista().LaggTill(new Medlem(NamnTextLada.Text.Trim(),
+            try
+            {
+                MedlemLista.HamtaMedlemLista().LaggTill(NamnTextLada.Text.Trim(),
                                                                       TelefonNummerTextLada.Text.Trim(),
                                                                       MedlemsNummerTextLada.Text.Trim(),
-                                                                      (bool)Administratör.IsChecked));
+                                                                      (bool)Administratör.IsChecked);
             
 
             } catch (ArgumentException ex)

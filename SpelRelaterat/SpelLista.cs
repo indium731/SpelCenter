@@ -38,9 +38,11 @@ public sealed class SpelLista
     private List<Sorterare<Spel>> metoder;
     private int metodIndex;
 
-    public void LaggTill(Spel nyttSpel)
+    public Spel LaggTill(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
-        _spel.Add(nyttSpel);
+        Spel spel = new Spel(n, k, a, m, s, b);
+        _spel.Add(spel);
+        return spel;
     }
     public void TaBort(Spel nyttSpel)
     {

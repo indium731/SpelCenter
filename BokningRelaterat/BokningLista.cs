@@ -40,9 +40,11 @@ public sealed class BokningLista
     private List<Sorterare<Bokning>> metoder;
     private int metodIndex;
 
-    public void LaggTill(Bokning bokning)
+    public Bokning LaggTill(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
+        Bokning bokning = new Bokning(d, s, p, m, a, b);
         _bokningar.Add(bokning);
+        return bokning;
     }
     public void TaBort(Bokning bokning)
     {

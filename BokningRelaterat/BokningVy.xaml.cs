@@ -41,14 +41,13 @@ namespace Labb1_OOP
             int antal = 0;
             if (!int.TryParse(MaxAntalTextLada.Text.Trim(), out antal)) return;
 
-            Bokning bokning = new Bokning(startDatum,
+
+            Bokning bokning = BokningLista.HamtaBokningLista().LaggTill(startDatum,
                                           slutDatum,
                                           PlatsTextLada.Text.Trim(),
                                           antal,
                                           Session.HamtaSession().inloggadMedlem,
                                           BeskrivningTextLada.Text.Trim());
-
-            BokningLista.HamtaBokningLista().bokningar.Add(bokning);
             
 
             var mainWin = (MainWindow)MainWindow.GetWindow(this);

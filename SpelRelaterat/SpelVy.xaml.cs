@@ -48,12 +48,12 @@ namespace Labb1_OOP
 
             try {
 
-            SpelLista.HamtaSpelLista().LaggTill(new Spel(NamnTextLada.Text.Trim(),
-                                                                      KategoriTextLada.Text.Trim(),
-                                                                      minAntal,
-                                                                      maxAntal,
-                                                                      svarighetsgrad,
-                                                                      BeskrivningTextLada.Text.Trim()));
+            SpelLista.HamtaSpelLista().LaggTill(NamnTextLada.Text.Trim(),
+                                                 KategoriTextLada.Text.Trim(),
+                                                 minAntal,
+                                                 maxAntal,
+                                                 svarighetsgrad,
+                                                 BeskrivningTextLada.Text.Trim());
             } catch (ArgumentException ex)
             {
                 return;

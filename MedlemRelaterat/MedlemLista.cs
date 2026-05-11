@@ -38,9 +38,11 @@ public sealed class MedlemLista
     private List<Sorterare<Medlem>> metoder;
     private int metodIndex;
 
-    public void LaggTill(Medlem medlem)
+    public Medlem LaggTill(string n, string t, string m, bool a)
     {
+        Medlem medlem = new Medlem(n, t, m, a);
         _medlemmar.Add(medlem);
+        return medlem;
     }
     public void TaBort(Medlem medlem)
     {
