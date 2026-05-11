@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.Windows;
 
 namespace Labb1_OOP;
 
@@ -44,11 +45,14 @@ public sealed class BokningLista
     {
         Bokning bokning = new Bokning(d, s, p, m, a, b);
         _bokningar.Add(bokning);
+        MessageBox.Show("Ny bokning har nu lagts till");
         return bokning;
     }
     public void TaBort(Bokning bokning)
     {
         _bokningar.Remove(bokning);
+        MessageBox.Show("Bokning har nu tagits bort");
+
     }
     public void GaTillNastaMetod()
     {

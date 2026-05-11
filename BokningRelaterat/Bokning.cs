@@ -78,17 +78,20 @@ public class Bokning : IListBar
             return;
         }
         anmalda.Add(medlem);
+        MessageBox.Show("Du är nu anmäld");
     }
     public void BokaSpel(Spel spel)
     {
         if (bokadeSpel.Contains(spel)) return;
         bokadeSpel.Add(spel);
+        MessageBox.Show("Spel är nu bokat");
 
     }
     public void AvBokaSpel(Spel spel)
     {
         if (!bokadeSpel.Contains(spel)) return;
         bokadeSpel.Remove(spel);
+        MessageBox.Show("Spel är nu avbokat");
 
     }
 

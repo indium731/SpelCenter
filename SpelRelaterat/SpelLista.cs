@@ -42,11 +42,13 @@ public sealed class SpelLista
     {
         Spel spel = new Spel(n, k, a, m, s, b);
         _spel.Add(spel);
+        MessageBox.Show("Nytt spel har nu lagts till");
         return spel;
     }
     public void TaBort(Spel nyttSpel)
     {
         _spel.Remove(nyttSpel);
+        MessageBox.Show("Spel har nu tagits bort");
     }
     public void GaTillNastaMetod()
     {

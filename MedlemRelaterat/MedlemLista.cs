@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Windows;
 
 namespace Labb1_OOP;
 
@@ -42,11 +43,14 @@ public sealed class MedlemLista
     {
         Medlem medlem = new Medlem(n, t, m, a);
         _medlemmar.Add(medlem);
+        MessageBox.Show("Ny medlem har nu lagts till");
         return medlem;
     }
+
     public void TaBort(Medlem medlem)
     {
         _medlemmar.Remove(medlem);
+        MessageBox.Show("Ny medlem har nu tagits bort");
     }
     public void GaTillNastaMetod()
     {
