@@ -9,8 +9,8 @@ namespace Labb1_OOP
         public BokningVy()
         {
             InitializeComponent();
-            InitieraStartSchemaTider();
-            InitieraSlutSchemaTider();
+            InitieraSchemaTider(StartSchemaTiderLada);
+            InitieraSchemaTider(SlutSchemaTiderLada);
         }
 
         public void GaTillMeny(Object sender, RoutedEventArgs e)
@@ -66,54 +66,33 @@ namespace Labb1_OOP
             StartDatumLada.Tag = (TimeOnly)((Button)sender).Tag;
             StartDatumLada.Text = "StartDatum vald";
         }
-        private void InitieraStartSchemaTider()
+        private void InitieraSchemaTider(ListBox ListaLada)
         {
-            int startTid = Installningar.forstaBokbaraTid;
-            int bokningTider = Installningar.antalBokningTider;
-            double inkrement = Installningar.sistaBokbaraTid - startTid;
-            inkrement /= bokningTider-1;
-            TimeOnly tid = new TimeOnly();
-            tid = TimeOnly.MinValue;
-            tid = tid.AddHours(startTid);
+            TimeSpan inkrement;
+            if (Installningar.antalBokningTider == 1)
+            {
+                inkrement = new TimeSpan();
+            }else
+            {
+                inkrement = (Installningar.sistaBokbaraTid - Installningar.forstaBokbaraTid)/(Installningar.antalBokningTider-1);
+            }
+
+            TimeOnly tid = Installningar.forstaBokbaraTid;
+
             List<Button> knappar = new List<Button>();
 
-            for (int i = 0; i<bokningTider; i++)
+            for (int i = 0; i<Installningar.antalBokningTider; i++)
             {
                 Button knapp = new Button();
                 knapp.Content = tid.ToString();
                 knapp.Click += ValjStartTid;
                 knapp.Tag = tid;
                 knappar.Add(knapp);
-                StartSchemaTiderLada.ItemsSource = knappar;
-                tid = tid.AddHours(inkrement);
+                tid = tid.Add(inkrement);
             }
+            ListaLada.ItemsSource = knappar;
             UppdateraUI();
         } 
-        private void InitieraSlutSchemaTider()
-        {
-            int startTid = Installningar.forstaBokbaraTid;
-            int bokningTider = Installningar.antalBokningTider;
-
-            double inkrement = Installningar.sistaBokbaraTid - startTid;
-            inkrement /= bokningTider-1;
-
-            TimeOnly tid = new TimeOnly();
-            tid = TimeOnly.MinValue;
-            tid = tid.AddHours(startTid);
-            List<Button> knappar = new List<Button>();
-
-            for (int i = 0; i<bokningTider; i++)
-            {
-                Button knapp = new Button();
-                knapp.Content = tid.ToString();
-                knapp.Click += TestaLaggTillBokningKlick;
-                knapp.Tag = tid;
-                knappar.Add(knapp);
-                SlutSchemaTiderLada.ItemsSource = knappar;
-                tid = tid.AddHours(inkrement);
-            }
-            UppdateraUI();
-        }
 
         private void UppdateraUI()
         {
@@ -127,4 +106,5 @@ namespace Labb1_OOP
         }
 
     }
+
 }

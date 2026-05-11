@@ -57,30 +57,35 @@ namespace Labb1_OOP
                 
             }
         }
-
-        
         private void InitieraSchemaTider(ListBox ListaLada)
         {
-            int startTid = Installningar.forstaBokbaraTid;
-            int bokningTider = Installningar.antalBokningTider;
-            double inkrement = Installningar.sistaBokbaraTid - startTid;
-            inkrement /= bokningTider-1;
-            List<Button> tider = new List<Button>();
-            TimeOnly tid = TimeOnly.MinValue;
-            tid = tid.AddHours(startTid);
-
-            for (int i = 0; i<bokningTider; i++)
+            TimeSpan inkrement;
+            if (Installningar.antalBokningTider == 1)
             {
-                Button tidKnapp = new Button();
-                tidKnapp.Content = tid.ToString();
-                tidKnapp.Tag = tid;
-                tidKnapp.Click += TestaAndraBokningKlick;
-                tider.Add(tidKnapp);
-                ListaLada.ItemsSource = tider;
-                tid = tid.AddHours(inkrement);
+                inkrement = new TimeSpan();
+            }else
+            {
+            inkrement = (Installningar.sistaBokbaraTid - Installningar.forstaBokbaraTid)/(Installningar.antalBokningTider-1);
             }
+
+            TimeOnly tid = Installningar.forstaBokbaraTid;
+
+            List<Button> knappar = new List<Button>();
+
+            for (int i = 0; i<Installningar.antalBokningTider; i++)
+            {
+                Button knapp = new Button();
+                knapp.Content = tid.ToString();
+                knapp.Click += TestaAndraBokningKlick;
+                knapp.Tag = tid;
+                knappar.Add(knapp);
+                tid = tid.Add(inkrement);
+            }
+            ListaLada.ItemsSource = knappar;
             UppdateraUI();
-        }
+        } 
+
+        
         private void UppdateraUI()
         {
             var startLista = StartSchemaTiderLada.ItemsSource;
