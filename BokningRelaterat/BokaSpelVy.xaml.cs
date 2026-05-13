@@ -56,7 +56,6 @@ namespace Labb1_OOP
 
         private void TestaBokaSpelKlick(Object sender, RoutedEventArgs e)
         {
-            if (BokaSpelKnapp.Tag is not Bokning bokning) return;
             if (SpelListaLada.SelectedItem is not Spel spel) return;
             bokning.BokaSpel(spel);
 

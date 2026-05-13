@@ -9,8 +9,8 @@ namespace Labb1_OOP
         public BokningVy()
         {
             InitializeComponent();
-            InitieraSchemaTider(StartSchemaTiderLada);
-            InitieraSchemaTider(SlutSchemaTiderLada);
+            InitieraStartSchemaTider(StartSchemaTiderLada);
+            InitieraSlutSchemaTider(SlutSchemaTiderLada);
         }
 
         public void GaTillMeny(Object sender, RoutedEventArgs e)
@@ -53,10 +53,12 @@ namespace Labb1_OOP
             var mainWin = (MainWindow)MainWindow.GetWindow(this);
             mainWin.Vy.Content = new BokaSpelVy(bokning);
             
-            } catch (ArgumentException ex)
-                {
+            } 
+            catch (ArgumentException ex)
+            {
                     return;
-                }
+            }
+
                 
         }
 
@@ -65,7 +67,7 @@ namespace Labb1_OOP
             StartDatumLada.Tag = (TimeOnly)((Button)sender).Tag;
             StartDatumLada.Text = "StartDatum vald";
         }
-        private void InitieraSchemaTider(ListBox ListaLada)
+        private void InitieraStartSchemaTider(ListBox ListaLada)
         {
             TimeSpan inkrement;
             if (Installningar.antalBokningTider == 1)
@@ -85,6 +87,33 @@ namespace Labb1_OOP
                 Button knapp = new Button();
                 knapp.Content = tid.ToString();
                 knapp.Click += ValjStartTid;
+                knapp.Tag = tid;
+                knappar.Add(knapp);
+                tid = tid.Add(inkrement);
+            }
+            ListaLada.ItemsSource = knappar;
+            UppdateraUI();
+        } 
+        private void InitieraSlutSchemaTider(ListBox ListaLada)
+        {
+            TimeSpan inkrement;
+            if (Installningar.antalBokningTider == 1)
+            {
+                inkrement = new TimeSpan();
+            }else
+            {
+                inkrement = (Installningar.sistaBokbaraTid - Installningar.forstaBokbaraTid)/(Installningar.antalBokningTider-1);
+            }
+
+            TimeOnly tid = Installningar.forstaBokbaraTid;
+
+            List<Button> knappar = new List<Button>();
+
+            for (int i = 0; i<Installningar.antalBokningTider; i++)
+            {
+                Button knapp = new Button();
+                knapp.Content = tid.ToString();
+                knapp.Click += TestaLaggTillBokningKlick;
                 knapp.Tag = tid;
                 knappar.Add(knapp);
                 tid = tid.Add(inkrement);

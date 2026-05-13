@@ -43,7 +43,6 @@ public sealed class BokningLista
     {
         Bokning nyttBokning = new Bokning(d, s, p, m, a, b);
         bokningar.Add(nyttBokning);
-        MessageBox.Show("Ny bokning har nu lagts till");
         return nyttBokning;
     }
     public void TaBort(Bokning bokning)

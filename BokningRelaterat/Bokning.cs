@@ -79,7 +79,10 @@ public class Bokning : IListBar
     }
     public void BokaSpel(Spel spel)
     {
-        if (bokadeSpel.Contains(spel)) return;
+        if (bokadeSpel.Contains(spel))
+        {
+            MessageBox.Show("Spelet är redan bokat");
+        } 
         bokadeSpel.Add(spel);
         MessageBox.Show("Spel är nu bokat");
 
