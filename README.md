@@ -10,3 +10,11 @@ Via Visual Studio:
 Clona repon
 Dubbelclicka .sln filen för att öppna med Visual Studio
 F5 för att bygga och köra programmet
+
+Via .zip fil
+Ladda ner zip fil
+Extrahera fil.
+Navigera till den skapade mappen via terminalen
+kör "dotnet run"
+
+Andra metoder kan ej garanteras att vara fungerande.
