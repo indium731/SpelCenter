@@ -15,15 +15,14 @@ public class Medlem : IListBar
         admin = a;
     }
     public string namn;
-    private string _telefonNummer;
-    public string telefonNummer {get => _telefonNummer; set
+    public string telefonNummer {get => field; set
         {
             if (!value.All(char.IsDigit))
             {
                 MessageBox.Show("Telefonnummer få enbart innehålla siffror");
                 throw new ArgumentException();
             }
-            _telefonNummer = value;
+            field = value;
         }
     }
     public string medlemsNummer;

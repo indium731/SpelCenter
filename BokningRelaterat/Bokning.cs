@@ -18,10 +18,9 @@ public class Bokning : IListBar
         anmalda = new List<Medlem>();
         bokadeSpel = new List<Spel>();
     }
-    private DateTime _startDatum;
-    public DateTime startDatum {get => _startDatum; set
+    public DateTime startDatum {get => field; set
         {
-            if (value > _slutDatum)
+            if (value > slutDatum)
             {
                 MessageBox.Show("StartDatum måste vara före slutdatum");
                 throw new ArgumentException();
@@ -30,13 +29,12 @@ public class Bokning : IListBar
             {
                 MessageBox.Show("Bokningen får inte påbörjas tillbaka i tiden");
             }
-            _startDatum = value;
+            field = value;
         }
     }
-    private DateTime _slutDatum;
-    public DateTime slutDatum {get => _slutDatum; set
+    public DateTime slutDatum {get => field; set
         {
-            if (_startDatum > value)
+            if (startDatum > value)
             {
                 MessageBox.Show("StartDatum måste vara före slutdatum");
                 throw new ArgumentException();
@@ -45,19 +43,18 @@ public class Bokning : IListBar
             {
                 MessageBox.Show("Bokningen får inte påbörjas tillbaka i tiden");
             }
-            _slutDatum = value;
+            field = value;
         }
     }
     public string plats;
-    private int _maxAntal;
-    public int maxAntal {get => _maxAntal; set
+    public int maxAntal {get => field; set
         {
             if (value < 0)
             {
                 MessageBox.Show("Maxantal måste vara ett positivt tal");
                 throw new ArgumentException();
             }
-            _maxAntal = value;
+            field = value;
         }
     }
     public Medlem ansvarig;

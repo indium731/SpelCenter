@@ -7,7 +7,7 @@ public sealed class MedlemLista
 {
     private MedlemLista()
     {
-        _medlemmar = new List<Medlem>();
+        medlemmar = new List<Medlem>();
         metoder = new List<Sorterare<Medlem>>
         {
             new Sorterare<Medlem>(m=>m.namn, "Namn"),
@@ -29,32 +29,31 @@ public sealed class MedlemLista
         }
         return _instans;
     }
-    private List<Medlem> _medlemmar;
     public List<Medlem> medlemmar
     {
-        get
-        {
-            return metoder[metodIndex].Sortera(_medlemmar);
-        } set;}
+        get => field;
+        private set;
+        }
     private List<Sorterare<Medlem>> metoder;
     private int metodIndex;
 
     public Medlem LaggTill(string n, string t, string m, bool a)
     {
-        Medlem medlem = new Medlem(n, t, m, a);
-        _medlemmar.Add(medlem);
+        Medlem nyttMedlem = new Medlem(n, t, m, a);
+        medlemmar.Add(nyttMedlem);
         MessageBox.Show("Ny medlem har nu lagts till");
-        return medlem;
+        return nyttMedlem;
     }
 
     public void TaBort(Medlem medlem)
     {
-        _medlemmar.Remove(medlem);
+        medlemmar.Remove(medlem);
         MessageBox.Show("Ny medlem har nu tagits bort");
     }
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
+       medlemmar = metoder[metodIndex].Sortera(medlemmar);
     }
     public List<Medlem> Sok(string sokOrd)
     {
@@ -66,8 +65,8 @@ public sealed class MedlemLista
     }
     public Medlem Seed(string n, string t, string m, bool a)
     {
-        Medlem medlem = new Medlem(n, t, m, a);
-        _medlemmar.Add(medlem);
-        return medlem;
+        Medlem nyttMedlem = new Medlem(n, t, m, a);
+        medlemmar.Add(nyttMedlem);
+        return nyttMedlem;
     }
 }

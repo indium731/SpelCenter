@@ -8,7 +8,7 @@ public sealed class BokningLista
 {
     private BokningLista()
     {
-        _bokningar = new List<Bokning>();
+        bokningar = new List<Bokning>();
         metoder = new List<Sorterare<Bokning>>
         {
             new Sorterare<Bokning>(b=>b.beskrivning, "Beskrivning"),
@@ -31,32 +31,31 @@ public sealed class BokningLista
         }
         return _instans;
     }
-    private List<Bokning> _bokningar;
     public List<Bokning> bokningar 
     {
-        get
-        {
-            return metoder[metodIndex].Sortera(_bokningar);
-        } set;}
+        get => field;
+        private set;
+        }
     private List<Sorterare<Bokning>> metoder;
     private int metodIndex;
 
     public Bokning LaggTill(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
-        Bokning bokning = new Bokning(d, s, p, m, a, b);
-        _bokningar.Add(bokning);
+        Bokning nyttBokning = new Bokning(d, s, p, m, a, b);
+        bokningar.Add(nyttBokning);
         MessageBox.Show("Ny bokning har nu lagts till");
-        return bokning;
+        return nyttBokning;
     }
     public void TaBort(Bokning bokning)
     {
-        _bokningar.Remove(bokning);
+        bokningar.Remove(bokning);
         MessageBox.Show("Bokning har nu tagits bort");
 
     }
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
+        bokningar = metoder[metodIndex].Sortera(bokningar);
     }
     public List<Bokning> Sok(string sokOrd)
     {
@@ -68,13 +67,13 @@ public sealed class BokningLista
     }
     public List<Bokning> OverlappandeBokningar(Bokning bokning)
     {
-        return _bokningar.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum).ToList();
+        return bokningar.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum).ToList();
         
     }
     public Bokning Seed(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
-        Bokning bokning = new Bokning(d, s, p, m, a, b);
-        _bokningar.Add(bokning);
-        return bokning;
+        Bokning nyttBokning = new Bokning(d, s, p, m, a, b);
+        bokningar.Add(nyttBokning);
+        return nyttBokning;
     }
 }

@@ -19,10 +19,9 @@ public class Spel : IListBar
     }
     public string namn;
     public string kategori;
-    private int _minAntalSpelare = 0;
-    public int minAntalSpelare {get => _minAntalSpelare; set
+    public int minAntalSpelare {get => field; set
         {
-            if (value > _maxAntalSpelare)
+            if (value > maxAntalSpelare)
             {
                 MessageBox.Show("Minimum antal spelare måste vara färre än maximum");
                 throw new ArgumentException();
@@ -32,13 +31,12 @@ public class Spel : IListBar
                 MessageBox.Show("Minimum antal spelare måste vara mer än 0");
                 throw new ArgumentException();
             }
-            _minAntalSpelare = value;
+            field = value;
         }
-    }
-    private int _maxAntalSpelare = 0;
-    public int maxAntalSpelare {get => _maxAntalSpelare; set
+    } = 0;
+    public int maxAntalSpelare {get => field; set
         {
-            if (value < _maxAntalSpelare)
+            if (value < maxAntalSpelare)
             {
                 MessageBox.Show("Max antal spelare måste vara fler än minimum antal");
                 throw new ArgumentException();
@@ -48,9 +46,9 @@ public class Spel : IListBar
                 MessageBox.Show("Maximum antal spelare måste vara mer än 0");
                 throw new ArgumentException();
             }
-            _maxAntalSpelare = value;
-        }
-    }
+            field = value;
+        } 
+    } = 0;
     public Svarighetsgrad svarighetsgrad;
     public string beskrivning;
 

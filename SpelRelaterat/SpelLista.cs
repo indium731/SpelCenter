@@ -6,7 +6,7 @@ public sealed class SpelLista
 {
     private SpelLista()
     {
-        _spel = new List<Spel>();
+        spel = new List<Spel>();
         metoder = new List<Sorterare<Spel>>
         {
             new Sorterare<Spel>(s=>s.namn, "Namn"),
@@ -28,31 +28,30 @@ public sealed class SpelLista
         }
         return _instans;
     }
-    private List<Spel> _spel;
     public List<Spel> spel 
     {
-        get
-        {
-            return metoder[metodIndex].Sortera(_spel);
-        } set;}
+        get => field;
+        private set;
+        }
     private List<Sorterare<Spel>> metoder;
     private int metodIndex;
 
     public Spel LaggTill(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
-        Spel spel = new Spel(n, k, a, m, s, b);
-        _spel.Add(spel);
+        Spel nyttSpel = new Spel(n, k, a, m, s, b);
+        spel.Add(nyttSpel);
         MessageBox.Show("Nytt spel har nu lagts till");
-        return spel;
+        return nyttSpel;
     }
     public void TaBort(Spel nyttSpel)
     {
-        _spel.Remove(nyttSpel);
+        spel.Remove(nyttSpel);
         MessageBox.Show("Spel har nu tagits bort");
     }
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
+        spel = metoder[metodIndex].Sortera(spel);
     }
     public List<Spel> Sok(string sokOrd)
     {
@@ -64,12 +63,12 @@ public sealed class SpelLista
     }
     public List<Spel> RekommenderadeSpel(Bokning bokning)
     {
-        return _spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && spel.maxAntalSpelare >= bokning.anmalda.Count).ToList();
+        return spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && spel.maxAntalSpelare >= bokning.anmalda.Count).ToList();
     }
     public Spel Seed(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
-        Spel spel = new Spel(n, k, a, m, s, b);
-        _spel.Add(spel);
-        return spel;
+        Spel nyttSpel = new Spel(n, k, a, m, s, b);
+        spel.Add(nyttSpel);
+        return nyttSpel;
     }
 }
