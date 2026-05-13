@@ -66,4 +66,10 @@ public sealed class SpelLista
     {
         return _spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && spel.maxAntalSpelare >= bokning.anmalda.Count).ToList();
     }
+    public Spel Seed(string n, string k, int a, int m, Svarighetsgrad s, string b)
+    {
+        Spel spel = new Spel(n, k, a, m, s, b);
+        _spel.Add(spel);
+        return spel;
+    }
 }

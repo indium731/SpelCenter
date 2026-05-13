@@ -71,4 +71,10 @@ public sealed class BokningLista
         return _bokningar.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum).ToList();
         
     }
+    public Bokning Seed(DateTime d, DateTime s, string p, int m, Medlem a, string b)
+    {
+        Bokning bokning = new Bokning(d, s, p, m, a, b);
+        _bokningar.Add(bokning);
+        return bokning;
+    }
 }

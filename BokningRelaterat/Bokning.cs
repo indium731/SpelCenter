@@ -129,5 +129,19 @@ public class Bokning : IListBar
                $"Beskriving: {beskrivning}\n" +
                $"Bokade spel: {bokadeSpelString}";
     }
+    public void SeedAnmal(Medlem medlem)
+    {
+        if (anmalda.Count >= maxAntal)
+        {
+            MessageBox.Show("Bokningen är fullbokad");
+            return;
+        } 
+        if (anmalda.Contains(medlem))
+        {
+            MessageBox.Show("Du har redan anmält dig till denna bokning");
+            return;
+        }
+        anmalda.Add(medlem);
+    }
 }
 

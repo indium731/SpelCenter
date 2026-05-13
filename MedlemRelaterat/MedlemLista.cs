@@ -64,4 +64,10 @@ public sealed class MedlemLista
     {
         return metoder[metodIndex].sortering;
     }
+    public Medlem Seed(string n, string t, string m, bool a)
+    {
+        Medlem medlem = new Medlem(n, t, m, a);
+        _medlemmar.Add(medlem);
+        return medlem;
+    }
 }

@@ -26,28 +26,22 @@ public partial class MainWindow : Window
 	private void Seed()
 	{
 
-		Medlem Alexander = MedlemLista.HamtaMedlemLista().LaggTill("Alexander", "0701234567", "S1", true);   
-		Medlem Lisa = MedlemLista.HamtaMedlemLista().LaggTill("Lisa", "0739876543", "S2", false);
-		Medlem Pelle = MedlemLista.HamtaMedlemLista().LaggTill("Pelle", "0725551234", "S3", false);
-		Medlem Emma = MedlemLista.HamtaMedlemLista().LaggTill("Emma", "0761112233", "S4", true);
-		Medlem Rednaxela = MedlemLista.HamtaMedlemLista().LaggTill("Rednaxela", "070123333", "S5", true);
+		Medlem Alexander = MedlemLista.HamtaMedlemLista().Seed("Alexander", "0701234567", "S1", true);   
+		Medlem Lisa = MedlemLista.HamtaMedlemLista().Seed("Lisa", "0739876543", "S2", false);
+		Medlem Pelle = MedlemLista.HamtaMedlemLista().Seed("Pelle", "0725551234", "S3", false);
+		Medlem Emma = MedlemLista.HamtaMedlemLista().Seed("Emma", "0761112233", "S4", true);
+		Medlem Rednaxela = MedlemLista.HamtaMedlemLista().Seed("Rednaxela", "070123333", "S5", true);
 
+		SpelLista.HamtaSpelLista().Seed("Uno", "Sällskap", 2, 8, Svarighetsgrad.barnvänligt , "kortspel");
+		SpelLista.HamtaSpelLista().Seed("Fyra i rad", "Sällskap", 2, 2, Svarighetsgrad.barnvänligt, "Få fyra i rad");
+		SpelLista.HamtaSpelLista().Seed("Call of duty", "Strategi", 2, 8, Svarighetsgrad.barnvänligt, "Actionfyllt strategispel");
+		SpelLista.HamtaSpelLista().Seed("Guitarherokortspelet", "Sällskap", 1, 2, Svarighetsgrad.barnvänligt, "kortspel");
 
+		Bokning unotraff = BokningLista.HamtaBokningLista().Seed(new DateTime(2027, 03, 12), new DateTime(2027, 03, 12), "Majorna", 5, Alexander, "Unospelträff");
+		Bokning Codtraff = BokningLista.HamtaBokningLista().Seed(new DateTime(2027, 03, 15), new DateTime(2027, 03, 15), "Majorna", 5, Emma, "Unospelträff");
 
-		SpelLista.HamtaSpelLista().LaggTill("Uno", "Sällskap", 2, 8, Svarighetsgrad.barnvänligt , "kortspel");
-		SpelLista.HamtaSpelLista().LaggTill("Fyra i rad", "Sällskap", 2, 2, Svarighetsgrad.barnvänligt, "Få fyra i rad");
-		SpelLista.HamtaSpelLista().LaggTill("Call of duty", "Strategi", 2, 8, Svarighetsgrad.barnvänligt, "Actionfyllt strategispel");
-		SpelLista.HamtaSpelLista().LaggTill("Guitarherokortspelet", "Sällskap", 1, 2, Svarighetsgrad.barnvänligt, "kortspel");
-
-
-
-
-
-		Bokning unotraff = BokningLista.HamtaBokningLista().LaggTill(new DateTime(2027, 03, 12), new DateTime(2027, 03, 12), "Majorna", 5, Alexander, "Unospelträff");
-		Bokning Codtraff = BokningLista.HamtaBokningLista().LaggTill(new DateTime(2027, 03, 15), new DateTime(2027, 03, 15), "Majorna", 5, Emma, "Unospelträff");
-
-		unotraff.Anmal(Rednaxela);
-		Codtraff.Anmal(Pelle);
+		unotraff.SeedAnmal(Rednaxela);
+		Codtraff.SeedAnmal(Pelle);
 	}
 
 }
