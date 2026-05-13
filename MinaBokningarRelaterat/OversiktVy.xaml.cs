@@ -38,12 +38,15 @@ namespace Labb1_OOP
 
         private void AndraValdObjekt(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            ((IListBar)OversiktListaLada.SelectedItem).Detaljer();
+            DetaljTextLada.Text = ((IListBar)OversiktListaLada.SelectedItem).Detaljer();
         }
 
 
         private void AndraVisadListaKlick(Object sender, RoutedEventArgs e)
         {
+            OversiktListaLada.SelectionChanged -= AndraValdObjekt;
+            OversiktListaLada.UnselectAll();
+
             if (OversiktListaLada.ItemsSource is IEnumerable<Medlem> medlem)
             {
 
@@ -53,17 +56,17 @@ namespace Labb1_OOP
                 rekommenderadeSpel.RemoveAll(spel => 
                     overlappandeBokningar.Any(b => b.bokadeSpel.Contains(spel)));
 
-                OversiktListaLada.ItemsSource = rekommenderadeSpel;
+                OversiktListaLada.ItemsSource = rekommenderadeSpel.Cast<IListBar>();
                 UppdateraUI();
-                return;
             }
 
-            if (OversiktListaLada.ItemsSource is IEnumerable<Spel> spel)
+            else if (OversiktListaLada.ItemsSource is IEnumerable<Spel> spel)
             {
-                OversiktListaLada.ItemsSource = bokning.anmalda;
+                OversiktListaLada.ItemsSource = bokning.anmalda.Cast<IListBar>();
                 UppdateraUI();
-                return;
             }
+            OversiktListaLada.SelectionChanged += AndraValdObjekt;
+            DetaljTextLada.Text = "";
         }
     }
 }

@@ -143,5 +143,11 @@ public class Bokning : IListBar
         }
         anmalda.Add(medlem);
     }
+    public void SeedBokaSpel(Spel spel)
+    {
+        if (bokadeSpel.Contains(spel)) return;
+        bokadeSpel.Add(spel);
+
+    }
 }
 

@@ -32,16 +32,32 @@ public partial class MainWindow : Window
 		Medlem Emma = MedlemLista.HamtaMedlemLista().Seed("Emma", "0761112233", "S4", true);
 		Medlem Rednaxela = MedlemLista.HamtaMedlemLista().Seed("Rednaxela", "070123333", "S5", true);
 
-		SpelLista.HamtaSpelLista().Seed("Uno", "Sällskap", 2, 8, Svarighetsgrad.barnvänligt , "kortspel");
-		SpelLista.HamtaSpelLista().Seed("Fyra i rad", "Sällskap", 2, 2, Svarighetsgrad.barnvänligt, "Få fyra i rad");
-		SpelLista.HamtaSpelLista().Seed("Call of duty", "Strategi", 2, 8, Svarighetsgrad.barnvänligt, "Actionfyllt strategispel");
-		SpelLista.HamtaSpelLista().Seed("Guitarherokortspelet", "Sällskap", 1, 2, Svarighetsgrad.barnvänligt, "kortspel");
+		Spel uno = SpelLista.HamtaSpelLista().Seed("Uno", "Sällskap", 2, 8, Svarighetsgrad.barnvänligt , "kortspel");
+		Spel fyraIRad = SpelLista.HamtaSpelLista().Seed("Fyra i rad", "Sällskap", 2, 2, Svarighetsgrad.barnvänligt, "Få fyra i rad");
+		Spel cod = SpelLista.HamtaSpelLista().Seed("Call of duty", "Strategi", 2, 8, Svarighetsgrad.barnvänligt, "Actionfyllt strategispel");
+		Spel guitarHero = SpelLista.HamtaSpelLista().Seed("Guitarherokortspelet", "Sällskap", 1, 2, Svarighetsgrad.barnvänligt, "kortspel");
+		Spel schack = SpelLista.HamtaSpelLista().Seed("Schack", "Sällskap", 2, 2, Svarighetsgrad.utmanande, "The ROOK!");
+		Spel ticketToRide = SpelLista.HamtaSpelLista().Seed("Ticket To Ride", "Sällskap", 2, 5, Svarighetsgrad.mittemellan, "Klassisk brädspel");
 
-		Bokning unotraff = BokningLista.HamtaBokningLista().Seed(new DateTime(2027, 03, 12), new DateTime(2027, 03, 12), "Majorna", 5, Alexander, "Unospelträff");
-		Bokning Codtraff = BokningLista.HamtaBokningLista().Seed(new DateTime(2027, 03, 15), new DateTime(2027, 03, 15), "Majorna", 5, Emma, "Unospelträff");
+		Bokning unoTraff = BokningLista.HamtaBokningLista().Seed(new DateTime(DateTime.Now.Year+1, 01, 1), new DateTime(DateTime.Now.Year+1, 01, 2), "Majorna", 5, Alexander, "Unospelträff");
+		Bokning codTraff = BokningLista.HamtaBokningLista().Seed(new DateTime(DateTime.Now.Year+1, 01, 1), new DateTime(DateTime.Now.Year+1, 01, 2), "Majorna", 5, Emma, "Codträff");
+		Bokning gottOBlandatTraff = BokningLista.HamtaBokningLista().Seed(new DateTime(DateTime.Now.Year+1, 01, 1), new DateTime(DateTime.Now.Year+1, 01, 2), "Majorna", 5, Alexander, "Gott O Blandat träff");
 
-		unotraff.SeedAnmal(Rednaxela);
-		Codtraff.SeedAnmal(Pelle);
+		unoTraff.SeedAnmal(Rednaxela);
+		unoTraff.SeedAnmal(Lisa);
+		codTraff.SeedAnmal(Pelle);
+		codTraff.SeedAnmal(Emma);
+		gottOBlandatTraff.SeedAnmal(Lisa);
+		gottOBlandatTraff.SeedAnmal(Pelle);
+		gottOBlandatTraff.SeedAnmal(Rednaxela);
+
+		unoTraff.SeedBokaSpel(uno);
+		codTraff.SeedBokaSpel(cod);
+		gottOBlandatTraff.SeedBokaSpel(uno);
+		gottOBlandatTraff.SeedBokaSpel(cod);
+		gottOBlandatTraff.SeedBokaSpel(guitarHero);
+
+
 	}
 
 }

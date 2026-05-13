@@ -36,7 +36,7 @@ public class Spel : IListBar
         }
     }
     private int _maxAntalSpelare = 0;
-    public int maxAntalSpelare {get => _minAntalSpelare; set
+    public int maxAntalSpelare {get => _maxAntalSpelare; set
         {
             if (value < _maxAntalSpelare)
             {

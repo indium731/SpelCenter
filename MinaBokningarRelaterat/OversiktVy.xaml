@@ -41,7 +41,7 @@
                 Click="AndraVisadListaKlick"/>
 
             <TextBlock Text="Detaljer" />
-            <TextBlock x:Name="DetaljTextLada" Text="Ingen bokning vald." />
+            <TextBlock x:Name="DetaljTextLada" Text="Inget valt." />
 
         </StackPanel>
     </Grid>
