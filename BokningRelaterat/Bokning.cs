@@ -82,6 +82,7 @@ public class Bokning : IListBar
         if (bokadeSpel.Contains(spel))
         {
             MessageBox.Show("Spelet är redan bokat");
+            return;
         } 
         bokadeSpel.Add(spel);
         MessageBox.Show("Spel är nu bokat");
@@ -89,7 +90,11 @@ public class Bokning : IListBar
     }
     public void AvBokaSpel(Spel spel)
     {
-        if (!bokadeSpel.Contains(spel)) return;
+        if (!bokadeSpel.Contains(spel))
+        {
+            MessageBox.Show("Spelet är inte bokat");
+            return;
+        }
         bokadeSpel.Remove(spel);
         MessageBox.Show("Spel är nu avbokat");
 
