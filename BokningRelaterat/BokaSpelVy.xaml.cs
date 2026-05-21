@@ -19,24 +19,12 @@ namespace Labb1_OOP
 
         private void InitieraLista()
         {
-            //Jag ber om ursäkt för denna synd
-            //  men vad koden gör är att den separerar ut om några tidigare bokningar överlappar
-            //  tidsmässigt med en man försöker lägga.
-            //  Sedan tar den reda på om någon av dessa tidigare,
-            //  överlappande bokningarna har bokat upp ett givet spel.
-            //  Om spelet inte är bokat under denna tid så läggs den till i listan av spel som kan bokas.
+            var overlappandeBokningar = BokningLista.HamtaBokningLista().OverlappandeBokningar(bokning);
 
-            // 2. Find all bookings that clash with the selected dates
-            var overlappandeBokningar = BokningLista.HamtaBokningLista().bokningar
-                .Where(b => b.startDatum < bokning.slutDatum && bokning.startDatum < b.slutDatum)
-                .ToList();
-
-            // 3. Filter the games: Select games NOT found in the list of overlapping games
             var tillgangligaSpel = SpelLista.HamtaSpelLista().spel
                 .Where(spel => !overlappandeBokningar.Any(b => b.bokadeSpel.Contains(spel)))
                 .ToList();
 
-            // 4. Update the UI
             SpelListaLada.ItemsSource = tillgangligaSpel;
         }
 

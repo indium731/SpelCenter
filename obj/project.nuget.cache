@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "pW1OlUwGkCc=",
+  "dgSpecHash": "4huuryKpv9A=",
   "success": true,
   "projectFilePath": "C:\\Users\\alfre\\VSCodeProjects\\Labb1_OOP\\Labb1_OOP.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\alfre\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.2\\communitytoolkit.mvvm.8.4.2.nupkg.sha512"
+  ],
   "logs": []
 }
