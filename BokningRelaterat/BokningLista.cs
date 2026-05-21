@@ -1,6 +1,11 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using System.Windows;
+using Labb1_OOP.Modeller;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Labb1_OOP;
 
@@ -8,7 +13,7 @@ public sealed class BokningLista
 {
     private BokningLista()
     {
-        bokningar = new List<Bokning>();
+        bokningar = new ObservableCollection<Bokning>();
         metoder = new List<Sorterare<Bokning>>
         {
             new Sorterare<Bokning>(b=>b.beskrivning, "Beskrivning"),
@@ -31,7 +36,7 @@ public sealed class BokningLista
         }
         return _instans;
     }
-    public List<Bokning> bokningar 
+    public ObservableCollection<Bokning> bokningar 
     {
         get => field;
         private set;
@@ -56,17 +61,17 @@ public sealed class BokningLista
         metodIndex = (metodIndex + 1) % metoder.Count();
         bokningar = metoder[metodIndex].Sortera(bokningar);
     }
-    public List<Bokning> Sok(string sokOrd)
+    public ObservableCollection<Bokning> Sok(string sokOrd)
     {
-        return bokningar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())).ToList();
+        return (ObservableCollection<Bokning>)bokningar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower()));
     }
     public string NuvarandeSortering()
     {
         return metoder[metodIndex].sortering;
     }
-    public List<Bokning> OverlappandeBokningar(Bokning bokning)
+    public ObservableCollection<Bokning> OverlappandeBokningar(Bokning bokning)
     {
-        return bokningar.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum).ToList();
+        return (ObservableCollection<Bokning>)bokningar.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum);
         
     }
     public Bokning Seed(DateTime d, DateTime s, string p, int m, Medlem a, string b)

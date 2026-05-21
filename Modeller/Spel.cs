@@ -1,7 +1,7 @@
 ﻿
 using System.Windows;
 
-namespace Labb1_OOP;
+namespace Labb1_OOP.Modeller;
 
 public class Spel : IListBar
 {

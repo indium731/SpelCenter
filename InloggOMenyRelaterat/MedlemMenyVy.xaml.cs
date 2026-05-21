@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Labb1_OOP
+namespace Labb1_OOP.Vyer
 {
     public partial class MedlemMenyVy : UserControl
     {
@@ -13,15 +13,15 @@ namespace Labb1_OOP
 
         private void TestaUtloggKlick(Object sender, RoutedEventArgs e)
         {
-            var mainWin = (MainWindow)Window.GetWindow(this);
-            mainWin.Vy.Content = new InloggVy();
+            //var mainWin = (MainWindow)Window.GetWindow(this);
+            //mainWin.Vy.Content = new InloggVy();
         }
 
         private void GaTillValdVy(Object sender, RoutedEventArgs e)
         {
-            Button knapp = (Button)sender;
-            var mainWin = (MainWindow)Window.GetWindow(this);
-            mainWin.Vy.Content = knapp.Tag;
+            //Button knapp = (Button)sender;
+            //var mainWin = (MainWindow)Window.GetWindow(this);
+            //mainWin.Vy.Content = knapp.Tag;
         }
         
         private void KontrolleraAtkomster()

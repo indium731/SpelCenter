@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Labb1_OOP
+namespace Labb1_OOP.Vyer
 {
     public partial class MinaBokningarVy : UserControl
     {
@@ -25,8 +25,8 @@ namespace Labb1_OOP
 
         private void GaTillMeny(Object sender, RoutedEventArgs e)
         {
-            var mainWin = (MainWindow)Window.GetWindow(this);
-            mainWin.Vy.Content = new MedlemMenyVy();
+            //var mainWin = (MainWindow)Window.GetWindow(this);
+            //mainWin.Vy.Content = new MedlemMenyVy();
         }
 
         private void TaBortValdBokningKlick(Object sender, RoutedEventArgs e)
@@ -57,14 +57,14 @@ namespace Labb1_OOP
         private void GaTillOversiktKlick(Object sender, RoutedEventArgs e)
         {
             if (MinaBokningarListaLada.SelectedItem is not Bokning valdBokning) return;
-            var mainWin = (MainWindow)Window.GetWindow(this);
-            mainWin.Vy.Content = new OversiktVy(valdBokning);
+            //var mainWin = (MainWindow)Window.GetWindow(this);
+            //mainWin.Vy.Content = new OversiktVy(valdBokning);
         }
         private void GaTillAndraBokningKlick(Object sender, RoutedEventArgs e)
         {
             if (MinaBokningarListaLada.SelectedItem is not Bokning valdBokning) return;
-            var mainWin = (MainWindow)Window.GetWindow(this);
-            mainWin.Vy.Content = new AndraBokningVy(valdBokning);
+            //var mainWin = (MainWindow)Window.GetWindow(this);
+            //mainWin.Vy.Content = new AndraBokningVy(valdBokning);
         }
 
 

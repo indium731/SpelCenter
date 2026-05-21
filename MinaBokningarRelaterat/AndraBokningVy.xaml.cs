@@ -18,8 +18,8 @@ namespace Labb1_OOP
 
         private void GaTillMeny(Object sender, RoutedEventArgs e)
         {
-            var mainWin = (MainWindow)Window.GetWindow(this);
-            mainWin.Vy.Content = new MedlemMenyVy();
+            //var mainWin = (MainWindow)Window.GetWindow(this);
+            //mainWin.Vy.Content = new MedlemMenyVy();
         }
 
         private void TestaAndraBokningKlick(Object sender, RoutedEventArgs e)
@@ -49,8 +49,8 @@ namespace Labb1_OOP
                 if (antal != 0) bokning.maxAntal = antal;
                 if (BeskrivningTextLada.Text.Trim() != "") bokning.beskrivning = BeskrivningTextLada.Text.Trim();
 
-                var mainWin = (MainWindow)MainWindow.GetWindow(this);
-                mainWin.Vy.Content = new BokaSpelVy(bokning);
+                //var mainWin = (MainWindow)MainWindow.GetWindow(this);
+                //mainWin.Vy.Content = new BokaSpelVy(bokning);
             }
             catch
             {

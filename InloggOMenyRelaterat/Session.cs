@@ -1,4 +1,5 @@
 ﻿namespace Labb1_OOP;
+using Labb1_OOP.Modeller;
 
 public sealed class Session
 {

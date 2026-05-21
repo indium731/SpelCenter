@@ -1,11 +1,17 @@
 
-<UserControl x:Class="Labb1_OOP.MedlemVy"
+<UserControl x:Class="Labb1_OOP.Vyer.MedlemVy"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Labb1_OOP.VyModeller"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <vm:MedlemVyVM x:Key="MedlemVyVM"/>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -24,56 +30,58 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox x:Name="MedlemListaLada"
-                SelectionChanged="AndraValdMedlem"/>
+            <ListBox ItemsSource="{Binding medlemListaLada}"
+                SelectedItem="{Binding valdMedlem, Mode=TwoWay}"/>
             
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Återvänd till meny" 
-                Click="GaTillMeny"/>
+                Command="{Binding GaTillMeny}"/>
             
             <TextBlock Text="Lägg till medlem" />
 
             <TextBlock Text="Namn" />
-            <TextBox x:Name="NamnTextLada" />
+            <TextBox Text="{Binding namn}"/>
 
             <TextBlock Text="TelefonNummer" />
-            <TextBox x:Name="TelefonNummerTextLada" />
+            <TextBox Text="{Binding telefonNummer}"/>
 
             <TextBlock Text="MedlemsNummer" />
-            <TextBox x:Name="MedlemsNummerTextLada" />
+            <TextBox Text="{Binding medlemsNummer}" />
 
-            <CheckBox x:Name="Administratör"
+            <CheckBox IsChecked="{Binding administrator}"
                     Content="Administratör?" />
 
             <Button Content="Lägg till medlem" 
-                Click="TestaLaggTillMedlemKlick"/>
+                Command="{Binding TestaLaggTillMedlemKlick}"/>
 
             <Button Content="Ta bort vald medlem" 
-                Click="TaBortValdMedlemKlick"/>
+                Command="{Binding TaBortValdMedlemKlick}"/>
 
             <Button Content="Uppdatera vald medlem" 
-                Click="UppdateraValdMedlemKlick"/>
+                Command="{Binding UppdateraValdMedlemKlick}"/>
             
             <Button Content="Öka medlemskapet med ett år"
-                Click="OkaMedlemSkapAr"/>
+                Command="{Binding OkaMedlemSkapAr}"/>
 
-            <TextBlock Text="Sortering"
-                x:Name="SorteringTextLada"/>
+            <TextBlock Text="{Binding SorteringText}"/>
 
             <Button Content="Ändra sortering"
-                Click="AndraSorteringKlick"/>
+                Command="{Binding AndraSorteringKlick}"/>
 
-            <TextBox x:Name="SokTextLada"/>
-            <CheckBox x:Name="SokCheckLada"/>
-            <DatePicker x:Name="SokDatumLada"/>
+            <TextBox Text="{Binding SokText}"
+                Visibility ="{Binding SokTextVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <CheckBox IsChecked="{Binding SokCheck}"
+                Visibility ="{Binding SokCheckVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <DatePicker SelectedDate="{Binding SokDatum}"
+                Visibility ="{Binding SokDatumVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Button Content="Sök"
-                Click="SokKlick"/>
+                Command="{Binding SokKlick}"/>
 
             <TextBlock Text="Detaljer" />
-            <TextBlock x:Name="DetaljTextLada" Text="Ingen medlem vald." />
+            <TextBlock Text="{Binding detaljText}" />
 
         </StackPanel>
     </Grid>

@@ -1,4 +1,4 @@
-﻿namespace Labb1_OOP;
+﻿namespace Labb1_OOP.Modeller;
 
 public enum Svarighetsgrad
 {

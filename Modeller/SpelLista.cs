@@ -1,12 +1,16 @@
 ﻿using System.Windows;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Labb1_OOP;
+namespace Labb1_OOP.Modeller;
 
 public sealed class SpelLista
 {
     private SpelLista()
     {
-        spel = new List<Spel>();
+        spel = new ObservableCollection<Spel>();
         metoder = new List<Sorterare<Spel>>
         {
             new Sorterare<Spel>(s=>s.namn, "Namn"),
@@ -28,7 +32,7 @@ public sealed class SpelLista
         }
         return _instans;
     }
-    public List<Spel> spel 
+    public ObservableCollection<Spel> spel 
     {
         get => field;
         private set;
@@ -53,17 +57,17 @@ public sealed class SpelLista
         metodIndex = (metodIndex + 1) % metoder.Count();
         spel = metoder[metodIndex].Sortera(spel);
     }
-    public List<Spel> Sok(string sokOrd)
+    public ObservableCollection<Spel> Sok(string sokOrd)
     {
-        return spel.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())).ToList();
+        return (ObservableCollection<Spel>)spel.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower()));
     }
     public string NuvarandeSortering()
     {
         return metoder[metodIndex].sortering;
     }
-    public List<Spel> RekommenderadeSpel(Bokning bokning)
+    public ObservableCollection<Spel> RekommenderadeSpel(Bokning bokning)
     {
-        return spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && spel.maxAntalSpelare >= bokning.anmalda.Count).ToList();
+        return (ObservableCollection<Spel>)spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && spel.maxAntalSpelare >= bokning.anmalda.Count);
     }
     public Spel Seed(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {

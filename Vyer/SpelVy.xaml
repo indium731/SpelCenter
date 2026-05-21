@@ -1,12 +1,18 @@
 
 
-<UserControl x:Class="Labb1_OOP.SpelVy"
+<UserControl x:Class="Labb1_OOP.Vyer.SpelVy"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Labb1_OOP.VyModeller"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <vm:SpelVM x:Key="SpelVM"/>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,58 +31,61 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox x:Name="SpelListaLada"
-                SelectionChanged="AndraValdSpel"/>
+            <ListBox ItemsSource="{Binding SpelListaLada}"
+                SelectedItem="{Binding ValdSpel}"/>
             
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Återvänd till meny" 
-                Click="GaTillMeny"/>
+                Command="{Binding GaTillMeny}"/>
             
             <TextBlock Text="Lägg till spel" />
 
             <TextBlock Text="Namn" />
-            <TextBox x:Name="NamnTextLada" />
+            <TextBox Text="{Binding namn}" />
 
             <TextBlock Text="Kategori" />
-            <TextBox x:Name="KategoriTextLada" />
+            <TextBox Text="{Binding kategori}" />
 
             <TextBlock Text="Minimum antal spelare" />
-            <TextBox x:Name="MinSpelareTextLada" />
+            <TextBox Text="{Binding minAntal}" />
 
             <TextBlock Text="Maximum antal spelare" />
-            <TextBox x:Name="MaxSpelareTextLada" />
+            <TextBox Text="{Binding maxAntal}" />
 
             <TextBlock Text="SvårighetsGrad"/>
-            <ComboBox x:Name="SvarighetsgradLada"/>
+            <ComboBox Text="{Binding svarighetsgrad}"/>
 
             <TextBlock Text="Beskrivning"/>
-            <TextBox x:Name="BeskrivningTextLada" />
+            <TextBox Text="{Binding beskrivning}" />
 
             <Button Content="Lägg till Spel" 
-                Click="TestaLaggTillSpelKlick"/>
+                Command="{Binding TestaLaggTillSpelKlick}"/>
 
             <Button Content="Ta bort vald spel" 
-                Click="TaBortValdSpelKlick"/>
+                Command="{Binding TaBortValdSpelKlick}"/>
 
             <Button Content="Uppdatera vald spel" 
-                Click="UppdateraValdSpelKlick"/>
+                Command="{Binding UppdateraValdSpelKlick}"/>
 
-            <TextBlock Text="Sortering"
-                x:Name="SorteringTextLada"/>
+            <TextBlock 
+                Text="{Binding sortering}"/>
 
             <Button Content="Ändra sortering"
-                Click="AndraSorteringKlick"/>
+                Command="{Binding AndraSorteringKlick}"/>
 
-            <TextBox x:Name="SokTextLada"/>
-            <ComboBox x:Name="SokComboLada"/>
+            <TextBox Text="{Binding sokText}"
+                Visibility ="{Binding SokDatumVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <ComboBox ItemsSource="{Binding Svarighetsgrad}"
+                SelectedItem="{Binding valdSvarighetsgrad}"
+                Visibility ="{Binding SokDatumVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Button Content="Sök"
-                Click="SokKlick"/>
+                Command="{Binding sokKlick}"/>
 
             <TextBlock Text="Detaljer" />
-            <TextBlock x:Name="DetaljTextLada" Text="Ingen medlem vald." />
+            <TextBlock Text="{Binding detaljText}"/>
 
         </StackPanel>
     </Grid>

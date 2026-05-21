@@ -1,16 +1,14 @@
 using System.Windows;
 using System.Windows.Controls;
-using Labb1_OOP.VyModeller;
 
 namespace Labb1_OOP.Vyer
 {
-    public partial class InloggVy : UserControl
+    public partial class MedlemVy : UserControl
     {
-        public InloggVy()
+        public MedlemVy()
         {
             InitializeComponent();
+            DataContext = new VyModeller.MedlemVyVM();
         }
-    
     }
 }
-

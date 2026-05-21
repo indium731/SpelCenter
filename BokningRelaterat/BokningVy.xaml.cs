@@ -2,7 +2,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Labb1_OOP
+namespace Labb1_OOP.Vyer
 {
     public partial class BokningVy : UserControl
     {
@@ -15,8 +15,8 @@ namespace Labb1_OOP
 
         public void GaTillMeny(Object sender, RoutedEventArgs e)
         {
-            var mainWin = (MainWindow)Window.GetWindow(this);
-            mainWin.Vy.Content = new MedlemMenyVy();
+            //var mainWin = (MainWindow)Window.GetWindow(this);
+            //mainWin.Vy.Content = new MedlemMenyVy();
         }
 
         private void TestaLaggTillBokningKlick(Object sender, RoutedEventArgs e)
@@ -50,8 +50,8 @@ namespace Labb1_OOP
                                           BeskrivningTextLada.Text.Trim());
             
 
-            var mainWin = (MainWindow)MainWindow.GetWindow(this);
-            mainWin.Vy.Content = new BokaSpelVy(bokning);
+            //var mainWin = (MainWindow)MainWindow.GetWindow(this);
+            //mainWin.Vy.Content = new BokaSpelVy(bokning);
             
             } 
             catch (ArgumentException ex)

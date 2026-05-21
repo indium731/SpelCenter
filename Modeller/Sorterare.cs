@@ -1,4 +1,8 @@
 ﻿using System.Windows;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Labb1_OOP;
 
@@ -12,9 +16,9 @@ public class Sorterare<T>
     }
     Func<T,Object> metod;
     public string sortering;
-    public List<T> Sortera(List<T> lista)
+    public ObservableCollection<T> Sortera(ObservableCollection<T> lista)
     {
-        return lista.OrderBy(metod).ToList();
+        return (ObservableCollection<T>)lista.OrderBy(metod);
     }
     public bool Matchar(T sokTema, string sokOrd)
     {
@@ -22,5 +26,4 @@ public class Sorterare<T>
         if (ord.Contains(sokOrd)) return true;
         return false;
     }
-
 }

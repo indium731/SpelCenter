@@ -3,7 +3,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Labb1_OOP
+namespace Labb1_OOP.Vyer
 {
     public partial class AnmalVy : UserControl
     {
@@ -36,8 +36,8 @@ namespace Labb1_OOP
 
         private void GaTillMeny(Object sender, RoutedEventArgs e)
         {
-            var mainWin = (MainWindow)Window.GetWindow(this);
-            mainWin.Vy.Content = new MedlemMenyVy();
+            //var mainWin = (MainWindow)Window.GetWindow(this);
+            //mainWin.Vy.Content = new MedlemMenyVy();
         }
 
         private void TestaAnmalKlick(Object sender, RoutedEventArgs e)

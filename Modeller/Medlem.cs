@@ -1,11 +1,9 @@
 ﻿using System.Windows;
 
-namespace Labb1_OOP;
+namespace Labb1_OOP.Modeller;
 
 public class Medlem : IListBar
 {
-
-
     public Medlem(string n, string t, string m, bool a)
     {
         namn = n;

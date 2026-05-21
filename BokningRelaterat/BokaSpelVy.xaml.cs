@@ -1,6 +1,4 @@
-
-
-
+using Labb1_OOP.Modeller;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -38,8 +36,8 @@ namespace Labb1_OOP
 
         private void GaTillMeny(Object sender, RoutedEventArgs e)
         {
-            var mainWin = (MainWindow)Window.GetWindow(this);
-            mainWin.Vy.Content = new MedlemMenyVy();
+            //var mainWin = (MainWindow)Window.GetWindow(this);
+            //mainWin.Vy.Content = new MedlemMenyVy();
         }
 
         private void TestaBokaSpelKlick(Object sender, RoutedEventArgs e)

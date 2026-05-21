@@ -1,16 +1,15 @@
+
+
 using System.Windows;
 using System.Windows.Controls;
-using Labb1_OOP.VyModeller;
 
 namespace Labb1_OOP.Vyer
 {
-    public partial class InloggVy : UserControl
+    public partial class SpelVy : UserControl
     {
-        public InloggVy()
+        public SpelVy()
         {
             InitializeComponent();
         }
-    
     }
 }
-

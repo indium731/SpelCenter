@@ -1,9 +1,14 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
+using Labb1_OOP.Modeller;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 
-namespace Labb1_OOP
+namespace Labb1_OOP.Vyer
 {
     public partial class OversiktVy : UserControl
     {
@@ -31,8 +36,8 @@ namespace Labb1_OOP
 
         private void GaTillMinaBokningarKlick(Object sender, RoutedEventArgs e)
         {
-            var mainWin = (MainWindow)Window.GetWindow(this);
-            mainWin.Vy.Content = new MinaBokningarVy();
+            //var mainWin = (MainWindow)Window.GetWindow(this);
+            //mainWin.Vy.Content = new MinaBokningarVy();
         }
 
 
@@ -50,10 +55,10 @@ namespace Labb1_OOP
             if (OversiktListaLada.ItemsSource is IEnumerable<Medlem> medlem)
             {
 
-                List<Spel> rekommenderadeSpel = SpelLista.HamtaSpelLista().RekommenderadeSpel(bokning);
-                List<Bokning> overlappandeBokningar = BokningLista.HamtaBokningLista().OverlappandeBokningar(bokning);
+                ObservableCollection<Spel> rekommenderadeSpel = SpelLista.HamtaSpelLista().RekommenderadeSpel(bokning);
+                ObservableCollection<Bokning> overlappandeBokningar = BokningLista.HamtaBokningLista().OverlappandeBokningar(bokning);
 
-                rekommenderadeSpel.RemoveAll(spel => 
+                rekommenderadeSpel.ToList().RemoveAll(spel => 
                     overlappandeBokningar.Any(b => b.bokadeSpel.Contains(spel)));
 
                 OversiktListaLada.ItemsSource = rekommenderadeSpel.Cast<IListBar>();

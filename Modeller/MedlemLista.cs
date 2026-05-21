@@ -1,13 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Windows;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Labb1_OOP;
+
+namespace Labb1_OOP.Modeller;
 
 public sealed class MedlemLista
 {
     private MedlemLista()
     {
-        medlemmar = new List<Medlem>();
+        medlemmar = new ObservableCollection<Medlem>();
         metoder = new List<Sorterare<Medlem>>
         {
             new Sorterare<Medlem>(m=>m.namn, "Namn"),
@@ -29,7 +34,7 @@ public sealed class MedlemLista
         }
         return _instans;
     }
-    public List<Medlem> medlemmar
+    public ObservableCollection<Medlem> medlemmar
     {
         get => field;
         private set;
@@ -55,9 +60,9 @@ public sealed class MedlemLista
         metodIndex = (metodIndex + 1) % metoder.Count();
        medlemmar = metoder[metodIndex].Sortera(medlemmar);
     }
-    public List<Medlem> Sok(string sokOrd)
+    public ObservableCollection<Medlem> Sok(string sokOrd)
     {
-        return medlemmar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())).ToList();
+        return (ObservableCollection<Medlem>)medlemmar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower()));
     }
     public string NuvarandeSortering()
     {
