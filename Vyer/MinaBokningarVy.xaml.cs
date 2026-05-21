@@ -3,11 +3,12 @@ using System.Windows.Controls;
 
 namespace Labb1_OOP.Vyer
 {
-    public partial class MedlemVy : UserControl
+    public partial class MinaBokningarVy : UserControl
     {
-        public MedlemVy()
+        public MinaBokningarVy()
         {
             InitializeComponent();
         }
     }
 }
+

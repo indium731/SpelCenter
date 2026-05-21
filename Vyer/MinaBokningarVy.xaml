@@ -5,8 +5,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Labb1_OOP.VyModeller"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <vm:MinaBokningarVM x:Key="MinaBokningarVM"/>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,29 +31,29 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox x:Name="MinaBokningarListaLada"
-                SelectionChanged="AndraValdBokning"/>
+            <ListBox ItemsSource="{Binding Bokningar}"
+                SelectedItem="{Binding ValdBokning, Mode=TwoWay}"/>
             
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Återvänd till meny" 
-                Click="GaTillMeny"/>
+                Command="{Binding GaTillMenyKlick}"/>
             
             <TextBlock Text="Dina bokningar" />
 
             <Button Content="Få översikt" 
-                Click="GaTillOversiktKlick"/>
+                Command="{Binding GaTillOversiktKlick}"/>
 
             <Button Content="Ändra bokning" 
-                Click="GaTillAndraBokningKlick"/>
+                Command="{Binding GaTillAndraBokningKlick}"/>
 
             <Button Content="Ta bort vald bokning" 
-                Click="TaBortValdBokningKlick"/>
+                Command="{Binding TaBortValdBokningKlick}"/>
 
             <TextBlock Text="Detaljer" />
-            <TextBlock x:Name="DetaljTextLada" Text="Ingen bokning vald." />
+            <TextBlock Text="{Binding ValdBokning.DetaljText}"/>
 
         </StackPanel>
     </Grid>
