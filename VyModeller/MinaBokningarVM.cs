@@ -61,8 +61,7 @@ public partial class MinaBokningarVM : ObservableObject
     private void GaTillOversikt()
     {
         if (ValdBokning is not Bokning valdBokning) return;
-        //var mainWin = (MainWindow)Window.GetWindow(this);
-        //mainWin.Vy.Content = new OversiktVy(valdBokning);
+        _navigator.NavigeraTill(new OversiktVM(valdBokning, _navigator));
     }
     [RelayCommand]
     private void GaTillAndraBokning()

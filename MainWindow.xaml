@@ -36,6 +36,9 @@
             <DataTemplate DataType="{x:Type vm:AndraBokningVM}">
                 <views:AndraBokningVy />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:OversiktVM}">
+                <views:OversiktVy />
+            </DataTemplate>
         </Window.Resources>
 
         <Grid>

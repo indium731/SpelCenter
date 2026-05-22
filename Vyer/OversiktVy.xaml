@@ -26,22 +26,21 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox x:Name="OversiktListaLada"
-                SelectionChanged="AndraValdObjekt"/>
+            <ListBox ItemsSource="{Binding OversiktListaLada}"
+                SelectedItem="{Binding ValdObjekt, Mode=TwoWay}"/>
             
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Återvänd till mina bokningar" 
-                Click="GaTillMinaBokningarKlick"/>
+                Command="{Binding GaTillMinaBokningarCommand}"/>
             
             <Button Content="Ändra visad lista" 
-                x:Name="AndraVisadListaKnapp"
-                Click="AndraVisadListaKlick"/>
+                Command="{Binding AndraVisadListaCommand}"/>
 
             <TextBlock Text="Detaljer" />
-            <TextBlock x:Name="DetaljTextLada" Text="Inget valt." />
+            <TextBlock Text="{Binding DetaljText}" />
 
         </StackPanel>
     </Grid>
