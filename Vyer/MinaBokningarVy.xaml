@@ -38,18 +38,18 @@
         <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Återvänd till meny" 
-                Command="{Binding GaTillMenyKlick}"/>
+                Command="{Binding GaTillMenyCommand}"/>
             
             <TextBlock Text="Dina bokningar" />
 
             <Button Content="Få översikt" 
-                Command="{Binding GaTillOversiktKlick}"/>
+                Command="{Binding GaTillOversiktCommand}"/>
 
             <Button Content="Ändra bokning" 
-                Command="{Binding GaTillAndraBokningKlick}"/>
+                Command="{Binding GaTillAndraBokningCommand}"/>
 
             <Button Content="Ta bort vald bokning" 
-                Command="{Binding TaBortValdBokningKlick}"/>
+                Command="{Binding TaBortValdBokningCommand}"/>
 
             <TextBlock Text="Detaljer" />
             <TextBlock Text="{Binding ValdBokning.DetaljText}"/>

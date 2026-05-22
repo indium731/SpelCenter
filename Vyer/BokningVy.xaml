@@ -36,7 +36,7 @@
                     <DataTemplate>
                         <Button
                             Content="{Binding}"
-                            Command="{Binding DataContext.ValjStartTidCommand,
+                            Command="{Binding ValjStartTidCommand,
                                             RelativeSource={RelativeSource AncestorType=ListBox}}"
                             CommandParameter="{Binding}" />
                     </DataTemplate>

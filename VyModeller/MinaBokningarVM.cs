@@ -25,12 +25,14 @@ public partial class MinaBokningarVM : ObservableObject
         _navigator = n;
     }
 
+    [RelayCommand]
     private void GaTillMeny()
     {
         _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
     }
 
-    private void TaBortValdBokningKlick()
+    [RelayCommand]
+    private void TaBortValdBokning()
     {
         if (ValdBokning is not Bokning valdBokning)
         {
@@ -43,6 +45,7 @@ public partial class MinaBokningarVM : ObservableObject
 
     }
 
+    [RelayCommand]
     private void AndraValdBokning()
     {
         if (ValdBokning is not Bokning valdBokning)
@@ -54,13 +57,15 @@ public partial class MinaBokningarVM : ObservableObject
         DetaljText = valdBokning.Detaljer();
     }
 
-    private void GaTillOversiktKlick()
+    [RelayCommand]
+    private void GaTillOversikt()
     {
         if (ValdBokning is not Bokning valdBokning) return;
         //var mainWin = (MainWindow)Window.GetWindow(this);
         //mainWin.Vy.Content = new OversiktVy(valdBokning);
     }
-    private void GaTillAndraBokningKlick()
+    [RelayCommand]
+    private void GaTillAndraBokning()
     {
         if (ValdBokning is not Bokning valdBokning) return;
         //var mainWin = (MainWindow)Window.GetWindow(this);

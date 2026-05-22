@@ -14,7 +14,7 @@ public partial class SpelVM : ObservableObject
 {
     private Navigator _navigator;
     [ObservableProperty]
-    private ObservableCollection<Spel> spelListaLada;
+    private ObservableCollection<Spel> spelListaLada = SpelLista.HamtaSpelLista().spel;
     [ObservableProperty]
     private Spel valdSpel;
     [ObservableProperty]
@@ -66,7 +66,7 @@ public partial class SpelVM : ObservableObject
     }
 
     [RelayCommand]
-    private void TestaLaggTillSpelKlick()
+    private void TestaLaggTillSpel()
     {
 
         if (!int.TryParse(MinAntal, out int min))
@@ -98,7 +98,7 @@ public partial class SpelVM : ObservableObject
     }
 
     [RelayCommand]
-    private void TaBortValdSpelKlick()
+    private void TaBortValdSpel()
     {
         if (ValdSpel is not Spel valdSpel)
         {
@@ -123,7 +123,7 @@ public partial class SpelVM : ObservableObject
     }
 
     [RelayCommand]
-    private void UppdateraValdSpelKlick()
+    private void UppdateraValdSpel()
     {
         try
         {
@@ -143,7 +143,7 @@ public partial class SpelVM : ObservableObject
     }
 
     [RelayCommand]
-    private void AndraSorteringKlick()
+    private void AndraSortering()
     {
         SpelLista.HamtaSpelLista().GaTillNastaMetod();
         Sortering = SpelLista.HamtaSpelLista().NuvarandeSortering();
@@ -151,7 +151,7 @@ public partial class SpelVM : ObservableObject
         UppdateraUI();
     }
     [RelayCommand]
-    private void SokKlick()
+    private void Sok()
     {
         if (SokTextVisas)
         {

@@ -38,53 +38,53 @@
         <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Återvänd till meny" 
-                Command="{Binding GaTillMeny}"/>
+                Command="{Binding GaTillMenyCommand}"/>
             
             <TextBlock Text="Lägg till spel" />
 
             <TextBlock Text="Namn" />
-            <TextBox Text="{Binding namn}" />
+            <TextBox Text="{Binding Namn}" />
 
             <TextBlock Text="Kategori" />
-            <TextBox Text="{Binding kategori}" />
+            <TextBox Text="{Binding Kategori}" />
 
             <TextBlock Text="Minimum antal spelare" />
-            <TextBox Text="{Binding minAntal}" />
+            <TextBox Text="{Binding MinAntal}" />
 
             <TextBlock Text="Maximum antal spelare" />
-            <TextBox Text="{Binding maxAntal}" />
+            <TextBox Text="{Binding MaxAntal}" />
 
             <TextBlock Text="SvårighetsGrad"/>
-            <ComboBox Text="{Binding svarighetsgrad}"/>
+            <ComboBox Text="{Binding Svarighetsgrad}"/>
 
             <TextBlock Text="Beskrivning"/>
-            <TextBox Text="{Binding beskrivning}" />
+            <TextBox Text="{Binding Beskrivning}" />
 
             <Button Content="Lägg till Spel" 
-                Command="{Binding TestaLaggTillSpelKlick}"/>
+                Command="{Binding TestaLaggTillSpelCommand}"/>
 
             <Button Content="Ta bort vald spel" 
-                Command="{Binding TaBortValdSpelKlick}"/>
+                Command="{Binding TaBortValdSpelCommand}"/>
 
             <Button Content="Uppdatera vald spel" 
-                Command="{Binding UppdateraValdSpelKlick}"/>
+                Command="{Binding UppdateraValdSpelCommand}"/>
 
             <TextBlock 
-                Text="{Binding sortering}"/>
+                Text="{Binding Sortering}"/>
 
             <Button Content="Ändra sortering"
-                Command="{Binding AndraSorteringKlick}"/>
+                Command="{Binding AndraSorteringCommand}"/>
 
-            <TextBox Text="{Binding sokText}"
+            <TextBox Text="{Binding SokText}"
                 Visibility ="{Binding SokDatumVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <ComboBox ItemsSource="{Binding Svarighetsgrad}"
-                SelectedItem="{Binding valdSvarighetsgrad}"
+                SelectedItem="{Binding ValdSvarighetsgrad}"
                 Visibility ="{Binding SokDatumVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Button Content="Sök"
-                Command="{Binding sokKlick}"/>
+                Command="{Binding SokCommand}"/>
 
             <TextBlock Text="Detaljer" />
-            <TextBlock Text="{Binding detaljText}"/>
+            <TextBlock Text="{Binding DetaljText}"/>
 
         </StackPanel>
     </Grid>

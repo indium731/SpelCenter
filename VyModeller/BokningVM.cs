@@ -23,8 +23,10 @@ public partial class BokningVM : ObservableObject
     [ObservableProperty]
     private string beskrivning;
 
-    private ObservableCollection<TimeOnly> StartTider { get; } = new();
-    private ObservableCollection<TimeOnly> SlutTider { get; } = new();
+    [ObservableProperty]
+    private ObservableCollection<TimeOnly> startTider = new();
+    [ObservableProperty]
+    private ObservableCollection<TimeOnly> slutTider = new();
     private TimeOnly valdStartTid;
 
     private Navigator _navigator;
@@ -36,6 +38,7 @@ public partial class BokningVM : ObservableObject
         InitieraSlutSchemaTider();
     }
 
+    [RelayCommand]
     public void GaTillMeny()
     {
         _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
@@ -82,7 +85,7 @@ public partial class BokningVM : ObservableObject
 
         for (int i = 0; i < Installningar.antalBokningTider; i++)
         {
-            StartTider.Add(tid);
+            slutTider.Add(tid);
             tid = tid.Add(inkrement);
         }
     }
