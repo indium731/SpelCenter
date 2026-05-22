@@ -62,8 +62,7 @@ public partial class SpelVM : ObservableObject
     [RelayCommand]
     private void GaTillMeny()
     {
-        //var mainWin = (MainWindow)Window.GetWindow(this);
-        //mainWin.Vy.Content = new MedlemMenyVy();
+        _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
     }
 
     [RelayCommand]

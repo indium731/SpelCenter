@@ -12,15 +12,51 @@ namespace Labb1_OOP.VyModeller;
 
 public partial class MedlemMenyVM : ObservableObject
 {
+    [ObservableProperty]
+    private bool bokningHanterareVisas = true;
+    [ObservableProperty]
+    private bool anmalHanterareVisas = true;
+    [ObservableProperty]
+    private bool minaBokningarVisas = true;
+    [ObservableProperty]
+    private bool spelHanterareVisas = true;
+    [ObservableProperty]
+    private bool medlemHanterareVisas = true;
+
     private Navigator _navigator;
     public MedlemMenyVM(Navigator n)
     {
         _navigator = n;
+        KontrolleraAtkomster();
     }
+    [RelayCommand]
+    private void GaTillValdVy(Type vmTyp)
+    {
+            
+        
+        ObservableObject vm =
+            (ObservableObject)Activator.CreateInstance(vmTyp, _navigator);
 
+        _navigator.NavigeraTill(vm);
+        
+    }
     [RelayCommand]
     private void LoggaUt()
     {
+        Session.HamtaSession().inloggadMedlem = null;
         _navigator.NavigeraTill(new InloggVM(_navigator));
+    }
+    private void KontrolleraAtkomster()
+    {
+
+        if (!Session.HamtaSession().inloggadMedlem.admin)
+        {
+            MedlemHanterareVisas = false;
+            SpelHanterareVisas = false;
+        }
+        if (!BokningLista.HamtaBokningLista().bokningar.Any(bokning => bokning.ansvarig == Session.HamtaSession().inloggadMedlem))
+        {
+            MinaBokningarVisas = false;
+        }
     }
 }

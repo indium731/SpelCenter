@@ -10,7 +10,6 @@
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <vm:MedlemVyVM x:Key="MedlemVyVM"/>
     </UserControl.Resources>
 
     <Grid>
@@ -30,46 +29,46 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox ItemsSource="{Binding medlemListaLada}"
-                SelectedItem="{Binding valdMedlem, Mode=TwoWay}"/>
+            <ListBox ItemsSource="{Binding MedlemListaLada}"
+                SelectedItem="{Binding ValdMedlem, Mode=TwoWay}"/>
             
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Återvänd till meny" 
-                Command="{Binding GaTillMeny}"/>
+                Command="{Binding GaTillMenyCommand}"/>
             
             <TextBlock Text="Lägg till medlem" />
 
             <TextBlock Text="Namn" />
-            <TextBox Text="{Binding namn}"/>
+            <TextBox Text="{Binding Namn}"/>
 
             <TextBlock Text="TelefonNummer" />
-            <TextBox Text="{Binding telefonNummer}"/>
+            <TextBox Text="{Binding NelefonNummer}"/>
 
             <TextBlock Text="MedlemsNummer" />
-            <TextBox Text="{Binding medlemsNummer}" />
+            <TextBox Text="{Binding MedlemsNummer}" />
 
             <CheckBox IsChecked="{Binding administrator}"
                     Content="Administratör?" />
 
             <Button Content="Lägg till medlem" 
-                Command="{Binding TestaLaggTillMedlemKlick}"/>
+                Command="{Binding TestaLaggTillMedlemCommand}"/>
 
             <Button Content="Ta bort vald medlem" 
-                Command="{Binding TaBortValdMedlemKlick}"/>
+                Command="{Binding TaBortValdMedlemCommand}"/>
 
             <Button Content="Uppdatera vald medlem" 
-                Command="{Binding UppdateraValdMedlemKlick}"/>
+                Command="{Binding UppdateraValdMedlemCommand}"/>
             
             <Button Content="Öka medlemskapet med ett år"
-                Command="{Binding OkaMedlemSkapAr}"/>
+                Command="{Binding OkaMedlemSkapArCommand}"/>
 
             <TextBlock Text="{Binding SorteringText}"/>
 
             <Button Content="Ändra sortering"
-                Command="{Binding AndraSorteringKlick}"/>
+                Command="{Binding AndraSorteringCommand}"/>
 
             <TextBox Text="{Binding SokText}"
                 Visibility ="{Binding SokTextVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
@@ -78,10 +77,10 @@
             <DatePicker SelectedDate="{Binding SokDatum}"
                 Visibility ="{Binding SokDatumVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Button Content="Sök"
-                Command="{Binding SokKlick}"/>
+                Command="{Binding SokCommand}"/>
 
             <TextBlock Text="Detaljer" />
-            <TextBlock Text="{Binding detaljText}" />
+            <TextBlock Text="{Binding DetaljText}" />
 
         </StackPanel>
     </Grid>

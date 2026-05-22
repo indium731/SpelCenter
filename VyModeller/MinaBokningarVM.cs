@@ -27,8 +27,7 @@ public partial class MinaBokningarVM : ObservableObject
 
     private void GaTillMeny()
     {
-        //var mainWin = (MainWindow)Window.GetWindow(this);
-        //mainWin.Vy.Content = new MedlemMenyVy();
+        _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
     }
 
     private void TaBortValdBokningKlick()

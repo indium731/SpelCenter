@@ -1,15 +1,8 @@
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.csproj.AssemblyReference.cache
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\AnmälningRelaterat\AnmalVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\BokningRelaterat\BokaSpelVy.baml
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\BokningRelaterat\BokningVy.baml
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\InloggOMenyRelaterat\InloggVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarRelaterat\AndraBokningVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarRelaterat\OversiktVy.baml
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\AnmälningRelaterat\AnmalVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\BokningRelaterat\BokaSpelVy.g.cs
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\BokningRelaterat\BokningVy.g.cs
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\InloggOMenyRelaterat\InloggVy.g.cs
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\InloggOMenyRelaterat\MedlemMenyVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MainWindow.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarRelaterat\AndraBokningVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarRelaterat\OversiktVy.g.cs
@@ -23,7 +16,6 @@ C:\Users\alfre\VSCodeProjects\Labb1_OOP\bin\Debug\net10.0-windows\Labb1_OOP.runt
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\bin\Debug\net10.0-windows\Labb1_OOP.dll
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\bin\Debug\net10.0-windows\Labb1_OOP.pdb
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\bin\Debug\net10.0-windows\CommunityToolkit.Mvvm.dll
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\InloggOMenyRelaterat\MedlemMenyVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MainWindow.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.g.resources
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.GeneratedMSBuildEditorConfig.editorconfig
@@ -43,3 +35,11 @@ C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\SpelVy.g.
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\SpelVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\MinaBokningarVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\MinaBokningarVy.baml
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\InloggVy.baml
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\InloggVy.g.cs
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\MedlemMenyVy.g.cs
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\MedlemMenyVy.baml
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\AnmalVy.g.cs
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\AnmalVy.baml
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\BokningVy.baml
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\BokningVy.g.cs

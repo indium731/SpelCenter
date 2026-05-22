@@ -20,8 +20,6 @@ public partial class MainWindow : Window
 	public MainWindow()
 	{
 		InitializeComponent();
-		var navigation = new Navigator();
-		navigation.NavigeraTill(new InloggVM(navigation));
-		DataContext = navigation;
+		DataContext = new MainWindowVM();
 	}
 }

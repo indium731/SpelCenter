@@ -22,18 +22,17 @@ public partial class InloggVM : ObservableObject
     }
 
     [RelayCommand]
-    private void TestaInloggKlick()
+    private void TestaInlogg()
     {
 
-
-        if (string.IsNullOrWhiteSpace(inlogg))
+        if (string.IsNullOrWhiteSpace(Inlogg))
         {
             return;
         }
 
         foreach (Medlem medlem in MedlemLista.HamtaMedlemLista().medlemmar)
         {
-            if (inlogg == medlem.medlemsNummer)
+            if (Inlogg == medlem.medlemsNummer)
                 {
                     if (!medlem.medlemSkap.medlemStatus)
                 {

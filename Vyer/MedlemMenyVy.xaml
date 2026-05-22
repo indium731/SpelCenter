@@ -4,8 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Labb1_OOP.Vyer"
+             xmlns:vm="clr-namespace:Labb1_OOP.VyModeller"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -26,53 +31,39 @@
 
             <Button Content="BokningHanterare"
                 x:Name="BokningHanterare"
-                Click="GaTillValdVy">
-                <Button.Tag>
-                    <local:BokningVy/>
-                </Button.Tag>
-            </Button>
+                Command="{Binding GaTillValdVyCommand}"
+                CommandParameter="{x:Type vm:BokningVM}" 
+                Visibility ="{Binding BokningHanterareVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
             <Button Content="Anmäl dig"
                 x:Name="AnmalHanterare"
-                Click="GaTillValdVy">
-                <Button.Tag>
-                    <local:AnmalVy/>
-                </Button.Tag>
-            </Button>
+                Command="{Binding GaTillValdVyCommand}"
+                CommandParameter="{x:Type vm:AnmalVM}" 
+                Visibility ="{Binding AnmalHanterareVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             
             <Button Content="Mina bokningar"
                 x:Name="MinaBokningar"
-                Visibility="Collapsed"
-                Click="GaTillValdVy">
-                <Button.Tag>
-                    <local:MinaBokningarVy/>
-                </Button.Tag>
-            </Button>
+                Command="{Binding GaTillValdVyCommand}"
+                CommandParameter="{x:Type vm:MinaBokningarVM}" 
+                Visibility ="{Binding MinaBokningarVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             
             <Button Content="SpelHanterare"
                 x:Name="SpelHanterare"
-                Click="GaTillValdVy">
-                <Button.Tag>
-                    <local:SpelVy/>
-                </Button.Tag>
-            </Button>
+                Command="{Binding GaTillValdVyCommand}"
+                CommandParameter="{x:Type vm:SpelVM}" 
+                Visibility ="{Binding SpelHanterareVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
             <Button Content="MedlemHanterare"
                 x:Name="MedlemHanterare"
-                Click="GaTillValdVy">
-                <Button.Tag>
-                    <local:MedlemVy/>
-                </Button.Tag>
-            </Button>
-
-
+                Command="{Binding GaTillValdVyCommand}"
+                CommandParameter="{x:Type vm:MedlemVyVM}" 
+                Visibility ="{Binding MedlemHanterareVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Logga ut" 
-                Click="TestaUtloggKlick"/>
-
+                Command="{Binding LoggaUtCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

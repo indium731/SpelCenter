@@ -16,10 +16,13 @@ public partial class MainWindowVM : ObservableObject
 {
     [ObservableProperty]
     public partial ObservableObject Vy { get; set; }
+
+	public Navigator Navigator {get; set;} 
     public MainWindowVM()
     {
         Seed();
-
+		Navigator = new Navigator();
+		Navigator.NavigeraTill(new InloggVM(Navigator));
     }
 
 	private void Seed()

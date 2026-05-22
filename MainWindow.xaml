@@ -21,10 +21,19 @@
             <DataTemplate DataType="{x:Type vm:MinaBokningarVM}">
                 <views:MinaBokningarVy />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AnmalVM}">
+                <views:AnmalVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MedlemVyVM}">
+                <views:MedlemVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:BokningVM}">
+                <views:BokningVy />
+            </DataTemplate>
         </Window.Resources>
 
         <Grid>
-            <ContentControl Content="{Binding Vy}"/>
+            <ContentControl Content="{Binding Navigator.Vy}"/>
         </Grid>
 
 </Window>

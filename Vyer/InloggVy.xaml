@@ -25,10 +25,10 @@
 
             <TextBlock Text="Logga in" 
                 Name="InloggTextBlock"/>
-            <TextBox Text="{Binding inlogg}" />
+            <TextBox Text="{Binding Inlogg}" />
 
             <Button Content="Logga in" 
-                Command="{Binding TestaInloggKlick}"/>
+                Command="{Binding TestaInloggCommand}"/>
 
         </StackPanel>
     </Grid>

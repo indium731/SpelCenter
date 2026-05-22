@@ -44,8 +44,10 @@ namespace Labb1_OOP.VyModeller
         [ObservableProperty]
         private bool sokTextVisas;
 
-        public MedlemVyVM()
+        private Navigator _navigator;
+        public MedlemVyVM(Navigator n)
         {
+            _navigator = n;
             InitieraMedlemLista();
         }
 
@@ -58,10 +60,11 @@ namespace Labb1_OOP.VyModeller
         [RelayCommand]
         private void GaTillMeny()
         {
+            _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
         }
 
         [RelayCommand]
-        private void TestaLaggTillMedlemKlick()
+        private void TestaLaggTillMedlem()
         {
             try
             {
@@ -78,7 +81,7 @@ namespace Labb1_OOP.VyModeller
         }
 
         [RelayCommand]
-        private void TaBortValdMedlemKlick()
+        private void TaBortValdMedlem()
         {
             if (ValdMedlem is not Medlem valdMedlem)
             {
@@ -92,20 +95,13 @@ namespace Labb1_OOP.VyModeller
         }
 
         [RelayCommand]
-        private void AndraValdMedlem()
+        partial void OnValdMedlemChanged(Medlem medlem)
         {
-            if (ValdMedlem is not Medlem valdMedlem)
-            {
-                DetaljText = "Ingen medlem vald";
-                return;
-            }
-
-
-            DetaljText = valdMedlem.UtokadeDetaljer();
+            DetaljText = medlem.UtokadeDetaljer();
         }
 
         [RelayCommand]
-        private void UppdateraValdMedlemKlick()
+        private void UppdateraValdMedlem()
         {
             try
             {
@@ -117,7 +113,6 @@ namespace Labb1_OOP.VyModeller
             catch
             {
             }
-            
         }
 
         [RelayCommand]
@@ -127,7 +122,7 @@ namespace Labb1_OOP.VyModeller
             valdMedlem.medlemSkap.slutDatum = valdMedlem.medlemSkap.slutDatum.AddYears(1);
         }
         [RelayCommand]
-        private void AndraSorteringKlick()
+        private void AndraSortering()
         {
             MedlemLista.HamtaMedlemLista().GaTillNastaMetod();
             SorteringText = MedlemLista.HamtaMedlemLista().NuvarandeSortering();
@@ -140,7 +135,7 @@ namespace Labb1_OOP.VyModeller
             if (SorteringText == "Startdatum" || SorteringText == "Slutdatum") SokDatumVisas = true;
         }
         [RelayCommand]
-        private void SokKlick()
+        private void Sok()
         {
             if (SokTextVisas)
             {
@@ -155,9 +150,6 @@ namespace Labb1_OOP.VyModeller
                 if (SokDatum == null) return;
                 MedlemListaLada = MedlemLista.HamtaMedlemLista().Sok(SokDatum.ToString());
             }
-            
         }
-
     }
 }
-

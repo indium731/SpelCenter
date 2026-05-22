@@ -5,8 +5,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Labb1_OOP.VyModeller"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,33 +30,34 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox x:Name="BokningarListaLada"
-                SelectionChanged="AndraValdBokning"/>
+            <ListBox ItemsSource="{Binding BokningListaLada}"
+                SelectedItem="{Binding ValdBokning}"/>
             
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Återvänd till meny" 
-                Click="GaTillMeny"/>
+                Command="{Binding GaTillMenyCommand}"/>
             
             <Button Content="Anmäl dig" 
-                Click="TestaAnmalKlick"/>
+                Command="{Binding TestaAnmalCommand}"/>
 
-            <TextBlock Text="Sortering"
-                x:Name="SorteringTextLada"/>
+            <TextBlock 
+                Text="{Binding SorteringText}"/>
 
             <Button Content="Ändra sortering"
-                Click="AndraSorteringKlick"/>
+                Command="{Binding AndraSorteringCommand}"/>
 
-            <TextBox x:Name="SokTextLada"/>
-            <DatePicker x:Name="SokDatumLada"/>
+            <TextBox Text="{Binding SokText, Mode=TwoWay}"
+                Visibility ="{Binding SokTextVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <DatePicker SelectedDate="{Binding SokDatum, Mode=TwoWay}"
+                Visibility ="{Binding SokDatumVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Button Content="Sök"
-                Click="SokKlick"/>
-
+                Command="{Binding SokCommand}"/>
 
             <TextBlock Text="Detaljer" />
-            <TextBlock x:Name="DetaljTextLada" Text="Ingen bokning vald." />
+            <TextBlock Text="{Binding DetaljText}"/>
 
         </StackPanel>
     </Grid>
