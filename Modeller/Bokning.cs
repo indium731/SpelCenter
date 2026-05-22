@@ -29,6 +29,7 @@ public class Bokning : IListBar
             if (value < DateTime.Now)
             {
                 MessageBox.Show("Bokningen får inte påbörjas tillbaka i tiden");
+                throw new ArgumentException();
             }
             field = value;
         }

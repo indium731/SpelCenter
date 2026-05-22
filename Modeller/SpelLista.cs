@@ -59,7 +59,7 @@ public sealed class SpelLista
     }
     public ObservableCollection<Spel> Sok(string sokOrd)
     {
-        return (ObservableCollection<Spel>)spel.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower()));
+        return new ObservableCollection<Spel>(spel.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())));
     }
     public string NuvarandeSortering()
     {
@@ -67,7 +67,7 @@ public sealed class SpelLista
     }
     public ObservableCollection<Spel> RekommenderadeSpel(Bokning bokning)
     {
-        return (ObservableCollection<Spel>)spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && spel.maxAntalSpelare >= bokning.anmalda.Count);
+        return new ObservableCollection<Spel>(spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && spel.maxAntalSpelare >= bokning.anmalda.Count));
     }
     public Spel Seed(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {

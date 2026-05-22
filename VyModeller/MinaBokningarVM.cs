@@ -46,7 +46,7 @@ public partial class MinaBokningarVM : ObservableObject
     }
 
     [RelayCommand]
-    private void AndraValdBokning()
+    partial void OnValdBokningChanged(Bokning b)
     {
         if (ValdBokning is not Bokning valdBokning)
         {
@@ -54,7 +54,7 @@ public partial class MinaBokningarVM : ObservableObject
             return;
         }
         
-        DetaljText = valdBokning.Detaljer();
+        DetaljText = ValdBokning.Detaljer();
     }
 
     [RelayCommand]
@@ -68,8 +68,7 @@ public partial class MinaBokningarVM : ObservableObject
     private void GaTillAndraBokning()
     {
         if (ValdBokning is not Bokning valdBokning) return;
-        //var mainWin = (MainWindow)Window.GetWindow(this);
-        //mainWin.Vy.Content = new AndraBokningVy(valdBokning);
+        _navigator.NavigeraTill(new AndraBokningVM(valdBokning, _navigator));
     }
 
 }

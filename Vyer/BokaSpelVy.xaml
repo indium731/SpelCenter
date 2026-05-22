@@ -1,7 +1,7 @@
 
 
 
-<UserControl x:Class="Labb1_OOP.BokaSpelVy"
+<UserControl x:Class="Labb1_OOP.Vyer.BokaSpelVy"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -26,25 +26,25 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox x:Name="SpelListaLada"
-                SelectionChanged="AndraValdSpel"/>
+            <ListBox ItemsSource="{Binding SpelListaLada}"
+                SelectedItem="{Binding ValdSpel}"/>
             
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
 
             <Button Content="Återvänd till meny" 
-                Click="GaTillMeny"/>
+                Command="{Binding GaTillMenyCommand}"/>
             
             <Button Content="Boka spel" 
                 x:Name="BokaSpelKnapp"
-                Click="TestaBokaSpelKlick"/>
+                Command="{Binding TestaBokaSpelCommand}"/>
 
             <Button Content="Avboka vald spel" 
-                Click="AvbokaValdSpelKlick"/>
+                Command="{Binding AvbokaValdSpelCommand}"/>
 
             <TextBlock Text="Detaljer" />
-            <TextBlock x:Name="DetaljTextLada" Text="Ingen medlem vald." />
+            <TextBlock Text="{Binding DetaljText}" />
 
         </StackPanel>
     </Grid>

@@ -62,7 +62,7 @@ public sealed class MedlemLista
     }
     public ObservableCollection<Medlem> Sok(string sokOrd)
     {
-        return (ObservableCollection<Medlem>)medlemmar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower()));
+        return new ObservableCollection<Medlem>(medlemmar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())));
     }
     public string NuvarandeSortering()
     {

@@ -30,6 +30,12 @@
             <DataTemplate DataType="{x:Type vm:BokningVM}">
                 <views:BokningVy />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:BokaSpelVM}">
+                <views:BokaSpelVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AndraBokningVM}">
+                <views:AndraBokningVy />
+            </DataTemplate>
         </Window.Resources>
 
         <Grid>

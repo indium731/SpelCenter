@@ -63,7 +63,7 @@ public sealed class BokningLista
     }
     public ObservableCollection<Bokning> Sok(string sokOrd)
     {
-        return (ObservableCollection<Bokning>)bokningar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower()));
+        return new ObservableCollection<Bokning>(bokningar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())));
     }
     public string NuvarandeSortering()
     {
@@ -71,7 +71,7 @@ public sealed class BokningLista
     }
     public ObservableCollection<Bokning> OverlappandeBokningar(Bokning bokning)
     {
-        return (ObservableCollection<Bokning>)bokningar.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum);
+        return new ObservableCollection<Bokning>(bokningar.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum));
         
     }
     public Bokning Seed(DateTime d, DateTime s, string p, int m, Medlem a, string b)

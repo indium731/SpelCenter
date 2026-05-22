@@ -52,7 +52,7 @@
                 Command="{Binding TaBortValdBokningCommand}"/>
 
             <TextBlock Text="Detaljer" />
-            <TextBlock Text="{Binding ValdBokning.DetaljText}"/>
+            <TextBlock Text="{Binding DetaljText}"/>
 
         </StackPanel>
     </Grid>

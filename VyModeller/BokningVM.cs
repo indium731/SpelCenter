@@ -85,15 +85,16 @@ public partial class BokningVM : ObservableObject
 
         for (int i = 0; i < Installningar.antalBokningTider; i++)
         {
-            slutTider.Add(tid);
+            SlutTider.Add(tid);
             tid = tid.Add(inkrement);
         }
     }
 
 
     [RelayCommand]
-    private void ValjSlutSchemaTid(TimeOnly slutTid)
+    private void ValjSlutTid(TimeOnly slutTid)
     {
+        try {
 
         if (StartDatum == null) return;
         if (SlutDatum == null) return;
@@ -108,7 +109,6 @@ public partial class BokningVM : ObservableObject
         DateTime slutDatum = ((DateTime)SlutDatum).Date + slutTid.ToTimeSpan();
 
 
-        try {
         int antal = 0;
         if (!int.TryParse(MaxAntal.Trim(), out antal)) return;
 
@@ -121,15 +121,14 @@ public partial class BokningVM : ObservableObject
                                         Beskrivning.Trim());
         
 
-        //var mainWin = (MainWindow)MainWindow.GetWindow(this);
-        //mainWin.Vy.Content = new BokaSpelVy(bokning);
+        _navigator.NavigeraTill(new BokaSpelVM(bokning, _navigator));
         
         } 
         catch (ArgumentException ex)
         {
-                return;
         }
     }
+    [RelayCommand]
     private void ValjStartTid(TimeOnly tid)
     {
         valdStartTid = tid;

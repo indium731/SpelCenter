@@ -1,10 +1,6 @@
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Labb1_OOP.csproj.AssemblyReference.cache
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\BokningRelaterat\BokaSpelVy.baml
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarRelaterat\AndraBokningVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarRelaterat\OversiktVy.baml
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\BokningRelaterat\BokaSpelVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MainWindow.g.cs
-C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarRelaterat\AndraBokningVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\MinaBokningarRelaterat\OversiktVy.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\App.g.cs
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\GeneratedInternalTypeHelper.g.cs
@@ -43,3 +39,7 @@ C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\AnmalVy.g
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\AnmalVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\BokningVy.baml
 C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\BokningVy.g.cs
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\BokaSpelVy.baml
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\BokaSpelVy.g.cs
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\AndraBokningVy.baml
+C:\Users\alfre\VSCodeProjects\Labb1_OOP\obj\Debug\net10.0-windows\Vyer\AndraBokningVy.g.cs
