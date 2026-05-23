@@ -7,8 +7,9 @@ public class MedlemSkap
         startDatum = DateOnly.FromDateTime(DateTime.Today);
         slutDatum = DateOnly.FromDateTime(DateTime.Today).AddYears(1);
     }
-    public DateOnly startDatum;
-    public DateOnly slutDatum;
+    public int Id { get; set; }
+    public DateOnly startDatum { get; set; }
+    public DateOnly slutDatum { get; set; }
     public bool medlemStatus {
         get
         {

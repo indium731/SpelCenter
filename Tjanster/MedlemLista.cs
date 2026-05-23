@@ -12,8 +12,8 @@ namespace Labb1_OOP.Modeller;
 
 public sealed class MedlemLista
 {
-    private SpelCenterDbContext _context;
-    private MedlemLista(SpelCenterDbContext context)
+    private IDbContextFactory<SpelCenterDbContext> _context;
+    private MedlemLista(IDbContextFactory<SpelCenterDbContext> context)
     {
         _context = context;
         metoder = new List<Sorterare<Medlem>>
@@ -26,39 +26,58 @@ public sealed class MedlemLista
         };
         metodIndex = 0;
     }
+    private static MedlemLista _instans;
+    public static MedlemLista HamtaMedlemLista()
+    {
+        if (_instans == null)
+        {
+            throw new Exception("MedlemLista har inte initierats");
+        }
+        return _instans;
+    }
+    public static void InitieraMedlemLista(IDbContextFactory<SpelCenterDbContext> context)
+    {
+        if (_instans == null)
+        {
+            _instans = new MedlemLista(context);
+        }
+    }
     public ObservableCollection<Medlem> medlemmar 
     {
-        get
-        {
-            ObservableCollection<Medlem> medlemmar = new ObservableCollection<Medlem>(_context.Medlem);
-            medlemmar = metoder[metodIndex].Sortera(medlemmar);
-
-            return medlemmar;
-        } 
+        get;
+        
+         
         private set; 
     }
-
     private List<Sorterare<Medlem>> metoder;
     private int metodIndex;
 
+    private void UppdateraMedlemmar()
+    {
+        medlemmar = new ObservableCollection<Medlem>(_context.CreateDbContext().Medlem.ToList());
+        medlemmar = metoder[metodIndex].Sortera(medlemmar);
+    }
     public Medlem LaggTill(string n, string t, string m, bool a)
     {
         Medlem nyMedlem = new Medlem(n, t, m, a);
-        _context.Medlem.Add(nyMedlem);
-        _context.SaveChanges();
+        _context.CreateDbContext().Medlem.Add(nyMedlem);
+        _context.CreateDbContext().SaveChanges();
+        UppdateraMedlemmar();
         MessageBox.Show("Ny medlem har nu lagts till");
         return nyMedlem;
     }
 
     public void TaBort(Medlem medlem)
     {
-        _context.Medlem.Remove(medlem);
-        _context.SaveChanges();
+        _context.CreateDbContext().Medlem.Remove(medlem);
+        _context.CreateDbContext().SaveChanges();
+        UppdateraMedlemmar();
         MessageBox.Show("Medlem har nu tagits bort");
     }
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
+        UppdateraMedlemmar();
     }
     public ObservableCollection<Medlem> Sok(string sokOrd)
     {
@@ -70,9 +89,11 @@ public sealed class MedlemLista
     }
     public Medlem Seed(string n, string t, string m, bool a)
     {
+        using var context = _context.CreateDbContext();
         Medlem nyMedlem = new Medlem(n, t, m, a);
-        _context.Medlem.Add(nyMedlem);
-        _context.SaveChanges();
+        context.Medlem.Add(nyMedlem);
+        context.SaveChanges();
+        UppdateraMedlemmar();
         return nyMedlem;
     }
 }

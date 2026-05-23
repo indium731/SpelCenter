@@ -8,4 +8,10 @@ public class SpelCenterDbContext : DbContext
     public DbSet<Spel> Spel { get; set; }
     public DbSet<Medlem> Medlem { get; set; }
     public DbSet<Bokning> Bokning { get; set; }
+
+    public SpelCenterDbContext(
+        DbContextOptions<SpelCenterDbContext> options)
+        : base(options)
+    {
+    }
 }

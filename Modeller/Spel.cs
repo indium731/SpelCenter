@@ -7,6 +7,9 @@ public class Spel : IListBar
 {
 
 
+    public Spel()
+    {
+    }
     public Spel(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
         namn = n;
@@ -17,8 +20,9 @@ public class Spel : IListBar
         beskrivning = b;
 
     }
-    public string namn;
-    public string kategori;
+    public int Id { get; set; }
+    public string namn { get; set; }
+    public string kategori { get; set; }
     public int minAntalSpelare {get => field; set
         {
             if (value > maxAntalSpelare)
@@ -49,8 +53,8 @@ public class Spel : IListBar
             field = value;
         } 
     } = 0;
-    public Svarighetsgrad svarighetsgrad;
-    public string beskrivning;
+    public Svarighetsgrad svarighetsgrad { get; set; }
+    public string beskrivning { get; set; }
 
     public override string ToString()
     {

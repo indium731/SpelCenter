@@ -7,6 +7,9 @@ public class Bokning : IListBar
 {
 
 
+    public Bokning()
+    {
+    }
     public Bokning(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
 
@@ -16,9 +19,8 @@ public class Bokning : IListBar
         maxAntal = m;
         ansvarig = a;
         beskrivning = b;
-        anmalda = new List<Medlem>();
-        bokadeSpel = new List<Spel>();
     }
+    public int Id { get; set; }
     public DateTime startDatum {get => field; set
         {
             if (value > slutDatum)
@@ -48,7 +50,8 @@ public class Bokning : IListBar
             field = value;
         }
     }
-    public string plats;
+    
+    public string plats { get; set; }
     public int maxAntal {get => field; set
         {
             if (value < 0)
@@ -59,10 +62,10 @@ public class Bokning : IListBar
             field = value;
         }
     }
-    public Medlem ansvarig;
-    public string beskrivning;
-    public List<Medlem> anmalda;
-    public List<Spel> bokadeSpel;
+    public Medlem ansvarig { get; set; }
+    public string beskrivning { get; set; }
+    public List<Medlem> anmalda { get; set; } = new List<Medlem>();
+    public List<Spel> bokadeSpel { get; set; } = new List<Spel>();
 
     public void Anmal(Medlem medlem)
     {

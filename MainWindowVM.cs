@@ -7,6 +7,10 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore;
+using Labb1_OOP.Data;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Labb1_OOP.VyModeller
 {
@@ -20,10 +24,29 @@ public partial class MainWindowVM : ObservableObject
 	public Navigator Navigator {get; set;} 
     public MainWindowVM()
     {
-        Seed();
+		try{
+		var options = new DbContextOptionsBuilder<SpelCenterDbContext>()
+			.UseSqlServer("Server=.;Database=SpelCenterDb;Trusted_Connection=True;TrustServerCertificate=True;")
+			.Options;
+
+		IDbContextFactory<SpelCenterDbContext> fabrik =
+			new PooledDbContextFactory<SpelCenterDbContext>(options);
+
+		MedlemLista.InitieraMedlemLista(fabrik);
+		SpelLista.InitieraSpelLista(fabrik);
+		BokningLista.InitieraBokningLista(fabrik);
+		
+		fabrik.CreateDbContext().Database.EnsureDeleted();
+		fabrik.CreateDbContext().Database.EnsureCreated();
+		Seed();
+
 		Navigator = new Navigator();
 		Navigator.NavigeraTill(new InloggVM(Navigator));
-    }
+		}catch (Exception ex)
+		{
+			MessageBox.Show(ex.Message);
+		}
+	}
 
 	private void Seed()
 	{

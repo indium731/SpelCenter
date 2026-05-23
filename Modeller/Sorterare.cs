@@ -18,7 +18,7 @@ public class Sorterare<T>
     public string sortering;
     public ObservableCollection<T> Sortera(ObservableCollection<T> lista)
     {
-        return (ObservableCollection<T>)lista.OrderBy(metod);
+        return new ObservableCollection<T>(lista.OrderBy(metod));
     }
     public bool Matchar(T sokTema, string sokOrd)
     {

@@ -4,6 +4,9 @@ namespace Labb1_OOP.Modeller;
 
 public class Medlem : IListBar
 {
+    public Medlem()
+    {
+    }
     public Medlem(string n, string t, string m, bool a)
     {
         namn = n;
@@ -12,7 +15,8 @@ public class Medlem : IListBar
         medlemSkap = new MedlemSkap();
         admin = a;
     }
-    public string namn;
+    public int Id { get; set; }
+    public string namn { get; set; }
     public string telefonNummer {get => field; set
         {
             if (!value.All(char.IsDigit))
@@ -23,9 +27,9 @@ public class Medlem : IListBar
             field = value;
         }
     }
-    public string medlemsNummer;
-    public MedlemSkap medlemSkap;
-    public bool admin;
+    public string medlemsNummer { get; set; }
+    public MedlemSkap medlemSkap { get; set; } = new MedlemSkap();
+    public bool admin { get; set; }
 
     public override string ToString()
     {

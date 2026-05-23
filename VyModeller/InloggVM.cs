@@ -30,8 +30,10 @@ public partial class InloggVM : ObservableObject
             return;
         }
 
+        MessageBox.Show(MedlemLista.HamtaMedlemLista().medlemmar.Count().ToString());
         foreach (Medlem medlem in MedlemLista.HamtaMedlemLista().medlemmar)
         {
+            MessageBox.Show(medlem.medlemsNummer);
             if (Inlogg == medlem.medlemsNummer)
                 {
                     if (!medlem.medlemSkap.medlemStatus)
