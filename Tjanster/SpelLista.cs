@@ -3,13 +3,16 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Labb1_OOP.Data;
 
 namespace Labb1_OOP.Modeller;
 
 public sealed class SpelLista
 {
-    private SpelLista()
+    private SpelCenterDbContext _context;
+    private SpelLista(SpelCenterDbContext context)
     {
+        _context = context;
         spel = new ObservableCollection<Spel>();
         metoder = new List<Sorterare<Spel>>
         {
@@ -22,19 +25,14 @@ public sealed class SpelLista
         metodIndex = 0;
     }
 
-    private static SpelLista _instans;
- 
-    public static SpelLista HamtaSpelLista()
-    {
-        if (_instans == null)
-        {
-            _instans = new SpelLista();
-        }
-        return _instans;
-    }
     public ObservableCollection<Spel> spel 
     {
-        get => field;
+        get {
+            ObservableCollection<Spel> spel = new ObservableCollection<Spel>(_context.Spel);
+            spel = metoder[metodIndex].Sortera(spel);
+
+            return spel;
+        }
         private set;
         }
     private List<Sorterare<Spel>> metoder;
@@ -42,20 +40,19 @@ public sealed class SpelLista
 
     public Spel LaggTill(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
-        Spel nyttSpel = new Spel(n, k, a, m, s, b);
-        spel.Add(nyttSpel);
+        Spel nySpel = new Spel(n, k, a, m, s, b);
+        _context.Spel.Add(nySpel);
         MessageBox.Show("Nytt spel har nu lagts till");
-        return nyttSpel;
+        return nySpel;
     }
     public void TaBort(Spel nyttSpel)
     {
-        spel.Remove(nyttSpel);
+        _context.Spel.Remove(nyttSpel);
         MessageBox.Show("Spel har nu tagits bort");
     }
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
-        spel = metoder[metodIndex].Sortera(spel);
     }
     public ObservableCollection<Spel> Sok(string sokOrd)
     {

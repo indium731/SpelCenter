@@ -6,14 +6,16 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Labb1_OOP.Data;
 
 namespace Labb1_OOP;
 
 public sealed class BokningLista
 {
-    private BokningLista()
+    private SpelCenterDbContext _context;
+    private BokningLista(SpelCenterDbContext context)
     {
-        bokningar = new ObservableCollection<Bokning>();
+        _context = context;
         metoder = new List<Sorterare<Bokning>>
         {
             new Sorterare<Bokning>(b=>b.beskrivning, "Beskrivning"),
@@ -25,41 +27,36 @@ public sealed class BokningLista
         };
         metodIndex = 0;
     }
-
-    private static BokningLista _instans;
- 
-    public static BokningLista HamtaBokningLista()
+    public ObservableCollection<Bokning> bokningar
     {
-        if (_instans == null)
+        get
         {
-            _instans = new BokningLista();
-        }
-        return _instans;
+            ObservableCollection<Bokning> bokningar = new ObservableCollection<Bokning>(_context.Bokning);
+            bokningar = metoder[metodIndex].Sortera(bokningar);
+
+            return bokningar;
+        } 
+        private set; 
     }
-    public ObservableCollection<Bokning> bokningar 
-    {
-        get => field;
-        private set;
-        }
+
     private List<Sorterare<Bokning>> metoder;
     private int metodIndex;
 
     public Bokning LaggTill(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
-        Bokning nyttBokning = new Bokning(d, s, p, m, a, b);
-        bokningar.Add(nyttBokning);
-        return nyttBokning;
+        Bokning nyBokning = new Bokning(d, s, p, m, a, b);
+        _context.Bokning.Add(nyBokning);
+        return nyBokning;
     }
     public void TaBort(Bokning bokning)
     {
-        bokningar.Remove(bokning);
+        _context.Bokning.Remove(bokning);
         MessageBox.Show("Bokning har nu tagits bort");
 
     }
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
-        bokningar = metoder[metodIndex].Sortera(bokningar);
     }
     public ObservableCollection<Bokning> Sok(string sokOrd)
     {
@@ -71,13 +68,13 @@ public sealed class BokningLista
     }
     public ObservableCollection<Bokning> OverlappandeBokningar(Bokning bokning)
     {
-        return new ObservableCollection<Bokning>(bokningar.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum));
+        return new ObservableCollection<Bokning>(_context.Bokning.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum));
         
     }
     public Bokning Seed(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
-        Bokning nyttBokning = new Bokning(d, s, p, m, a, b);
-        bokningar.Add(nyttBokning);
-        return nyttBokning;
+        Bokning nyBokning = new Bokning(d, s, p, m, a, b);
+        _context.Bokning.Add(nyBokning);
+        return nyBokning;
     }
 }
