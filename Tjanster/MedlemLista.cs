@@ -24,16 +24,6 @@ public sealed class MedlemLista
         metodIndex = 0;
     }
 
-    private static MedlemLista _instans;
- 
-    public static MedlemLista HamtaMedlemLista()
-    {
-        if (_instans == null)
-        {
-            _instans = new MedlemLista();
-        }
-        return _instans;
-    }
     public ObservableCollection<Medlem> medlemmar
     {
         get => field;
