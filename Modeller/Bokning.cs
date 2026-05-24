@@ -80,7 +80,6 @@ public class Bokning : IListBar
             return;
         }
         anmalda.Add(medlem);
-        MessageBox.Show("Du är nu anmäld");
     }
     public void BokaSpel(Spel spel)
     {
@@ -90,8 +89,6 @@ public class Bokning : IListBar
             return;
         } 
         bokadeSpel.Add(spel);
-        MessageBox.Show("Spel är nu bokat");
-
     }
     public void AvBokaSpel(Spel spel)
     {
@@ -101,7 +98,6 @@ public class Bokning : IListBar
             return;
         }
         bokadeSpel.Remove(spel);
-        MessageBox.Show("Spel är nu avbokat");
 
     }
 
@@ -138,26 +134,6 @@ public class Bokning : IListBar
                $"Ansvarig: {ansvarig.ToString()}\n" +
                $"Beskriving: {beskrivning}\n" +
                $"Bokade spel: {bokadeSpelString}";
-    }
-    public void SeedAnmal(Medlem medlem)
-    {
-        if (anmalda.Count >= maxAntal)
-        {
-            MessageBox.Show("Bokningen är fullbokad");
-            return;
-        } 
-        if (anmalda.Contains(medlem))
-        {
-            MessageBox.Show("Du har redan anmält dig till denna bokning");
-            return;
-        }
-        anmalda.Add(medlem);
-    }
-    public void SeedBokaSpel(Spel spel)
-    {
-        if (bokadeSpel.Contains(spel)) return;
-        bokadeSpel.Add(spel);
-
     }
 }
 

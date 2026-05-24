@@ -40,35 +40,35 @@ public sealed class SpelLista
             _instans = new SpelLista(context);
         }
     }
-    public ObservableCollection<Spel> spel 
-    {
-        get {
-            ObservableCollection<Spel> spel = new ObservableCollection<Spel>(_context.CreateDbContext().Spel.ToList());
-            
-            spel = metoder[metodIndex].Sortera(spel);
-
-            return spel;
-        }
-        private set;
-        }
+    public ObservableCollection<Spel> spel  { get; private set; }
     private List<Sorterare<Spel>> metoder;
     private int metodIndex;
 
+    private void UppdateraSpel()
+    {
+        spel = new ObservableCollection<Spel>(_context.CreateDbContext().Spel.ToList());
+        spel = metoder[metodIndex].Sortera(spel);
+    }
     public Spel LaggTill(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
+        var context = _context.CreateDbContext();
         Spel nySpel = new Spel(n, k, a, m, s, b);
-        _context.CreateDbContext().Spel.Add(nySpel);
-        MessageBox.Show("Nytt spel har nu lagts till");
+        context.Spel.Add(nySpel);
+        context.SaveChanges();
+        UppdateraSpel();
         return nySpel;
     }
     public void TaBort(Spel nyttSpel)
     {
-        _context.CreateDbContext().Spel.Remove(nyttSpel);
-        MessageBox.Show("Spel har nu tagits bort");
+        var context = _context.CreateDbContext();
+        context.Spel.Remove(nyttSpel);
+        context.SaveChanges();
+        UppdateraSpel();
     }
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
+        UppdateraSpel();
     }
     public ObservableCollection<Spel> Sok(string sokOrd)
     {
@@ -84,8 +84,10 @@ public sealed class SpelLista
     }
     public Spel Seed(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
+        var context = _context.CreateDbContext();
         Spel nyttSpel = new Spel(n, k, a, m, s, b);
-        _context.CreateDbContext().Spel.Add(nyttSpel);
+        context.Spel.Add(nyttSpel);
+        context.SaveChanges();
         return nyttSpel;
     }
 }

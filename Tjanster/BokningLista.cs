@@ -44,32 +44,33 @@ public sealed class BokningLista
             _instans = new BokningLista(contextFactory);
         }
     }
-    public ObservableCollection<Bokning> bokningar
-    {
-        get
-        {
-            ObservableCollection<Bokning> bokningar = new ObservableCollection<Bokning>(_context.CreateDbContext().Bokning.ToList());
-            bokningar = metoder[metodIndex].Sortera(bokningar);
-
-            return bokningar;
-        } 
-        private set; 
-    }
+    public ObservableCollection<Bokning> bokningar { get; private set; }
 
     private List<Sorterare<Bokning>> metoder;
     private int metodIndex;
 
+    private void UppdateraBokningar()
+    {
+        var context = _context.CreateDbContext();
+        var lista = context.Bokning.Include(b => b.ansvarig).ToList();
+        bokningar = new ObservableCollection<Bokning>(lista);
+        bokningar = metoder[metodIndex].Sortera(bokningar);
+    }
     public Bokning LaggTill(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
+        var context = _context.CreateDbContext();
         Bokning nyBokning = new Bokning(d, s, p, m, a, b);
-        _context.CreateDbContext().Bokning.Add(nyBokning);
+        context.Bokning.Add(nyBokning);
+        context.SaveChanges();
+        UppdateraBokningar();
         return nyBokning;
     }
     public void TaBort(Bokning bokning)
     {
-        _context.CreateDbContext().Bokning.Remove(bokning);
-        MessageBox.Show("Bokning har nu tagits bort");
-
+        var context = _context.CreateDbContext();
+        context.Bokning.Remove(bokning);
+        context.SaveChanges();
+        UppdateraBokningar();
     }
     public void GaTillNastaMetod()
     {
@@ -90,8 +91,38 @@ public sealed class BokningLista
     }
     public Bokning Seed(DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
+        var context = _context.CreateDbContext();
+        context.Attach(a);
         Bokning nyBokning = new Bokning(d, s, p, m, a, b);
-        _context.CreateDbContext().Bokning.Add(nyBokning);
+        context.Bokning.Add(nyBokning);
+        context.SaveChanges();
+        UppdateraBokningar();
         return nyBokning;
+    }
+    public void AnmalMedlem (Bokning bokning, Medlem medlem)
+    {
+        var context = _context.CreateDbContext();
+        context.Attach(bokning);
+        context.Attach(medlem);
+        bokning.Anmal(medlem);
+        UppdateraBokningar();
+        context.SaveChanges();
+    }
+    public void BokaSpel(Bokning bokning, Spel spel)
+    {
+        var context = _context.CreateDbContext();
+        context.Attach(bokning);
+        context.Attach(spel);
+        bokning.BokaSpel(spel);
+        UppdateraBokningar();
+        context.SaveChanges();
+    }
+    public void AvbokaSpel(Bokning bokning, Spel spel)
+    {
+        bokning.AvBokaSpel(spel);
+        var context = _context.CreateDbContext();
+        context.Bokning.Update(bokning);
+        UppdateraBokningar();
+        context.SaveChanges();
     }
 }

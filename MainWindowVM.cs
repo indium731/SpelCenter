@@ -68,19 +68,20 @@ public partial class MainWindowVM : ObservableObject
 		Bokning codTraff = BokningLista.HamtaBokningLista().Seed(new DateTime(DateTime.Now.Year+1, 01, 1), new DateTime(DateTime.Now.Year+1, 01, 2), "Majorna", 5, Emma, "Codträff");
 		Bokning gottOBlandatTraff = BokningLista.HamtaBokningLista().Seed(new DateTime(DateTime.Now.Year+1, 01, 1), new DateTime(DateTime.Now.Year+1, 01, 2), "Majorna", 5, Alexander, "Gott O Blandat träff");
 
-		unoTraff.SeedAnmal(Rednaxela);
-		unoTraff.SeedAnmal(Lisa);
-		codTraff.SeedAnmal(Pelle);
-		codTraff.SeedAnmal(Emma);
-		gottOBlandatTraff.SeedAnmal(Lisa);
-		gottOBlandatTraff.SeedAnmal(Pelle);
-		gottOBlandatTraff.SeedAnmal(Rednaxela);
+  
+		BokningLista.HamtaBokningLista().AnmalMedlem(unoTraff, Rednaxela);
+		BokningLista.HamtaBokningLista().AnmalMedlem(unoTraff, Lisa);
+		BokningLista.HamtaBokningLista().AnmalMedlem(codTraff, Pelle);
+		BokningLista.HamtaBokningLista().AnmalMedlem(codTraff, Emma);
+		BokningLista.HamtaBokningLista().AnmalMedlem(gottOBlandatTraff, Lisa);
+		BokningLista.HamtaBokningLista().AnmalMedlem(gottOBlandatTraff, Pelle);
+		BokningLista.HamtaBokningLista().AnmalMedlem(gottOBlandatTraff, Rednaxela);
 
-		unoTraff.SeedBokaSpel(uno);
-		codTraff.SeedBokaSpel(cod);
-		gottOBlandatTraff.SeedBokaSpel(uno);
-		gottOBlandatTraff.SeedBokaSpel(cod);
-		gottOBlandatTraff.SeedBokaSpel(guitarHero);
+		BokningLista.HamtaBokningLista().BokaSpel(unoTraff, uno);
+		BokningLista.HamtaBokningLista().BokaSpel(codTraff, cod);
+		BokningLista.HamtaBokningLista().BokaSpel(gottOBlandatTraff, uno);
+		BokningLista.HamtaBokningLista().BokaSpel(gottOBlandatTraff, cod);
+		BokningLista.HamtaBokningLista().BokaSpel(gottOBlandatTraff, guitarHero);
 
 
 	}

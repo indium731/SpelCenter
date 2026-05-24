@@ -42,37 +42,31 @@ public sealed class MedlemLista
             _instans = new MedlemLista(context);
         }
     }
-    public ObservableCollection<Medlem> medlemmar 
-    {
-        get;
-        
-         
-        private set; 
-    }
+    public ObservableCollection<Medlem> medlemmar  { get; private set; }
     private List<Sorterare<Medlem>> metoder;
     private int metodIndex;
 
     private void UppdateraMedlemmar()
     {
-        medlemmar = new ObservableCollection<Medlem>(_context.CreateDbContext().Medlem.ToList());
+        medlemmar = new ObservableCollection<Medlem>(_context.CreateDbContext().Medlem.Include(m => m.medlemSkap).ToList());
         medlemmar = metoder[metodIndex].Sortera(medlemmar);
     }
     public Medlem LaggTill(string n, string t, string m, bool a)
     {
+        var context = _context.CreateDbContext();
         Medlem nyMedlem = new Medlem(n, t, m, a);
-        _context.CreateDbContext().Medlem.Add(nyMedlem);
-        _context.CreateDbContext().SaveChanges();
+        context.Medlem.Add(nyMedlem);
+        context.SaveChanges();
         UppdateraMedlemmar();
-        MessageBox.Show("Ny medlem har nu lagts till");
         return nyMedlem;
     }
 
     public void TaBort(Medlem medlem)
     {
-        _context.CreateDbContext().Medlem.Remove(medlem);
-        _context.CreateDbContext().SaveChanges();
+        var context = _context.CreateDbContext();
+        context.Medlem.Remove(medlem);
+        context.SaveChanges();
         UppdateraMedlemmar();
-        MessageBox.Show("Medlem har nu tagits bort");
     }
     public void GaTillNastaMetod()
     {

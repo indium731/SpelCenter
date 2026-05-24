@@ -12,7 +12,6 @@ public class Medlem : IListBar
         namn = n;
         telefonNummer = t;
         medlemsNummer = m;
-        medlemSkap = new MedlemSkap();
         admin = a;
     }
     public int Id { get; set; }

@@ -45,7 +45,7 @@
             <TextBox Text="{Binding Namn}"/>
 
             <TextBlock Text="TelefonNummer" />
-            <TextBox Text="{Binding NelefonNummer}"/>
+            <TextBox Text="{Binding TelefonNummer}"/>
 
             <TextBlock Text="MedlemsNummer" />
             <TextBox Text="{Binding MedlemsNummer}" />

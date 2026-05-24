@@ -49,7 +49,7 @@ namespace Labb1_OOP.VyModeller
         private void TestaBokaSpel()
         {
             if (ValdSpel is not Spel spel) return;
-            bokning.BokaSpel(spel);
+            BokningLista.HamtaBokningLista().BokaSpel(bokning, spel);
 
         }
 
@@ -57,7 +57,7 @@ namespace Labb1_OOP.VyModeller
         private void AvbokaValdSpel()
         {
             if (ValdSpel is not Spel spel) return;
-            bokning.AvBokaSpel(spel);
+            BokningLista.HamtaBokningLista().AvbokaSpel(bokning, spel);
 
         }
 

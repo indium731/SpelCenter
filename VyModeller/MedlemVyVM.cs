@@ -74,9 +74,9 @@ namespace Labb1_OOP.VyModeller
                                                         Administrator);
             
 
-            } catch (ArgumentException ex)
+            } catch (Exception ex)
             {
-                return;
+                MessageBox.Show(ex.Message);
             }
         }
 

@@ -1,4 +1,6 @@
-﻿namespace Labb1_OOP.Modeller;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Labb1_OOP.Modeller;
 
 public class MedlemSkap
 {
@@ -8,6 +10,7 @@ public class MedlemSkap
         slutDatum = DateOnly.FromDateTime(DateTime.Today).AddYears(1);
     }
     public int Id { get; set; }
+
     public DateOnly startDatum { get; set; }
     public DateOnly slutDatum { get; set; }
     public bool medlemStatus {
