@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows.Navigation;
 
 namespace Labb1_OOP.VyModeller;
 
@@ -24,25 +25,13 @@ public partial class InloggVyVM : ObservableObject
     [RelayCommand]
     private void TestaInlogg()
     {
-
-        if (string.IsNullOrWhiteSpace(Inlogg))
+        try{
+        MedlemLista.HamtaMedlemLista().TestaInlogg(Inlogg);
+        _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
+        }catch (Exception ex)
         {
-            return;
+            MessageBox.Show(ex.Message);
         }
 
-        foreach (Medlem medlem in MedlemLista.HamtaMedlemLista().medlemmar)
-        {
-            if (Inlogg == medlem.medlemsNummer)
-                {
-                    if (!medlem.medlemSkap.medlemStatus)
-                    {
-                        MessageBox.Show("medlemSkap ej aktivt");
-                        return;
-                    }
-                Session.HamtaSession().inloggadMedlem = medlem;
-                _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
-
-            }
-        }
     }
 }
