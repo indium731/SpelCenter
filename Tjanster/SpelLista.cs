@@ -44,33 +44,34 @@ public sealed class SpelLista
     private List<Sorterare<Spel>> metoder;
     private int metodIndex;
 
-    private void UppdateraSpel()
+    private async Task UppdateraSpelAsync()
     {
-        spel = _context.CreateDbContext().Spel.ToList();
+        await using var context = await _context.CreateDbContextAsync();
+        spel = await context.Spel.ToListAsync();
         spel = metoder[metodIndex].Sortera(spel);
     }
-    public Spel LaggTill(string n, string k, int a, int m, Svarighetsgrad s, string b)
+    public async Task<Spel> LaggTillAsync(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
-        var context = _context.CreateDbContext();
+        await using var context = await _context.CreateDbContextAsync();
         Spel nySpel = new Spel(n, k, a, m, s, b);
         context.Spel.Add(nySpel);
-        context.SaveChanges();
-        UppdateraSpel();
+        await context.SaveChangesAsync();
+        await UppdateraSpelAsync();
         return nySpel;
     }
-    public void TaBort(Spel nyttSpel)
+    public async Task TaBortAsync(Spel nyttSpel)
     {
-        var context = _context.CreateDbContext();
+        await using var context = await _context.CreateDbContextAsync();
         context.Spel.Remove(nyttSpel);
-        context.SaveChanges();
-        UppdateraSpel();
+        await context.SaveChangesAsync();
+        await UppdateraSpelAsync();
     }
-    public Spel SparaSpel(Spel spel)
+    public async Task<Spel> SparaSpelAsync(Spel spel)
     {
-        var context = _context.CreateDbContext();
+        await using var context = await _context.CreateDbContextAsync();
         context.Spel.Update(spel);
         context.SaveChanges();
-        UppdateraSpel();
+        await UppdateraSpelAsync();
         return spel;
 
 
@@ -78,7 +79,7 @@ public sealed class SpelLista
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
-        UppdateraSpel();
+        UppdateraSpelAsync();
     }
     public List<Spel> Sok(string sokOrd)
     {
@@ -91,14 +92,5 @@ public sealed class SpelLista
     public List<Spel> RekommenderadeSpel(Bokning bokning)
     {
         return spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && spel.maxAntalSpelare >= bokning.anmalda.Count).ToList();
-    }
-    public Spel Seed(string n, string k, int a, int m, Svarighetsgrad s, string b)
-    {
-        var context = _context.CreateDbContext();
-        Spel nyttSpel = new Spel(n, k, a, m, s, b);
-        context.Spel.Add(nyttSpel);
-        context.SaveChanges();
-        UppdateraSpel();
-        return nyttSpel;
     }
 }

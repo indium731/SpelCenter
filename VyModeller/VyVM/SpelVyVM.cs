@@ -26,10 +26,9 @@ public partial class SpelVyVM : ObservableObject
     private string minAntal;
     [ObservableProperty]
     private string maxAntal;
+    public Svarighetsgrad[] Svarighetsgrader => Enum.GetValues<Svarighetsgrad>();
     [ObservableProperty]
-    private string[] svarighetsgrad = Enum.GetNames(typeof(Svarighetsgrad));
-    [ObservableProperty]
-    private string valdSvarighetsgrad;
+    private Svarighetsgrad valdSvarighetsgrad;
     [ObservableProperty]
     private string beskrivning;
     [ObservableProperty]
@@ -68,7 +67,7 @@ public partial class SpelVyVM : ObservableObject
     }
 
     [RelayCommand]
-    private void TestaLaggTillSpel()
+    private async void TestaLaggTillSpel()
     {
 
         if (!int.TryParse(MinAntal, out int min))
@@ -81,21 +80,20 @@ public partial class SpelVyVM : ObservableObject
             MessageBox.Show("Maximum antal spelare måste vara ett heltal");
             return;
         }
-        if (Svarighetsgrad == null) return;
-
-        Svarighetsgrad svarighetsgrad = (Svarighetsgrad)Enum.Parse(typeof(Svarighetsgrad), Svarighetsgrad.ToString());
+        if (ValdSvarighetsgrad == null) return;
 
         try {
 
-        Spel spel = SpelLista.HamtaSpelLista().LaggTill(Namn,
+        Spel spel = await SpelLista.HamtaSpelLista().LaggTillAsync(Namn,
                                                 Kategori,
                                                 min,
                                                 max,
-                                                svarighetsgrad,
+                                                ValdSvarighetsgrad,
                                                 Beskrivning);
         SpelListaLada.Add(new SpelEntitetVM(spel));
-        } catch (ArgumentException ex)
+        } catch (Exception ex)
         {
+            MessageBox.Show(ex.Message);
             return;
         }
     }
@@ -109,20 +107,15 @@ public partial class SpelVyVM : ObservableObject
             return;
         }
         
-        SpelLista.HamtaSpelLista().TaBort(valdSpel.TillSpel());
+        SpelLista.HamtaSpelLista().TaBortAsync(valdSpel.TillSpel());
         DetaljText = "Inget Spel vald";
         SpelListaLada.Remove(valdSpel);
 
     }
 
     [RelayCommand]
-    private void AndraValdSpel()
+    partial void OnValdSpelChanged(SpelEntitetVM spel)
     {
-        if (ValdSpel is not SpelEntitetVM valdSpel)
-        {
-            DetaljText = "Inget spel vald";
-            return;
-        }
         DetaljText = valdSpel.TillSpel().Detaljer(); 
     }
 
@@ -140,10 +133,11 @@ public partial class SpelVyVM : ObservableObject
             if (!int.TryParse(MaxAntal.Trim(), out tempInt)) ;
             else valdSpel.maxAntalSpelare = tempInt;
             if (ValdSvarighetsgrad != null) valdSpel.svarighetsgrad = (Svarighetsgrad)Enum.Parse(typeof(Svarighetsgrad), ValdSvarighetsgrad.ToString());
-            SpelLista.HamtaSpelLista().SparaSpel(valdSpel.TillSpel());
+            SpelLista.HamtaSpelLista().SparaSpelAsync(valdSpel.TillSpel());
         }
-        catch
+        catch(Exception ex)
         {
+            MessageBox.Show(ex.Message);
         }
     }
 
@@ -168,11 +162,7 @@ public partial class SpelVyVM : ObservableObject
         }
         if (SokComboVisas)
         {
-            if (ValdSvarighetsgrad is not string valdSvarighetsgrad)
-            {
-                return;
-            }
-            var spelLista = SpelLista.HamtaSpelLista().Sok(valdSvarighetsgrad);
+            var spelLista = SpelLista.HamtaSpelLista().Sok(ValdSvarighetsgrad.ToString());
             SpelListaLada.Clear();
             foreach(Spel spel in spelLista)
             {

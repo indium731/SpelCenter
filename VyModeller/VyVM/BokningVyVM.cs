@@ -94,7 +94,7 @@ public partial class BokningVyVM : ObservableObject
 
 
     [RelayCommand]
-    private void ValjSlutTid(TimeOnly slutTid)
+    private async void ValjSlutTid(TimeOnly slutTid)
     {
         try {
 
@@ -116,7 +116,7 @@ public partial class BokningVyVM : ObservableObject
         if (!int.TryParse(MaxAntal.Trim(), out antal)) return;
 
 
-        Bokning bokning = BokningLista.HamtaBokningLista().LaggTill(Namn,
+        Bokning bokning = await BokningLista.HamtaBokningLista().LaggTillAsync(Namn,
                                         startDatum,
                                         slutDatum,
                                         Plats.Trim(),
@@ -128,8 +128,9 @@ public partial class BokningVyVM : ObservableObject
         _navigator.NavigeraTill(new BokaSpelVyVM(bokning, _navigator));
         
         } 
-        catch (ArgumentException ex)
+        catch (Exception ex)
         {
+            MessageBox.Show(ex.Message);
         }
     }
     [RelayCommand]

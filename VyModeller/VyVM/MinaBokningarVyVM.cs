@@ -14,7 +14,7 @@ public partial class MinaBokningarVyVM : ObservableObject
     [ObservableProperty]
     private Bokning valdBokning;
     [ObservableProperty]
-    private ObservableCollection<Bokning> bokningar = new ObservableCollection<Bokning>(BokningLista.HamtaBokningLista().bokningar.Where(bokning => bokning.ansvarig.medlemsNummer == Session.HamtaSession().inloggadMedlem.medlemsNummer));
+    private ObservableCollection<Bokning> bokningar = new ObservableCollection<Bokning>(BokningLista.HamtaBokningLista().bokningar.Where(b => b.ansvarig.Id == Session.HamtaSession().inloggadMedlem.Id));
     [ObservableProperty]
     private string detaljText = "Ingen bokning vald.";
     [ObservableProperty]
@@ -40,7 +40,7 @@ public partial class MinaBokningarVyVM : ObservableObject
             return;
         }
         
-        BokningLista.HamtaBokningLista().TaBort(valdBokning);
+        BokningLista.HamtaBokningLista().TaBortAsync(valdBokning);
         DetaljText = "Ingen bokning vald";
 
     }
@@ -69,5 +69,4 @@ public partial class MinaBokningarVyVM : ObservableObject
         if (ValdBokning is not Bokning valdBokning) return;
         _navigator.NavigeraTill(new AndraBokningVyVM(valdBokning, _navigator));
     }
-
 }

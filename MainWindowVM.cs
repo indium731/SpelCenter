@@ -24,7 +24,6 @@ public partial class MainWindowVM : ObservableObject
 	public Navigator Navigator {get; set;} 
     public MainWindowVM()
     {
-		try{
 		var options = new DbContextOptionsBuilder<SpelCenterDbContext>()
 			.UseSqlServer("Server=.;Database=SpelCenterDb;Trusted_Connection=True;TrustServerCertificate=True;")
 			.Options;
@@ -42,47 +41,43 @@ public partial class MainWindowVM : ObservableObject
 
 		Navigator = new Navigator();
 		Navigator.NavigeraTill(new InloggVyVM(Navigator));
-		}catch (Exception ex)
-		{
-			MessageBox.Show(ex.Message);
-		}
 	}
 
-	private void Seed()
+	private async void Seed()
 	{
 
 
-		Medlem Alexander = MedlemLista.HamtaMedlemLista().LaggTill("Alexander", "0701234567", "S1", true);   
-		Medlem Lisa = MedlemLista.HamtaMedlemLista().LaggTill("Lisa", "0739876543", "S2", false);
-		Medlem Pelle = MedlemLista.HamtaMedlemLista().LaggTill("Pelle", "0725551234", "S3", false);
-		Medlem Emma = MedlemLista.HamtaMedlemLista().LaggTill("Emma", "0761112233", "S4", true);
-		Medlem Rednaxela = MedlemLista.HamtaMedlemLista().LaggTill("Rednaxela", "070123333", "S5", true);
+		Medlem Alexander = await MedlemLista.HamtaMedlemLista().LaggTillAsync("Alexander", "0701234567", "S1", true);   
+		Medlem Lisa = await MedlemLista.HamtaMedlemLista().LaggTillAsync("Lisa", "0739876543", "S2", false);
+		Medlem Pelle = await  MedlemLista.HamtaMedlemLista().LaggTillAsync("Pelle", "0725551234", "S3", false);
+		Medlem Emma = await MedlemLista.HamtaMedlemLista().LaggTillAsync("Emma", "0761112233", "S4", true);
+		Medlem Rednaxela = await MedlemLista.HamtaMedlemLista().LaggTillAsync("Rednaxela", "070123333", "S5", true);
 
-		Spel uno = SpelLista.HamtaSpelLista().LaggTill("Uno", "Sällskap", 2, 8, Svarighetsgrad.barnvänligt , "kortspel");
-		Spel fyraIRad = SpelLista.HamtaSpelLista().LaggTill("Fyra i rad", "Sällskap", 2, 2, Svarighetsgrad.barnvänligt, "Få fyra i rad");
-		Spel cod = SpelLista.HamtaSpelLista().LaggTill("Call of duty", "Strategi", 2, 8, Svarighetsgrad.barnvänligt, "Actionfyllt strategispel");
-		Spel guitarHero = SpelLista.HamtaSpelLista().LaggTill("Guitarherokortspelet", "Sällskap", 1, 2, Svarighetsgrad.barnvänligt, "kortspel");
-		Spel schack = SpelLista.HamtaSpelLista().LaggTill("Schack", "Sällskap", 2, 2, Svarighetsgrad.utmanande, "The ROOK!");
-		Spel ticketToRide = SpelLista.HamtaSpelLista().LaggTill("Ticket To Ride", "Sällskap", 2, 5, Svarighetsgrad.mittemellan, "Klassisk brädspel");
+		Spel uno = await SpelLista.HamtaSpelLista().LaggTillAsync("Uno", "Sällskap", 2, 8, Svarighetsgrad.barnvänligt , "kortspel");
+		Spel fyraIRad = await SpelLista.HamtaSpelLista().LaggTillAsync("Fyra i rad", "Sällskap", 2, 2, Svarighetsgrad.barnvänligt, "Få fyra i rad");
+		Spel cod = await SpelLista.HamtaSpelLista().LaggTillAsync("Call of duty", "Strategi", 2, 8, Svarighetsgrad.barnvänligt, "Actionfyllt strategispel");
+		Spel guitarHero = await SpelLista.HamtaSpelLista().LaggTillAsync("Guitarherokortspelet", "Sällskap", 1, 2, Svarighetsgrad.barnvänligt, "kortspel");
+		Spel schack = await SpelLista.HamtaSpelLista().LaggTillAsync("Schack", "Sällskap", 2, 2, Svarighetsgrad.utmanande, "The ROOK!");
+		Spel ticketToRide = await SpelLista.HamtaSpelLista().LaggTillAsync("Ticket To Ride", "Sällskap", 2, 5, Svarighetsgrad.mittemellan, "Klassisk brädspel");
 
-		Bokning unoTraff = BokningLista.HamtaBokningLista().LaggTill("unoTräff",new DateTime(DateTime.Now.Year+1, 01, 1), new DateTime(DateTime.Now.Year+1, 01, 2), "Majorna", 5, Alexander, "Unospelträff");
-		Bokning codTraff = BokningLista.HamtaBokningLista().LaggTill("codTräff",new DateTime(DateTime.Now.Year+1, 01, 1), new DateTime(DateTime.Now.Year+1, 01, 2), "Majorna", 5, Emma, "Codträff");
-		Bokning gottOBlandatTraff = BokningLista.HamtaBokningLista().LaggTill("gottOBlandatTräff",new DateTime(DateTime.Now.Year+1, 06, 1), new DateTime(DateTime.Now.Year+1, 06, 2), "Majorna", 5, Alexander, "Gott O Blandat träff");
+		Bokning unoTraff = await BokningLista.HamtaBokningLista().LaggTillAsync("unoTräff",new DateTime(DateTime.Now.Year+1, 01, 1), new DateTime(DateTime.Now.Year+1, 01, 2), "Majorna", 5, Alexander, "Unospelträff");
+		Bokning codTraff = await BokningLista.HamtaBokningLista().LaggTillAsync("codTräff",new DateTime(DateTime.Now.Year+1, 01, 1), new DateTime(DateTime.Now.Year+1, 01, 2), "Majorna", 5, Emma, "Codträff");
+		Bokning gottOBlandatTraff = await BokningLista.HamtaBokningLista().LaggTillAsync("gottOBlandatTräff",new DateTime(DateTime.Now.Year+1, 06, 1), new DateTime(DateTime.Now.Year+1, 06, 2), "Majorna", 5, Alexander, "Gott O Blandat träff");
 
   
-		BokningLista.HamtaBokningLista().AnmalMedlem(unoTraff, Rednaxela);
-		BokningLista.HamtaBokningLista().AnmalMedlem(unoTraff, Lisa);
-		BokningLista.HamtaBokningLista().AnmalMedlem(codTraff, Pelle);
-		BokningLista.HamtaBokningLista().AnmalMedlem(codTraff, Emma);
-		BokningLista.HamtaBokningLista().AnmalMedlem(gottOBlandatTraff, Lisa);
-		BokningLista.HamtaBokningLista().AnmalMedlem(gottOBlandatTraff, Pelle);
-		BokningLista.HamtaBokningLista().AnmalMedlem(gottOBlandatTraff, Rednaxela);
+		BokningLista.HamtaBokningLista().AnmalMedlemAsync(unoTraff, Rednaxela);
+		BokningLista.HamtaBokningLista().AnmalMedlemAsync(unoTraff, Lisa);
+		BokningLista.HamtaBokningLista().AnmalMedlemAsync(codTraff, Pelle);
+		BokningLista.HamtaBokningLista().AnmalMedlemAsync(codTraff, Emma);
+		BokningLista.HamtaBokningLista().AnmalMedlemAsync(gottOBlandatTraff, Lisa);
+		BokningLista.HamtaBokningLista().AnmalMedlemAsync(gottOBlandatTraff, Pelle);
+		BokningLista.HamtaBokningLista().AnmalMedlemAsync(gottOBlandatTraff, Rednaxela);
 
-		BokningLista.HamtaBokningLista().BokaSpel(unoTraff, uno);
-		BokningLista.HamtaBokningLista().BokaSpel(codTraff, cod);
-		BokningLista.HamtaBokningLista().BokaSpel(gottOBlandatTraff, uno);
-		BokningLista.HamtaBokningLista().BokaSpel(gottOBlandatTraff, cod);
-		BokningLista.HamtaBokningLista().BokaSpel(gottOBlandatTraff, guitarHero);
+		BokningLista.HamtaBokningLista().BokaSpelAsync(unoTraff, uno);
+		BokningLista.HamtaBokningLista().BokaSpelAsync(codTraff, cod);
+		BokningLista.HamtaBokningLista().BokaSpelAsync(gottOBlandatTraff, uno);
+		BokningLista.HamtaBokningLista().BokaSpelAsync(gottOBlandatTraff, cod);
+		BokningLista.HamtaBokningLista().BokaSpelAsync(gottOBlandatTraff, guitarHero);
 
 
 

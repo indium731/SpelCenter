@@ -46,41 +46,42 @@ public sealed class MedlemLista
     private List<Sorterare<Medlem>> metoder;
     private int metodIndex;
 
-    private void UppdateraMedlemmar()
+    private async Task UppdateraMedlemmarAsync()
     {
-        medlemmar = _context.CreateDbContext().Medlem.Include(m => m.medlemSkap).ToList();
+        await using var context = await _context.CreateDbContextAsync();
+        medlemmar = await context.Medlem.Include(m => m.medlemSkap).ToListAsync();
         medlemmar = metoder[metodIndex].Sortera(medlemmar);
     }
-    public Medlem LaggTill(string n, string t, string m, bool a)
+    public async Task<Medlem> LaggTillAsync(string n, string t, string m, bool a)
     {
-        var context = _context.CreateDbContext();
+        await using var context = await _context.CreateDbContextAsync();
         Medlem nyMedlem = new Medlem(n, t, m, a);
         context.Medlem.Add(nyMedlem);
-        context.SaveChanges();
-        UppdateraMedlemmar();
+        await context.SaveChangesAsync();
+        await UppdateraMedlemmarAsync();
         return nyMedlem;
     }
 
-    public void TaBort(Medlem medlem)
+    public async Task TaBortAsync(Medlem medlem)
     {
-        var context = _context.CreateDbContext();
+        await using var context = await _context.CreateDbContextAsync();
         context.Medlem.Remove(medlem);
         context.SaveChanges();
-        UppdateraMedlemmar();
+        await UppdateraMedlemmarAsync();
     }
-    public Medlem SparaMedlem(Medlem medlem)
+    public async Task<Medlem> SparaMedlemAsync(Medlem medlem)
     {
-        var context = _context.CreateDbContext();
+        await using var context = await _context.CreateDbContextAsync();
         context.Medlem.Update(medlem);
         context.SaveChanges();
-        UppdateraMedlemmar();
+        await UppdateraMedlemmarAsync();
         return medlem;
 
     }
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
-        UppdateraMedlemmar();
+        UppdateraMedlemmarAsync();
     }
     public List<Medlem> Sok(string sokOrd)
     {
@@ -89,14 +90,5 @@ public sealed class MedlemLista
     public string NuvarandeSortering()
     {
         return metoder[metodIndex].sortering;
-    }
-    public Medlem Seed(string n, string t, string m, bool a)
-    {
-        using var context = _context.CreateDbContext();
-        Medlem nyMedlem = new Medlem(n, t, m, a);
-        context.Medlem.Add(nyMedlem);
-        context.SaveChanges();
-        UppdateraMedlemmar();
-        return nyMedlem;
     }
 }

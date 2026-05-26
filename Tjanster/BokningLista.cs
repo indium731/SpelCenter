@@ -49,33 +49,34 @@ public sealed class BokningLista
     private List<Sorterare<Bokning>> metoder;
     private int metodIndex;
 
-    private void UppdateraBokningar()
+    private async Task UppdateraBokningarAsync()
     {
-        using var context = _context.CreateDbContext();
-        bokningar = context.Bokning.Include(b => b.ansvarig)
+        await using var context = _context.CreateDbContext();
+        bokningar = await context.Bokning.Include(b => b.ansvarig)
                                    .Include(b => b.anmalda)
                                    .Include(b => b.bokadeSpel)
-                                   .ToList();
+                                   .ToListAsync();
         
         bokningar = metoder[metodIndex].Sortera(bokningar);
     }
-    public Bokning LaggTill(string n, DateTime d, DateTime s, string p, int m, Medlem a, string b)
+    public async Task<Bokning> LaggTillAsync(string n, DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
-        using var context = _context.CreateDbContext();
-        Medlem medlem = context.Medlem.Find(a.Id) ?? throw new Exception();
+        await using var context = await _context.CreateDbContextAsync ();
+        Medlem medlem = await context.Medlem.FindAsync(a.Id) ?? throw new Exception();
         Bokning nyBokning = new Bokning(n, d, s, p, m, medlem, b);
-        context.Bokning.Add(nyBokning);
-        context.SaveChanges();
-        UppdateraBokningar();
+        await context.Bokning.AddAsync(nyBokning);
+        await context.SaveChangesAsync();
+        await UppdateraBokningarAsync();
+        await context.Entry(medlem).Collection(m => m.ansvaradeBokningar).LoadAsync();
         return nyBokning;
     }
-    public void TaBort(Bokning bokning)
+    public async Task TaBortAsync(Bokning bokning)
     {
-        using var context = _context.CreateDbContext();
+        await using var context = await _context.CreateDbContextAsync();
         context.Attach(bokning);
         context.Bokning.Remove(bokning);
-        context.SaveChanges();
-        UppdateraBokningar();
+        await context.SaveChangesAsync();
+        await UppdateraBokningarAsync();
     }
     public void GaTillNastaMetod()
     {
@@ -94,30 +95,34 @@ public sealed class BokningLista
         return _context.CreateDbContext().Bokning.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum).ToList();
         
     }
-    public void AnmalMedlem (Bokning bokning, Medlem medlem)
+    public async Task AnmalMedlemAsync (Bokning bokning, Medlem medlem)
     {
-        using var context = _context.CreateDbContext();
-        var dbBokning = context.Bokning.Include(b => b.anmalda).First(b => b.Id == bokning.Id);
-        var dbMedlem = context.Medlem.First(m => m.Id == medlem.Id);
+        await using var context = await _context.CreateDbContextAsync();
+        var dbBokning = await context.Bokning.Include(b => b.anmalda).FirstOrDefaultAsync(b => b.Id == bokning.Id);
+        var dbMedlem = await context.Medlem.FirstOrDefaultAsync(m => m.Id == medlem.Id);
         dbBokning.Anmal(dbMedlem);
-        context.SaveChanges();
-        UppdateraBokningar();
+        dbMedlem.bokningar.Add(dbBokning);
+        await context.SaveChangesAsync();
+        await UppdateraBokningarAsync();
     }
-    public void BokaSpel(Bokning bokning, Spel spel)
+    public async Task BokaSpelAsync(Bokning bokning, Spel spel)
     {
-        using var context = _context.CreateDbContext();
-        var dbBokning = context.Bokning.Include(b => b.bokadeSpel).First(b => b.Id == bokning.Id);
-        var dbSpel = context.Spel.First(s => s.Id == spel.Id);
+        await using var context = await _context.CreateDbContextAsync();
+        var dbBokning = await context.Bokning.Include(b => b.bokadeSpel).FirstOrDefaultAsync(b => b.Id == bokning.Id);
+        var dbSpel = await context.Spel.FirstOrDefaultAsync(s => s.Id == spel.Id);
         dbBokning.BokaSpel(dbSpel);
-        context.SaveChanges();
-        UppdateraBokningar();
+        dbSpel.bokningar.Add(dbBokning);
+        await context.SaveChangesAsync();
+        await UppdateraBokningarAsync();
     }
-    public void AvbokaSpel(Bokning bokning, Spel spel)
+    public async Task AvbokaSpelAsync(Bokning bokning, Spel spel)
     {
-        using var context = _context.CreateDbContext();
+        await using var context = await _context.CreateDbContextAsync();
+        var dbBokning = await context.Bokning.Include(b => b.bokadeSpel)
+                                             .FirstOrDefaultAsync(b => b.Id == bokning.Id);
         bokning.AvBokaSpel(spel);
         context.Bokning.Update(bokning);
-        UppdateraBokningar();
-        context.SaveChanges();
+        await context.SaveChangesAsync();
+        await UppdateraBokningarAsync();
     }
 }

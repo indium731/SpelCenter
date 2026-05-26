@@ -25,13 +25,11 @@ public class Bokning : IListBar
         {
             if (value > slutDatum)
             {
-                MessageBox.Show("StartDatum måste vara före slutdatum");
-                throw new ArgumentException();
+                throw new ArgumentException("StartDatum måste vara före slutdatum");
             }
             if (value < DateTime.Now)
             {
-                MessageBox.Show("Bokningen får inte påbörjas tillbaka i tiden");
-                throw new ArgumentException();
+                throw new ArgumentException("Bokningen får inte påbörjas tillbaka i tiden");
             }
             field = value;
         }
@@ -40,12 +38,11 @@ public class Bokning : IListBar
         {
             if (startDatum > value)
             {
-                MessageBox.Show("StartDatum måste vara före slutdatum");
-                throw new ArgumentException();
+                throw new ArgumentException("StartDatum måste vara före slutdatum");
             }
             if (value < DateTime.Now)
             {
-                MessageBox.Show("Bokningen får inte påbörjas tillbaka i tiden");
+                throw new ArgumentException("Bokningen får inte påbörjas tillbaka i tiden");
             }
             field = value;
         }
@@ -56,8 +53,7 @@ public class Bokning : IListBar
         {
             if (value < 0)
             {
-                MessageBox.Show("Maxantal måste vara ett positivt tal");
-                throw new ArgumentException();
+                throw new ArgumentException("Maxantal måste vara ett positivt tal");
             }
             field = value;
         }
@@ -72,13 +68,11 @@ public class Bokning : IListBar
     {
         if (anmalda.Count >= maxAntal)
         {
-            MessageBox.Show("Bokningen är fullbokad");
-            return;
+            throw new Exception("Bokningen är fullbokad");
         } 
         if (anmalda.Contains(medlem))
         {
-            MessageBox.Show("Du har redan anmält dig till denna bokning");
-            return;
+            throw new Exception("Du har redan anmält dig till denna bokning");
         }
         anmalda.Add(medlem);
     }
@@ -86,8 +80,7 @@ public class Bokning : IListBar
     {
         if (bokadeSpel.Contains(spel))
         {
-            MessageBox.Show("Spelet är redan bokat");
-            return;
+            throw new Exception("Spelet är redan bokat");
         } 
         bokadeSpel.Add(spel);
     }
@@ -95,8 +88,7 @@ public class Bokning : IListBar
     {
         if (!bokadeSpel.Contains(spel))
         {
-            MessageBox.Show("Spelet är inte bokat");
-            return;
+            throw new Exception("Spelet är inte bokat");
         }
         bokadeSpel.Remove(spel);
 

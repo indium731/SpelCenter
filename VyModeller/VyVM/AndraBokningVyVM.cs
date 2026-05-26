@@ -73,9 +73,9 @@ namespace Labb1_OOP.VyModeller
 
                 _navigator.NavigeraTill(new BokaSpelVyVM(bokning, _navigator));
             }
-            catch
+            catch (Exception ex)
             {
-                
+                MessageBox.Show(ex.Message);
             }
         }
     private void InitieraStartSchemaTider()

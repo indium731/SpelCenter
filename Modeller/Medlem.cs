@@ -20,8 +20,7 @@ public class Medlem : IListBar
         {
             if (!value.All(char.IsDigit))
             {
-                MessageBox.Show("Telefonnummer få enbart innehålla siffror");
-                throw new ArgumentException();
+                throw new ArgumentException("Telefonnummer får enbart innehålla siffror");
             }
             field = value;
         }

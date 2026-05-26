@@ -37,6 +37,10 @@ namespace Labb1_OOP.VyModeller
 
             SpelListaLada = tillgangligaSpel;
         }
+        partial void OnValdSpelChanged(Spel spel)
+        {
+            DetaljText = spel.Detaljer();
+        }
 
 
         [RelayCommand]
@@ -49,7 +53,8 @@ namespace Labb1_OOP.VyModeller
         private void TestaBokaSpel()
         {
             if (ValdSpel is not Spel spel) return;
-            BokningLista.HamtaBokningLista().BokaSpel(bokning, spel);
+            BokningLista.HamtaBokningLista().BokaSpelAsync(bokning, spel);
+            MessageBox.Show(spel + " är nu bokat");
 
         }
 
@@ -57,7 +62,8 @@ namespace Labb1_OOP.VyModeller
         private void AvbokaValdSpel()
         {
             if (ValdSpel is not Spel spel) return;
-            BokningLista.HamtaBokningLista().AvbokaSpel(bokning, spel);
+            BokningLista.HamtaBokningLista().AvbokaSpelAsync(bokning, spel);
+            MessageBox.Show(spel + " är nu avbokat");
 
         }
 

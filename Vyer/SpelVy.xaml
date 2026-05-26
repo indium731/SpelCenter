@@ -56,7 +56,8 @@
             <TextBox Text="{Binding MaxAntal}" />
 
             <TextBlock Text="SvårighetsGrad"/>
-            <ComboBox Text="{Binding Svarighetsgrad}"/>
+            <ComboBox ItemsSource="{Binding Svarighetsgrader}"
+                SelectedItem="{Binding valdSvarighetsgrad}"/>
 
             <TextBlock Text="Beskrivning"/>
             <TextBox Text="{Binding Beskrivning}" />

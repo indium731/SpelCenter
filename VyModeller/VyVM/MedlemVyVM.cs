@@ -70,11 +70,11 @@ namespace Labb1_OOP.VyModeller
         }
 
         [RelayCommand]
-        private void TestaLaggTillMedlem()
+        private async void TestaLaggTillMedlem()
         {
             try
             {
-                Medlem medlem = MedlemLista.HamtaMedlemLista().LaggTill(Namn.Trim(),
+                Medlem medlem = await MedlemLista.HamtaMedlemLista().LaggTillAsync(Namn.Trim(),
                                                         TelefonNummer.Trim(),
                                                         MedlemsNummer.Trim(),
                                                         Administrator);
@@ -97,7 +97,7 @@ namespace Labb1_OOP.VyModeller
                 return;
             }
             
-            MedlemLista.HamtaMedlemLista().TaBort(valdMedlem.TillMedlem());
+            MedlemLista.HamtaMedlemLista().TaBortAsync(valdMedlem.TillMedlem());
             MedlemListaLada.Remove(valdMedlem);
             DetaljText = "Ingen medlem vald";
 
@@ -119,11 +119,12 @@ namespace Labb1_OOP.VyModeller
                 if (TelefonNummer.Trim().Count() != 0) valdMedlem.telefonNummer = TelefonNummer.Trim();
                 if (MedlemsNummer.Trim().Count() != 0) valdMedlem.medlemsNummer = MedlemsNummer.Trim();
 
-                MedlemLista.HamtaMedlemLista().SparaMedlem(valdMedlem.TillMedlem());
+                MedlemLista.HamtaMedlemLista().SparaMedlemAsync(valdMedlem.TillMedlem());
 
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
             }
         }
 
