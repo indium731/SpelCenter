@@ -55,12 +55,12 @@
             <TextBlock Text="Maximum antal spelare" />
             <TextBox Text="{Binding MaxAntal}" />
 
+            <TextBlock Text="Beskrivning"/>
+            <TextBox Text="{Binding Beskrivning}" />
+
             <TextBlock Text="SvårighetsGrad"/>
             <ComboBox ItemsSource="{Binding Svarighetsgrader}"
                 SelectedItem="{Binding valdSvarighetsgrad}"/>
-
-            <TextBlock Text="Beskrivning"/>
-            <TextBox Text="{Binding Beskrivning}" />
 
             <Button Content="Lägg till Spel" 
                 Command="{Binding TestaLaggTillSpelCommand}"/>
