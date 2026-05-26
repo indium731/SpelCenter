@@ -31,6 +31,7 @@
         <StackPanel Grid.Row="0" Grid.Column="0">
 
             <ListBox ItemsSource="{Binding SpelListaLada}"
+                DisplayMemberPath="namn"
                 SelectedItem="{Binding ValdSpel}"/>
             
         </StackPanel>

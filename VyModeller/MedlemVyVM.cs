@@ -26,9 +26,9 @@ namespace Labb1_OOP.VyModeller
         [ObservableProperty]
         private string sorteringText;
         [ObservableProperty]
-        private ObservableCollection<Medlem> medlemListaLada;
+        private ObservableCollection<MedlemEntitetVM> medlemListaLada = new();
         [ObservableProperty]
-        private Medlem? valdMedlem;
+        private MedlemEntitetVM? valdMedlem;
         [ObservableProperty]
         private string detaljText;
         [ObservableProperty]
@@ -48,19 +48,25 @@ namespace Labb1_OOP.VyModeller
         public MedlemVyVM(Navigator n)
         {
             _navigator = n;
-            InitieraMedlemLista();
+            SorteringText = MedlemLista.HamtaMedlemLista().NuvarandeSortering();
+            LaddaMedlemmar();
         }
 
-        private void InitieraMedlemLista()
+        private void LaddaMedlemmar()
         {
-            SorteringText = MedlemLista.HamtaMedlemLista().NuvarandeSortering();
-            MedlemListaLada = MedlemLista.HamtaMedlemLista().medlemmar;
+            var medlemmar = MedlemLista.HamtaMedlemLista().medlemmar;
+            MedlemListaLada.Clear();
+            foreach(Medlem medlem in medlemmar)
+            {
+                MedlemListaLada.Add(new MedlemEntitetVM(medlem));
+            }
+
         }
 
         [RelayCommand]
         private void GaTillMeny()
         {
-            _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
+            _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
         }
 
         [RelayCommand]
@@ -68,10 +74,12 @@ namespace Labb1_OOP.VyModeller
         {
             try
             {
-                MedlemLista.HamtaMedlemLista().LaggTill(Namn.Trim(),
+                Medlem medlem = MedlemLista.HamtaMedlemLista().LaggTill(Namn.Trim(),
                                                         TelefonNummer.Trim(),
                                                         MedlemsNummer.Trim(),
                                                         Administrator);
+                
+                MedlemListaLada.Add(new MedlemEntitetVM(medlem));
             
 
             } catch (Exception ex)
@@ -83,21 +91,22 @@ namespace Labb1_OOP.VyModeller
         [RelayCommand]
         private void TaBortValdMedlem()
         {
-            if (ValdMedlem is not Medlem valdMedlem)
+            if (ValdMedlem is not MedlemEntitetVM valdMedlem)
             {
                 DetaljText = "Välj en medlem att ta bort";
                 return;
             }
             
-            MedlemLista.HamtaMedlemLista().TaBort(valdMedlem);
+            MedlemLista.HamtaMedlemLista().TaBort(valdMedlem.TillMedlem());
+            MedlemListaLada.Remove(valdMedlem);
             DetaljText = "Ingen medlem vald";
 
         }
 
         [RelayCommand]
-        partial void OnValdMedlemChanged(Medlem medlem)
+        partial void OnValdMedlemChanged(MedlemEntitetVM medlem)
         {
-            DetaljText = medlem.UtokadeDetaljer();
+            DetaljText = medlem.TillMedlem().UtokadeDetaljer();
         }
 
         [RelayCommand]
@@ -105,12 +114,15 @@ namespace Labb1_OOP.VyModeller
         {
             try
             {
-                if (ValdMedlem is not Medlem valdMedlem) return;
+                if (ValdMedlem is not MedlemEntitetVM valdMedlem) return;
                 if (Namn.Trim().Count() != 0) valdMedlem.namn = Namn.Trim();
                 if (TelefonNummer.Trim().Count() != 0) valdMedlem.telefonNummer = TelefonNummer.Trim();
                 if (MedlemsNummer.Trim().Count() != 0) valdMedlem.medlemsNummer = MedlemsNummer.Trim();
+
+                MedlemLista.HamtaMedlemLista().SparaMedlem(valdMedlem.TillMedlem());
+
             }
-            catch
+            catch (Exception ex)
             {
             }
         }
@@ -118,8 +130,9 @@ namespace Labb1_OOP.VyModeller
         [RelayCommand]
         private void OkaMedlemSkapAr()
         {
-            if (ValdMedlem is not Medlem valdMedlem) return;
+            if (ValdMedlem is not MedlemEntitetVM valdMedlem) return;
             valdMedlem.medlemSkap.slutDatum = valdMedlem.medlemSkap.slutDatum.AddYears(1);
+            LaddaMedlemmar();
         }
         [RelayCommand]
         private void AndraSortering()
@@ -133,22 +146,39 @@ namespace Labb1_OOP.VyModeller
             if (SorteringText == "Admin") SokCheckVisas = true;
             if (SorteringText == "MedlemStatus") SokCheckVisas = true;
             if (SorteringText == "Startdatum" || SorteringText == "Slutdatum") SokDatumVisas = true;
+            LaddaMedlemmar();
         }
         [RelayCommand]
         private void Sok()
         {
             if (SokTextVisas)
             {
-                MedlemListaLada = MedlemLista.HamtaMedlemLista().Sok(SokText.Trim());
+                var medlemmar = MedlemLista.HamtaMedlemLista().Sok(SokText.Trim());
+                MedlemListaLada.Clear();
+                foreach (Medlem medlem in medlemmar)
+                {
+                    MedlemListaLada.Add(new MedlemEntitetVM(medlem));
+                }
+
             }
             if (SokCheckVisas)
             {
-                MedlemListaLada = MedlemLista.HamtaMedlemLista().Sok(SokCheck.ToString());
+                var medlemmar = MedlemLista.HamtaMedlemLista().Sok(SokCheck.ToString());
+                MedlemListaLada.Clear();
+                foreach (Medlem medlem in medlemmar)
+                {
+                    MedlemListaLada.Add(new MedlemEntitetVM(medlem));
+                }
             }
             if (SokDatumVisas)
             {
                 if (SokDatum == null) return;
-                MedlemListaLada = MedlemLista.HamtaMedlemLista().Sok(SokDatum.ToString());
+                var medlemmar = MedlemLista.HamtaMedlemLista().Sok(SokDatum.ToString());
+                MedlemListaLada.Clear();
+                foreach (Medlem medlem in medlemmar)
+                {
+                    MedlemListaLada.Add(new MedlemEntitetVM(medlem));
+                }
             }
         }
     }

@@ -10,12 +10,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Labb1_OOP.VyModeller;
 
-public partial class AnmalVM : ObservableObject
+public partial class AnmalVyVM : ObservableObject
 {
     [ObservableProperty]
-    private ObservableCollection<Bokning> bokningListaLada = BokningLista.HamtaBokningLista().bokningar;
+    private ObservableCollection<BokningEntitetVM> bokningListaLada = new();
     [ObservableProperty]
-    private Bokning? valdBokning;
+    private BokningEntitetVM? valdBokning;
     [ObservableProperty]
     private string detaljText;
     [ObservableProperty]
@@ -29,15 +29,21 @@ public partial class AnmalVM : ObservableObject
     [ObservableProperty]
     private DateTime? sokDatum;
 
-    private void InitieraBokningar()
+    private void LaddaBokningar()
     {
-        BokningListaLada = BokningLista.HamtaBokningLista().bokningar;
+        var bokningLista = BokningLista.HamtaBokningLista().bokningar;
+        BokningListaLada.Clear();
+        foreach (Bokning bokning in bokningLista)
+        {
+            BokningListaLada.Add(new BokningEntitetVM(bokning));
+        }
     }
     private Navigator navigator;
-    public AnmalVM(Navigator n)
+    public AnmalVyVM(Navigator n)
     {
         navigator = n;
         UppdateraUI();
+        LaddaBokningar();
     }
     private void UppdateraUI()
     {
@@ -54,27 +60,23 @@ public partial class AnmalVM : ObservableObject
     [RelayCommand]
     private void GaTillMeny()
     {
-        navigator.NavigeraTill(new MedlemMenyVM(navigator));
+        navigator.NavigeraTill(new MedlemMenyVyVM(navigator));
     }
 
     [RelayCommand]
     private void TestaAnmalKlick()
     {
-    if (ValdBokning is not Bokning valdBokning)
+    if (ValdBokning is not BokningEntitetVM valdBokning)
         {
             return;
         }
-        valdBokning.Anmal(Session.HamtaSession().inloggadMedlem);
+        valdBokning.TillBokning().Anmal(Session.HamtaSession().inloggadMedlem);
     }
 
-    private void AndraValdBokning()
+    [RelayCommand]
+    partial void OnValdBokningChanged(BokningEntitetVM bokning)
     {
-        if (ValdBokning is not Bokning valdBokning)
-        {
-            DetaljText = "Ingen Bokning vald";
-            return;
-        }
-        DetaljText = valdBokning.Detaljer();
+        DetaljText = bokning.TillBokning().Detaljer();
     }
     [RelayCommand]
     private void AndraSorteringKlick()
@@ -90,12 +92,22 @@ public partial class AnmalVM : ObservableObject
 
         if (SokTextVisas)
         {
-            BokningListaLada = BokningLista.HamtaBokningLista().Sok(SokText.Trim());
+            var bokningLista = BokningLista.HamtaBokningLista().Sok(SokText.Trim());
+            BokningListaLada.Clear();
+            foreach (Bokning bokning in bokningLista)
+            {
+                BokningListaLada.Add(new BokningEntitetVM(bokning));
+            }
         }
         if (SokDatumVisas)
         {
             var datum = SokDatum ?? DateTime.Now;
-            BokningListaLada = BokningLista.HamtaBokningLista().Sok(datum.ToShortDateString());
+            var bokningLista = BokningLista.HamtaBokningLista().Sok(datum.ToShortDateString());
+            BokningListaLada.Clear();
+            foreach (Bokning bokning in bokningLista)
+            {
+                BokningListaLada.Add(new BokningEntitetVM(bokning));
+            }
         }
     }
 }

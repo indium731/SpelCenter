@@ -30,6 +30,7 @@
         <StackPanel Grid.Row="0" Grid.Column="0">
 
             <ListBox ItemsSource="{Binding MedlemListaLada}"
+                DisplayMemberPath="namn"
                 SelectedItem="{Binding ValdMedlem, Mode=TwoWay}"/>
             
         </StackPanel>

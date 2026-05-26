@@ -10,7 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Labb1_OOP.VyModeller;
 
-public partial class MedlemMenyVM : ObservableObject
+public partial class MedlemMenyVyVM : ObservableObject
 {
     [ObservableProperty]
     private bool bokningHanterareVisas = true;
@@ -24,7 +24,7 @@ public partial class MedlemMenyVM : ObservableObject
     private bool medlemHanterareVisas = true;
 
     private Navigator _navigator;
-    public MedlemMenyVM(Navigator n)
+    public MedlemMenyVyVM(Navigator n)
     {
         _navigator = n;
         KontrolleraAtkomster();
@@ -44,7 +44,7 @@ public partial class MedlemMenyVM : ObservableObject
     private void LoggaUt()
     {
         Session.HamtaSession().inloggadMedlem = null;
-        _navigator.NavigeraTill(new InloggVM(_navigator));
+        _navigator.NavigeraTill(new InloggVyVM(_navigator));
     }
     private void KontrolleraAtkomster()
     {

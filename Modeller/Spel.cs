@@ -55,6 +55,7 @@ public class Spel : IListBar
     } = 0;
     public Svarighetsgrad svarighetsgrad { get; set; }
     public string beskrivning { get; set; }
+    public List<Bokning> bokningar { get; set; } = new();
 
     public override string ToString()
     {

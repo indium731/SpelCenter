@@ -32,25 +32,25 @@
             <Button Content="BokningHanterare"
                 x:Name="BokningHanterare"
                 Command="{Binding GaTillValdVyCommand}"
-                CommandParameter="{x:Type vm:BokningVM}" 
+                CommandParameter="{x:Type vm:BokningVyVM}" 
                 Visibility ="{Binding BokningHanterareVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
             <Button Content="Anmäl dig"
                 x:Name="AnmalHanterare"
                 Command="{Binding GaTillValdVyCommand}"
-                CommandParameter="{x:Type vm:AnmalVM}" 
+                CommandParameter="{x:Type vm:AnmalVyVM}" 
                 Visibility ="{Binding AnmalHanterareVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             
             <Button Content="Mina bokningar"
                 x:Name="MinaBokningar"
                 Command="{Binding GaTillValdVyCommand}"
-                CommandParameter="{x:Type vm:MinaBokningarVM}" 
+                CommandParameter="{x:Type vm:MinaBokningarVyVM}" 
                 Visibility ="{Binding MinaBokningarVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             
             <Button Content="SpelHanterare"
                 x:Name="SpelHanterare"
                 Command="{Binding GaTillValdVyCommand}"
-                CommandParameter="{x:Type vm:SpelVM}" 
+                CommandParameter="{x:Type vm:SpelVyVM}" 
                 Visibility ="{Binding SpelHanterareVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
             <Button Content="MedlemHanterare"

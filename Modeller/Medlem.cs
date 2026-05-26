@@ -27,8 +27,10 @@ public class Medlem : IListBar
         }
     }
     public string medlemsNummer { get; set; }
-    public MedlemSkap medlemSkap { get; set; } = new MedlemSkap();
+    public MedlemSkap medlemSkap { get; private set; } = new MedlemSkap();
     public bool admin { get; set; }
+    public List<Bokning> bokningar { get; set; } = new();
+    public List<Bokning> ansvaradeBokningar { get; set; } = new();
 
     public override string ToString()
     {

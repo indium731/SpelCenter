@@ -16,9 +16,9 @@ public class Sorterare<T>
     }
     Func<T,Object> metod;
     public string sortering;
-    public ObservableCollection<T> Sortera(ObservableCollection<T> lista)
+    public List<T> Sortera(List<T> lista)
     {
-        return new ObservableCollection<T>(lista.OrderBy(metod));
+        return lista.OrderBy(metod).ToList();
     }
     public bool Matchar(T sokTema, string sokOrd)
     {

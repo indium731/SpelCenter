@@ -10,7 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Labb1_OOP.VyModeller
 {
-    public partial class BokaSpelVM : ObservableObject
+    public partial class BokaSpelVyVM : ObservableObject
     {
         [ObservableProperty]
         private string detaljText = "Ingen spel vald.";
@@ -20,7 +20,7 @@ namespace Labb1_OOP.VyModeller
         private ObservableCollection<Spel> spelListaLada;
         private Bokning bokning;
         private Navigator _navigator;
-        public BokaSpelVM(Bokning b, Navigator n)
+        public BokaSpelVyVM(Bokning b, Navigator n)
         {
             bokning = b;
             _navigator = n;
@@ -29,7 +29,7 @@ namespace Labb1_OOP.VyModeller
 
         private void InitieraLista()
         {
-            ObservableCollection<Bokning> overlappandeBokningar = BokningLista.HamtaBokningLista().OverlappandeBokningar(bokning);
+            ObservableCollection<Bokning> overlappandeBokningar = new ObservableCollection<Bokning>(BokningLista.HamtaBokningLista().OverlappandeBokningar(bokning));
 
             ObservableCollection<Spel> tillgangligaSpel = new ObservableCollection<Spel>(SpelLista.HamtaSpelLista().spel
                 .Where(spel => !overlappandeBokningar.Any(b => b.bokadeSpel.Contains(spel))));
@@ -42,7 +42,7 @@ namespace Labb1_OOP.VyModeller
         [RelayCommand]
         private void GaTillMeny()
         {
-            _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
+            _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
         }
 
         [RelayCommand]

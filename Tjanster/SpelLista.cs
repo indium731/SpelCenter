@@ -40,13 +40,13 @@ public sealed class SpelLista
             _instans = new SpelLista(context);
         }
     }
-    public ObservableCollection<Spel> spel  { get; private set; }
+    public List<Spel> spel  { get; private set; }
     private List<Sorterare<Spel>> metoder;
     private int metodIndex;
 
     private void UppdateraSpel()
     {
-        spel = new ObservableCollection<Spel>(_context.CreateDbContext().Spel.ToList());
+        spel = _context.CreateDbContext().Spel.ToList();
         spel = metoder[metodIndex].Sortera(spel);
     }
     public Spel LaggTill(string n, string k, int a, int m, Svarighetsgrad s, string b)
@@ -65,22 +65,32 @@ public sealed class SpelLista
         context.SaveChanges();
         UppdateraSpel();
     }
+    public Spel SparaSpel(Spel spel)
+    {
+        var context = _context.CreateDbContext();
+        context.Spel.Update(spel);
+        context.SaveChanges();
+        UppdateraSpel();
+        return spel;
+
+
+    }
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
         UppdateraSpel();
     }
-    public ObservableCollection<Spel> Sok(string sokOrd)
+    public List<Spel> Sok(string sokOrd)
     {
-        return new ObservableCollection<Spel>(spel.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())).ToList());
+        return spel.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())).ToList();
     }
     public string NuvarandeSortering()
     {
         return metoder[metodIndex].sortering;
     }
-    public ObservableCollection<Spel> RekommenderadeSpel(Bokning bokning)
+    public List<Spel> RekommenderadeSpel(Bokning bokning)
     {
-        return new ObservableCollection<Spel>(spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && spel.maxAntalSpelare >= bokning.anmalda.Count).ToList());
+        return spel.Where(spel => spel.minAntalSpelare <= bokning.anmalda.Count && spel.maxAntalSpelare >= bokning.anmalda.Count).ToList();
     }
     public Spel Seed(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
@@ -88,6 +98,7 @@ public sealed class SpelLista
         Spel nyttSpel = new Spel(n, k, a, m, s, b);
         context.Spel.Add(nyttSpel);
         context.SaveChanges();
+        UppdateraSpel();
         return nyttSpel;
     }
 }

@@ -9,7 +9,7 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Labb1_OOP.VyModeller;
-public partial class MinaBokningarVM : ObservableObject
+public partial class MinaBokningarVyVM : ObservableObject
 {
     [ObservableProperty]
     private Bokning valdBokning;
@@ -20,7 +20,7 @@ public partial class MinaBokningarVM : ObservableObject
     [ObservableProperty]
 
     private Navigator _navigator;
-    public MinaBokningarVM(Navigator n)
+    public MinaBokningarVyVM(Navigator n)
     {
         _navigator = n;
     }
@@ -28,7 +28,7 @@ public partial class MinaBokningarVM : ObservableObject
     [RelayCommand]
     private void GaTillMeny()
     {
-        _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
+        _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
     }
 
     [RelayCommand]
@@ -61,13 +61,13 @@ public partial class MinaBokningarVM : ObservableObject
     private void GaTillOversikt()
     {
         if (ValdBokning is not Bokning valdBokning) return;
-        _navigator.NavigeraTill(new OversiktVM(valdBokning, _navigator));
+        _navigator.NavigeraTill(new OversiktVyVM(valdBokning, _navigator));
     }
     [RelayCommand]
     private void GaTillAndraBokning()
     {
         if (ValdBokning is not Bokning valdBokning) return;
-        _navigator.NavigeraTill(new AndraBokningVM(valdBokning, _navigator));
+        _navigator.NavigeraTill(new AndraBokningVyVM(valdBokning, _navigator));
     }
 
 }

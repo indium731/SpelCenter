@@ -11,7 +11,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Labb1_OOP.VyModeller
 {
-    public partial class OversiktVM : ObservableObject
+    public partial class OversiktVyVM : ObservableObject
     {
         [ObservableProperty]
         private ObservableCollection<IListBar> oversiktListaLada;
@@ -23,7 +23,7 @@ namespace Labb1_OOP.VyModeller
         Bokning bokning;
         Navigator _navigator;
         int visadListaIndex = 0;
-        public OversiktVM(Bokning b, Navigator n)
+        public OversiktVyVM(Bokning b, Navigator n)
         {
             bokning = b;
             _navigator = n;
@@ -40,7 +40,7 @@ namespace Labb1_OOP.VyModeller
         [RelayCommand]
         private void GaTillMinaBokningar()
         {
-            _navigator.NavigeraTill(new MinaBokningarVM(_navigator));
+            _navigator.NavigeraTill(new MinaBokningarVyVM(_navigator));
         }
 
 
@@ -58,8 +58,8 @@ namespace Labb1_OOP.VyModeller
             if (visadListaIndex == 0)
             {
 
-                ObservableCollection<Spel> rekommenderadeSpel = SpelLista.HamtaSpelLista().RekommenderadeSpel(bokning);
-                ObservableCollection<Bokning> overlappandeBokningar = BokningLista.HamtaBokningLista().OverlappandeBokningar(bokning);
+                ObservableCollection<Spel> rekommenderadeSpel = new ObservableCollection<Spel>(SpelLista.HamtaSpelLista().RekommenderadeSpel(bokning));
+                ObservableCollection<Bokning> overlappandeBokningar = new ObservableCollection<Bokning>(BokningLista.HamtaBokningLista().OverlappandeBokningar(bokning));
 
                 rekommenderadeSpel.ToList().RemoveAll(spel => 
                     overlappandeBokningar.Any(b => b.bokadeSpel.Contains(spel)));

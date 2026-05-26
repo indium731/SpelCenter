@@ -14,4 +14,23 @@ public class SpelCenterDbContext : DbContext
         : base(options)
     {
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Bokning>()
+            .HasMany(b => b.anmalda)
+            .WithMany(m => m.bokningar);
+
+        modelBuilder.Entity<Bokning>()
+            .HasMany(b => b.bokadeSpel)
+            .WithMany(s => s.bokningar);
+
+        modelBuilder.Entity<Bokning>()
+            .HasOne(b => b.ansvarig)
+            .WithMany(m => m.ansvaradeBokningar)
+            .OnDelete(DeleteBehavior.NoAction);
+
+    }
 }

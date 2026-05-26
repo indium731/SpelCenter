@@ -44,22 +44,26 @@ public sealed class BokningLista
             _instans = new BokningLista(contextFactory);
         }
     }
-    public ObservableCollection<Bokning> bokningar { get; private set; }
+    public List<Bokning> bokningar { get; private set; }
 
     private List<Sorterare<Bokning>> metoder;
     private int metodIndex;
 
     private void UppdateraBokningar()
     {
-        var context = _context.CreateDbContext();
-        var lista = context.Bokning.Include(b => b.ansvarig).ToList();
-        bokningar = new ObservableCollection<Bokning>(lista);
+        using var context = _context.CreateDbContext();
+        bokningar = context.Bokning.Include(b => b.ansvarig)
+                                   .Include(b => b.anmalda)
+                                   .Include(b => b.bokadeSpel)
+                                   .ToList();
+        
         bokningar = metoder[metodIndex].Sortera(bokningar);
     }
-    public Bokning LaggTill(DateTime d, DateTime s, string p, int m, Medlem a, string b)
+    public Bokning LaggTill(string n, DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
-        var context = _context.CreateDbContext();
-        Bokning nyBokning = new Bokning(d, s, p, m, a, b);
+        using var context = _context.CreateDbContext();
+        Medlem medlem = context.Medlem.Find(a.Id) ?? throw new Exception();
+        Bokning nyBokning = new Bokning(n, d, s, p, m, medlem, b);
         context.Bokning.Add(nyBokning);
         context.SaveChanges();
         UppdateraBokningar();
@@ -67,7 +71,8 @@ public sealed class BokningLista
     }
     public void TaBort(Bokning bokning)
     {
-        var context = _context.CreateDbContext();
+        using var context = _context.CreateDbContext();
+        context.Attach(bokning);
         context.Bokning.Remove(bokning);
         context.SaveChanges();
         UppdateraBokningar();
@@ -76,51 +81,41 @@ public sealed class BokningLista
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
     }
-    public ObservableCollection<Bokning> Sok(string sokOrd)
+    public List<Bokning> Sok(string sokOrd)
     {
-        return new ObservableCollection<Bokning>(bokningar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())));
+        return bokningar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())).ToList();
     }
     public string NuvarandeSortering()
     {
         return metoder[metodIndex].sortering;
     }
-    public ObservableCollection<Bokning> OverlappandeBokningar(Bokning bokning)
+    public List<Bokning> OverlappandeBokningar(Bokning bokning)
     {
-        return new ObservableCollection<Bokning>(_context.CreateDbContext().Bokning.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum));
+        return _context.CreateDbContext().Bokning.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum).ToList();
         
-    }
-    public Bokning Seed(DateTime d, DateTime s, string p, int m, Medlem a, string b)
-    {
-        var context = _context.CreateDbContext();
-        context.Attach(a);
-        Bokning nyBokning = new Bokning(d, s, p, m, a, b);
-        context.Bokning.Add(nyBokning);
-        context.SaveChanges();
-        UppdateraBokningar();
-        return nyBokning;
     }
     public void AnmalMedlem (Bokning bokning, Medlem medlem)
     {
-        var context = _context.CreateDbContext();
-        context.Attach(bokning);
-        context.Attach(medlem);
-        bokning.Anmal(medlem);
-        UppdateraBokningar();
+        using var context = _context.CreateDbContext();
+        var dbBokning = context.Bokning.Include(b => b.anmalda).First(b => b.Id == bokning.Id);
+        var dbMedlem = context.Medlem.First(m => m.Id == medlem.Id);
+        dbBokning.Anmal(dbMedlem);
         context.SaveChanges();
+        UppdateraBokningar();
     }
     public void BokaSpel(Bokning bokning, Spel spel)
     {
-        var context = _context.CreateDbContext();
-        context.Attach(bokning);
-        context.Attach(spel);
-        bokning.BokaSpel(spel);
-        UppdateraBokningar();
+        using var context = _context.CreateDbContext();
+        var dbBokning = context.Bokning.Include(b => b.bokadeSpel).First(b => b.Id == bokning.Id);
+        var dbSpel = context.Spel.First(s => s.Id == spel.Id);
+        dbBokning.BokaSpel(dbSpel);
         context.SaveChanges();
+        UppdateraBokningar();
     }
     public void AvbokaSpel(Bokning bokning, Spel spel)
     {
+        using var context = _context.CreateDbContext();
         bokning.AvBokaSpel(spel);
-        var context = _context.CreateDbContext();
         context.Bokning.Update(bokning);
         UppdateraBokningar();
         context.SaveChanges();

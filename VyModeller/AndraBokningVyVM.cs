@@ -10,7 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Labb1_OOP.VyModeller
 {
-    public partial class AndraBokningVM : ObservableObject
+    public partial class AndraBokningVyVM : ObservableObject
     {
         [ObservableProperty]
         private string nuvarandeBokning;
@@ -31,7 +31,7 @@ namespace Labb1_OOP.VyModeller
 
         Bokning bokning;
         Navigator _navigator;
-        public AndraBokningVM(Bokning b, Navigator n)
+        public AndraBokningVyVM(Bokning b, Navigator n)
         {
             NuvarandeBokning = b.ToString();
             bokning = b;
@@ -43,7 +43,7 @@ namespace Labb1_OOP.VyModeller
         [RelayCommand]
         private void GaTillMeny()
         {
-            _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
+            _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
         }
 
         [RelayCommand]
@@ -71,7 +71,7 @@ namespace Labb1_OOP.VyModeller
                 if (antal != 0) bokning.maxAntal = antal;
                 if (Beskrivning.Trim() != "") bokning.beskrivning = Beskrivning.Trim();
 
-                _navigator.NavigeraTill(new BokaSpelVM(bokning, _navigator));
+                _navigator.NavigeraTill(new BokaSpelVyVM(bokning, _navigator));
             }
             catch
             {

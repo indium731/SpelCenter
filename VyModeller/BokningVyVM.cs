@@ -10,8 +10,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Labb1_OOP.VyModeller;
 
-public partial class BokningVM : ObservableObject
+public partial class BokningVyVM : ObservableObject
 {
+    [ObservableProperty]
+    private string namn;
     [ObservableProperty]
     private DateTime? startDatum;
     [ObservableProperty]
@@ -31,7 +33,7 @@ public partial class BokningVM : ObservableObject
 
     private Navigator _navigator;
 
-    public BokningVM(Navigator n)
+    public BokningVyVM(Navigator n)
     {
         _navigator = n;
         InitieraStartSchemaTider();
@@ -41,7 +43,7 @@ public partial class BokningVM : ObservableObject
     [RelayCommand]
     public void GaTillMeny()
     {
-        _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
+        _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
     }
     private void InitieraStartSchemaTider()
     {
@@ -98,6 +100,7 @@ public partial class BokningVM : ObservableObject
 
         if (StartDatum == null) return;
         if (SlutDatum == null) return;
+        if (Namn == null) return;
         
         if (valdStartTid == null)
         {
@@ -113,7 +116,8 @@ public partial class BokningVM : ObservableObject
         if (!int.TryParse(MaxAntal.Trim(), out antal)) return;
 
 
-        Bokning bokning = BokningLista.HamtaBokningLista().LaggTill(startDatum,
+        Bokning bokning = BokningLista.HamtaBokningLista().LaggTill(Namn,
+                                        startDatum,
                                         slutDatum,
                                         Plats.Trim(),
                                         antal,
@@ -121,7 +125,7 @@ public partial class BokningVM : ObservableObject
                                         Beskrivning.Trim());
         
 
-        _navigator.NavigeraTill(new BokaSpelVM(bokning, _navigator));
+        _navigator.NavigeraTill(new BokaSpelVyVM(bokning, _navigator));
         
         } 
         catch (ArgumentException ex)

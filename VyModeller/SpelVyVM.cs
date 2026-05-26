@@ -7,16 +7,17 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Linq.Expressions;
 
 namespace Labb1_OOP.VyModeller;
 
-public partial class SpelVM : ObservableObject
+public partial class SpelVyVM : ObservableObject
 {
     private Navigator _navigator;
     [ObservableProperty]
-    private ObservableCollection<Spel> spelListaLada = SpelLista.HamtaSpelLista().spel;
+    private ObservableCollection<SpelEntitetVM> spelListaLada = new();
     [ObservableProperty]
-    private Spel valdSpel;
+    private SpelEntitetVM valdSpel;
     [ObservableProperty]
     private string namn;
     [ObservableProperty]
@@ -44,25 +45,26 @@ public partial class SpelVM : ObservableObject
     [ObservableProperty]
     private bool sokComboVisas;
 
-    public SpelVM(Navigator navigator)
+    public SpelVyVM(Navigator navigator)
     {
         _navigator = navigator;
+        LaddaSpel();
     }
 
-    private void UppdateraUI()
+    private void LaddaSpel()
     {
-        SpelListaLada = null;
-        SpelListaLada = SpelLista.HamtaSpelLista().spel;
-        SokTextVisas = false;
-        SokComboVisas = false;
-        if (SpelLista.HamtaSpelLista().NuvarandeSortering() == "Svarighetsgrad") SokComboVisas = true;
-        else SokTextVisas = true;
+        var spelLista = SpelLista.HamtaSpelLista().spel;
+        SpelListaLada.Clear();
+        foreach(Spel spel in spelLista)
+        {
+            SpelListaLada.Add(new SpelEntitetVM(spel));
+        }
     }
 
     [RelayCommand]
     private void GaTillMeny()
     {
-        _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
+        _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
     }
 
     [RelayCommand]
@@ -85,12 +87,13 @@ public partial class SpelVM : ObservableObject
 
         try {
 
-        SpelLista.HamtaSpelLista().LaggTill(Namn,
+        Spel spel = SpelLista.HamtaSpelLista().LaggTill(Namn,
                                                 Kategori,
                                                 min,
                                                 max,
                                                 svarighetsgrad,
                                                 Beskrivning);
+        SpelListaLada.Add(new SpelEntitetVM(spel));
         } catch (ArgumentException ex)
         {
             return;
@@ -100,26 +103,27 @@ public partial class SpelVM : ObservableObject
     [RelayCommand]
     private void TaBortValdSpel()
     {
-        if (ValdSpel is not Spel valdSpel)
+        if (ValdSpel is not SpelEntitetVM valdSpel)
         {
             DetaljText = "Välj ett spel att ta bort";
             return;
         }
         
-        SpelLista.HamtaSpelLista().TaBort(valdSpel);
+        SpelLista.HamtaSpelLista().TaBort(valdSpel.TillSpel());
         DetaljText = "Inget Spel vald";
+        SpelListaLada.Remove(valdSpel);
 
     }
 
     [RelayCommand]
     private void AndraValdSpel()
     {
-        if (ValdSpel is not Spel valdSpel)
+        if (ValdSpel is not SpelEntitetVM valdSpel)
         {
             DetaljText = "Inget spel vald";
             return;
         }
-        DetaljText = valdSpel.Detaljer(); 
+        DetaljText = valdSpel.TillSpel().Detaljer(); 
     }
 
     [RelayCommand]
@@ -128,7 +132,7 @@ public partial class SpelVM : ObservableObject
         try
         {
             int tempInt;
-            if (ValdSpel is not Spel valdSpel) return;
+            if (ValdSpel is not SpelEntitetVM valdSpel) return;
             if (Namn.Trim().Count() != 0) valdSpel.namn = Namn.Trim();
             if (Kategori.Trim().Count() != 0) valdSpel.kategori= Kategori.Trim();
             if (!int.TryParse(MinAntal.Trim(), out tempInt)) ;
@@ -136,6 +140,7 @@ public partial class SpelVM : ObservableObject
             if (!int.TryParse(MaxAntal.Trim(), out tempInt)) ;
             else valdSpel.maxAntalSpelare = tempInt;
             if (ValdSvarighetsgrad != null) valdSpel.svarighetsgrad = (Svarighetsgrad)Enum.Parse(typeof(Svarighetsgrad), ValdSvarighetsgrad.ToString());
+            SpelLista.HamtaSpelLista().SparaSpel(valdSpel.TillSpel());
         }
         catch
         {
@@ -148,14 +153,18 @@ public partial class SpelVM : ObservableObject
         SpelLista.HamtaSpelLista().GaTillNastaMetod();
         Sortering = SpelLista.HamtaSpelLista().NuvarandeSortering();
         
-        UppdateraUI();
     }
     [RelayCommand]
     private void Sok()
     {
         if (SokTextVisas)
         {
-            SpelListaLada = SpelLista.HamtaSpelLista().Sok(SokText.Trim());
+            var spelLista = SpelLista.HamtaSpelLista().Sok(SokText.Trim());
+            SpelListaLada.Clear();
+            foreach (Spel spel in spelLista)
+            {
+                SpelListaLada.Add(new SpelEntitetVM(spel));
+            }
         }
         if (SokComboVisas)
         {
@@ -163,8 +172,12 @@ public partial class SpelVM : ObservableObject
             {
                 return;
             }
-            
-            SpelListaLada = SpelLista.HamtaSpelLista().Sok(valdSvarighetsgrad);
+            var spelLista = SpelLista.HamtaSpelLista().Sok(valdSvarighetsgrad);
+            SpelListaLada.Clear();
+            foreach(Spel spel in spelLista)
+            {
+                SpelListaLada.Add(new SpelEntitetVM(spel));
+            }
         }
         
     }

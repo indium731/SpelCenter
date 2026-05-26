@@ -42,13 +42,13 @@ public sealed class MedlemLista
             _instans = new MedlemLista(context);
         }
     }
-    public ObservableCollection<Medlem> medlemmar  { get; private set; }
+    public List<Medlem> medlemmar  { get; private set; }
     private List<Sorterare<Medlem>> metoder;
     private int metodIndex;
 
     private void UppdateraMedlemmar()
     {
-        medlemmar = new ObservableCollection<Medlem>(_context.CreateDbContext().Medlem.Include(m => m.medlemSkap).ToList());
+        medlemmar = _context.CreateDbContext().Medlem.Include(m => m.medlemSkap).ToList();
         medlemmar = metoder[metodIndex].Sortera(medlemmar);
     }
     public Medlem LaggTill(string n, string t, string m, bool a)
@@ -68,14 +68,23 @@ public sealed class MedlemLista
         context.SaveChanges();
         UppdateraMedlemmar();
     }
+    public Medlem SparaMedlem(Medlem medlem)
+    {
+        var context = _context.CreateDbContext();
+        context.Medlem.Update(medlem);
+        context.SaveChanges();
+        UppdateraMedlemmar();
+        return medlem;
+
+    }
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
         UppdateraMedlemmar();
     }
-    public ObservableCollection<Medlem> Sok(string sokOrd)
+    public List<Medlem> Sok(string sokOrd)
     {
-        return new ObservableCollection<Medlem>(medlemmar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())));
+        return medlemmar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())).ToList();
     }
     public string NuvarandeSortering()
     {

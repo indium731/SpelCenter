@@ -67,6 +67,9 @@
             <Button Content="Återvänd till meny" 
                 Command="{Binding GaTillMenyCommand}"/>
             
+            <TextBlock Text="Namn" />
+            <TextBox Text="{Binding Namn}" />
+
             <TextBlock Text="plats" />
             <TextBox Text="{Binding Plats}" />
 

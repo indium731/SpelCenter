@@ -10,9 +10,9 @@ public class Bokning : IListBar
     public Bokning()
     {
     }
-    public Bokning(DateTime d, DateTime s, string p, int m, Medlem a, string b)
+    public Bokning(string n, DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
-
+        namn = n;
         slutDatum = s;
         startDatum = d;
         plats  = p;
@@ -62,6 +62,7 @@ public class Bokning : IListBar
             field = value;
         }
     }
+    public string namn { get; set; }
     public Medlem ansvarig { get; set; }
     public string beskrivning { get; set; }
     public List<Medlem> anmalda { get; set; } = new List<Medlem>();
@@ -103,7 +104,7 @@ public class Bokning : IListBar
 
     public override string ToString()
     {
-        return beskrivning.ToString();
+        return namn;
     }
     public string Detaljer()
     {
@@ -113,7 +114,8 @@ public class Bokning : IListBar
             bokadeSpelString += spel.ToString() + '\n';
         }
 
-        return $"Tid: {startDatum.ToString()} - {slutDatum.ToString()}\n" +
+        return $"Namn: {namn}\n" +
+               $"Tid: {startDatum.ToString()} - {slutDatum.ToString()}\n" +
                $"Plats: {plats}\n" +
                $"Maxantal: {maxAntal}\n" +
                $"Ansvarig: {ansvarig.ToString()}\n" +
@@ -128,7 +130,8 @@ public class Bokning : IListBar
             bokadeSpelString += spel.ToString() + '\n';
         }
 
-        return $"Tid: {startDatum.ToString()} - {slutDatum.ToString()}\n" +
+        return $"Namn: {namn}\n" +
+               $"Tid: {startDatum.ToString()} - {slutDatum.ToString()}\n" +
                $"Plats: {plats}\n" +
                $"Maxantal: {maxAntal}\n" +
                $"Ansvarig: {ansvarig.ToString()}\n" +

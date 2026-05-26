@@ -11,12 +11,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 namespace Labb1_OOP.VyModeller;
 
 
-public partial class InloggVM : ObservableObject
+public partial class InloggVyVM : ObservableObject
 {
     [ObservableProperty]
     private string inlogg;
     private Navigator _navigator;
-    public InloggVM(Navigator n)
+    public InloggVyVM(Navigator n)
     {
         _navigator = n;
     }
@@ -40,7 +40,7 @@ public partial class InloggVM : ObservableObject
                         return;
                     }
                 Session.HamtaSession().inloggadMedlem = medlem;
-                _navigator.NavigeraTill(new MedlemMenyVM(_navigator));
+                _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
 
             }
         }
