@@ -21,13 +21,15 @@ namespace Labb1_OOP.VyModeller
         [ObservableProperty]
         private string beskrivning;
         [ObservableProperty]
-        private ObservableCollection<TimeOnly> startTider = new();
+        private ObservableCollection<TimeOnly> tider = new();
         [ObservableProperty]
-        private ObservableCollection<TimeOnly> slutTider = new();
+        private DateTime? valdDatum;
         [ObservableProperty]
-        private DateTime startDatum;
-        [ObservableProperty]
-        private DateTime slutDatum;
+        private string? valdTid;
+        public List<string> TidVal { get; } = [
+            "StartTid",
+            "SlutTid"
+        ];
 
         Bokning bokning;
         Navigator _navigator;
@@ -36,8 +38,7 @@ namespace Labb1_OOP.VyModeller
             NuvarandeBokning = b.ToString();
             bokning = b;
             _navigator = n;
-            InitieraSlutSchemaTider();
-            InitieraStartSchemaTider();
+            InitieraSchemaTider();
         }
 
         [RelayCommand]
@@ -47,83 +48,59 @@ namespace Labb1_OOP.VyModeller
         }
 
         [RelayCommand]
-        private void TestaAndraBokning(TimeOnly tid)
+        private void TestaAndraBokning(TimeOnly? tid)
         {
+            try{
+            MaxAntal ??= "";
             int antal = 0;
-            if (!int.TryParse(MaxAntal.Trim(), out antal)) return;
+            if (!int.TryParse(MaxAntal.Trim(), out antal));
 
-            DateTime? startDatumTid = null;
-            DateTime? slutDatumTid = null;
+            if (ValdTid == "StartTid" && ValdDatum != null && tid != null)
+                {
+                    bokning.startDatum = ((DateTime)ValdDatum).Date + ((TimeOnly)tid).ToTimeSpan();
+                }
+            else if (ValdTid == "SlutTid" && ValdDatum != null && tid != null)
+                {
+                    bokning.slutDatum = ((DateTime)ValdDatum).Date + ((TimeOnly)tid).ToTimeSpan();
+                    MessageBox.Show("slutdatum är nu "+bokning.slutDatum);
+                }
 
-            if (StartDatum is DateTime startDatum)
-            {
-            startDatumTid = startDatum.Date + tid.ToTimeSpan();
-            }
-            if (SlutDatum is DateTime slutDatum)
-            {
-            slutDatumTid = slutDatum.Date + tid.ToTimeSpan();
-            }
-            try
-            {
-                if (startDatumTid != null) bokning.startDatum = (DateTime)startDatumTid;
-                if (slutDatumTid != null) bokning.slutDatum = (DateTime)slutDatumTid;
-                if (Plats.Trim() != "") bokning.plats = Plats.Trim();
+                if (!string.IsNullOrWhiteSpace(Plats)) bokning.plats = Plats.Trim();
                 if (antal != 0) bokning.maxAntal = antal;
-                if (Beskrivning.Trim() != "") bokning.beskrivning = Beskrivning.Trim();
+                if (!string.IsNullOrWhiteSpace(Beskrivning)) bokning.beskrivning = Beskrivning.Trim();
 
                 _navigator.NavigeraTill(new BokaSpelVyVM(bokning, _navigator));
+
             }
-            catch (Exception ex)
+            
+            catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+        }
+        private void InitieraSchemaTider()
+        {
+            TimeSpan inkrement;
+
+            if (Installningar.antalBokningTider == 1)
             {
-                MessageBox.Show(ex.Message);
+                inkrement = TimeSpan.Zero;
+            }
+            else
+            {
+                inkrement =
+                    (Installningar.sistaBokbaraTid - Installningar.forstaBokbaraTid)
+                    / (Installningar.antalBokningTider - 1);
+            }
+
+            TimeOnly tid = Installningar.forstaBokbaraTid;
+
+            for (int i = 0; i < Installningar.antalBokningTider; i++)
+            {
+                Tider.Add(tid);
+                tid = tid.Add(inkrement);
             }
         }
-    private void InitieraStartSchemaTider()
-    {
-        TimeSpan inkrement;
-
-        if (Installningar.antalBokningTider == 1)
-        {
-            inkrement = TimeSpan.Zero;
-        }
-        else
-        {
-            inkrement =
-                (Installningar.sistaBokbaraTid - Installningar.forstaBokbaraTid)
-                / (Installningar.antalBokningTider - 1);
-        }
-
-        TimeOnly tid = Installningar.forstaBokbaraTid;
-
-        for (int i = 0; i < Installningar.antalBokningTider; i++)
-        {
-            StartTider.Add(tid);
-            tid = tid.Add(inkrement);
-        }
-    }
-    private void InitieraSlutSchemaTider()
-    {
-        TimeSpan inkrement;
-
-        if (Installningar.antalBokningTider == 1)
-        {
-            inkrement = TimeSpan.Zero;
-        }
-        else
-        {
-            inkrement =
-                (Installningar.sistaBokbaraTid - Installningar.forstaBokbaraTid)
-                / (Installningar.antalBokningTider - 1);
-        }
-
-        TimeOnly tid = Installningar.forstaBokbaraTid;
-
-        for (int i = 0; i < Installningar.antalBokningTider; i++)
-        {
-            SlutTider.Add(tid);
-            tid = tid.Add(inkrement);
-        }
-    }
-
+        
     }
 }

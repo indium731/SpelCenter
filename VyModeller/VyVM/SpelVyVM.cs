@@ -126,8 +126,8 @@ public partial class SpelVyVM : ObservableObject
         {
             int tempInt;
             if (ValdSpel is not SpelEntitetVM valdSpel) return;
-            if (Namn.Trim().Count() != 0) valdSpel.namn = Namn.Trim();
-            if (Kategori.Trim().Count() != 0) valdSpel.kategori= Kategori.Trim();
+            if (!string.IsNullOrWhiteSpace(Namn.Trim())) valdSpel.namn = Namn.Trim();
+            if (!string.IsNullOrWhiteSpace(Kategori.Trim())) valdSpel.kategori= Kategori.Trim();
             if (!int.TryParse(MinAntal.Trim(), out tempInt)) ;
             else valdSpel.minAntalSpelare = tempInt;
             if (!int.TryParse(MaxAntal.Trim(), out tempInt)) ;

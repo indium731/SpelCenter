@@ -24,13 +24,16 @@
 
         <TextBlock Grid.ColumnSpan="2"
                 Text="SpelCenter" />
+            
+            <ComboBox ItemsSource="{Binding TidVal}"
+                SelectedItem="{Binding ValdTid, Mode=TwoWay}"/>
 
             <TextBlock Text="StartDatum"/>
             
-            <DatePicker Text="StartDatum"
-                SelectedDate="{Binding StartDatum, Mode=TwoWay}" /> 
+            <DatePicker Text="Datum"
+                SelectedDate="{Binding ValdDatum, Mode=TwoWay}" /> 
 
-            <ListBox ItemsSource="{Binding StartTider}">
+            <ListBox ItemsSource="{Binding Tider}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Button
@@ -42,23 +45,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-            <TextBlock Text="SlutDatum"/>
-            
-            <DatePicker Text="SlutDatum"
-                SelectedDate="{Binding SlutDatum, Mode=TwoWay}"/> 
-
-            <ListBox ItemsSource="{Binding SlutTider}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Button
-                            Content="{Binding}"
-                            Command="{Binding DataContext.TestaAndraBokningCommand,
-                                            RelativeSource={RelativeSource AncestorType=ListBox}}"
-                            CommandParameter="{Binding}" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
@@ -79,7 +65,8 @@
             <TextBox Text="{Binding Beskrivning}" />
 
             <Button Content="Ändra"
-                Command="{Binding TestaAndraBokningCommand}"/>
+                Command="{Binding TestaAndraBokningCommand}"
+                CommandParameter="{x:Null}"/>
             
 
         </StackPanel>

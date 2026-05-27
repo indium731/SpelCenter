@@ -115,9 +115,9 @@ namespace Labb1_OOP.VyModeller
             try
             {
                 if (ValdMedlem is not MedlemEntitetVM valdMedlem) return;
-                if (Namn.Trim().Count() != 0) valdMedlem.namn = Namn.Trim();
-                if (TelefonNummer.Trim().Count() != 0) valdMedlem.telefonNummer = TelefonNummer.Trim();
-                if (MedlemsNummer.Trim().Count() != 0) valdMedlem.medlemsNummer = MedlemsNummer.Trim();
+                if (!string.IsNullOrWhiteSpace(Namn.Trim())) valdMedlem.namn = Namn.Trim();
+                if (!string.IsNullOrWhiteSpace(TelefonNummer.Trim())) valdMedlem.telefonNummer = TelefonNummer.Trim();
+                if (!string.IsNullOrWhiteSpace(MedlemsNummer.Trim())) valdMedlem.medlemsNummer = MedlemsNummer.Trim();
 
                 MedlemLista.HamtaMedlemLista().SparaMedlemAsync(valdMedlem.TillMedlem());
 

@@ -78,6 +78,15 @@ public sealed class BokningLista
         await context.SaveChangesAsync();
         await UppdateraBokningarAsync();
     }
+    public async Task<Bokning> SparaBokningAsync(Bokning bokning)
+    {
+        await using var context = await _context.CreateDbContextAsync();
+        context.Bokning.Update(bokning);
+        context.SaveChanges();
+        await UppdateraBokningarAsync();
+        return bokning;
+
+    }
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();

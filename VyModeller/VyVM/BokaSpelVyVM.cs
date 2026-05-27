@@ -46,6 +46,7 @@ namespace Labb1_OOP.VyModeller
         [RelayCommand]
         private void GaTillMeny()
         {
+            BokningLista.HamtaBokningLista().SparaBokningAsync(bokning);
             _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
         }
 
