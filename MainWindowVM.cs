@@ -35,9 +35,9 @@ public partial class MainWindowVM : ObservableObject
 		SpelLista.InitieraSpelLista(fabrik);
 		BokningLista.InitieraBokningLista(fabrik);
 		
-		fabrik.CreateDbContext().Database.EnsureDeleted();
 		fabrik.CreateDbContext().Database.EnsureCreated();
-		Seed();
+		if (!fabrik.CreateDbContext().Medlem.Any())
+			Seed();
 
 		Navigator = new Navigator();
 		Navigator.NavigeraTill(new InloggVyVM(Navigator));

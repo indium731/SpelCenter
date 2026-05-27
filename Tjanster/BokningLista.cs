@@ -27,6 +27,7 @@ public sealed class BokningLista
             new Sorterare<Bokning>(b=>b.maxAntal, "Maxantal"),
         };
         metodIndex = 0;
+        UppdateraBokningarAsync();
     }
     private static BokningLista _instans;
     public static BokningLista HamtaBokningLista()

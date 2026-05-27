@@ -126,11 +126,11 @@ public partial class SpelVyVM : ObservableObject
         {
             int tempInt;
             if (ValdSpel is not SpelEntitetVM valdSpel) return;
-            if (!string.IsNullOrWhiteSpace(Namn.Trim())) valdSpel.namn = Namn.Trim();
-            if (!string.IsNullOrWhiteSpace(Kategori.Trim())) valdSpel.kategori= Kategori.Trim();
-            if (!int.TryParse(MinAntal.Trim(), out tempInt)) ;
+            if (!string.IsNullOrWhiteSpace(Namn)) valdSpel.namn = Namn.Trim();
+            if (!string.IsNullOrWhiteSpace(Kategori)) valdSpel.kategori= Kategori.Trim();
+            if (!int.TryParse(MinAntal, out tempInt)) ;
             else valdSpel.minAntalSpelare = tempInt;
-            if (!int.TryParse(MaxAntal.Trim(), out tempInt)) ;
+            if (!int.TryParse(MaxAntal, out tempInt)) ;
             else valdSpel.maxAntalSpelare = tempInt;
             if (ValdSvarighetsgrad != null) valdSpel.svarighetsgrad = (Svarighetsgrad)Enum.Parse(typeof(Svarighetsgrad), ValdSvarighetsgrad.ToString());
             SpelLista.HamtaSpelLista().SparaSpelAsync(valdSpel.TillSpel());

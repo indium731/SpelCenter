@@ -23,6 +23,7 @@ public sealed class SpelLista
             new Sorterare<Spel>(s=>s.svarighetsgrad, "Svarighetsgrad")
         };
         metodIndex = 0;
+        UppdateraSpelAsync();
     }
     private static SpelLista _instans;
     public static SpelLista HamtaSpelLista()

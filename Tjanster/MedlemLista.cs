@@ -25,6 +25,7 @@ public sealed class MedlemLista
             new Sorterare<Medlem>(m=>m.admin, "Admin"),
         };
         metodIndex = 0;
+        UppdateraMedlemmarAsync();
     }
     private static MedlemLista _instans;
     public static MedlemLista HamtaMedlemLista()

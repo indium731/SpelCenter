@@ -66,15 +66,15 @@ public class Bokning : IListBar
 
     public void Anmal(Medlem medlem)
     {
-        if (anmalda.Count >= maxAntal)
-        {
-            throw new Exception("Bokningen är fullbokad");
-        } 
         if (anmalda.Contains(medlem))
         {
             anmalda.Remove(medlem);
             throw new Exception("Du är nu frånanmäld från denna bokning");
         }
+        if (anmalda.Count >= maxAntal)
+        {
+            throw new Exception("Bokningen är fullbokad");
+        } 
         anmalda.Add(medlem);
     }
     public void BokaSpel(Spel spel)
