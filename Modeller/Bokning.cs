@@ -72,7 +72,8 @@ public class Bokning : IListBar
         } 
         if (anmalda.Contains(medlem))
         {
-            throw new Exception("Du har redan anmält dig till denna bokning");
+            anmalda.Remove(medlem);
+            throw new Exception("Du är nu frånanmäld från denna bokning");
         }
         anmalda.Add(medlem);
     }
