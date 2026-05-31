@@ -70,7 +70,14 @@ public partial class AnmalVyVM : ObservableObject
         {
             return;
         }
-        valdBokning.TillBokning().Anmal(Session.HamtaSession().inloggadMedlem);
+        try{
+            valdBokning.TillBokning().Anmal(Session.HamtaSession().inloggadMedlem);
+            MessageBox.Show("Du är nu anmäld");
+
+        } catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
 
     [RelayCommand]

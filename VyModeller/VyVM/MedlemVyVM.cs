@@ -80,6 +80,7 @@ namespace Labb1_OOP.VyModeller
                                                         Administrator);
                 
                 MedlemListaLada.Add(new MedlemEntitetVM(medlem));
+                MessageBox.Show("Ny medlem nu tillagd");
             
 
             } catch (Exception ex)
@@ -110,7 +111,7 @@ namespace Labb1_OOP.VyModeller
         }
 
         [RelayCommand]
-        private void UppdateraValdMedlem()
+        private async Task UppdateraValdMedlem()
         {
             try
             {
@@ -119,7 +120,8 @@ namespace Labb1_OOP.VyModeller
                 if (!string.IsNullOrWhiteSpace(TelefonNummer.Trim())) valdMedlem.telefonNummer = TelefonNummer.Trim();
                 if (!string.IsNullOrWhiteSpace(MedlemsNummer.Trim())) valdMedlem.medlemsNummer = MedlemsNummer.Trim();
 
-                MedlemLista.HamtaMedlemLista().SparaMedlemAsync(valdMedlem.TillMedlem());
+                await MedlemLista.HamtaMedlemLista().SparaMedlemAsync(valdMedlem.TillMedlem());
+                MessageBox.Show("Medlemmen är nu uppdaterad");
 
             }
             catch (Exception ex)
