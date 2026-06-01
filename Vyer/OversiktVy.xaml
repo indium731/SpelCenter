@@ -9,6 +9,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -26,8 +30,12 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox ItemsSource="{Binding OversiktListaLada}"
-                SelectedItem="{Binding ValdObjekt, Mode=TwoWay}"/>
+            <ListBox ItemsSource="{Binding MedlemListaLada}"
+                SelectedItem="{Binding ValdObjekt, Mode=TwoWay}"
+                Visibility ="{Binding MedlemListaVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <ListBox ItemsSource="{Binding SpelListaLada}"
+                SelectedItem="{Binding ValdObjekt, Mode=TwoWay}"
+                Visibility ="{Binding SpelListaVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             
         </StackPanel>
 

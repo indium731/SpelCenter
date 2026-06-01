@@ -67,6 +67,26 @@ public partial class SpelEntitetVM : ObservableObject
             OnPropertyChanged();
         }
     }
+    public override string ToString()
+    {
+        return namn;
+    }
+    public string Detaljer()
+    {
+        return $"Namn: {namn}\n" +
+               $"Kategori: {kategori}\n" +
+               $"Antal Spelare: {minAntalSpelare} - {maxAntalSpelare}\n" +
+               $"Svårighetsgrad: {svarighetsgrad}\n" +
+               $"Beskrivning: {beskrivning}";
+    }
+    public string UtokadeDetaljer()
+    {
+        return $"Namn: {namn}\n" +
+               $"Kategori: {kategori}\n" +
+               $"Antal Spelare: {minAntalSpelare} - {maxAntalSpelare}\n" +
+               $"Svårighetsgrad: {svarighetsgrad}\n" +
+               $"Beskrivning: {beskrivning}";
+    }
     public Spel TillSpel()
     {
         return _model;

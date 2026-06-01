@@ -93,7 +93,7 @@ namespace Labb1_OOP.VyModeller
         [RelayCommand]
         partial void OnValdMedlemChanged(MedlemEntitetVM medlem)
         {
-            DetaljText = medlem.TillMedlem().UtokadeDetaljer();
+            DetaljText = medlem.UtokadeDetaljer();
         }
 
         [RelayCommand]

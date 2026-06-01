@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace Labb1_OOP.Modeller;
 
-public class Spel : IListBar
+public class Spel
 {
 
 
@@ -53,24 +53,4 @@ public class Spel : IListBar
     public string beskrivning { get; set; }
     public List<Bokning> bokningar { get; set; } = new();
 
-    public override string ToString()
-    {
-        return namn;
-    }
-    public string Detaljer()
-    {
-        return $"Namn: {namn}\n" +
-               $"Kategori: {kategori}\n" +
-               $"Antal Spelare: {minAntalSpelare} - {maxAntalSpelare}\n" +
-               $"Svårighetsgrad: {svarighetsgrad}\n" +
-               $"Beskrivning: {beskrivning}";
-    }
-    public string UtokadeDetaljer()
-    {
-        return $"Namn: {namn}\n" +
-               $"Kategori: {kategori}\n" +
-               $"Antal Spelare: {minAntalSpelare} - {maxAntalSpelare}\n" +
-               $"Svårighetsgrad: {svarighetsgrad}\n" +
-               $"Beskrivning: {beskrivning}";
-    }
 }

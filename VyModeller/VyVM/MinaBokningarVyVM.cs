@@ -54,7 +54,7 @@ public partial class MinaBokningarVyVM : ObservableObject
             return;
         }
         
-        DetaljText = ValdBokning.Detaljer();
+        DetaljText = new BokningEntitetVM(valdBokning).Detaljer();
     }
 
     [RelayCommand]

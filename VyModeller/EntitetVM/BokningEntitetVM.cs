@@ -92,6 +92,42 @@ public partial class BokningEntitetVM : ObservableObject
             OnPropertyChanged();
         }
     }
+    public override string ToString()
+    {
+        return namn;
+    }
+    public string Detaljer()
+    {
+        string bokadeSpelString = "\n";
+        foreach (SpelEntitetVM spel in bokadeSpel)
+        {
+            bokadeSpelString += spel.ToString() + '\n';
+        }
+
+        return $"Namn: {namn}\n" +
+               $"Tid: {startDatum.ToString()} - {slutDatum.ToString()}\n" +
+               $"Plats: {plats}\n" +
+               $"Maxantal: {maxAntal}\n" +
+               $"Ansvarig: {ansvarig.ToString()}\n" +
+               $"Beskriving: {beskrivning}\n" +
+               $"Bokade spel: {bokadeSpelString}";
+    }
+    public string UtokadeDetaljer()
+    {
+        string bokadeSpelString = "\n";
+        foreach (SpelEntitetVM spel in bokadeSpel)
+        {
+            bokadeSpelString += spel.ToString() + '\n';
+        }
+
+        return $"Namn: {namn}\n" +
+               $"Tid: {startDatum.ToString()} - {slutDatum.ToString()}\n" +
+               $"Plats: {plats}\n" +
+               $"Maxantal: {maxAntal}\n" +
+               $"Ansvarig: {ansvarig.ToString()}\n" +
+               $"Beskriving: {beskrivning}\n" +
+               $"Bokade spel: {bokadeSpelString}";
+    }
     public Bokning TillBokning()
     {
         return _model;

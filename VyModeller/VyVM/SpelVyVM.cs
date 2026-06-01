@@ -107,7 +107,7 @@ public partial class SpelVyVM : ObservableObject
     [RelayCommand]
     partial void OnValdSpelChanged(SpelEntitetVM spel)
     {
-        DetaljText = valdSpel.TillSpel().Detaljer(); 
+        DetaljText = valdSpel.Detaljer(); 
     }
 
     [RelayCommand]

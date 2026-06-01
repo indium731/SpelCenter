@@ -14,15 +14,22 @@ namespace Labb1_OOP.VyModeller
     public partial class OversiktVyVM : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<IListBar> oversiktListaLada;
+        private ObservableCollection<Medlem> medlemListaLada;
         [ObservableProperty]
-        private IListBar valdObjekt;
+        private ObservableCollection<Spel> spelListaLada;
+        [ObservableProperty]
+        private Spel valdSpel;
+        [ObservableProperty]
+        private Medlem valdMedlem;
         [ObservableProperty]
         private string detaljText;
+        [ObservableProperty]
+        private bool medlemListaVisas = true;
+        [ObservableProperty]
+        private bool spelListaVisas = false;
         
         Bokning bokning;
         Navigator _navigator;
-        int visadListaIndex = 0;
         public OversiktVyVM(Bokning b, Navigator n)
         {
             bokning = b;
@@ -33,7 +40,8 @@ namespace Labb1_OOP.VyModeller
 
         private void InitieraOversiktLista(Bokning bokning)
         {
-            OversiktListaLada = new ObservableCollection<IListBar>(bokning.anmalda);
+            MedlemListaLada = new ObservableCollection<Medlem>(bokning.anmalda);
+            SpelListaLada = new ObservableCollection<Spel>(SpelLista.HamtaSpelLista().RekommenderadeSpel(bokning));
         }
 
 
@@ -45,9 +53,15 @@ namespace Labb1_OOP.VyModeller
 
 
         [RelayCommand]
-        partial void OnValdObjektChanged(IListBar obj)
+        partial void OnValdSpelChanged(Spel spel)
         {
-            DetaljText = ValdObjekt.Detaljer();
+            DetaljText = new SpelEntitetVM(ValdSpel).Detaljer();
+        }
+
+        [RelayCommand]
+        partial void OnValdMedlemChanged(Medlem medlem)
+        {
+            DetaljText = new MedlemEntitetVM(ValdMedlem).Detaljer();
         }
 
 
@@ -55,25 +69,9 @@ namespace Labb1_OOP.VyModeller
         private void AndraVisadLista()
         {
 
-            if (visadListaIndex == 0)
-            {
-
-                ObservableCollection<Spel> rekommenderadeSpel = new ObservableCollection<Spel>(SpelLista.HamtaSpelLista().RekommenderadeSpel(bokning));
-                ObservableCollection<Bokning> overlappandeBokningar = new ObservableCollection<Bokning>(BokningLista.HamtaBokningLista().OverlappandeBokningar(bokning));
-
-                rekommenderadeSpel.ToList().RemoveAll(spel => 
-                    overlappandeBokningar.Any(b => b.bokadeSpel.Contains(spel)));
-
-                OversiktListaLada = new ObservableCollection<IListBar>(rekommenderadeSpel);
-            }
-
-            else if (visadListaIndex == 1)
-
-            {
-                OversiktListaLada = new ObservableCollection<IListBar>(bokning.anmalda);
-            }
-            visadListaIndex += 1;
-            visadListaIndex = visadListaIndex % 2;
+            MedlemListaVisas = !MedlemListaVisas;
+            SpelListaVisas = !SpelListaVisas;
+            
             DetaljText = "Inget valt";
         }
     }

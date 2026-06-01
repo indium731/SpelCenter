@@ -39,7 +39,7 @@ namespace Labb1_OOP.VyModeller
         }
         partial void OnValdSpelChanged(Spel spel)
         {
-            DetaljText = spel.Detaljer();
+            DetaljText = new SpelEntitetVM(spel).Detaljer();
         }
 
 

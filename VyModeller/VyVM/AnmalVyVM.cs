@@ -74,7 +74,7 @@ public partial class AnmalVyVM : ObservableObject
     [RelayCommand]
     partial void OnValdBokningChanged(BokningEntitetVM bokning)
     {
-        DetaljText = bokning.TillBokning().Detaljer();
+        DetaljText = bokning.Detaljer();
     }
     [RelayCommand]
     private void AndraSortering()
