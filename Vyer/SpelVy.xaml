@@ -30,7 +30,7 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox ItemsSource="{Binding SpelListaLada}"
+            <ListBox ItemsSource="{Binding SpelListaLada.spel}"
                 DisplayMemberPath="namn"
                 SelectedItem="{Binding ValdSpel}"/>
             
@@ -72,16 +72,16 @@
                 Command="{Binding UppdateraValdSpelCommand}"/>
 
             <TextBlock 
-                Text="{Binding Sortering}"/>
+                Text="{Binding SorteringText}"/>
 
             <Button Content="Ändra sortering"
                 Command="{Binding AndraSorteringCommand}"/>
 
             <TextBox Text="{Binding SokText}"
-                Visibility ="{Binding SokDatumVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            <ComboBox ItemsSource="{Binding Svarighetsgrad}"
-                SelectedItem="{Binding ValdSvarighetsgrad}"
-                Visibility ="{Binding SokDatumVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                Visibility ="{Binding SokTextVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <ComboBox ItemsSource="{Binding ComboSvarighetsgrader}"
+                SelectedItem="{Binding ComboValdSvarighetsgrad}"
+                Visibility ="{Binding SokComboVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Button Content="Sök"
                 Command="{Binding SokCommand}"/>
 

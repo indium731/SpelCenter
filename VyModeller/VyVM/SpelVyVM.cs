@@ -15,7 +15,7 @@ public partial class SpelVyVM : ObservableObject
 {
     private Navigator _navigator;
     [ObservableProperty]
-    private ObservableCollection<SpelEntitetVM> spelListaLada = new();
+    private SpelListaVM spelListaLada = new SpelListaVM();
     [ObservableProperty]
     private SpelEntitetVM valdSpel;
     [ObservableProperty]
@@ -32,7 +32,7 @@ public partial class SpelVyVM : ObservableObject
     [ObservableProperty]
     private string beskrivning;
     [ObservableProperty]
-    private string sortering;
+    private string sorteringText;
     [ObservableProperty]
     private string sokText;
     [ObservableProperty]
@@ -43,22 +43,15 @@ public partial class SpelVyVM : ObservableObject
     private bool sokTextVisas;
     [ObservableProperty]
     private bool sokComboVisas;
+    [ObservableProperty]
+    private Svarighetsgrad comboValdSvarighetsgrad;
+    public Svarighetsgrad[] ComboSvarighetsgrader => Enum.GetValues<Svarighetsgrad>();
 
     public SpelVyVM(Navigator navigator)
     {
         _navigator = navigator;
-        LaddaSpel();
     }
 
-    private void LaddaSpel()
-    {
-        var spelLista = SpelLista.HamtaSpelLista().spel;
-        SpelListaLada.Clear();
-        foreach(Spel spel in spelLista)
-        {
-            SpelListaLada.Add(new SpelEntitetVM(spel));
-        }
-    }
 
     [RelayCommand]
     private void GaTillMeny()
@@ -84,13 +77,12 @@ public partial class SpelVyVM : ObservableObject
 
         try {
 
-        Spel spel = await SpelLista.HamtaSpelLista().LaggTillAsync(Namn,
+        await SpelListaLada.LaggTillAsync(Namn,
                                                 Kategori,
                                                 min,
                                                 max,
                                                 ValdSvarighetsgrad,
                                                 Beskrivning);
-        SpelListaLada.Add(new SpelEntitetVM(spel));
         } catch (Exception ex)
         {
             MessageBox.Show(ex.Message);
@@ -99,7 +91,7 @@ public partial class SpelVyVM : ObservableObject
     }
 
     [RelayCommand]
-    private void TaBortValdSpel()
+    private async void TaBortValdSpel()
     {
         if (ValdSpel is not SpelEntitetVM valdSpel)
         {
@@ -107,9 +99,8 @@ public partial class SpelVyVM : ObservableObject
             return;
         }
         
-        SpelLista.HamtaSpelLista().TaBortAsync(valdSpel.TillSpel());
+        await SpelListaLada.TaBortAsync(valdSpel);
         DetaljText = "Inget Spel vald";
-        SpelListaLada.Remove(valdSpel);
 
     }
 
@@ -120,7 +111,7 @@ public partial class SpelVyVM : ObservableObject
     }
 
     [RelayCommand]
-    private void UppdateraValdSpel()
+    private async void UppdateraValdSpel()
     {
         try
         {
@@ -133,7 +124,7 @@ public partial class SpelVyVM : ObservableObject
             if (!int.TryParse(MaxAntal, out tempInt)) ;
             else valdSpel.maxAntalSpelare = tempInt;
             if (ValdSvarighetsgrad != null) valdSpel.svarighetsgrad = (Svarighetsgrad)Enum.Parse(typeof(Svarighetsgrad), ValdSvarighetsgrad.ToString());
-            SpelLista.HamtaSpelLista().SparaSpelAsync(valdSpel.TillSpel());
+            SpelListaLada.SparaSpelAsync(valdSpel);
         }
         catch(Exception ex)
         {
@@ -144,8 +135,15 @@ public partial class SpelVyVM : ObservableObject
     [RelayCommand]
     private void AndraSortering()
     {
-        SpelLista.HamtaSpelLista().GaTillNastaMetod();
-        Sortering = SpelLista.HamtaSpelLista().NuvarandeSortering();
+        SpelListaLada.GaTillNastaMetod();
+        SorteringText = SpelListaLada.NuvarandeSortering();
+            SokTextVisas = false;
+            SokComboVisas = false;
+            if (SorteringText == "Namn"
+             || SorteringText == "Kategori" 
+             || SorteringText == "Minantal spelare"
+             || SorteringText == "Maxantal spelare") SokTextVisas = true;
+            if (SorteringText == "Svarighetsgrad") SokComboVisas = true;
         
     }
     [RelayCommand]
@@ -153,23 +151,12 @@ public partial class SpelVyVM : ObservableObject
     {
         if (SokTextVisas)
         {
-            var spelLista = SpelLista.HamtaSpelLista().Sok(SokText.Trim());
-            SpelListaLada.Clear();
-            foreach (Spel spel in spelLista)
-            {
-                SpelListaLada.Add(new SpelEntitetVM(spel));
-            }
+            SpelListaLada.Sok(SokText.Trim());
         }
         if (SokComboVisas)
         {
-            var spelLista = SpelLista.HamtaSpelLista().Sok(ValdSvarighetsgrad.ToString());
-            SpelListaLada.Clear();
-            foreach(Spel spel in spelLista)
-            {
-                SpelListaLada.Add(new SpelEntitetVM(spel));
-            }
+            SpelListaLada.Sok(ComboValdSvarighetsgrad.ToString());
         }
-        
     }
 
 }

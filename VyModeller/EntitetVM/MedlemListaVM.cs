@@ -30,6 +30,7 @@ public class MedlemListaVM
     {
         medlemmar.Clear();
         MedlemLista.HamtaMedlemLista().medlemmar.ForEach(m => medlemmar.Add(new MedlemEntitetVM(m)));
+        SokningVisas = false;
     }
     public async Task LaggTillAsync(string n, string t, string m, bool a)
     {

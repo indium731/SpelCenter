@@ -27,7 +27,6 @@ namespace Labb1_OOP.VyModeller
         private string sorteringText;
         [ObservableProperty]
         private MedlemListaVM medlemListaLada = new MedlemListaVM();
-        //private ObservableCollection<MedlemEntitetVM> medlemListaLada = new();
         [ObservableProperty]
         private MedlemEntitetVM? valdMedlem;
         [ObservableProperty]

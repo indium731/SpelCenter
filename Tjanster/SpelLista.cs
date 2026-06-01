@@ -14,15 +14,6 @@ public sealed class SpelLista
     private SpelLista(IDbContextFactory<SpelCenterDbContext> contextFactory)
     {
         _context = contextFactory;
-        metoder = new List<Sorterare<Spel>>
-        {
-            new Sorterare<Spel>(s=>s.namn, "Namn"),
-            new Sorterare<Spel>(s=>s.kategori, "Kategori"),
-            new Sorterare<Spel>(s=>s.minAntalSpelare, "Minantal spelare"),
-            new Sorterare<Spel>(s=>s.maxAntalSpelare, "Maxantal spelare"),
-            new Sorterare<Spel>(s=>s.svarighetsgrad, "Svarighetsgrad")
-        };
-        metodIndex = 0;
         UppdateraSpelAsync();
     }
     private static SpelLista _instans;
@@ -42,14 +33,11 @@ public sealed class SpelLista
         }
     }
     public List<Spel> spel  { get; private set; }
-    private List<Sorterare<Spel>> metoder;
-    private int metodIndex;
 
     private async Task UppdateraSpelAsync()
     {
         await using var context = await _context.CreateDbContextAsync();
         spel = await context.Spel.ToListAsync();
-        spel = metoder[metodIndex].Sortera(spel);
     }
     public async Task<Spel> LaggTillAsync(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
@@ -74,21 +62,6 @@ public sealed class SpelLista
         context.SaveChanges();
         await UppdateraSpelAsync();
         return spel;
-
-
-    }
-    public void GaTillNastaMetod()
-    {
-        metodIndex = (metodIndex + 1) % metoder.Count();
-        UppdateraSpelAsync();
-    }
-    public List<Spel> Sok(string sokOrd)
-    {
-        return spel.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())).ToList();
-    }
-    public string NuvarandeSortering()
-    {
-        return metoder[metodIndex].sortering;
     }
     public List<Spel> RekommenderadeSpel(Bokning bokning)
     {
