@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Labb1_OOP;
+namespace Labb1_OOP.VyModeller;
 
 public partial class BokningEntitetVM : ObservableObject
 {

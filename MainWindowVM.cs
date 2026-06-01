@@ -35,6 +35,7 @@ public partial class MainWindowVM : ObservableObject
 		SpelLista.InitieraSpelLista(fabrik);
 		BokningLista.InitieraBokningLista(fabrik);
 		
+		fabrik.CreateDbContext().Database.EnsureDeleted();
 		fabrik.CreateDbContext().Database.EnsureCreated();
 		if (!fabrik.CreateDbContext().Medlem.Any())
 			Seed();

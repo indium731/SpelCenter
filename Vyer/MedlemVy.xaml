@@ -29,7 +29,7 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox ItemsSource="{Binding MedlemListaLada}"
+            <ListBox ItemsSource="{Binding MedlemListaLada.medlemmar}"
                 DisplayMemberPath="namn"
                 SelectedItem="{Binding ValdMedlem, Mode=TwoWay}"/>
             

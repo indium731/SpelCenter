@@ -26,7 +26,8 @@ namespace Labb1_OOP.VyModeller
         [ObservableProperty]
         private string sorteringText;
         [ObservableProperty]
-        private ObservableCollection<MedlemEntitetVM> medlemListaLada = new();
+        private MedlemListaVM medlemListaLada = new MedlemListaVM();
+        //private ObservableCollection<MedlemEntitetVM> medlemListaLada = new();
         [ObservableProperty]
         private MedlemEntitetVM? valdMedlem;
         [ObservableProperty]
@@ -48,20 +49,9 @@ namespace Labb1_OOP.VyModeller
         public MedlemVyVM(Navigator n)
         {
             _navigator = n;
-            SorteringText = MedlemLista.HamtaMedlemLista().NuvarandeSortering();
-            LaddaMedlemmar();
+            SorteringText = medlemListaLada.NuvarandeSortering();
         }
 
-        private void LaddaMedlemmar()
-        {
-            var medlemmar = MedlemLista.HamtaMedlemLista().medlemmar;
-            MedlemListaLada.Clear();
-            foreach(Medlem medlem in medlemmar)
-            {
-                MedlemListaLada.Add(new MedlemEntitetVM(medlem));
-            }
-
-        }
 
         [RelayCommand]
         private void GaTillMeny()
@@ -74,12 +64,11 @@ namespace Labb1_OOP.VyModeller
         {
             try
             {
-                Medlem medlem = await MedlemLista.HamtaMedlemLista().LaggTillAsync(Namn.Trim(),
+                await MedlemListaLada.LaggTillAsync(Namn.Trim(),
                                                         TelefonNummer.Trim(),
                                                         MedlemsNummer.Trim(),
                                                         Administrator);
                 
-                MedlemListaLada.Add(new MedlemEntitetVM(medlem));
                 MessageBox.Show("Ny medlem nu tillagd");
             
 
@@ -90,18 +79,16 @@ namespace Labb1_OOP.VyModeller
         }
 
         [RelayCommand]
-        private void TaBortValdMedlem()
+        private async void TaBortValdMedlem()
         {
             if (ValdMedlem is not MedlemEntitetVM valdMedlem)
             {
-                DetaljText = "Välj en medlem att ta bort";
+                MessageBox.Show("Välj en medlem att ta bort");
                 return;
             }
             
-            MedlemLista.HamtaMedlemLista().TaBortAsync(valdMedlem.TillMedlem());
-            MedlemListaLada.Remove(valdMedlem);
+            await MedlemListaLada.TaBortAsync(valdMedlem);
             DetaljText = "Ingen medlem vald";
-
         }
 
         [RelayCommand]
@@ -120,7 +107,8 @@ namespace Labb1_OOP.VyModeller
                 if (!string.IsNullOrWhiteSpace(TelefonNummer.Trim())) valdMedlem.telefonNummer = TelefonNummer.Trim();
                 if (!string.IsNullOrWhiteSpace(MedlemsNummer.Trim())) valdMedlem.medlemsNummer = MedlemsNummer.Trim();
 
-                await MedlemLista.HamtaMedlemLista().SparaMedlemAsync(valdMedlem.TillMedlem());
+                await MedlemListaLada.SparaMedlemAsync(valdMedlem);
+                DetaljText = "Ingen medlem vald";
                 MessageBox.Show("Medlemmen är nu uppdaterad");
 
             }
@@ -135,13 +123,12 @@ namespace Labb1_OOP.VyModeller
         {
             if (ValdMedlem is not MedlemEntitetVM valdMedlem) return;
             valdMedlem.medlemSkap.slutDatum = valdMedlem.medlemSkap.slutDatum.AddYears(1);
-            LaddaMedlemmar();
         }
         [RelayCommand]
         private void AndraSortering()
         {
-            MedlemLista.HamtaMedlemLista().GaTillNastaMetod();
-            SorteringText = MedlemLista.HamtaMedlemLista().NuvarandeSortering();
+            MedlemListaLada.GaTillNastaMetod();
+            SorteringText = MedlemListaLada.NuvarandeSortering();
             SokTextVisas = false;
             SokCheckVisas = false;
             SokDatumVisas = false;
@@ -149,39 +136,23 @@ namespace Labb1_OOP.VyModeller
             if (SorteringText == "Admin") SokCheckVisas = true;
             if (SorteringText == "MedlemStatus") SokCheckVisas = true;
             if (SorteringText == "Startdatum" || SorteringText == "Slutdatum") SokDatumVisas = true;
-            LaddaMedlemmar();
         }
         [RelayCommand]
         private void Sok()
         {
             if (SokTextVisas)
             {
-                var medlemmar = MedlemLista.HamtaMedlemLista().Sok(SokText.Trim());
-                MedlemListaLada.Clear();
-                foreach (Medlem medlem in medlemmar)
-                {
-                    MedlemListaLada.Add(new MedlemEntitetVM(medlem));
-                }
-
+                MedlemListaLada.Sok(SokText.Trim());
             }
             if (SokCheckVisas)
             {
-                var medlemmar = MedlemLista.HamtaMedlemLista().Sok(SokCheck.ToString());
-                MedlemListaLada.Clear();
-                foreach (Medlem medlem in medlemmar)
-                {
-                    MedlemListaLada.Add(new MedlemEntitetVM(medlem));
-                }
+                MedlemListaLada.Sok(SokCheck.ToString());
             }
             if (SokDatumVisas)
             {
-                if (SokDatum == null) return;
-                var medlemmar = MedlemLista.HamtaMedlemLista().Sok(SokDatum.ToString());
-                MedlemListaLada.Clear();
-                foreach (Medlem medlem in medlemmar)
-                {
-                    MedlemListaLada.Add(new MedlemEntitetVM(medlem));
-                }
+                SokDatum ??= DateTime.Now;
+                string SokDatumText = SokDatum.ToString() ?? DateTime.Now.ToString();
+                MedlemListaLada.Sok(SokDatumText);
             }
         }
     }

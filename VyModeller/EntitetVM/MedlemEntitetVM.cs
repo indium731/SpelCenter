@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Labb1_OOP.Modeller;
 
-namespace Labb1_OOP;
+namespace Labb1_OOP.VyModeller;
 
 public partial class MedlemEntitetVM : ObservableObject
 {
