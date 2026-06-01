@@ -8,7 +8,8 @@ public class SpelListaVM
     public ObservableCollection<SpelEntitetVM> spel  { get; private set; } = new();
     private List<Sorterare<SpelEntitetVM>> metoder;
     private int metodIndex;
-    private bool SokningVisas = false;
+    //använder denna bool för att veta om medlemmar måste laddas om från databasen
+    private bool sokningVisas = false;
     public SpelListaVM()
     {
         metoder = new List<Sorterare<SpelEntitetVM>>
@@ -27,20 +28,20 @@ public class SpelListaVM
     {
         spel.Clear();
         SpelLista.HamtaSpelLista().spel.ForEach(s => spel.Add(new SpelEntitetVM(s)));
-        SokningVisas = false;
+        sokningVisas = false;
     }
     public async Task LaggTillAsync(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
         Spel nySpel = await SpelLista.HamtaSpelLista().LaggTillAsync(n, k, a, m, s, b);
         spel.Add(new SpelEntitetVM(nySpel));
-        if (SokningVisas) UppdateraSpel();
+        if (sokningVisas) UppdateraSpel();
 
     }
     public async Task TaBortAsync(SpelEntitetVM spelAttTaBort)
     {
         await SpelLista.HamtaSpelLista().TaBortAsync(spelAttTaBort.TillSpel());
         spel.Remove(spelAttTaBort);
-        if (SokningVisas) UppdateraSpel();
+        if (sokningVisas) UppdateraSpel();
     }
     public async Task SparaSpelAsync(SpelEntitetVM spel)
     {
@@ -53,7 +54,9 @@ public class SpelListaVM
     }
     public void Sok(string sokOrd)
     {
-        SokningVisas = true;
+        //Gjort sökfunktionen på detta sätt för att kunna 
+        // bibehålla samma pekare för den observablecollection som finns så den uppdateras korrekt
+        sokningVisas = true;
         List<SpelEntitetVM> ickeMatchningar = spel.Where(s => !metoder[metodIndex].Matchar(s, sokOrd.ToLower())).ToList();
         ickeMatchningar.ForEach(s => spel.Remove(s));
     }

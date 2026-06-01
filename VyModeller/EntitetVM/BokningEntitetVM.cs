@@ -19,6 +19,42 @@ public partial class BokningEntitetVM : ObservableObject
             OnPropertyChanged();
         }
     }
+    public MedlemEntitetVM ansvarig
+    {
+        get => new MedlemEntitetVM(_model.ansvarig);
+        set
+        {
+            _model.ansvarig = value.TillMedlem();
+            OnPropertyChanged();
+        }
+    }
+    public string beskrivning
+    {
+        get => _model.beskrivning;
+        set
+        {
+            _model.beskrivning = value;
+            OnPropertyChanged();
+        }
+    }
+    public List<MedlemEntitetVM> anmalda
+    {
+        get => _model.anmalda.Select(m => new MedlemEntitetVM(m)).ToList();
+        set
+        {
+            _model.anmalda = value.Select(m => m.TillMedlem()).ToList();
+            OnPropertyChanged();
+        }
+    }
+    public List<SpelEntitetVM> bokadeSpel
+    {
+        get => _model.bokadeSpel.Select(s => new SpelEntitetVM(s)).ToList();
+        set
+        {
+            _model.bokadeSpel = value.Select(s => s.TillSpel()).ToList();
+            OnPropertyChanged();
+        }
+    }
     public DateTime startDatum
     {
         get => _model.startDatum;

@@ -70,7 +70,7 @@ public sealed class MedlemLista
     public Medlem? TestaInlogg(string inlogg)
     {
         Medlem medlem = medlemmar.FirstOrDefault(m => m.medlemsNummer == inlogg);
-        if (medlem == null) throw new Exception("Felaktigt Inlogg");
+        if (medlem == null) throw new Exception("Felaktigt inlogg");
         if (!medlem.medlemSkap.medlemStatus) throw new Exception("medlemskap är ej aktivt");
         Session.HamtaSession().inloggadMedlem = medlem;
         return medlem;

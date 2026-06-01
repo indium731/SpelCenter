@@ -13,13 +13,13 @@ namespace Labb1_OOP.VyModeller;
 public partial class AnmalVyVM : ObservableObject
 {
     [ObservableProperty]
-    private ObservableCollection<BokningEntitetVM> bokningListaLada = new();
+    private BokningListaVM bokningListaLada = new BokningListaVM();
     [ObservableProperty]
     private BokningEntitetVM? valdBokning;
     [ObservableProperty]
     private string detaljText;
     [ObservableProperty]
-    private string sorteringText = BokningLista.HamtaBokningLista().NuvarandeSortering();
+    private string sorteringText;
     [ObservableProperty]
     private bool sokTextVisas;
     [ObservableProperty]
@@ -29,32 +29,23 @@ public partial class AnmalVyVM : ObservableObject
     [ObservableProperty]
     private DateTime? sokDatum;
 
-    private void LaddaBokningar()
-    {
-        var bokningLista = BokningLista.HamtaBokningLista().bokningar;
-        BokningListaLada.Clear();
-        foreach (Bokning bokning in bokningLista)
-        {
-            BokningListaLada.Add(new BokningEntitetVM(bokning));
-        }
-    }
     private Navigator navigator;
     public AnmalVyVM(Navigator n)
     {
+        SorteringText = bokningListaLada.NuvarandeSortering();
         navigator = n;
         UppdateraUI();
-        LaddaBokningar();
     }
     private void UppdateraUI()
     {
         SokTextVisas = false;
         SokDatumVisas = false;
-        if (BokningLista.HamtaBokningLista().NuvarandeSortering() == "Startdatum") SokDatumVisas = true;
-        if (BokningLista.HamtaBokningLista().NuvarandeSortering() == "Slutdatum") SokDatumVisas = true;
-        if (BokningLista.HamtaBokningLista().NuvarandeSortering() == "Beskrivning") SokTextVisas = true;
-        if (BokningLista.HamtaBokningLista().NuvarandeSortering() == "Ansvarig") SokTextVisas = true;
-        if (BokningLista.HamtaBokningLista().NuvarandeSortering() == "Maxantal") SokTextVisas = true;
-        if (BokningLista.HamtaBokningLista().NuvarandeSortering() == "Plats") SokTextVisas = true;
+        if (BokningListaLada.NuvarandeSortering() == "Startdatum") SokDatumVisas = true;
+        if (BokningListaLada.NuvarandeSortering() == "Slutdatum") SokDatumVisas = true;
+        if (BokningListaLada.NuvarandeSortering() == "Beskrivning") SokTextVisas = true;
+        if (BokningListaLada.NuvarandeSortering() == "Ansvarig") SokTextVisas = true;
+        if (BokningListaLada.NuvarandeSortering() == "Maxantal") SokTextVisas = true;
+        if (BokningListaLada.NuvarandeSortering() == "Plats") SokTextVisas = true;
     }
 
     [RelayCommand]
@@ -64,7 +55,7 @@ public partial class AnmalVyVM : ObservableObject
     }
 
     [RelayCommand]
-    private void TestaAnmalKlick()
+    private void TestaAnmal()
     {
     if (ValdBokning is not BokningEntitetVM valdBokning)
         {
@@ -86,35 +77,26 @@ public partial class AnmalVyVM : ObservableObject
         DetaljText = bokning.TillBokning().Detaljer();
     }
     [RelayCommand]
-    private void AndraSorteringKlick()
+    private void AndraSortering()
     {
-        BokningLista.HamtaBokningLista().GaTillNastaMetod();
-        SorteringText = BokningLista.HamtaBokningLista().NuvarandeSortering();
+        BokningListaLada.GaTillNastaMetod();
+        SorteringText = BokningListaLada.NuvarandeSortering();
         UppdateraUI();
         
     }
     [RelayCommand]
-    private void SokKlick()
+    private void Sok()
     {
 
         if (SokTextVisas)
         {
-            var bokningLista = BokningLista.HamtaBokningLista().Sok(SokText.Trim());
-            BokningListaLada.Clear();
-            foreach (Bokning bokning in bokningLista)
-            {
-                BokningListaLada.Add(new BokningEntitetVM(bokning));
-            }
+            BokningListaLada.Sok(SokText.Trim());
         }
         if (SokDatumVisas)
         {
-            var datum = SokDatum ?? DateTime.Now;
-            var bokningLista = BokningLista.HamtaBokningLista().Sok(datum.ToShortDateString());
-            BokningListaLada.Clear();
-            foreach (Bokning bokning in bokningLista)
-            {
-                BokningListaLada.Add(new BokningEntitetVM(bokning));
-            }
+            SokDatum ??= DateTime.Now;
+            string SokDatumText = SokDatum.ToString() ?? DateTime.Now.ToString();
+            BokningListaLada.Sok(SokDatumText);
         }
     }
 }

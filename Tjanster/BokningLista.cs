@@ -17,16 +17,6 @@ public sealed class BokningLista
     private BokningLista(IDbContextFactory<SpelCenterDbContext> contextFactory)
     {
         _context = contextFactory;
-        metoder = new List<Sorterare<Bokning>>
-        {
-            new Sorterare<Bokning>(b=>b.beskrivning, "Beskrivning"),
-            new Sorterare<Bokning>(b=>b.ansvarig.namn, "Ansvarig"),
-            new Sorterare<Bokning>(b=>b.startDatum.Date, "Startdatum"),
-            new Sorterare<Bokning>(b=>b.slutDatum.Date, "Slutdatum"),
-            new Sorterare<Bokning>(b=>b.plats, "Plats"),
-            new Sorterare<Bokning>(b=>b.maxAntal, "Maxantal"),
-        };
-        metodIndex = 0;
         UppdateraBokningarAsync();
     }
     private static BokningLista _instans;
@@ -47,8 +37,6 @@ public sealed class BokningLista
     }
     public List<Bokning> bokningar { get; private set; }
 
-    private List<Sorterare<Bokning>> metoder;
-    private int metodIndex;
 
     private async Task UppdateraBokningarAsync()
     {
@@ -58,7 +46,6 @@ public sealed class BokningLista
                                    .Include(b => b.bokadeSpel)
                                    .ToListAsync();
         
-        bokningar = metoder[metodIndex].Sortera(bokningar);
     }
     public async Task<Bokning> LaggTillAsync(string n, DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
@@ -87,18 +74,6 @@ public sealed class BokningLista
         await UppdateraBokningarAsync();
         return bokning;
 
-    }
-    public void GaTillNastaMetod()
-    {
-        metodIndex = (metodIndex + 1) % metoder.Count();
-    }
-    public List<Bokning> Sok(string sokOrd)
-    {
-        return bokningar.Where(m => metoder[metodIndex].Matchar(m, sokOrd.ToLower())).ToList();
-    }
-    public string NuvarandeSortering()
-    {
-        return metoder[metodIndex].sortering;
     }
     public List<Bokning> OverlappandeBokningar(Bokning bokning)
     {

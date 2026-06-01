@@ -10,7 +10,7 @@ public class MedlemListaVM
     private List<Sorterare<MedlemEntitetVM>> metoder;
     private int metodIndex;
     //använder denna bool för att veta om medlemmar måste laddas om från databasen
-    private bool SokningVisas = false;
+    private bool sokningVisas = false;
 
     public MedlemListaVM()
     {
@@ -30,20 +30,20 @@ public class MedlemListaVM
     {
         medlemmar.Clear();
         MedlemLista.HamtaMedlemLista().medlemmar.ForEach(m => medlemmar.Add(new MedlemEntitetVM(m)));
-        SokningVisas = false;
+        sokningVisas = false;
     }
     public async Task LaggTillAsync(string n, string t, string m, bool a)
     {
         Medlem medlem = await MedlemLista.HamtaMedlemLista().LaggTillAsync(n, t, m, a);
         medlemmar.Add(new MedlemEntitetVM(medlem));
-        if (SokningVisas)UppdateraMedlemmar();
+        if (sokningVisas)UppdateraMedlemmar();
     }
 
     public async Task TaBortAsync(MedlemEntitetVM medlem)
     {
         await MedlemLista.HamtaMedlemLista().TaBortAsync(medlem.TillMedlem());
         medlemmar.Remove(medlem);
-        if (SokningVisas)UppdateraMedlemmar();
+        if (sokningVisas)UppdateraMedlemmar();
     }
     public async Task SparaMedlemAsync(MedlemEntitetVM medlem)
     {
@@ -52,13 +52,13 @@ public class MedlemListaVM
     public void GaTillNastaMetod()
     {
         metodIndex = (metodIndex + 1) % metoder.Count();
-        if (SokningVisas)UppdateraMedlemmar();
+        if (sokningVisas)UppdateraMedlemmar();
     }
     public void Sok(string sokOrd)
     {
         //Gjort sökfunktionen på detta sätt för att kunna 
         // bibehålla samma pekare för den observablecollection som finns så den uppdateras korrekt
-        SokningVisas = true;
+        sokningVisas = true;
         List<MedlemEntitetVM> ickeMatchningar = medlemmar.Where(m => !metoder[metodIndex].Matchar(m, sokOrd.ToLower())).ToList();
         ickeMatchningar.ForEach(m => medlemmar.Remove(m));
     }
