@@ -110,4 +110,8 @@ public sealed class BokningLista
         await context.SaveChangesAsync();
         await UppdateraBokningarAsync();
     }
+    public List<Bokning> AnsvaradeBokningar(Medlem medlem)
+    {
+        return bokningar.Where(b => b.ansvarig.Id == medlem.Id).ToList();
+    }
 }

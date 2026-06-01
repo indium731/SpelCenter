@@ -30,7 +30,7 @@
         
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <ListBox ItemsSource="{Binding Bokningar}"
+            <ListBox ItemsSource="{Binding BokningListaLada.bokningar}"
                 SelectedItem="{Binding ValdBokning, Mode=TwoWay}"/>
             
         </StackPanel>

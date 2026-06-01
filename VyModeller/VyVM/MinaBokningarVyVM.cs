@@ -12,9 +12,9 @@ namespace Labb1_OOP.VyModeller;
 public partial class MinaBokningarVyVM : ObservableObject
 {
     [ObservableProperty]
-    private Bokning valdBokning;
+    private BokningEntitetVM valdBokning;
     [ObservableProperty]
-    private ObservableCollection<Bokning> bokningar = new ObservableCollection<Bokning>(BokningLista.HamtaBokningLista().bokningar.Where(b => b.ansvarig.Id == Session.HamtaSession().inloggadMedlem.Id));
+    private BokningListaVM bokningListaLada = new BokningListaVM();
     [ObservableProperty]
     private string detaljText = "Ingen bokning vald.";
     [ObservableProperty]
@@ -23,6 +23,7 @@ public partial class MinaBokningarVyVM : ObservableObject
     public MinaBokningarVyVM(Navigator n)
     {
         _navigator = n;
+        bokningListaLada.AnsvaradeBokningar(Session.HamtaSession().inloggadMedlem);
     }
 
     [RelayCommand]
@@ -32,41 +33,41 @@ public partial class MinaBokningarVyVM : ObservableObject
     }
 
     [RelayCommand]
-    private void TaBortValdBokning()
+    private async void TaBortValdBokning()
     {
-        if (ValdBokning is not Bokning valdBokning)
+        if (ValdBokning is not BokningEntitetVM valdBokning)
         {
             DetaljText = "Välj en bokning att ta bort";
             return;
         }
         
-        BokningLista.HamtaBokningLista().TaBortAsync(valdBokning);
+        await BokningListaLada.TaBortAsync(valdBokning);
         DetaljText = "Ingen bokning vald";
 
     }
 
     [RelayCommand]
-    partial void OnValdBokningChanged(Bokning b)
+    partial void OnValdBokningChanged(BokningEntitetVM b)
     {
-        if (ValdBokning is not Bokning valdBokning)
+        if (ValdBokning is not BokningEntitetVM valdBokning)
         {
             DetaljText = "Ingen bokning vald";
             return;
         }
         
-        DetaljText = new BokningEntitetVM(valdBokning).Detaljer();
+        DetaljText = valdBokning.Detaljer();
     }
 
     [RelayCommand]
     private void GaTillOversikt()
     {
-        if (ValdBokning is not Bokning valdBokning) return;
-        _navigator.NavigeraTill(new OversiktVyVM(valdBokning, _navigator));
+        if (ValdBokning is not BokningEntitetVM valdBokning) return;
+        _navigator.NavigeraTill(new OversiktVyVM(valdBokning.TillBokning(), _navigator));
     }
     [RelayCommand]
     private void GaTillAndraBokning()
     {
-        if (ValdBokning is not Bokning valdBokning) return;
-        _navigator.NavigeraTill(new AndraBokningVyVM(valdBokning, _navigator));
+        if (ValdBokning is not BokningEntitetVM valdBokning) return;
+        _navigator.NavigeraTill(new AndraBokningVyVM(valdBokning.TillBokning(), _navigator));
     }
 }

@@ -65,4 +65,11 @@ public class BokningListaVM
     {
         return metoder[metodIndex].sortering;
     }
+    public void AnsvaradeBokningar(Medlem medlem)
+    {
+        sokningVisas = true;
+        bokningar.Clear();
+        BokningLista.HamtaBokningLista().AnsvaradeBokningar(medlem)
+            .ForEach(b => bokningar.Add(new BokningEntitetVM(b)));
+    }
 }

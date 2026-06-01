@@ -14,13 +14,13 @@ namespace Labb1_OOP.VyModeller
     public partial class OversiktVyVM : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<Medlem> medlemListaLada;
+        private ObservableCollection<MedlemEntitetVM> medlemListaLada;
         [ObservableProperty]
-        private ObservableCollection<Spel> spelListaLada;
+        private ObservableCollection<SpelEntitetVM> spelListaLada;
         [ObservableProperty]
-        private Spel valdSpel;
+        private SpelEntitetVM valdSpel;
         [ObservableProperty]
-        private Medlem valdMedlem;
+        private MedlemEntitetVM valdMedlem;
         [ObservableProperty]
         private string detaljText;
         [ObservableProperty]
@@ -40,8 +40,8 @@ namespace Labb1_OOP.VyModeller
 
         private void InitieraOversiktLista(Bokning bokning)
         {
-            MedlemListaLada = new ObservableCollection<Medlem>(bokning.anmalda);
-            SpelListaLada = new ObservableCollection<Spel>(SpelLista.HamtaSpelLista().RekommenderadeSpel(bokning));
+            MedlemListaLada = new ObservableCollection<MedlemEntitetVM>(bokning.anmalda.Select(m => new MedlemEntitetVM(m)));
+            SpelListaLada = new ObservableCollection<SpelEntitetVM>(SpelLista.HamtaSpelLista().RekommenderadeSpel(bokning).Select(s => new SpelEntitetVM(s)));
         }
 
 
@@ -53,26 +53,25 @@ namespace Labb1_OOP.VyModeller
 
 
         [RelayCommand]
-        partial void OnValdSpelChanged(Spel spel)
+        partial void OnValdSpelChanged(SpelEntitetVM spel)
         {
-            DetaljText = new SpelEntitetVM(ValdSpel).Detaljer();
+            DetaljText = spel.Detaljer();
         }
 
         [RelayCommand]
-        partial void OnValdMedlemChanged(Medlem medlem)
+        partial void OnValdMedlemChanged(MedlemEntitetVM medlem)
         {
-            DetaljText = new MedlemEntitetVM(ValdMedlem).Detaljer();
+            DetaljText = medlem.Detaljer();
         }
 
 
         [RelayCommand]
         private void AndraVisadLista()
         {
-
             MedlemListaVisas = !MedlemListaVisas;
             SpelListaVisas = !SpelListaVisas;
-            
-            DetaljText = "Inget valt";
+
+            DetaljText = "";
         }
     }
 }

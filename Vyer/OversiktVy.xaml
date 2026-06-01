@@ -31,10 +31,10 @@
         <StackPanel Grid.Row="0" Grid.Column="0">
 
             <ListBox ItemsSource="{Binding MedlemListaLada}"
-                SelectedItem="{Binding ValdObjekt, Mode=TwoWay}"
+                SelectedItem="{Binding ValdMedlem, Mode=TwoWay}"
                 Visibility ="{Binding MedlemListaVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <ListBox ItemsSource="{Binding SpelListaLada}"
-                SelectedItem="{Binding ValdObjekt, Mode=TwoWay}"
+                SelectedItem="{Binding ValdSpel, Mode=TwoWay}"
                 Visibility ="{Binding SpelListaVisas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             
         </StackPanel>
