@@ -54,7 +54,7 @@ public partial class MedlemMenyVyVM : ObservableObject
             MedlemHanterareVisas = false;
             SpelHanterareVisas = false;
         }
-        if (!BokningLista.HamtaBokningLista().bokningar.Any(b => b.ansvarig.Id == Session.HamtaSession().inloggadMedlem.Id))
+        if (!BokningLista.HamtaBokningLista().AnsvaradeBokningar(Session.HamtaSession().inloggadMedlem).Any())
         {
             MinaBokningarVisas = false;
         }
