@@ -68,7 +68,6 @@ namespace Labb1_OOP.VyModeller
                                                         MedlemsNummer.Trim(),
                                                         Administrator);
                 
-                MessageBox.Show("Ny medlem nu tillagd");
             
 
             } catch (Exception ex)
@@ -108,7 +107,6 @@ namespace Labb1_OOP.VyModeller
 
                 await MedlemListaLada.SparaMedlemAsync(valdMedlem);
                 DetaljText = "Ingen medlem vald";
-                MessageBox.Show("Medlemmen är nu uppdaterad");
 
             }
             catch (Exception ex)

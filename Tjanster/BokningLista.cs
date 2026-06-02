@@ -78,7 +78,6 @@ public sealed class BokningLista
     public List<Bokning> OverlappandeBokningar(Bokning bokning)
     {
         return _context.CreateDbContext().Bokning.Where(b => b != bokning && b.startDatum <bokning.slutDatum && b.slutDatum > bokning.startDatum).ToList();
-        
     }
     public async Task AnmalMedlemAsync (Bokning bokning, Medlem medlem)
     {

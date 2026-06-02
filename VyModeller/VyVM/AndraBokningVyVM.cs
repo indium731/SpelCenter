@@ -58,6 +58,7 @@ namespace Labb1_OOP.VyModeller
             if (ValdTid == "StartTid" && ValdDatum != null && tid != null)
                 {
                     bokning.startDatum = ((DateTime)ValdDatum).Date + ((TimeOnly)tid).ToTimeSpan();
+                    MessageBox.Show("startdatum är nu "+bokning.startDatum);
                 }
             else if (ValdTid == "SlutTid" && ValdDatum != null && tid != null)
                 {
