@@ -18,3 +18,5 @@ Navigera till den skapade mappen via terminalen
 kör "dotnet run"
 
 Andra metoder kan ej garanteras att vara fungerande.
+
+Databas som används är en lokal vid namn SpelCenterDB och är via SQLServer
