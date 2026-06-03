@@ -8,6 +8,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Linq.Expressions;
+using Labb1_OOP.Tjanster;
 
 namespace Labb1_OOP.VyModeller;
 

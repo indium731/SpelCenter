@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using Labb1_OOP.Modeller;
+using Labb1_OOP.Tjanster;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Labb1_OOP.VyModeller;
 
@@ -29,25 +31,25 @@ public class MedlemListaVM
     private void UppdateraMedlemmar()
     {
         medlemmar.Clear();
-        MedlemLista.HamtaMedlemLista().medlemmar.ForEach(m => medlemmar.Add(new MedlemEntitetVM(m)));
+        App.tjanstLeverantor.GetRequiredService<MedlemLista>().medlemmar.ForEach(m => medlemmar.Add(new MedlemEntitetVM(m)));
         sokningVisas = false;
     }
     public async Task LaggTillAsync(string n, string t, string m, bool a)
     {
-        Medlem medlem = await MedlemLista.HamtaMedlemLista().LaggTillAsync(n, t, m, a);
+        Medlem medlem = await App.tjanstLeverantor.GetRequiredService<MedlemLista>().LaggTillAsync(n, t, m, a);
         medlemmar.Add(new MedlemEntitetVM(medlem));
         if (sokningVisas)UppdateraMedlemmar();
     }
 
     public async Task TaBortAsync(MedlemEntitetVM medlem)
     {
-        await MedlemLista.HamtaMedlemLista().TaBortAsync(medlem.TillMedlem());
+        await App.tjanstLeverantor.GetRequiredService<MedlemLista>().TaBortAsync(medlem.TillMedlem());
         medlemmar.Remove(medlem);
         if (sokningVisas)UppdateraMedlemmar();
     }
     public async Task SparaMedlemAsync(MedlemEntitetVM medlem)
     {
-        await MedlemLista.HamtaMedlemLista().SparaMedlemAsync(medlem.TillMedlem());
+        await App.tjanstLeverantor.GetRequiredService<MedlemLista>().SparaMedlemAsync(medlem.TillMedlem());
     }
     public void GaTillNastaMetod()
     {

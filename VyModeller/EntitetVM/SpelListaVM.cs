@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Labb1_OOP.Modeller;
+using Labb1_OOP.Tjanster;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Labb1_OOP.VyModeller;
 
@@ -27,25 +29,25 @@ public class SpelListaVM
     private void UppdateraSpel()
     {
         spel.Clear();
-        SpelLista.HamtaSpelLista().spel.ForEach(s => spel.Add(new SpelEntitetVM(s)));
+        App.tjanstLeverantor.GetRequiredService<SpelLista>().spel.ForEach(s => spel.Add(new SpelEntitetVM(s)));
         sokningVisas = false;
     }
     public async Task LaggTillAsync(string n, string k, int a, int m, Svarighetsgrad s, string b)
     {
-        Spel nySpel = await SpelLista.HamtaSpelLista().LaggTillAsync(n, k, a, m, s, b);
+        Spel nySpel = await App.tjanstLeverantor.GetRequiredService<SpelLista>().LaggTillAsync(n, k, a, m, s, b);
         spel.Add(new SpelEntitetVM(nySpel));
         if (sokningVisas) UppdateraSpel();
 
     }
     public async Task TaBortAsync(SpelEntitetVM spelAttTaBort)
     {
-        await SpelLista.HamtaSpelLista().TaBortAsync(spelAttTaBort.TillSpel());
+        await App.tjanstLeverantor.GetRequiredService<SpelLista>().TaBortAsync(spelAttTaBort.TillSpel());
         spel.Remove(spelAttTaBort);
         if (sokningVisas) UppdateraSpel();
     }
     public async Task SparaSpelAsync(SpelEntitetVM spel)
     {
-        await SpelLista.HamtaSpelLista().SparaSpelAsync(spel.TillSpel());
+        await App.tjanstLeverantor.GetRequiredService<SpelLista>().SparaSpelAsync(spel.TillSpel());
     }
     public void GaTillNastaMetod()
     {

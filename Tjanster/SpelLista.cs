@@ -4,35 +4,28 @@ using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Labb1_OOP.Data;
+using Labb1_OOP.Modeller;
 using Microsoft.EntityFrameworkCore;
 
-namespace Labb1_OOP.Modeller;
+namespace Labb1_OOP.Tjanster;
 
-public sealed class SpelLista
+public class SpelLista
 {
     private IDbContextFactory<SpelCenterDbContext> _context;
-    private SpelLista(IDbContextFactory<SpelCenterDbContext> contextFactory)
+    public SpelLista(IDbContextFactory<SpelCenterDbContext> contextFactory)
     {
         _context = contextFactory;
-        UppdateraSpelAsync();
     }
-    private static SpelLista _instans;
-    public static SpelLista HamtaSpelLista()
-    {
-        if (_instans == null)
+    public List<Spel> spel  {
+        get
         {
-            throw new Exception("SpelLista har inte initierats");
-        }
-        return _instans;
-    }
-    public static void InitieraSpelLista(IDbContextFactory<SpelCenterDbContext> context)
-    {
-        if (_instans == null)
-        {
-            _instans = new SpelLista(context);
-        }
-    }
-    public List<Spel> spel  { get; private set; }
+            if (field == null)
+            {
+                using var context = _context.CreateDbContext();
+                field = context.Spel.ToList();
+            }
+            return field;
+        } private set; } = null;
 
     private async Task UppdateraSpelAsync()
     {

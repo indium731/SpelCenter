@@ -1,11 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using Labb1_OOP.Modeller;
+using Labb1_OOP.Tjanster;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Labb1_OOP.VyModeller;
 
 public class BokningListaVM
 {
-    private static BokningLista _instans;
     public ObservableCollection<BokningEntitetVM> bokningar { get; private set; } = new();
     private List<Sorterare<BokningEntitetVM>> metoder;
     private int metodIndex;
@@ -29,24 +30,24 @@ public class BokningListaVM
     private void UppdateraBokningar()
     {
         bokningar.Clear();
-        BokningLista.HamtaBokningLista().bokningar.ForEach(b => bokningar.Add(new BokningEntitetVM(b)));
+        App.tjanstLeverantor.GetRequiredService<BokningLista>().bokningar.ForEach(b => bokningar.Add(new BokningEntitetVM(b)));
         sokningVisas = false;
     }
     public async Task LaggTillAsync(string n, DateTime d, DateTime s, string p, int m, Medlem a, string b)
     {
-        Bokning bokning = await BokningLista.HamtaBokningLista().LaggTillAsync(n,d,s,p,m,a,b);
+        Bokning bokning = await App.tjanstLeverantor.GetRequiredService<BokningLista>().LaggTillAsync(n,d,s,p,m,a,b);
         bokningar.Add(new BokningEntitetVM(bokning));
         if (sokningVisas) UppdateraBokningar();
     }
     public async Task TaBortAsync(BokningEntitetVM bokning)
     {
-        await BokningLista.HamtaBokningLista().TaBortAsync(bokning.TillBokning());
+        await App.tjanstLeverantor.GetRequiredService<BokningLista>().TaBortAsync(bokning.TillBokning());
         bokningar.Remove(bokning);
         if (sokningVisas) UppdateraBokningar();
     }
     public async Task SparaBokningAsync(BokningEntitetVM bokning)
     {
-        await BokningLista.HamtaBokningLista().SparaBokningAsync(bokning.TillBokning());
+        await App.tjanstLeverantor.GetRequiredService<BokningLista>().SparaBokningAsync(bokning.TillBokning());
     }
     public void GaTillNastaMetod()
     {
@@ -69,7 +70,7 @@ public class BokningListaVM
     {
         sokningVisas = true;
         bokningar.Clear();
-        BokningLista.HamtaBokningLista().AnsvaradeBokningar(medlem)
+        App.tjanstLeverantor.GetRequiredService<BokningLista>().AnsvaradeBokningar(medlem)
             .ForEach(b => bokningar.Add(new BokningEntitetVM(b)));
     }
 }

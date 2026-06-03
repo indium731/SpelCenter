@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Labb1_OOP.Tjanster;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Labb1_OOP.VyModeller;
 
@@ -116,7 +118,7 @@ public partial class BokningVyVM : ObservableObject
         if (!int.TryParse(MaxAntal.Trim(), out antal)) return;
 
 
-        Bokning bokning = await BokningLista.HamtaBokningLista().LaggTillAsync(Namn,
+        Bokning bokning = await App.tjanstLeverantor.GetRequiredService<BokningLista>().LaggTillAsync(Namn,
                                         startDatum,
                                         slutDatum,
                                         Plats.Trim(),

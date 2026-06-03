@@ -8,6 +8,8 @@ using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Navigation;
+using Labb1_OOP.Tjanster;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Labb1_OOP.VyModeller;
 
@@ -23,10 +25,11 @@ public partial class InloggVyVM : ObservableObject
     }
 
     [RelayCommand]
-    private void TestaInlogg()
+    private async Task TestaInlogg()
     {
         try{
-        MedlemLista.HamtaMedlemLista().TestaInlogg(Inlogg);
+        var medlemTjanst = App.tjanstLeverantor.GetRequiredService<MedlemLista>();
+        medlemTjanst.TestaInlogg(inlogg);
         _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
         }catch (Exception ex)
         {

@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Labb1_OOP.Tjanster;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Labb1_OOP.VyModeller
 {
@@ -29,9 +31,9 @@ namespace Labb1_OOP.VyModeller
 
         private void InitieraLista()
         {
-            ObservableCollection<Bokning> overlappandeBokningar = new ObservableCollection<Bokning>(BokningLista.HamtaBokningLista().OverlappandeBokningar(bokning));
+            ObservableCollection<Bokning> overlappandeBokningar = new ObservableCollection<Bokning>(App.tjanstLeverantor.GetRequiredService<BokningLista>().OverlappandeBokningar(bokning));
 
-            ObservableCollection<Spel> tillgangligaSpel = new ObservableCollection<Spel>(SpelLista.HamtaSpelLista().spel
+            ObservableCollection<Spel> tillgangligaSpel = new ObservableCollection<Spel>(App.tjanstLeverantor.GetRequiredService<SpelLista>().spel
                 .Where(spel => !overlappandeBokningar.Any(b => b.bokadeSpel.Contains(spel))));
                 
 
@@ -46,7 +48,7 @@ namespace Labb1_OOP.VyModeller
         [RelayCommand]
         private void GaTillMeny()
         {
-            BokningLista.HamtaBokningLista().SparaBokningAsync(bokning);
+            App.tjanstLeverantor.GetRequiredService<BokningLista>().SparaBokningAsync(bokning);
             _navigator.NavigeraTill(new MedlemMenyVyVM(_navigator));
         }
 
@@ -54,7 +56,7 @@ namespace Labb1_OOP.VyModeller
         private void TestaBokaSpel()
         {
             if (ValdSpel is not Spel spel) return;
-            BokningLista.HamtaBokningLista().BokaSpelAsync(bokning, spel);
+            App.tjanstLeverantor.GetRequiredService<BokningLista>().BokaSpelAsync(bokning, spel);
             MessageBox.Show(spel + " är nu bokat");
 
         }
@@ -63,7 +65,7 @@ namespace Labb1_OOP.VyModeller
         private void AvbokaValdSpel()
         {
             if (ValdSpel is not Spel spel) return;
-            BokningLista.HamtaBokningLista().AvbokaSpelAsync(bokning, spel);
+            App.tjanstLeverantor.GetRequiredService<BokningLista>().AvbokaSpelAsync(bokning, spel);
             MessageBox.Show(spel + " är nu avbokat");
 
         }

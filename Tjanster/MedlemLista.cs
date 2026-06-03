@@ -5,36 +5,29 @@ using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Labb1_OOP.Data;
+using Labb1_OOP.Modeller;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Labb1_OOP.Modeller;
+namespace Labb1_OOP.Tjanster;
 
-public sealed class MedlemLista
+public class MedlemLista
 {
     private IDbContextFactory<SpelCenterDbContext> _context;
-    private MedlemLista(IDbContextFactory<SpelCenterDbContext> context)
+    public MedlemLista(IDbContextFactory<SpelCenterDbContext> context)
     {
         _context = context;
-        UppdateraMedlemmarAsync();
     }
-    private static MedlemLista _instans;
-    public static MedlemLista HamtaMedlemLista()
-    {
-        if (_instans == null)
+    public List<Medlem> medlemmar  {
+        get
         {
-            throw new Exception("MedlemLista har inte initierats");
-        }
-        return _instans;
-    }
-    public static void InitieraMedlemLista(IDbContextFactory<SpelCenterDbContext> context)
-    {
-        if (_instans == null)
-        {
-            _instans = new MedlemLista(context);
-        }
-    }
-    public List<Medlem> medlemmar  { get; private set; }
+            if (field == null)
+            {
+                using var context = _context.CreateDbContext();
+                field = context.Medlem.Include(m => m.medlemSkap).ToList();
+            }
+            return field;
+        } private set; } = null;
 
     private async Task UppdateraMedlemmarAsync()
     {

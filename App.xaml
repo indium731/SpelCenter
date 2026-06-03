@@ -2,8 +2,39 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Labb1_OOP"
-             StartupUri="MainWindow.xaml">
+             xmlns:views="clr-namespace:Labb1_OOP.Vyer"
+             xmlns:vm="clr-namespace:Labb1_OOP.VyModeller">
     <Application.Resources>
+            <DataTemplate DataType="{x:Type vm:InloggVyVM}">
+                <views:InloggVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MedlemMenyVyVM}">
+                <views:MedlemMenyVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SpelVyVM}">
+                <views:SpelVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MinaBokningarVyVM}">
+                <views:MinaBokningarVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AnmalVyVM}">
+                <views:AnmalVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MedlemVyVM}">
+                <views:MedlemVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:BokningVyVM}">
+                <views:BokningVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:BokaSpelVyVM}">
+                <views:BokaSpelVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AndraBokningVyVM}">
+                <views:AndraBokningVy />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:OversiktVyVM}">
+                <views:OversiktVy />
+            </DataTemplate>
          
     </Application.Resources>
 </Application>

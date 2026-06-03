@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Labb1_OOP.Tjanster;
 
 namespace Labb1_OOP.VyModeller;
 

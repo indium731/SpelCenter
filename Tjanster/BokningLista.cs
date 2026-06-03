@@ -9,33 +9,28 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Labb1_OOP.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Labb1_OOP;
+namespace Labb1_OOP.Tjanster;
 
-public sealed class BokningLista
+public class BokningLista
 {
     private IDbContextFactory<SpelCenterDbContext> _context;
-    private BokningLista(IDbContextFactory<SpelCenterDbContext> contextFactory)
+    public BokningLista(IDbContextFactory<SpelCenterDbContext> contextFactory)
     {
         _context = contextFactory;
-        UppdateraBokningarAsync();
     }
-    private static BokningLista _instans;
-    public static BokningLista HamtaBokningLista()
-    {
-        if (_instans == null)
+    public List<Bokning> bokningar {
+        get
         {
-            throw new Exception("BokningLista har inte initierats");
-        }
-        return _instans;
-    }
-    public static void InitieraBokningLista(IDbContextFactory<SpelCenterDbContext> contextFactory)
-    {
-        if (_instans == null)
-        {
-            _instans = new BokningLista(contextFactory);
-        }
-    }
-    public List<Bokning> bokningar { get; private set; }
+            if (field == null)
+            {
+                using var context = _context.CreateDbContext();
+                field = context.Bokning.Include(b => b.ansvarig)
+                                       .Include(b => b.anmalda)
+                                       .Include(b => b.bokadeSpel)
+                                       .ToList();
+            }
+            return field;
+        } private set; } = null;
 
 
     private async Task UppdateraBokningarAsync()

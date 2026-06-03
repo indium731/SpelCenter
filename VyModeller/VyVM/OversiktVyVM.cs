@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Labb1_OOP.Tjanster;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace Labb1_OOP.VyModeller
@@ -41,7 +43,7 @@ namespace Labb1_OOP.VyModeller
         private void InitieraOversiktLista(Bokning bokning)
         {
             MedlemListaLada = new ObservableCollection<MedlemEntitetVM>(bokning.anmalda.Select(m => new MedlemEntitetVM(m)));
-            SpelListaLada = new ObservableCollection<SpelEntitetVM>(SpelLista.HamtaSpelLista().RekommenderadeSpel(bokning).Select(s => new SpelEntitetVM(s)));
+            SpelListaLada = new ObservableCollection<SpelEntitetVM>(App.tjanstLeverantor.GetRequiredService<SpelLista>().RekommenderadeSpel(bokning).Select(s => new SpelEntitetVM(s)));
         }
 
 

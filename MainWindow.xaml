@@ -3,43 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:Labb1_OOP.Vyer"
-        xmlns:vm="clr-namespace:Labb1_OOP.VyModeller"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
-        <Window.Resources>
-            <DataTemplate DataType="{x:Type vm:InloggVyVM}">
-                <views:InloggVy />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:MedlemMenyVyVM}">
-                <views:MedlemMenyVy />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:SpelVyVM}">
-                <views:SpelVy />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:MinaBokningarVyVM}">
-                <views:MinaBokningarVy />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:AnmalVyVM}">
-                <views:AnmalVy />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:MedlemVyVM}">
-                <views:MedlemVy />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:BokningVyVM}">
-                <views:BokningVy />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:BokaSpelVyVM}">
-                <views:BokaSpelVy />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:AndraBokningVyVM}">
-                <views:AndraBokningVy />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:OversiktVyVM}">
-                <views:OversiktVy />
-            </DataTemplate>
-        </Window.Resources>
 
         <Grid>
             <ContentControl Content="{Binding Navigator.Vy}"/>

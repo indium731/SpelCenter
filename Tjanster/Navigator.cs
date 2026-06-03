@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Labb1_OOP;
+namespace Labb1_OOP.Tjanster;
 
 public partial class Navigator : ObservableObject
 {

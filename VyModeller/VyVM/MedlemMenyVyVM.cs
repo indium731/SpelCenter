@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Labb1_OOP.Tjanster;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Labb1_OOP.VyModeller;
 
@@ -26,8 +28,13 @@ public partial class MedlemMenyVyVM : ObservableObject
     private Navigator _navigator;
     public MedlemMenyVyVM(Navigator n)
     {
+        try{
         _navigator = n;
         KontrolleraAtkomster();
+        }catch (Exception ex)
+        {
+            MessageBox.Show("hej");
+        }
     }
     [RelayCommand]
     private void GaTillValdVy(Type vmTyp)
@@ -54,7 +61,7 @@ public partial class MedlemMenyVyVM : ObservableObject
             MedlemHanterareVisas = false;
             SpelHanterareVisas = false;
         }
-        if (!BokningLista.HamtaBokningLista().AnsvaradeBokningar(Session.HamtaSession().inloggadMedlem).Any())
+        if (!App.tjanstLeverantor.GetRequiredService<BokningLista>().AnsvaradeBokningar(Session.HamtaSession().inloggadMedlem).Any())
         {
             MinaBokningarVisas = false;
         }
